@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Basic Metis Usage - NIU Metis Documentation</title>
+        <title>Introduction - NIU Metis Documentation</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_0.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_0_1.html"><strong aria-hidden="true">1.1.</strong> Recommended Development Environment</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_2_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Helpful Resources</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_0.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_0_1.html"><strong aria-hidden="true">1.1.</strong> Recommended Development Environment</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_2_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Helpful Resources</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,37 +173,69 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="2-basic-metis-usage"><a class="header" href="#2-basic-metis-usage">2. Basic Metis Usage</a></h1>
-<p>This first chapter will provide two into-the-fire projects that will teach you the core systems of Metis. This will be done through a simple C++ project, followed a optimized version written with CUDA.</p>
-<p>These chapters lay the foundational skills needed to use the advanced techniques used in the following chapters, it is highly recommended that you read them before proceeding.</p>
-<h2 id="overview-of-the-chapters"><a class="header" href="#overview-of-the-chapters">Overview of the Chapters</a></h2>
-<h3 id="chapter-21-c-on-metis"><a class="header" href="#chapter-21-c-on-metis">Chapter 2.1: C++ on Metis</a></h3>
+                        <h1 id="1-introduction"><a class="header" href="#1-introduction">1. Introduction</a></h1>
+<p>Welcome! This book serves as an all-in-one crash course in utilizing Metis, as well as some advanced techniques.</p>
+<p>While this book does assume a basic understanding of Linux and C++, it is not required.</p>
+<p>If you have not logged into Metis before, or if it's been some time since you've used Linux, NIU CRCD has <a href="https://www.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml">comprehensive documentation</a> on how to open a SSH connection, and a quick Linux refresher.</p>
+<p>If you would also like to refresh yourself on C++, w3schools has a wonderful <a href="https://www.w3schools.com/cpp/default.asp">quick reference</a> available.</p>
+<p>Although this guide is about how to employ Docker on Metis, it does not assume you have previous experience with it, and includes a crash course on basic usage. The skills in that section provide tools to build even some of the most advanced applications, and also includes resources for those applications which require more.</p>
+<h2 id="primary-purpose"><a class="header" href="#primary-purpose">Primary Purpose</a></h2>
+<p>The goal of this book is to allow researchers at NIU to hit the ground running with their research. Our goal is for you to focus less on getting Metis to work for you - and more on completing your work as a whole.</p>
+<p>It's possible to create applications that will work regardless of what Metis has available to you for installation. Furthermore, you no longer have to develop directly on Metis - you can develop and build locally on hardware you're used to. This will allow you to focus on writing your application - without having to worry whether it can run on Metis.</p>
+<p>We will do so by employing <a href="https://www.docker.com/">Docker</a>, an extremely powerful containerization and encapsulation tool that allows developers to define virtual machines with a level of granularity rarely found in modern computing. Docker allows you to select an operation system as a base, install packages and libraries, and define run behaviour.</p>
+<p>All of this is defined in a singular, simple, and human-readable file that can be build to be reproduced on any system - including Metis.</p>
+<h3 id="explored-use-cases"><a class="header" href="#explored-use-cases">Explored Use Cases</a></h3>
+<p>There are five use cases covered here, with increasing levels of control over Metis:</p>
 <ul>
-<li>Goals: Familiarize with basic commands and job submission on Metis.</li>
-<li>C++ Boilerplate: Create and run a basic "Hello, World" C++ program with computational loops.</li>
-<li>PBS Basics: Write a PBS job script to run your C++ program on compute nodes.</li>
-<li>Execution: Compile and run the C++ program locally and via PBS.</li>
-<li>Outcome: Understand job submission, the PBS script structure, and basic module commands.</li>
+<li><strong>Running a C++ project</strong>
+<ul>
+<li>No additional configuration</li>
+<li>PBS only</li>
 </ul>
-<h3 id="chapter-22-building-a-cuda-project-from-the-ground-up"><a class="header" href="#chapter-22-building-a-cuda-project-from-the-ground-up">Chapter 2.2: Building a CUDA Project from the Ground Up</a></h3>
+</li>
+<li><strong>Running a CUDA project</strong>
 <ul>
-<li>Goals: Learn to use CUDA for GPU programming on Metis.</li>
-<li>CUDA Boilerplate: Write a CUDA program to achieve the same task as in Chapter 1.1 but using GPU acceleration.</li>
-<li>CUDA Modules: Install and use the CUDA compiler (nvcc) with module commands.</li>
-<li>Execution: Compile and run your CUDA program, observing performance improvements.</li>
-<li>PBS for CUDA: Adapt the PBS script to load CUDA modules and compile with nvcc.</li>
-<li>Outcome: Leverage CUDA for faster computation and understand the structure of CUDA programs and PBS scripts.</li>
+<li>Loading CUDA via the <code>module</code> command</li>
+<li>PBS only</li>
+</ul>
+</li>
+<li><strong>Running a language not installed on Metis, such as Rust</strong>
+<ul>
+<li>Downloading a pre-built Docker Image with <code>cargo</code> installed</li>
+<li>PBS with Docker via Podman</li>
+</ul>
+</li>
+<li><strong>Running packages not installed on Metis with GPU passthrough</strong>
+<ul>
+<li>Downloading a pre-built Docker Image</li>
+<li>Passing through GPUs to Docker</li>
+<li>PBS with Docker and NVIDIA Container Toolkit via Podman</li>
+</ul>
+</li>
+<li><strong>Running virtually any project using custom Docker Images</strong>
+<ul>
+<li>Writing, building, and publishing your own Docker Image</li>
+<li>Passing through GPUs to Docker</li>
+<li>PBS with Docker and NVIDIA Container Toolkit via Podman</li>
+</ul>
+</li>
+</ul>
+<h3 id="advanced-techniques"><a class="header" href="#advanced-techniques">Advanced Techniques</a></h3>
+<p>This guide will also explore one additional advanced technique:</p>
+<ul>
+<li><strong>SSH Automation</strong>
+<ul>
+<li>Demonstrates programmatic submission of PBS jobs via SSH for the purpose of fitting Metis into existing systems.</li>
+</ul>
+</li>
 </ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="chapter_0_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
 
-                            <a rel="next prefetch" href="chapter_1_1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="chapter_0_1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -213,33 +245,14 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="chapter_0_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
 
-                    <a rel="next prefetch" href="chapter_1_1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="chapter_0_1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
