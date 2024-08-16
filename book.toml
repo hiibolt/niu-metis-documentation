@@ -1,0 +1,8 @@
+[book]
+authors = ["BoltR6"]
+language = "en"
+multilingual = false
+src = "src"
+title = "NIU Metis Documentation"
+output.html.preferred-dark-theme = "Navy"
+output.html.preferred-light-theme = "Rust"
