@@ -23,36 +23,36 @@ All of this is defined in a singular, simple, and human-readable file that can b
 
 ### Explored Use Cases
 There are five use cases covered here, with increasing levels of control over Metis:
-* **Running a C++ project**
+* **Chapter 2.1 - Running a C++ project**
     - No additional configuration
     - PBS only
-* **Running a CUDA project**
+* **Chapter 2.2 - Running a CUDA project**
     - Loading CUDA via the `module` command
     - PBS only
-* **Running a language not installed on Metis, such as Rust**
-    - Downloading a pre-built Docker Image with `cargo` installed
+* **Chapter 3.1 - Running a language not installed on Metis, such as Python 3.11**
+    - Downloading a pre-built Docker Image with `python` version 3.11 installed
     - PBS with Docker via Podman
-* **Running packages not installed on Metis with GPU passthrough**
+* **Chapter 3.2 - Running packages not installed on Metis with GPU passthrough**
     - Downloading a pre-built Docker Image
     - Passing through GPUs to Docker
     - PBS with Docker and NVIDIA Container Toolkit via Podman
-* **Running virtually any project using custom Docker Images**
+* **Chapter 3.3 - Running virtually any project using custom Docker Images**
     - Writing, building, and publishing your own Docker Image
     - Passing through GPUs to Docker
     - PBS with Docker and NVIDIA Container Toolkit via Podman
 
 ### Advanced Techniques
 This guide will also explore one additional advanced technique:
-* **SSH Automation**
+* **Chapter 4.1 - SSH Automation**
     - Demonstrates programmatic submission of PBS jobs via SSH for the purpose of fitting Metis into existing systems.
 
 ## Where Do I Need to Read to?
 ### Cases Where Docker May Not Be Needed
-Check if your use case is either of the two below. If it is, you can safely stop reading after Chapter 2.2.
+Check if your use case is either of the two below. If it is, you can safely stop reading after **Chapter 2.2**.
 - Native C, Go, or Python applications with pre-existing or no dependencies
 - OpenMPI-based applications
 ### Cases Where Docker Is Needed
-If you only need CPU-based computation, you can safely stop reading after Chapter 3.1. If you need GPU passthrough or have a complicated project, it is recommended to read this book in its entirety!
+If you only need CPU-based computation, you can safely stop reading after **Chapter 3.1**. If you need GPU passthrough or have a complicated project, it is recommended to read this book in its entirety!
 - Applications with a language not listed above
 - Applications with dependencies Metis does not have encapsulated in its modulefiles
 - Applications with complex or circular dependencies
