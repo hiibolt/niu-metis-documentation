@@ -5,7 +5,9 @@ The next part of this introductory chapter will teach you how to build, compile,
 
 CUDA stands for Compute Unified Device Architecture, and it is proprietary NVIDIA-distributed software that allows developers to perform matrice-based operations at unbelievable speeds using the heavily optimized CUDA cores found only on NVIDIA GPUs.
 
-This chapter will teach you how to run CUDA code on Metis, but it will not teach you how to write it. There are many fantastic resources on how to write it, some of which are linked below:
+This chapter will teach you how to run CUDA code on Metis, but it will not teach you how to write it!
+
+There are many fantastic resources on how to write it, some of which are linked below:
 - [(NVIDIA) An Even Easier Introduction to CUDA](https://developer.nvidia.com/blog/even-easier-introduction-cuda/)
 - [(cuda-tutorial) Introduction to CUDA](https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/)
 - [(NVIDIA) CUDA Runtime API Reference](https://docs.nvidia.com/cuda/cuda-runtime-api/index.html)
@@ -132,7 +134,7 @@ Instead of using indicied loops, we run our program using the compute systems of
 - Our outer loop's dimensions are replaced by the CUDA (thread) block grid, 1-3D grid containing (thread) block.
 - Our inner loop's dimensions are replaced by the CUDA thread block, which are a 1-3D block containing the threads our kernel function will be executed on.
 
-In our program, we use the maximum number of dimensions, effectively creating a 6D matrice. Because each each block is aware of its coordinates on the grid it lies on, and each thread the coordinates of the block it sits in, we can use sneaky math to calculate which number the old "counter" variable each of the *ten billion* threads translates to.
+In our program, we use the maximum number of dimensions, effectively creating a 6D matrix. Because each each block is aware of its coordinates on the grid it lies on, and each thread the coordinates of the block it sits in, we can use sneaky math to calculate which number the old "counter" variable each of the *ten billion* threads translates to.
 
 If you would like to learn more about CUDA, the resources in the introductory section of this paragraph are greatly recommended.
 
@@ -175,7 +177,7 @@ You will notice a nearly instantaneous completion time, versus the 20-30 seconds
 Such is the power of graphical programming!
 
 ## Launching a CUDA Program with PBS
-For the most part, the `run.pbs` file will look the same to the version from the previous chapter.
+For the most part, the `run.pbs` file will look similar to the version from the previous chapter.
 
 Create a `run.pbs` file with the following contents:
 ```bash
@@ -251,7 +253,7 @@ The output will look something like this:
 18681.cm
 ```
 
-This tells us the id number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!
+This tells us the ID number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!
 ```bash
 $ ls
 hello_world_cuda.o18681 main.cu run.pbs

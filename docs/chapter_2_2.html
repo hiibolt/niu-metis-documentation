@@ -177,7 +177,8 @@
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cuda/cuda_on_metis">in this book's repository</a>!</em></p>
 <p>The next part of this introductory chapter will teach you how to build, compile, and run a CUDA program from the ground up on Metis.</p>
 <p>CUDA stands for Compute Unified Device Architecture, and it is proprietary NVIDIA-distributed software that allows developers to perform matrice-based operations at unbelievable speeds using the heavily optimized CUDA cores found only on NVIDIA GPUs.</p>
-<p>This chapter will teach you how to run CUDA code on Metis, but it will not teach you how to write it. There are many fantastic resources on how to write it, some of which are linked below:</p>
+<p>This chapter will teach you how to run CUDA code on Metis, but it will not teach you how to write it!</p>
+<p>There are many fantastic resources on how to write it, some of which are linked below:</p>
 <ul>
 <li><a href="https://developer.nvidia.com/blog/even-easier-introduction-cuda/">(NVIDIA) An Even Easier Introduction to CUDA</a></li>
 <li><a href="https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/">(cuda-tutorial) Introduction to CUDA</a></li>
@@ -302,7 +303,7 @@ int main() {
 <li>Our outer loop's dimensions are replaced by the CUDA (thread) block grid, 1-3D grid containing (thread) block.</li>
 <li>Our inner loop's dimensions are replaced by the CUDA thread block, which are a 1-3D block containing the threads our kernel function will be executed on.</li>
 </ul>
-<p>In our program, we use the maximum number of dimensions, effectively creating a 6D matrice. Because each each block is aware of its coordinates on the grid it lies on, and each thread the coordinates of the block it sits in, we can use sneaky math to calculate which number the old "counter" variable each of the <em>ten billion</em> threads translates to.</p>
+<p>In our program, we use the maximum number of dimensions, effectively creating a 6D matrix. Because each each block is aware of its coordinates on the grid it lies on, and each thread the coordinates of the block it sits in, we can use sneaky math to calculate which number the old "counter" variable each of the <em>ten billion</em> threads translates to.</p>
 <p>If you would like to learn more about CUDA, the resources in the introductory section of this paragraph are greatly recommended.</p>
 <h2 id="installing-modules-on-the-login-node"><a class="header" href="#installing-modules-on-the-login-node">Installing Modules on the Login Node</a></h2>
 <p>However, unlike our previous project which used <code>g++</code>, the CUDA compiler, <code>nvcc</code>, is not pre-installed.</p>
@@ -332,7 +333,7 @@ Hello, Metis!
 <p>You will notice a nearly instantaneous completion time, versus the 20-30 seconds of the previous C version.</p>
 <p>Such is the power of graphical programming!</p>
 <h2 id="launching-a-cuda-program-with-pbs"><a class="header" href="#launching-a-cuda-program-with-pbs">Launching a CUDA Program with PBS</a></h2>
-<p>For the most part, the <code>run.pbs</code> file will look the same to the version from the previous chapter.</p>
+<p>For the most part, the <code>run.pbs</code> file will look similar to the version from the previous chapter.</p>
 <p>Create a <code>run.pbs</code> file with the following contents:</p>
 <pre><code class="language-bash">#!/bin/bash
 
@@ -401,7 +402,7 @@ rm ./hello_world
 <p>The output will look something like this:</p>
 <pre><code class="language-bash">18681.cm
 </code></pre>
-<p>This tells us the id number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!</p>
+<p>This tells us the ID number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!</p>
 <pre><code class="language-bash">$ ls
 hello_world_cuda.o18681 main.cu run.pbs
 </code></pre>

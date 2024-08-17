@@ -71,7 +71,9 @@ int main () {
 ```
 This program does two things - it says hello to the user, and then takes count of the numbers divisible by 2, 3, and 5 from 0 up to 10 billion.
 
-This is done with multiple nested loops - the reason for which will be explained, and the code optimized, in the following chapter on CUDA. For now, what's apparent and important is that this is a computationally intensive task.
+This is done with multiple nested loops - the reason for which will be explained, and the code optimized, in the following chapter on CUDA.
+
+For now, what's apparent and important is that this is a computationally intensive task!
 
 Next, let's build and run this code. By default, Metis users have GCC and G++ (version 11.3.0) preinstalled, which we will now use:
 ```bash
@@ -82,7 +84,7 @@ $ ./hello_world
 After ten to twenty seconds, we should see our results!
 
 ## Getting Started with PBS
-Now, we are not currently making full use of Metis with this current setup. What we just ran our code on is called the 'login node', which has nowhere near the amount of computational power that is available to the 'compute nodes', which are where computationally intensive or time-consuming programs should be run.
+We are not currently making full use of Metis with this current setup. What we just ran our code on is called the **login node**, which has nowhere near the amount of computational power that is available to the **compute nodes**, which are where computationally intensive or time-consuming programs should be run.
 
 But how do we do so?
 
@@ -184,7 +186,7 @@ Before we move on, let's dissect what this does.
 ...
 ```
 
-Lines starting with `#PBS` are not comments, rather, they are PBS-specific commands.
+*Lines starting with `#PBS` are not comments, rather, they are PBS-specific commands!*
 
 The following lines are important to understand:
 - Line 1 is a [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) which specifies that the file's commands are to be interpreted by [bash](https://www.gnu.org/software/bash/manual/bash.html).
@@ -222,13 +224,13 @@ Next, we will familiarize ourselves with the `module` commands, which are used o
 ...
 ```
 
-The `module` commands are somewhat akin to a package manager, allowing you to load packages ("modules") into your environment.
+The `module` commands are somewhat akin to a package manager, allowing you to load packages ("modulefiles") into your environment.
 
 Unlike you, the compute node does not have `gcc` pre-installed. So to make it available to the compute node, we must install it, done in the following fashion:
 - Line 34 clears all packages with `module purge`, then installs GCC with `module load gcc/gcc-12.3.0`.
 - Line 35 lets you see what's currently installed with `module list`.
 
-This process for installing a package is the same on both the login and compute node. To see what packages are available to you, you can run `module av`. To narrow your search by a specific key word, use `module av <keyword>`.
+This process for installing a package is the same on both the login and compute nodes. To see what packages are available to you, you can run `module av`. To narrow your search by a specific key word, use `module av <keyword>`.
 
 ```bash
 ...
@@ -264,7 +266,7 @@ The output will look something like this:
 18681.cm
 ```
 
-This tells us the id number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!
+This tells us the ID number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!
 ```bash
 $ ls
 hello_world.o18681 main.cpp run.pbs

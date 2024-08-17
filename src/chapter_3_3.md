@@ -80,21 +80,21 @@ COPY . .
 CMD .venv/bin/python3 main.py
 ```
 
-`Dockerfile`s live in the root of a project. An example Python project layout:
+`Dockerfiles` live in the root of a project. An example Python project layout:
 ```
 src/
 - main.py
 - Dockerfile
 ```
 
-The reason why Dockerfiles become useful is more apparent the more complex and dependency-heavy your project is. Each command in a `Dockerfile` is cached step-by-step, which means, after the first time the above `Dockerfile` is built, steps such as dependency installation with `apt` are not performed again.
+The reason why `Dockerfiles` are useful becomes more apparent the more complex and dependency-heavy your project is. Each command in a `Dockerfile` is cached step-by-step, which means, after the first time the above `Dockerfile` is built, steps such as dependency installation with `apt` are not performed again.
 
 This means that builds with `Dockerfile` are exceptionally fast, if properly optimized!
 
 Linked [here](https://www.digitalocean.com/community/tutorials/how-to-optimize-docker-images-for-production) is a fan-favorite crash course in optimizing `Dockerfiles`.
 
 ## How Do I Write a `Dockerfile` From the Ground Up?
-This various from project-to-project based on decisions such as:
+This varies from project-to-project based on decisions such as:
 * Base operating system
 * Programming Language
 * Dependencies
@@ -103,7 +103,7 @@ This various from project-to-project based on decisions such as:
 From the get-go, if you plan to use CUDA and/or CUDNN, you should use [NVIDIA's base images](https://hub.docker.com/r/nvidia/cuda/) in your `FROM` instructions. This will save you a ton of time with configuration, as it's much simpler to install a programming language than to install CUDNN or CUDA.
 
 Depending on your project, Docker has wonderful guides linked [here](https://docs.docker.com/language/). These include:
-- NodeJS
+- Go
 - Python
 - R
 - Rust
@@ -128,8 +128,8 @@ If you are not tracking your project with GitHub already, I suggest that you fol
 If you are tracking with GitHub, it may be more convenient to instead use GitHub Actions to automatically build and publish your image with each commit. 
 
 GitHub Actions is significantly more ideal, but does build slower. Our team chose to use this route, since our entire codebase is on GitHub! Linked below is documentation on how to do so, and the two repositories we have automatic builds enabled on.
-- [GitHub's Documentation](https://docs.docker.com/build/ci/github-actions/)
-- [`igait-openpose`](https://github.com/igait-niu/igait-openpose) (runs on Metis)
-- [`igait-backend`](https://github.com/igait-niu/igait-backend) (runs on AWS)
- - building 
+* [GitHub's Documentation](https://docs.docker.com/build/ci/github-actions/)
+* [`igait-openpose`](https://github.com/igait-niu/igait-openpose) (runs on Metis)
+* [`igait-backend`](https://github.com/igait-niu/igait-backend) (runs on AWS)
+
 With this approach, you can containerize virtually any project with ease.

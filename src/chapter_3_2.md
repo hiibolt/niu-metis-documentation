@@ -27,11 +27,11 @@ CUDA drivers are notoriously difficult to install, so it's highly recommended to
 
 For the purpose of this example, we will be using NVIDIA's [base image](https://hub.docker.com/r/nvidia/cuda/), which has CUDA pre-installed.
 ### 3 - NVIDIA device files aren't always loaded on the compute node
-Occasionally, the `/dev` files for the NVIDIA GPUs dissapear on compute nodes.
+Occasionally, the `/dev` files for the NVIDIA GPUs disappear on compute nodes.
 
 To solve this, we use a relatively hacky but functional solution - running a CUDA-based binary to force them to load.
 
-For the sake of demonstration, we'll use the binary we developed in Chapter 2.2!
+For the sake of demonstration, we'll use the binary we developed in **Chapter 2.2**!
 
 ## Implementation
 First, let's create our project directory as we have in previous projects:
@@ -251,7 +251,7 @@ $ qsub run.pbs
 18731.cm
 ```
 
-After some time (remember, you can check the status of a job with `qstat -x <job_id>`):
+After some time (remember, you can check the status of a job with `qstat -x <job_id>`!):
 ```
 $ cat premade_image_gpu.o18731
 ...
@@ -288,6 +288,6 @@ This is quite the technical feat, and displays some of the most impressive conta
 
 Almost every conceivable project can be run on Metis using this technique, from CUDA-based quantum simulations, to machine learning models, to facial recognition software.
 
-For those whos' projects are complete using this tactic, you can safely stop reading here, if you would like. If SSH automation (Chapter 4.1) interests you, you can also safely skip to that chapter.
+For those whos' projects are complete using this tactic, you can safely stop reading here, if you would like. If SSH automation (**Chapter 4.1**) interests you, you can also safely skip to that chapter.
 
-The next chapter, Chapter 3.3, will provide insight into writing your own base images from the ground up, and some tactics for optimizing base images for build-time and size.
+The next chapter, **Chapter 3.3**, will provide insight into writing your own base images from the ground up, and some tactics for optimizing base images for build-time and size.

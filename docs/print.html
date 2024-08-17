@@ -247,25 +247,25 @@
 <li>Applications which require a different operating system</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="2-basic-metis-usage"><a class="header" href="#2-basic-metis-usage">2. Basic Metis Usage</a></h1>
-<p>This first chapter will provide two into-the-fire projects that will teach you the core systems of Metis. This will be done through a simple C++ project, followed a optimized version written with CUDA.</p>
-<p>These chapters lay the foundational skills needed to use the advanced techniques used in the following chapters, it is highly recommended that you read them before proceeding.</p>
+<p>This first chapter will provide two into-the-fire projects that will teach you the core systems of Metis. This will be done through a simple C++ project, followed by an optimized version written with CUDA.</p>
+<p>These chapters lay the foundational skills needed to use the advanced techniques in the following chapters, and it is highly recommended that you read them before proceeding!</p>
 <h2 id="overview-of-the-chapters"><a class="header" href="#overview-of-the-chapters">Overview of the Chapters</a></h2>
 <h3 id="chapter-21-c-on-metis"><a class="header" href="#chapter-21-c-on-metis">Chapter 2.1: C++ on Metis</a></h3>
 <ul>
-<li>Goals: Familiarize with basic commands and job submission on Metis.</li>
-<li>C++ Boilerplate: Create and run a basic "Hello, World" C++ program with computational loops.</li>
-<li>PBS Basics: Write a PBS job script to run your C++ program on compute nodes.</li>
-<li>Execution: Compile and run the C++ program locally and via PBS.</li>
-<li>Outcome: Understand job submission, the PBS script structure, and basic module commands.</li>
+<li><strong>Goals</strong>: Familiarize with basic commands and job submission on Metis.</li>
+<li><strong>C++ Boilerplate</strong>: Create and run a basic "Hello, World" C++ program with computational loops.</li>
+<li><strong>PBS Basics</strong>: Write a PBS job script to run your C++ program on compute nodes.</li>
+<li><strong>Execution</strong>: Compile and run the C++ program locally and via PBS.</li>
+<li><strong>Outcome</strong>: You will be able to understand job submission, the PBS script structure, and basic module commands.</li>
 </ul>
 <h3 id="chapter-22-building-a-cuda-project-from-the-ground-up"><a class="header" href="#chapter-22-building-a-cuda-project-from-the-ground-up">Chapter 2.2: Building a CUDA Project from the Ground Up</a></h3>
 <ul>
-<li>Goals: Learn to use CUDA for GPU programming on Metis.</li>
-<li>CUDA Boilerplate: Write a CUDA program to achieve the same task as in Chapter 1.1 but using GPU acceleration.</li>
-<li>CUDA Modules: Install and use the CUDA compiler (nvcc) with module commands.</li>
-<li>Execution: Compile and run your CUDA program, observing performance improvements.</li>
-<li>PBS for CUDA: Adapt the PBS script to load CUDA modules and compile with nvcc.</li>
-<li>Outcome: Leverage CUDA for faster computation and understand the structure of CUDA programs and PBS scripts.</li>
+<li><strong>Goals</strong>: Learn to use CUDA for GPU programming on Metis.</li>
+<li><strong>CUDA Boilerplate</strong>: Write a CUDA program to achieve the same task as in Chapter 1.1 but using GPU acceleration.</li>
+<li><strong>CUDA Modules</strong>: Install and use the CUDA compiler (nvcc) with module commands.</li>
+<li><strong>Execution</strong>: Compile and run your CUDA program, observing performance improvements.</li>
+<li><strong>PBS for CUDA</strong>: Adapt the PBS script to load CUDA modules and compile with nvcc.</li>
+<li><strong>Outcome</strong>: You will be able to leverage CUDA for faster computation and understand the structure of both CUDA programs and PBS scripts.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="21-building-a-c-project-from-the-ground-up"><a class="header" href="#21-building-a-c-project-from-the-ground-up">2.1. Building a C++ Project from the Ground Up</a></h1>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cpp/cpp_on_metis">in this book's repository</a>!</em></p>
@@ -334,14 +334,15 @@ int main () {
 }
 </code></pre>
 <p>This program does two things - it says hello to the user, and then takes count of the numbers divisible by 2, 3, and 5 from 0 up to 10 billion.</p>
-<p>This is done with multiple nested loops - the reason for which will be explained, and the code optimized, in the following chapter on CUDA. For now, what's apparent and important is that this is a computationally intensive task.</p>
+<p>This is done with multiple nested loops - the reason for which will be explained, and the code optimized, in the following chapter on CUDA.</p>
+<p>For now, what's apparent and important is that this is a computationally intensive task!</p>
 <p>Next, let's build and run this code. By default, Metis users have GCC and G++ (version 11.3.0) preinstalled, which we will now use:</p>
 <pre><code class="language-bash">$ g++ -o hello_world main.cpp
 $ ./hello_world
 </code></pre>
 <p>After ten to twenty seconds, we should see our results!</p>
 <h2 id="getting-started-with-pbs"><a class="header" href="#getting-started-with-pbs">Getting Started with PBS</a></h2>
-<p>Now, we are not currently making full use of Metis with this current setup. What we just ran our code on is called the 'login node', which has nowhere near the amount of computational power that is available to the 'compute nodes', which are where computationally intensive or time-consuming programs should be run.</p>
+<p>We are not currently making full use of Metis with this current setup. What we just ran our code on is called the <strong>login node</strong>, which has nowhere near the amount of computational power that is available to the <strong>compute nodes</strong>, which are where computationally intensive or time-consuming programs should be run.</p>
 <p>But how do we do so?</p>
 <p>Metis has many users, and each user may have various types of programs, each program with varying hardware requirements. As such, Metis uses a resource manager and job scheduling system by Altair, called <a href="https://altair.com/pbs-professional">PBS Professional</a>.</p>
 <p>In order to make use of this program, we must describe to the system what we need from it, which could be things such as:</p>
@@ -435,7 +436,7 @@ rm ./hello_world
 
 ...
 </code></pre>
-<p>Lines starting with <code>#PBS</code> are not comments, rather, they are PBS-specific commands.</p>
+<p><em>Lines starting with <code>#PBS</code> are not comments, rather, they are PBS-specific commands!</em></p>
 <p>The following lines are important to understand:</p>
 <ul>
 <li>Line 1 is a <a href="https://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a> which specifies that the file's commands are to be interpreted by <a href="https://www.gnu.org/software/bash/manual/bash.html">bash</a>.</li>
@@ -468,13 +469,13 @@ rm ./hello_world
 
 ...
 </code></pre>
-<p>The <code>module</code> commands are somewhat akin to a package manager, allowing you to load packages ("modules") into your environment.</p>
+<p>The <code>module</code> commands are somewhat akin to a package manager, allowing you to load packages ("modulefiles") into your environment.</p>
 <p>Unlike you, the compute node does not have <code>gcc</code> pre-installed. So to make it available to the compute node, we must install it, done in the following fashion:</p>
 <ul>
 <li>Line 34 clears all packages with <code>module purge</code>, then installs GCC with <code>module load gcc/gcc-12.3.0</code>.</li>
 <li>Line 35 lets you see what's currently installed with <code>module list</code>.</li>
 </ul>
-<p>This process for installing a package is the same on both the login and compute node. To see what packages are available to you, you can run <code>module av</code>. To narrow your search by a specific key word, use <code>module av &lt;keyword&gt;</code>.</p>
+<p>This process for installing a package is the same on both the login and compute nodes. To see what packages are available to you, you can run <code>module av</code>. To narrow your search by a specific key word, use <code>module av &lt;keyword&gt;</code>.</p>
 <pre><code class="language-bash">...
 
 38. # Compile our code
@@ -502,7 +503,7 @@ rm ./hello_world
 <p>The output will look something like this:</p>
 <pre><code class="language-bash">18681.cm
 </code></pre>
-<p>This tells us the id number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!</p>
+<p>This tells us the ID number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!</p>
 <pre><code class="language-bash">$ ls
 hello_world.o18681 main.cpp run.pbs
 </code></pre>
@@ -535,7 +536,8 @@ Done!
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cuda/cuda_on_metis">in this book's repository</a>!</em></p>
 <p>The next part of this introductory chapter will teach you how to build, compile, and run a CUDA program from the ground up on Metis.</p>
 <p>CUDA stands for Compute Unified Device Architecture, and it is proprietary NVIDIA-distributed software that allows developers to perform matrice-based operations at unbelievable speeds using the heavily optimized CUDA cores found only on NVIDIA GPUs.</p>
-<p>This chapter will teach you how to run CUDA code on Metis, but it will not teach you how to write it. There are many fantastic resources on how to write it, some of which are linked below:</p>
+<p>This chapter will teach you how to run CUDA code on Metis, but it will not teach you how to write it!</p>
+<p>There are many fantastic resources on how to write it, some of which are linked below:</p>
 <ul>
 <li><a href="https://developer.nvidia.com/blog/even-easier-introduction-cuda/">(NVIDIA) An Even Easier Introduction to CUDA</a></li>
 <li><a href="https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/">(cuda-tutorial) Introduction to CUDA</a></li>
@@ -660,7 +662,7 @@ int main() {
 <li>Our outer loop's dimensions are replaced by the CUDA (thread) block grid, 1-3D grid containing (thread) block.</li>
 <li>Our inner loop's dimensions are replaced by the CUDA thread block, which are a 1-3D block containing the threads our kernel function will be executed on.</li>
 </ul>
-<p>In our program, we use the maximum number of dimensions, effectively creating a 6D matrice. Because each each block is aware of its coordinates on the grid it lies on, and each thread the coordinates of the block it sits in, we can use sneaky math to calculate which number the old "counter" variable each of the <em>ten billion</em> threads translates to.</p>
+<p>In our program, we use the maximum number of dimensions, effectively creating a 6D matrix. Because each each block is aware of its coordinates on the grid it lies on, and each thread the coordinates of the block it sits in, we can use sneaky math to calculate which number the old "counter" variable each of the <em>ten billion</em> threads translates to.</p>
 <p>If you would like to learn more about CUDA, the resources in the introductory section of this paragraph are greatly recommended.</p>
 <h2 id="installing-modules-on-the-login-node"><a class="header" href="#installing-modules-on-the-login-node">Installing Modules on the Login Node</a></h2>
 <p>However, unlike our previous project which used <code>g++</code>, the CUDA compiler, <code>nvcc</code>, is not pre-installed.</p>
@@ -690,7 +692,7 @@ Hello, Metis!
 <p>You will notice a nearly instantaneous completion time, versus the 20-30 seconds of the previous C version.</p>
 <p>Such is the power of graphical programming!</p>
 <h2 id="launching-a-cuda-program-with-pbs"><a class="header" href="#launching-a-cuda-program-with-pbs">Launching a CUDA Program with PBS</a></h2>
-<p>For the most part, the <code>run.pbs</code> file will look the same to the version from the previous chapter.</p>
+<p>For the most part, the <code>run.pbs</code> file will look similar to the version from the previous chapter.</p>
 <p>Create a <code>run.pbs</code> file with the following contents:</p>
 <pre><code class="language-bash">#!/bin/bash
 
@@ -759,7 +761,7 @@ rm ./hello_world
 <p>The output will look something like this:</p>
 <pre><code class="language-bash">18681.cm
 </code></pre>
-<p>This tells us the id number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!</p>
+<p>This tells us the ID number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!</p>
 <pre><code class="language-bash">$ ls
 hello_world_cuda.o18681 main.cu run.pbs
 </code></pre>
@@ -1075,13 +1077,15 @@ Done!
 Removing the container...
 Done!
 </code></pre>
-<p>Lastly, we must kill off our Podman processes on the login node, or else we'll recieve emails about extended uptime. There are many, so it's easier to kill everything under your name. This will close your shell connection, so please save any unfinished work before doing so. This will cause additional load times next time you login to Metis (10-20 seconds), but is important to do.</p>
+<p>Lastly, we must kill off our Podman processes on the login node, or else we'll recieve emails about extended uptime.</p>
+<p>There are many, so it's easier to kill instead everything under your username. This will close your shell connection, so please save any unfinished work before doing so.</p>
+<p>This will cause additional load times next time you login to Metis (10-20 seconds), but is important to do.</p>
 <pre><code class="language-bash">pkill -U &lt;your_account_username&gt;
 </code></pre>
 <h2 id="closing-thoughts-2"><a class="header" href="#closing-thoughts-2">Closing Thoughts</a></h2>
 <p>Congratulations! You now have the skills needed to tackle most CPU-only applications.</p>
 <p>You can modify the base image to fit the operating system, languages, and software you need! You can also add or modify <code>exec</code> commands to install more languages, libraries, or software to be able to load anything else your software might need.</p>
-<p>If you'd like to learn more about the <code>run</code>, <code>exec</code>, <code>kill</code>, or <code>rm</code> commands, additional documentation can be found in the <strong>Helpful Resources</strong> chapter!</p>
+<p>If you'd like to learn more about the <code>run</code>, <code>exec</code>, <code>kill</code>, or <code>rm</code> commands, additional documentation can be found in the <strong>Conclusion and Helpful Resources</strong> chapter!</p>
 <p>If your application does not make use of the GPU, and you have no interest in automation or integration, you likely don't need to read any further. If you do, then feel free to continue onto <strong>Chapter 3.2 - Using GPU Acceleration with Docker</strong>!</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="32-using-gpu-acceleration-with-docker"><a class="header" href="#32-using-gpu-acceleration-with-docker">3.2. Using GPU Acceleration With Docker</a></h1>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image_gpu">in this book's repository</a>!</em></p>
@@ -1110,9 +1114,9 @@ Done!
 <p>CUDA drivers are notoriously difficult to install, so it's highly recommended to use a base image that already has them pre-installed.</p>
 <p>For the purpose of this example, we will be using NVIDIA's <a href="https://hub.docker.com/r/nvidia/cuda/">base image</a>, which has CUDA pre-installed.</p>
 <h3 id="3---nvidia-device-files-arent-always-loaded-on-the-compute-node"><a class="header" href="#3---nvidia-device-files-arent-always-loaded-on-the-compute-node">3 - NVIDIA device files aren't always loaded on the compute node</a></h3>
-<p>Occasionally, the <code>/dev</code> files for the NVIDIA GPUs dissapear on compute nodes.</p>
+<p>Occasionally, the <code>/dev</code> files for the NVIDIA GPUs disappear on compute nodes.</p>
 <p>To solve this, we use a relatively hacky but functional solution - running a CUDA-based binary to force them to load.</p>
-<p>For the sake of demonstration, we'll use the binary we developed in Chapter 2.2!</p>
+<p>For the sake of demonstration, we'll use the binary we developed in <strong>Chapter 2.2</strong>!</p>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
 <p>First, let's create our project directory as we have in previous projects:</p>
 <pre><code class="language-bash">$ mkdir ~/projects
@@ -1314,7 +1318,7 @@ echo "Done!"
 <pre><code class="language-bash">$ qsub run.pbs
 18731.cm
 </code></pre>
-<p>After some time (remember, you can check the status of a job with <code>qstat -x &lt;job_id&gt;</code>):</p>
+<p>After some time (remember, you can check the status of a job with <code>qstat -x &lt;job_id&gt;</code>!):</p>
 <pre><code>$ cat premade_image_gpu.o18731
 ...
 
@@ -1345,8 +1349,8 @@ Fri Aug 16 21:50:56 2024
 <p>Congratulations! You've officially achieved full GPU passthrough to Podman (Docker) through the PBS job scheduling system!</p>
 <p>This is quite the technical feat, and displays some of the most impressive containerization and supercomputing technologies available.</p>
 <p>Almost every conceivable project can be run on Metis using this technique, from CUDA-based quantum simulations, to machine learning models, to facial recognition software.</p>
-<p>For those whos' projects are complete using this tactic, you can safely stop reading here, if you would like. If SSH automation (Chapter 4.1) interests you, you can also safely skip to that chapter.</p>
-<p>The next chapter, Chapter 3.3, will provide insight into writing your own base images from the ground up, and some tactics for optimizing base images for build-time and size.</p>
+<p>For those whos' projects are complete using this tactic, you can safely stop reading here, if you would like. If SSH automation (<strong>Chapter 4.1</strong>) interests you, you can also safely skip to that chapter.</p>
+<p>The next chapter, <strong>Chapter 3.3</strong>, will provide insight into writing your own base images from the ground up, and some tactics for optimizing base images for build-time and size.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="33-creating-your-own-docker-base-images"><a class="header" href="#33-creating-your-own-docker-base-images">3.3. Creating your Own Docker Base Images</a></h1>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/custom_image">in this book's repository</a>!</em></p>
 <p>Unlike previous chapters, this will not have an example project, and will instead be more free-form to act as a basepoint for your own research!</p>
@@ -1422,16 +1426,16 @@ COPY . .
 # In this case, the command is `.vent/bin/python3 main.py`, which will run the `main.py` script.
 CMD .venv/bin/python3 main.py
 </code></pre>
-<p><code>Dockerfile</code>s live in the root of a project. An example Python project layout:</p>
+<p><code>Dockerfiles</code> live in the root of a project. An example Python project layout:</p>
 <pre><code>src/
 - main.py
 - Dockerfile
 </code></pre>
-<p>The reason why Dockerfiles become useful is more apparent the more complex and dependency-heavy your project is. Each command in a <code>Dockerfile</code> is cached step-by-step, which means, after the first time the above <code>Dockerfile</code> is built, steps such as dependency installation with <code>apt</code> are not performed again.</p>
+<p>The reason why <code>Dockerfiles</code> are useful becomes more apparent the more complex and dependency-heavy your project is. Each command in a <code>Dockerfile</code> is cached step-by-step, which means, after the first time the above <code>Dockerfile</code> is built, steps such as dependency installation with <code>apt</code> are not performed again.</p>
 <p>This means that builds with <code>Dockerfile</code> are exceptionally fast, if properly optimized!</p>
 <p>Linked <a href="https://www.digitalocean.com/community/tutorials/how-to-optimize-docker-images-for-production">here</a> is a fan-favorite crash course in optimizing <code>Dockerfiles</code>.</p>
 <h2 id="how-do-i-write-a-dockerfile-from-the-ground-up"><a class="header" href="#how-do-i-write-a-dockerfile-from-the-ground-up">How Do I Write a <code>Dockerfile</code> From the Ground Up?</a></h2>
-<p>This various from project-to-project based on decisions such as:</p>
+<p>This varies from project-to-project based on decisions such as:</p>
 <ul>
 <li>Base operating system</li>
 <li>Programming Language</li>
@@ -1441,7 +1445,7 @@ CMD .venv/bin/python3 main.py
 <p>From the get-go, if you plan to use CUDA and/or CUDNN, you should use <a href="https://hub.docker.com/r/nvidia/cuda/">NVIDIA's base images</a> in your <code>FROM</code> instructions. This will save you a ton of time with configuration, as it's much simpler to install a programming language than to install CUDNN or CUDA.</p>
 <p>Depending on your project, Docker has wonderful guides linked <a href="https://docs.docker.com/language/">here</a>. These include:</p>
 <ul>
-<li>NodeJS</li>
+<li>Go</li>
 <li>Python</li>
 <li>R</li>
 <li>Rust</li>
@@ -1464,9 +1468,8 @@ CMD .venv/bin/python3 main.py
 <li><a href="https://docs.docker.com/build/ci/github-actions/">GitHub's Documentation</a></li>
 <li><a href="https://github.com/igait-niu/igait-openpose"><code>igait-openpose</code></a> (runs on Metis)</li>
 <li><a href="https://github.com/igait-niu/igait-backend"><code>igait-backend</code></a> (runs on AWS)</li>
-<li>building
-With this approach, you can containerize virtually any project with ease.</li>
 </ul>
+<p>With this approach, you can containerize virtually any project with ease.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="4-advanced-metis-usage-techniques"><a class="header" href="#4-advanced-metis-usage-techniques">4. Advanced Metis Usage Techniques</a></h1>
 <p>The first and only advanced technique this book will cover with examples is SSH automation.</p>
 <p>This allows a Metis user to automate what would otherwise be:</p>
@@ -1476,7 +1479,7 @@ With this approach, you can containerize virtually any project with ease.</li>
 <li><strong>3</strong> - Retrieving a job ID</li>
 </ul>
 <p>By doing this, we can intergrate Metis into the workflow of any existing web server!</p>
-<p>This technique also opens the door to other techniques, three of which I will briefly mention below. Because of the varyied and complex nature of implementation, they will only be described conceptually.</p>
+<p>This technique also opens the door to other techniques, three of which I will briefly mention below. Because of the varied and complex nature of implementation, they will only be described conceptually.</p>
 <h3 id="providing-files-to-metis-remotely"><a class="header" href="#providing-files-to-metis-remotely">Providing Files to Metis Remotely</a></h3>
 <p>By adding file IDs, download links, or using another way to communicate a download location, you can use the arguments on a job submission request to provide Metis with a way to download files for processing.</p>
 <p>This can be accomplished by reading the provided arguments in your PBS script, and using <code>wget</code>, <code>git</code>, <code>curl</code>, Git LFS, or another download tool to then download the files onto Metis and into the PBS job's working directory.</p>
@@ -1507,7 +1510,7 @@ With this approach, you can containerize virtually any project with ease.</li>
 <li>At each invocation on the HTTP route, grab a handle to the websocket the ID corresponds to, and broadcast the information from the HTTP request</li>
 <li>When the job provides a completion signal, or when you send a fatal error event from your PBS script, close the websocket</li>
 </ul>
-<p>This is more effective for jobs that may not have a 'final output', but rather, work in chunks. Two examples are audio encoding/decoding or token-by-token output from a machine learning model</p>
+<p>This is more effective for jobs that may not have a 'final output', but rather, work in chunks. Two common examples are audio encoding/decoding, or token-by-token output from a machine learning model.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="41-ssh-automation-with-metis"><a class="header" href="#41-ssh-automation-with-metis">4.1. SSH Automation with Metis</a></h1>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust">in this book's repository</a>!</em></p>
 <p>While Metis is an incredibly powerful tool, it does not provide native tooling to allow for automatic job submission.</p>
@@ -1522,13 +1525,13 @@ With this approach, you can containerize virtually any project with ease.</li>
 <p>First, let's talk about what Metis can and can't do.</p>
 <p>There are a few problems with automation on Metis that make it more difficult than a standard server:</p>
 <ul>
-<li>You cannot host a webserver on Metis</li>
-<li>Ports cannot be forwarded</li>
+<li><strong>You cannot host a webserver on Metis</strong></li>
+<li><strong>Ports cannot be forwarded</strong></li>
 </ul>
 <p>This means that one cannot simply host a webserver, which could otherwise recieve requests to start jobs automatically.</p>
 <p>So, what can we do?</p>
 <h2 id="the-solution-1"><a class="header" href="#the-solution-1">The Solution</a></h2>
-<p>When asking why you can't automate something, one of the first questions is to ask "Well, how am I able to do it manually?".</p>
+<p>When asking why you can't automate something, one of the first questions is to ask <em>"Well, how am I able to do it manually?"</em>.</p>
 <p>In this case, we are using SSH to connect, and we are then running <code>qsub</code> to submit our jobs.</p>
 <p>Well, can that be done programmatically?</p>
 <p>Yes, but it's a little more complicated than doing it by hand.</p>
@@ -1536,7 +1539,7 @@ With this approach, you can containerize virtually any project with ease.</li>
 <p>For the sake of this guide, I will be using the <a href="https://www.rust-lang.org/">Rust programming language</a>. This is a programming language that best illustrates potential failure points in a program, forcing you to cover error cases in advance.</p>
 <p>SSH has many potential points of failure, so using it can help you to think ahead to cover your bases!</p>
 <p>However, you don't need to use Rust, you can just as easily write your connection code in Python, C, or any language that suits your need - as long as you write code that can handle and communicate failure well.</p>
-<p>For instance, here is example Rust code to submit a <code>qsub</code> job (if you would like to follow along, please see the repository <a href="">here</a>!):</p>
+<p>For instance, here is example Rust code to submit a <code>qsub</code> job (if you would like to follow along, please see the repository <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust">here</a>!):</p>
 <pre><pre class="playground"><code class="language-rust">use openssh::{Session, KnownHosts};
 
 async fn submit_pbs_job (
@@ -1610,18 +1613,18 @@ async fn main() {
 <ul>
 <li>The SSH can fail to open because there wasn't a known host</li>
 <li>The command it can fail to send over SSH</li>
-<li>The <code>qsub</code> command can fail (on Metis's end), and return an error</li>
+<li>The <code>qsub</code> command can fail (on Metis' end), and return an error</li>
 <li>The <code>stderr</code> from reading the failure reason from Metis can provide invalid UTF-8 (unlikely, but possible!)</li>
 <li>The output from <code>stdout</code> of the <code>qsub</code> command can provide invalid UTF-8 (unlikely, but possible!)</li>
 </ul>
 <p>The first failure will likely happen, unless you've aleady made Metis a known host on the system you will be automating SSH from.</p>
-<p>So, how do we add Metis as a known host? Well, we need to create an SSH key, and copy it over to Metis. This allows Metis to skip password-based authentication thanks to knowing it's us!</p>
+<p>So, how do we add Metis as a known host? We need to create an SSH key, and copy it over to Metis. This allows Metis to skip password-based authentication thanks to knowing it's us!</p>
 <p>You can hit enter through all of the prompts in the <code>ssh-keygen</code> command, but run the following <strong>on your host machine, not Metis</strong>:</p>
 <pre><code>$ ssh-keygen
 $ ssh-copy-id &lt;your_account_username&gt;@metis.niu.edu
 </code></pre>
-<p>Now that Metis is a known host, we can test our program!</p>
-<p>If you are following along with this tutorial in Rust, you can find the codebase <a href="">here</a>, as you'll need to have the <code>openssh</code> and <code>tokio</code> crates installed and configured.</p>
+<p>Now that Metis is a known host, we can test our program.</p>
+<p>If you are following along with this tutorial in Rust, you can find the codebase <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust">here</a>, as you'll need to have the <code>openssh</code> and <code>tokio</code> crates installed and configured.</p>
 <p>Testing our program:</p>
 <pre><code>$ cargo run
     Finished dev [unoptimized + debuginfo] target(s) in 0.04s
@@ -1643,8 +1646,8 @@ bin  examples  hello_world.o18734  projects  rundir
 <div style="break-before: page; page-break-before: always;"></div><h1 id="5-conclusion-and-helpful-resources"><a class="header" href="#5-conclusion-and-helpful-resources">5. Conclusion and Helpful Resources</a></h1>
 <p>This concludes my documentation for the NIU Metis supercomputing systems.</p>
 <p>I genuinely hope this helps you achieve your goals on Metis, as using complex systems such as Metis is often daunting and time-consuming even for the most tenured of Linux users.</p>
-<p>Despite being a Linux user, I am a strong believer in 'less time working on getting ready to work'. This isn't to say I don't like planning - I use kanban boards for the most basic of tasks - but I do not enjoy spending time troubleshooting. While Linux is a large improvement over Windows for the purpose of development, things are not perfect, and much of a Linux user's time is spent working to get something fixed, rather than working on projects.</p>
-<p>I hope this guide helped you streamline getting started on Metis, below you can find additional resources to help your time on the Metis platform!</p>
+<p>Despite being a Linux user, I am a strong believer in 'less time working on preparing to work'. This isn't to say I don't like planning - I use kanban boards for the most basic of tasks - but I do not enjoy spending time troubleshooting. While Linux is a large improvement over Windows for the purpose of development, things are not perfect, and much of a Linux user's time is spent working to get something fixed, rather than working on projects - the problem this guide aims to solve.</p>
+<p>I hope this guide helped streamline your getting started on Metis. Below you can find additional resources to help your time on the Metis platform!</p>
 <h2 id="helpful-resources"><a class="header" href="#helpful-resources">Helpful Resources</a></h2>
 <h3 id="docker-podman-and-nvidia-container-toolkit"><a class="header" href="#docker-podman-and-nvidia-container-toolkit">Docker, Podman, and NVIDIA Container Toolkit</a></h3>
 <ul>

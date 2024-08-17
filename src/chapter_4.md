@@ -8,7 +8,7 @@ This allows a Metis user to automate what would otherwise be:
 
 By doing this, we can intergrate Metis into the workflow of any existing web server!
 
-This technique also opens the door to other techniques, three of which I will briefly mention below. Because of the varyied and complex nature of implementation, they will only be described conceptually.
+This technique also opens the door to other techniques, three of which I will briefly mention below. Because of the varied and complex nature of implementation, they will only be described conceptually.
 
 ### Providing Files to Metis Remotely
 By adding file IDs, download links, or using another way to communicate a download location, you can use the arguments on a job submission request to provide Metis with a way to download files for processing.
@@ -44,4 +44,4 @@ The steps are mildly similar to the previous technique:
 - At each invocation on the HTTP route, grab a handle to the websocket the ID corresponds to, and broadcast the information from the HTTP request
 - When the job provides a completion signal, or when you send a fatal error event from your PBS script, close the websocket
 
-This is more effective for jobs that may not have a 'final output', but rather, work in chunks. Two examples are audio encoding/decoding or token-by-token output from a machine learning model
+This is more effective for jobs that may not have a 'final output', but rather, work in chunks. Two common examples are audio encoding/decoding, or token-by-token output from a machine learning model.

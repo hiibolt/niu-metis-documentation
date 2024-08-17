@@ -182,7 +182,7 @@
 <li><strong>3</strong> - Retrieving a job ID</li>
 </ul>
 <p>By doing this, we can intergrate Metis into the workflow of any existing web server!</p>
-<p>This technique also opens the door to other techniques, three of which I will briefly mention below. Because of the varyied and complex nature of implementation, they will only be described conceptually.</p>
+<p>This technique also opens the door to other techniques, three of which I will briefly mention below. Because of the varied and complex nature of implementation, they will only be described conceptually.</p>
 <h3 id="providing-files-to-metis-remotely"><a class="header" href="#providing-files-to-metis-remotely">Providing Files to Metis Remotely</a></h3>
 <p>By adding file IDs, download links, or using another way to communicate a download location, you can use the arguments on a job submission request to provide Metis with a way to download files for processing.</p>
 <p>This can be accomplished by reading the provided arguments in your PBS script, and using <code>wget</code>, <code>git</code>, <code>curl</code>, Git LFS, or another download tool to then download the files onto Metis and into the PBS job's working directory.</p>
@@ -213,7 +213,7 @@
 <li>At each invocation on the HTTP route, grab a handle to the websocket the ID corresponds to, and broadcast the information from the HTTP request</li>
 <li>When the job provides a completion signal, or when you send a fatal error event from your PBS script, close the websocket</li>
 </ul>
-<p>This is more effective for jobs that may not have a 'final output', but rather, work in chunks. Two examples are audio encoding/decoding or token-by-token output from a machine learning model</p>
+<p>This is more effective for jobs that may not have a 'final output', but rather, work in chunks. Two common examples are audio encoding/decoding, or token-by-token output from a machine learning model.</p>
 
                     </main>
 

@@ -3,9 +3,9 @@ This concludes my documentation for the NIU Metis supercomputing systems.
 
 I genuinely hope this helps you achieve your goals on Metis, as using complex systems such as Metis is often daunting and time-consuming even for the most tenured of Linux users.
 
-Despite being a Linux user, I am a strong believer in 'less time working on getting ready to work'. This isn't to say I don't like planning - I use kanban boards for the most basic of tasks - but I do not enjoy spending time troubleshooting. While Linux is a large improvement over Windows for the purpose of development, things are not perfect, and much of a Linux user's time is spent working to get something fixed, rather than working on projects.
+Despite being a Linux user, I am a strong believer in 'less time working on preparing to work'. This isn't to say I don't like planning - I use kanban boards for the most basic of tasks - but I do not enjoy spending time troubleshooting. While Linux is a large improvement over Windows for the purpose of development, things are not perfect, and much of a Linux user's time is spent working to get something fixed, rather than working on projects - the problem this guide aims to solve.
 
-I hope this guide helped you streamline getting started on Metis, below you can find additional resources to help your time on the Metis platform!
+I hope this guide helped streamline your getting started on Metis. Below you can find additional resources to help your time on the Metis platform!
 
 ## Helpful Resources
 ### Docker, Podman, and NVIDIA Container Toolkit

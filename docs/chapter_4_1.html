@@ -187,13 +187,13 @@
 <p>First, let's talk about what Metis can and can't do.</p>
 <p>There are a few problems with automation on Metis that make it more difficult than a standard server:</p>
 <ul>
-<li>You cannot host a webserver on Metis</li>
-<li>Ports cannot be forwarded</li>
+<li><strong>You cannot host a webserver on Metis</strong></li>
+<li><strong>Ports cannot be forwarded</strong></li>
 </ul>
 <p>This means that one cannot simply host a webserver, which could otherwise recieve requests to start jobs automatically.</p>
 <p>So, what can we do?</p>
 <h2 id="the-solution"><a class="header" href="#the-solution">The Solution</a></h2>
-<p>When asking why you can't automate something, one of the first questions is to ask "Well, how am I able to do it manually?".</p>
+<p>When asking why you can't automate something, one of the first questions is to ask <em>"Well, how am I able to do it manually?"</em>.</p>
 <p>In this case, we are using SSH to connect, and we are then running <code>qsub</code> to submit our jobs.</p>
 <p>Well, can that be done programmatically?</p>
 <p>Yes, but it's a little more complicated than doing it by hand.</p>
@@ -201,7 +201,7 @@
 <p>For the sake of this guide, I will be using the <a href="https://www.rust-lang.org/">Rust programming language</a>. This is a programming language that best illustrates potential failure points in a program, forcing you to cover error cases in advance.</p>
 <p>SSH has many potential points of failure, so using it can help you to think ahead to cover your bases!</p>
 <p>However, you don't need to use Rust, you can just as easily write your connection code in Python, C, or any language that suits your need - as long as you write code that can handle and communicate failure well.</p>
-<p>For instance, here is example Rust code to submit a <code>qsub</code> job (if you would like to follow along, please see the repository <a href="">here</a>!):</p>
+<p>For instance, here is example Rust code to submit a <code>qsub</code> job (if you would like to follow along, please see the repository <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust">here</a>!):</p>
 <pre><pre class="playground"><code class="language-rust">use openssh::{Session, KnownHosts};
 
 async fn submit_pbs_job (
@@ -275,18 +275,18 @@ async fn main() {
 <ul>
 <li>The SSH can fail to open because there wasn't a known host</li>
 <li>The command it can fail to send over SSH</li>
-<li>The <code>qsub</code> command can fail (on Metis's end), and return an error</li>
+<li>The <code>qsub</code> command can fail (on Metis' end), and return an error</li>
 <li>The <code>stderr</code> from reading the failure reason from Metis can provide invalid UTF-8 (unlikely, but possible!)</li>
 <li>The output from <code>stdout</code> of the <code>qsub</code> command can provide invalid UTF-8 (unlikely, but possible!)</li>
 </ul>
 <p>The first failure will likely happen, unless you've aleady made Metis a known host on the system you will be automating SSH from.</p>
-<p>So, how do we add Metis as a known host? Well, we need to create an SSH key, and copy it over to Metis. This allows Metis to skip password-based authentication thanks to knowing it's us!</p>
+<p>So, how do we add Metis as a known host? We need to create an SSH key, and copy it over to Metis. This allows Metis to skip password-based authentication thanks to knowing it's us!</p>
 <p>You can hit enter through all of the prompts in the <code>ssh-keygen</code> command, but run the following <strong>on your host machine, not Metis</strong>:</p>
 <pre><code>$ ssh-keygen
 $ ssh-copy-id &lt;your_account_username&gt;@metis.niu.edu
 </code></pre>
-<p>Now that Metis is a known host, we can test our program!</p>
-<p>If you are following along with this tutorial in Rust, you can find the codebase <a href="">here</a>, as you'll need to have the <code>openssh</code> and <code>tokio</code> crates installed and configured.</p>
+<p>Now that Metis is a known host, we can test our program.</p>
+<p>If you are following along with this tutorial in Rust, you can find the codebase <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust">here</a>, as you'll need to have the <code>openssh</code> and <code>tokio</code> crates installed and configured.</p>
 <p>Testing our program:</p>
 <pre><code>$ cargo run
     Finished dev [unoptimized + debuginfo] target(s) in 0.04s

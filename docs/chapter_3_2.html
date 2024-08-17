@@ -200,9 +200,9 @@
 <p>CUDA drivers are notoriously difficult to install, so it's highly recommended to use a base image that already has them pre-installed.</p>
 <p>For the purpose of this example, we will be using NVIDIA's <a href="https://hub.docker.com/r/nvidia/cuda/">base image</a>, which has CUDA pre-installed.</p>
 <h3 id="3---nvidia-device-files-arent-always-loaded-on-the-compute-node"><a class="header" href="#3---nvidia-device-files-arent-always-loaded-on-the-compute-node">3 - NVIDIA device files aren't always loaded on the compute node</a></h3>
-<p>Occasionally, the <code>/dev</code> files for the NVIDIA GPUs dissapear on compute nodes.</p>
+<p>Occasionally, the <code>/dev</code> files for the NVIDIA GPUs disappear on compute nodes.</p>
 <p>To solve this, we use a relatively hacky but functional solution - running a CUDA-based binary to force them to load.</p>
-<p>For the sake of demonstration, we'll use the binary we developed in Chapter 2.2!</p>
+<p>For the sake of demonstration, we'll use the binary we developed in <strong>Chapter 2.2</strong>!</p>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
 <p>First, let's create our project directory as we have in previous projects:</p>
 <pre><code class="language-bash">$ mkdir ~/projects
@@ -404,7 +404,7 @@ echo "Done!"
 <pre><code class="language-bash">$ qsub run.pbs
 18731.cm
 </code></pre>
-<p>After some time (remember, you can check the status of a job with <code>qstat -x &lt;job_id&gt;</code>):</p>
+<p>After some time (remember, you can check the status of a job with <code>qstat -x &lt;job_id&gt;</code>!):</p>
 <pre><code>$ cat premade_image_gpu.o18731
 ...
 
@@ -435,8 +435,8 @@ Fri Aug 16 21:50:56 2024
 <p>Congratulations! You've officially achieved full GPU passthrough to Podman (Docker) through the PBS job scheduling system!</p>
 <p>This is quite the technical feat, and displays some of the most impressive containerization and supercomputing technologies available.</p>
 <p>Almost every conceivable project can be run on Metis using this technique, from CUDA-based quantum simulations, to machine learning models, to facial recognition software.</p>
-<p>For those whos' projects are complete using this tactic, you can safely stop reading here, if you would like. If SSH automation (Chapter 4.1) interests you, you can also safely skip to that chapter.</p>
-<p>The next chapter, Chapter 3.3, will provide insight into writing your own base images from the ground up, and some tactics for optimizing base images for build-time and size.</p>
+<p>For those whos' projects are complete using this tactic, you can safely stop reading here, if you would like. If SSH automation (<strong>Chapter 4.1</strong>) interests you, you can also safely skip to that chapter.</p>
+<p>The next chapter, <strong>Chapter 3.3</strong>, will provide insight into writing your own base images from the ground up, and some tactics for optimizing base images for build-time and size.</p>
 
                     </main>
 

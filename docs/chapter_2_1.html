@@ -240,14 +240,15 @@ int main () {
 }
 </code></pre>
 <p>This program does two things - it says hello to the user, and then takes count of the numbers divisible by 2, 3, and 5 from 0 up to 10 billion.</p>
-<p>This is done with multiple nested loops - the reason for which will be explained, and the code optimized, in the following chapter on CUDA. For now, what's apparent and important is that this is a computationally intensive task.</p>
+<p>This is done with multiple nested loops - the reason for which will be explained, and the code optimized, in the following chapter on CUDA.</p>
+<p>For now, what's apparent and important is that this is a computationally intensive task!</p>
 <p>Next, let's build and run this code. By default, Metis users have GCC and G++ (version 11.3.0) preinstalled, which we will now use:</p>
 <pre><code class="language-bash">$ g++ -o hello_world main.cpp
 $ ./hello_world
 </code></pre>
 <p>After ten to twenty seconds, we should see our results!</p>
 <h2 id="getting-started-with-pbs"><a class="header" href="#getting-started-with-pbs">Getting Started with PBS</a></h2>
-<p>Now, we are not currently making full use of Metis with this current setup. What we just ran our code on is called the 'login node', which has nowhere near the amount of computational power that is available to the 'compute nodes', which are where computationally intensive or time-consuming programs should be run.</p>
+<p>We are not currently making full use of Metis with this current setup. What we just ran our code on is called the <strong>login node</strong>, which has nowhere near the amount of computational power that is available to the <strong>compute nodes</strong>, which are where computationally intensive or time-consuming programs should be run.</p>
 <p>But how do we do so?</p>
 <p>Metis has many users, and each user may have various types of programs, each program with varying hardware requirements. As such, Metis uses a resource manager and job scheduling system by Altair, called <a href="https://altair.com/pbs-professional">PBS Professional</a>.</p>
 <p>In order to make use of this program, we must describe to the system what we need from it, which could be things such as:</p>
@@ -341,7 +342,7 @@ rm ./hello_world
 
 ...
 </code></pre>
-<p>Lines starting with <code>#PBS</code> are not comments, rather, they are PBS-specific commands.</p>
+<p><em>Lines starting with <code>#PBS</code> are not comments, rather, they are PBS-specific commands!</em></p>
 <p>The following lines are important to understand:</p>
 <ul>
 <li>Line 1 is a <a href="https://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a> which specifies that the file's commands are to be interpreted by <a href="https://www.gnu.org/software/bash/manual/bash.html">bash</a>.</li>
@@ -374,13 +375,13 @@ rm ./hello_world
 
 ...
 </code></pre>
-<p>The <code>module</code> commands are somewhat akin to a package manager, allowing you to load packages ("modules") into your environment.</p>
+<p>The <code>module</code> commands are somewhat akin to a package manager, allowing you to load packages ("modulefiles") into your environment.</p>
 <p>Unlike you, the compute node does not have <code>gcc</code> pre-installed. So to make it available to the compute node, we must install it, done in the following fashion:</p>
 <ul>
 <li>Line 34 clears all packages with <code>module purge</code>, then installs GCC with <code>module load gcc/gcc-12.3.0</code>.</li>
 <li>Line 35 lets you see what's currently installed with <code>module list</code>.</li>
 </ul>
-<p>This process for installing a package is the same on both the login and compute node. To see what packages are available to you, you can run <code>module av</code>. To narrow your search by a specific key word, use <code>module av &lt;keyword&gt;</code>.</p>
+<p>This process for installing a package is the same on both the login and compute nodes. To see what packages are available to you, you can run <code>module av</code>. To narrow your search by a specific key word, use <code>module av &lt;keyword&gt;</code>.</p>
 <pre><code class="language-bash">...
 
 38. # Compile our code
@@ -408,7 +409,7 @@ rm ./hello_world
 <p>The output will look something like this:</p>
 <pre><code class="language-bash">18681.cm
 </code></pre>
-<p>This tells us the id number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!</p>
+<p>This tells us the ID number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!</p>
 <pre><code class="language-bash">$ ls
 hello_world.o18681 main.cpp run.pbs
 </code></pre>

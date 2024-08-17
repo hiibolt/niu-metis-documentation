@@ -275,7 +275,11 @@ Removing the container...
 Done!
 ```
 
-Lastly, we must kill off our Podman processes on the login node, or else we'll recieve emails about extended uptime. There are many, so it's easier to kill everything under your name. This will close your shell connection, so please save any unfinished work before doing so. This will cause additional load times next time you login to Metis (10-20 seconds), but is important to do.
+Lastly, we must kill off our Podman processes on the login node, or else we'll recieve emails about extended uptime. 
+
+There are many, so it's easier to kill instead everything under your username. This will close your shell connection, so please save any unfinished work before doing so. 
+
+This will cause additional load times next time you login to Metis (10-20 seconds), but is important to do.
 ```bash
 pkill -U <your_account_username>
 ```
@@ -285,6 +289,6 @@ Congratulations! You now have the skills needed to tackle most CPU-only applicat
 
 You can modify the base image to fit the operating system, languages, and software you need! You can also add or modify `exec` commands to install more languages, libraries, or software to be able to load anything else your software might need.
 
-If you'd like to learn more about the `run`, `exec`, `kill`, or `rm` commands, additional documentation can be found in the **Helpful Resources** chapter!
+If you'd like to learn more about the `run`, `exec`, `kill`, or `rm` commands, additional documentation can be found in the **Conclusion and Helpful Resources** chapter!
 
 If your application does not make use of the GPU, and you have no interest in automation or integration, you likely don't need to read any further. If you do, then feel free to continue onto **Chapter 3.2 - Using GPU Acceleration with Docker**!

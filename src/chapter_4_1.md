@@ -15,15 +15,15 @@ One solution is to write our own software which submits the job on our behalf, u
 First, let's talk about what Metis can and can't do.
 
 There are a few problems with automation on Metis that make it more difficult than a standard server:
-* You cannot host a webserver on Metis
-* Ports cannot be forwarded
+* **You cannot host a webserver on Metis**
+* **Ports cannot be forwarded**
 
 This means that one cannot simply host a webserver, which could otherwise recieve requests to start jobs automatically.
 
 So, what can we do?
 
 ## The Solution
-When asking why you can't automate something, one of the first questions is to ask "Well, how am I able to do it manually?".
+When asking why you can't automate something, one of the first questions is to ask *"Well, how am I able to do it manually?"*.
 
 In this case, we are using SSH to connect, and we are then running `qsub` to submit our jobs.
 
@@ -38,7 +38,7 @@ SSH has many potential points of failure, so using it can help you to think ahea
 
 However, you don't need to use Rust, you can just as easily write your connection code in Python, C, or any language that suits your need - as long as you write code that can handle and communicate failure well.
 
-For instance, here is example Rust code to submit a `qsub` job (if you would like to follow along, please see the repository [here]()!):
+For instance, here is example Rust code to submit a `qsub` job (if you would like to follow along, please see the repository [here](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust)!):
 ```rust
 use openssh::{Session, KnownHosts};
 
@@ -116,13 +116,13 @@ Many other libraries exist for other languages, such as `ssh-python` for Python 
 However, it's worth noting just how many potential points of failure there are:
 * The SSH can fail to open because there wasn't a known host
 * The command it can fail to send over SSH
-* The `qsub` command can fail (on Metis's end), and return an error
+* The `qsub` command can fail (on Metis' end), and return an error
 * The `stderr` from reading the failure reason from Metis can provide invalid UTF-8 (unlikely, but possible!)
 * The output from `stdout` of the `qsub` command can provide invalid UTF-8 (unlikely, but possible!)
 
 The first failure will likely happen, unless you've aleady made Metis a known host on the system you will be automating SSH from.
 
-So, how do we add Metis as a known host? Well, we need to create an SSH key, and copy it over to Metis. This allows Metis to skip password-based authentication thanks to knowing it's us!
+So, how do we add Metis as a known host? We need to create an SSH key, and copy it over to Metis. This allows Metis to skip password-based authentication thanks to knowing it's us!
 
 You can hit enter through all of the prompts in the `ssh-keygen` command, but run the following **on your host machine, not Metis**:
 ```
@@ -130,9 +130,9 @@ $ ssh-keygen
 $ ssh-copy-id <your_account_username>@metis.niu.edu
 ```
  
-Now that Metis is a known host, we can test our program!
+Now that Metis is a known host, we can test our program.
 
-If you are following along with this tutorial in Rust, you can find the codebase [here](), as you'll need to have the `openssh` and `tokio` crates installed and configured.
+If you are following along with this tutorial in Rust, you can find the codebase [here](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust), as you'll need to have the `openssh` and `tokio` crates installed and configured.
 
 Testing our program:
 ```
