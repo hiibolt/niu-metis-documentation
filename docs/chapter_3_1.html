@@ -252,10 +252,10 @@ ModuleNotFoundError: No module named 'numpy'
 </code></pre>
 <p>Let's create our <a href="https://docs.python.org/3/library/venv.html">Python virtual environment</a>, and install <code>numpy</code> using the <code>exec</code> command! Run the following:</p>
 <pre><code class="language-bash">$ /bin/podman exec python_container python -m venv .venv
-$ /bin/podman exec python_container .venv/bin/pip  install numpy
+$ /bin/podman exec python_container .venv/bin/pip install numpy
 </code></pre>
 <p>Running our script again:</p>
-<pre><code>$ /bin/podman exec python_container python3 main.py
+<pre><code>$ /bin/podman exec python_container .venv/bin/python3 main.py
 ...
 Hello, Metis!
 </code></pre>
@@ -292,14 +292,14 @@ $ /bin/podman rm python_container
 #--PBS -m ae
 #--#PBS -M account@niu.edu
 
-PROJECT_DIRECTORY=/home/z1994244/projects/docker/premade_image
+PROJECT_DIRECTORY=/home/&lt;your_account_name&gt;/projects/docker/premade_image
 echo "This job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
 # Enable linger for the user
 echo ""
 echo "Enabling linger for the user..."
-loginctl enable-linger z1994244
+loginctl enable-linger &lt;your_account_name&gt;
 echo "Done!"
 
 # Start the container
@@ -345,7 +345,7 @@ echo "Done!"
 # There is a generic error message, which can be ignored.
 echo ""
 echo "Running the python script..."
-/bin/podman exec python_container python3 main.py
+/bin/podman exec python_container .venv/bin/python3 main.py
 echo "Done!"
 
 # Kill the container
@@ -388,7 +388,7 @@ echo "Done!"
 <pre><code>$ qsub run.pbs
 18712.cm
 $ cat premade_image.o18712
-This job's working directory is /home/z1994244/projects/docker/premade_image
+This job's working directory is /home/&lt;your_account_name&gt;/projects/docker/premade_image
 
 Enabling linger for the user...
 Done!

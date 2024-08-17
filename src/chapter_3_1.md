@@ -254,7 +254,7 @@ With that, let's test our job!
 $ qsub run.pbs
 18712.cm
 $ cat premade_image.o18712
-This job's working directory is /home/z1994244/projects/docker/premade_image
+This job's working directory is /home/<your_account_name>/projects/docker/premade_image
 
 Enabling linger for the user...
 Done!
