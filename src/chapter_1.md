@@ -5,9 +5,7 @@ This documentation is not meant to replace NIU's documentation, but rather, to m
 
 While this book does assume a basic understanding of Linux and C++, it is not required.
 
-If you have not logged into Metis before, or if it's been some time since you've used Linux, NIU CRCD has [comprehensive documentation](https://www.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml) on how to open a SSH connection, and a quick Linux refresher.
-
-If you would also like to refresh yourself on C++, w3schools has a wonderful [quick reference](https://www.w3schools.com/cpp/default.asp) available.
+If you have not logged into Metis before, or if it's been some time since you've used Linux, NIU CRCD has [comprehensive documentation](https://www.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml) on how to open a SSH connection, and a quick Linux refresher. If you would also like to refresh yourself on C++, w3schools has a wonderful [quick reference](https://www.w3schools.com/cpp/default.asp) available.
 
 Although this guide is about how to employ Docker on Metis, it does not assume you have previous experience with it, and includes a crash course on basic usage. The skills in that section provide tools to build even some of the most advanced applications, and also includes resources for those applications which require more.
 
