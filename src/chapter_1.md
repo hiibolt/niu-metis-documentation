@@ -16,7 +16,7 @@ The goal of this book is to allow researchers at NIU to hit the ground running w
 
 It's possible to create applications that will work regardless of what Metis has available to you for installation. Furthermore, you no longer have to develop directly on Metis - you can develop and build locally on hardware you're used to. This will allow you to focus on writing your application - without having to worry whether it can run on Metis.
 
-We will do so by employing [Docker](https://www.docker.com/), an extremely powerful containerization and encapsulation tool that allows developers to define virtual machines with a level of granularity rarely found in modern computing. Docker allows you to select an operation system as a base, install packages and libraries, and define run behaviour.
+We will do so by employing [Docker](https://www.docker.com/), an extremely powerful containerization and encapsulation tool that allows developers to define virtual machines with a level of granularity rarely found in modern computing. Docker allows you to select an operating system as a base, install packages and libraries, and define run behaviour.
 
 All of this is defined in a singular, simple, and human-readable file that can be build to be reproduced on any system - including Metis.
 
