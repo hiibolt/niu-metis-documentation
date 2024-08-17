@@ -1611,8 +1611,8 @@ async fn main() {
 <p>Many other libraries exist for other languages, such as <code>ssh-python</code> for Python and <code>ssh</code> for Go.</p>
 <p>However, it's worth noting just how many potential points of failure there are:</p>
 <ul>
-<li>The SSH can fail to open because there wasn't a known host</li>
-<li>The command it can fail to send over SSH</li>
+<li>The SSH can fail to open because you weren't a known host</li>
+<li>The command can fail to send over SSH</li>
 <li>The <code>qsub</code> command can fail (on Metis' end), and return an error</li>
 <li>The <code>stderr</code> from reading the failure reason from Metis can provide invalid UTF-8 (unlikely, but possible!)</li>
 <li>The output from <code>stdout</code> of the <code>qsub</code> command can provide invalid UTF-8 (unlikely, but possible!)</li>
