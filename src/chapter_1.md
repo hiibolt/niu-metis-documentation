@@ -11,6 +11,8 @@ If you would also like to refresh yourself on C++, w3schools has a wonderful [qu
 
 Although this guide is about how to employ Docker on Metis, it does not assume you have previous experience with it, and includes a crash course on basic usage. The skills in that section provide tools to build even some of the most advanced applications, and also includes resources for those applications which require more.
 
+For your convenience, every project example in this book can be found in [the repository for this book](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects)!
+
 ## Primary Purpose
 The goal of this book is to allow researchers at NIU to hit the ground running with their research. Our goal is for you to focus less on getting Metis to work for you - and more on completing your work as a whole.
 
