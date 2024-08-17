@@ -1,0 +1,100 @@
+#!/bin/bash
+
+#PBS -N premade_image
+#PBS -j oe
+
+#Note - on Metis   
+#              Nchunks<=32, for GPU chunks
+#              Nchunks<=4096/Ncpus for CPU-only chunks
+#              (run 'shownodes' command to find the number of free cpus) 
+#              Ncpus<=128, the total number of CPUs per node is 128 
+#              NPmpi<=Ncpus, the total number of CPUs allocated for MPI tasks, 
+#                              request NPmpi=Ncpus for non-OPENMP jobs                           
+#              Ngpus==1,  the total number of GPUs per node is 1    
+#              X<=256,  28 of 32 Metis modes have 256 GB of RAM                       
+#                       special jobs can request up to 1024 GB of RAM (4 nodes)
+#
+# Below, we request two chunks;
+#  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
+#PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+#PBS -l walltime=00:15:00
+
+# When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
+#--PBS -m ae
+#--#PBS -M account@niu.edu
+
+PROJECT_DIRECTORY=/home/<your_account_name>/projects/docker/premade_image
+echo "This job's working directory is $PROJECT_DIRECTORY"
+cd $PROJECT_DIRECTORY
+
+# Enable linger for the user
+echo ""
+echo "Enabling linger for the user..."
+loginctl enable-linger <your_account_name>
+echo "Done!"
+
+# Start the container
+# 
+# There are five flags, most of which will never change:
+# - `-v $PROJECT_DIRECTORY:/home` mounts the project directory to the `/home` 
+#    directory in the container.
+# - `-w /home` sets the working directory in the container to `/home`.
+# - `-t` allocates a pseudo-TTY. This is useful for running the container in
+#    the background.
+# - `-d` runs the container in the background.
+#
+# The last argument is the image name. This is the only thing that will change
+#  between projects, this is the name of the image we want to run.
+# 
+# For instance, in this case, we are running the `python:3.12.5-bookworm` image:
+# - `python` is the name of the image.
+# - `3.12.5-bookworm` is the tag of the image, which specifies the version of the
+#    image we want to run.
+#
+# Millions of pre-built images are available on Docker Hub, and will likely 
+#  already have an image that suits your needs! You can search for images here:
+#  https://hub.docker.com/
+#
+# Note: There may be many logs that are printed to the console when the container
+#  is started. Despite being error-level, this is normal, and you can ignore them.
+echo ""
+echo "Starting the container..."
+/bin/podman run                  \
+    -v $PROJECT_DIRECTORY:/home  \
+    -w /home                     \
+    --name python_container      \
+    -t -d                        \
+    python:3.12.5-bookworm       \
+    > /dev/null 2>&1 # You can remove this line if you want to see the logs!
+echo "Done!"
+
+# Run our python script
+#
+# The `exec` command runs a command in a running container. In this case, we are
+#  running the `python3 main.py` command in the `python_container` container.
+# 
+# There is a generic error message, which can be ignored.
+echo ""
+echo "Running the python script..."
+/bin/podman exec python_container .venv/bin/python3 main.py
+echo "Done!"
+
+# Kill the container
+#
+# The `kill` command stops a running container. In this case, we are stopping the
+#  `python_container` container.
+echo ""
+echo "Stopping the container..."
+/bin/podman kill python_container \
+    > /dev/null 2>&1 # You can remove this line if you want to see the logs!
+echo "Done!"
+
+# Remove the container
+#
+# The `rm` command removes a container. In this case, we are removing the
+#  `python_container` container.
+echo ""
+echo "Removing the container..."
+/bin/podman rm python_container \
+    > /dev/null 2>&1 # You can remove this line if you want to see the logs!
+echo "Done!"

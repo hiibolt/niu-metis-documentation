@@ -42,7 +42,9 @@ $ cd ~/projects/docker/premade_image_gpu
 
 Next, we need a binary that forces CUDA to load. We'll build the project from Chapter 2.1 and have it output here:
 ```bash
-$ g++ -o initialize_cuda ~/projects/cuda/cuda_on_metis
+$ module purge
+$ module load cuda/cuda-11.8
+$ nvcc -o initialize_cuda ~/projects/cuda/cuda_on_metis/main.cu
 ```
 
 Finally, we'll implement everything mentioned above.
