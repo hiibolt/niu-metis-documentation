@@ -114,13 +114,13 @@ Our first step is to use an SSH library - in this case, the crate `openssh` - to
 Many other libraries exist for other languages, such as `ssh-python` for Python and `ssh` for Go.
 
 However, it's worth noting just how many potential points of failure there are:
-* The SSH can fail to open because you weren't a known host
+* The SSH can fail to open because Metis wasn't a known host
 * The command can fail to send over SSH
 * The `qsub` command can fail (on Metis' end), and return an error
 * The `stderr` from reading the failure reason from Metis can provide invalid UTF-8 (unlikely, but possible!)
 * The output from `stdout` of the `qsub` command can provide invalid UTF-8 (unlikely, but possible!)
 
-The first failure will likely happen, unless you've aleady made Metis a known host on the system you will be automating SSH from.
+The first failure will likely happen - unless you've aleady made Metis a known host on the system you will be automating SSH from.
 
 So, how do we add Metis as a known host? We need to create an SSH key, and copy it over to Metis. This allows Metis to skip password-based authentication thanks to knowing it's us!
 

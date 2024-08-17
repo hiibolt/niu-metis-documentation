@@ -273,13 +273,13 @@ async fn main() {
 <p>Many other libraries exist for other languages, such as <code>ssh-python</code> for Python and <code>ssh</code> for Go.</p>
 <p>However, it's worth noting just how many potential points of failure there are:</p>
 <ul>
-<li>The SSH can fail to open because you weren't a known host</li>
+<li>The SSH can fail to open because Metis wasn't a known host</li>
 <li>The command can fail to send over SSH</li>
 <li>The <code>qsub</code> command can fail (on Metis' end), and return an error</li>
 <li>The <code>stderr</code> from reading the failure reason from Metis can provide invalid UTF-8 (unlikely, but possible!)</li>
 <li>The output from <code>stdout</code> of the <code>qsub</code> command can provide invalid UTF-8 (unlikely, but possible!)</li>
 </ul>
-<p>The first failure will likely happen, unless you've aleady made Metis a known host on the system you will be automating SSH from.</p>
+<p>The first failure will likely happen - unless you've aleady made Metis a known host on the system you will be automating SSH from.</p>
 <p>So, how do we add Metis as a known host? We need to create an SSH key, and copy it over to Metis. This allows Metis to skip password-based authentication thanks to knowing it's us!</p>
 <p>You can hit enter through all of the prompts in the <code>ssh-keygen</code> command, but run the following <strong>on your host machine, not Metis</strong>:</p>
 <pre><code>$ ssh-keygen
