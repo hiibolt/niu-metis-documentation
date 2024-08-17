@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_0.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_0_1.html"><strong aria-hidden="true">1.1.</strong> Recommended Development Environment</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_2_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Helpful Resources</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Conclusion and Helpful Resources</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -176,6 +176,7 @@
                     <main>
                         <h1 id="1-introduction"><a class="header" href="#1-introduction">1. Introduction</a></h1>
 <p>Welcome! This book serves as an all-in-one crash course in utilizing Metis, as well as some advanced techniques.</p>
+<p>This documentation is not meant to replace NIU's documentation, but rather, to make it more beginner-friendly and to save you time!</p>
 <p>While this book does assume a basic understanding of Linux and C++, it is not required.</p>
 <p>If you have not logged into Metis before, or if it's been some time since you've used Linux, NIU CRCD has <a href="https://www.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml">comprehensive documentation</a> on how to open a SSH connection, and a quick Linux refresher.</p>
 <p>If you would also like to refresh yourself on C++, w3schools has a wonderful <a href="https://www.w3schools.com/cpp/default.asp">quick reference</a> available.</p>
@@ -230,7 +231,21 @@
 </ul>
 </li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="recommended-development-environment"><a class="header" href="#recommended-development-environment">Recommended Development Environment</a></h1>
+<h2 id="where-do-i-need-to-read-to"><a class="header" href="#where-do-i-need-to-read-to">Where Do I Need to Read to?</a></h2>
+<h3 id="cases-where-docker-may-not-be-needed"><a class="header" href="#cases-where-docker-may-not-be-needed">Cases Where Docker May Not Be Needed</a></h3>
+<p>Check if your use case is either of the two below. If it is, you can safely stop reading after Chapter 2.2.</p>
+<ul>
+<li>Native C, Go, or Python applications with pre-existing or no dependencies</li>
+<li>OpenMPI-based applications</li>
+</ul>
+<h3 id="cases-where-docker-is-needed"><a class="header" href="#cases-where-docker-is-needed">Cases Where Docker Is Needed</a></h3>
+<p>If you only need CPU-based computation, you can safely stop reading after Chapter 3.1. If you need GPU passthrough or have a complicated project, it is recommended to read this book in its entirety!</p>
+<ul>
+<li>Applications with a language not listed above</li>
+<li>Applications with dependencies Metis does not have encapsulated in its modulefiles</li>
+<li>Applications with complex or circular dependencies</li>
+<li>Applications which require a different operating system</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="2-basic-metis-usage"><a class="header" href="#2-basic-metis-usage">2. Basic Metis Usage</a></h1>
 <p>This first chapter will provide two into-the-fire projects that will teach you the core systems of Metis. This will be done through a simple C++ project, followed a optimized version written with CUDA.</p>
 <p>These chapters lay the foundational skills needed to use the advanced techniques used in the following chapters, it is highly recommended that you read them before proceeding.</p>
@@ -798,8 +813,32 @@ openmpi/openmpi-4.1.5-gcc-12.3.0-cuda-12.2
 openmpi/openmpi-4.1.6-gcc-11.4.0-cuda-11.8
 </code></pre>
 <p>Using a combination of both OpenMPI for coordinating large-scale tasks across many processors and CUDA for handling tasks best accelerated by GPU programming will allow you to fully harness the hardware of Metis.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="intermediate-metis-usage-with-docker"><a class="header" href="#intermediate-metis-usage-with-docker">Intermediate Metis Usage with Docker</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="using-pre-made-docker-images"><a class="header" href="#using-pre-made-docker-images">Using Pre-Made Docker Images</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="3-intermediate-metis-usage-with-metis"><a class="header" href="#3-intermediate-metis-usage-with-metis">3. Intermediate Metis Usage with Metis</a></h1>
+<p>In this chapter, we will dive deeper into advanced Docker techniques, expanding on the foundational knowledge covered in Chapters 2.1 and 2.2.</p>
+<p>We'll explore how to combine these techniques to create a robust workflow for your projects on Metis, including handling custom Docker images, leveraging GPU acceleration, and managing complex dependencies.</p>
+<h2 id="overview-of-the-chapters-1"><a class="header" href="#overview-of-the-chapters-1">Overview of the Chapters</a></h2>
+<h3 id="chapter-31-using-pre-made-docker-images"><a class="header" href="#chapter-31-using-pre-made-docker-images">Chapter 3.1: Using Pre-Made Docker Images</a></h3>
+<ul>
+<li><strong>Goals</strong>: Understand the limitations of Metis modulefiles and learn how to circumvent them using Docker.</li>
+<li><strong>Problem</strong>: Some software, like Python 3.11, isn't available on Metis, and creating modulefiles can be time-consuming.</li>
+<li><strong>Solution</strong>: Use Docker (via Podman) to run applications with custom dependencies.</li>
+<li><strong>Outcome</strong>: You will be able to run any version of software, regardless of the limitations of the Metis environment.</li>
+</ul>
+<h3 id="chapter-32-using-gpu-acceleration-with-docker"><a class="header" href="#chapter-32-using-gpu-acceleration-with-docker">Chapter 3.2: Using GPU Acceleration with Docker</a></h3>
+<ul>
+<li><strong>Goals</strong>: Learn how to enable GPU passthrough in Docker containers on Metis.</li>
+<li><strong>Problem</strong>: GPUs are not accessible in Docker by default, and additional steps are required to set up NVIDIA drivers and CUDA.</li>
+<li><strong>Solution</strong>: Configure Podman with specific flags and use NVIDIA's CUDA-enabled Docker images.</li>
+<li><strong>Outcome</strong>: You will be able to leverage GPU acceleration for your Dockerized applications, significantly boosting performance.</li>
+</ul>
+<h3 id="chapter-33-creating-your-own-docker-base-images"><a class="header" href="#chapter-33-creating-your-own-docker-base-images">Chapter 3.3: Creating Your Own Docker Base Images</a></h3>
+<ul>
+<li><strong>Goals</strong>: Gain the skills to create custom Docker images tailored to your project’s needs.</li>
+<li><strong>Problem</strong>: Pre-made Docker images may not always meet the specific requirements of your project.</li>
+<li><strong>Solution</strong>: Learn the basics of writing Dockerfiles, building custom images, and publishing them to public repositories.</li>
+<li><strong>Outcome</strong>: You will be able to create, customize, and share Docker images, enabling a flexible and reproducible environment for your work.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="31-using-pre-made-docker-images"><a class="header" href="#31-using-pre-made-docker-images">3.1. Using Pre-Made Docker Images</a></h1>
 <p>We will first begin by using a language which is <em>not</em> among the modules which Metis provides, Python 3.11.</p>
 <p>In actuality, Metis does offer Python, as seen below:</p>
 <pre><code>$ module av python
@@ -1041,7 +1080,7 @@ Done!
 <p>You can modify the base image to fit the operating system, languages, and software you need! You can also add or modify <code>exec</code> commands to install more languages, libraries, or software to be able to load anything else your software might need.</p>
 <p>If you'd like to learn more about the <code>run</code>, <code>exec</code>, <code>kill</code>, or <code>rm</code> commands, additional documentation can be found in the <strong>Helpful Resources</strong> chapter!</p>
 <p>If your application does not make use of the GPU, and you have no interest in automation or integration, you likely don't need to read any further. If you do, then feel free to continue onto <strong>Chapter 3.2 - Using GPU Acceleration with Docker</strong>!</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="using-gpu-acceleration-with-docker"><a class="header" href="#using-gpu-acceleration-with-docker">Using GPU Acceleration With Docker</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="32-using-gpu-acceleration-with-docker"><a class="header" href="#32-using-gpu-acceleration-with-docker">3.2. Using GPU Acceleration With Docker</a></h1>
 <p>Now we must address how to use GPU passthrough on Metis with Podman (Docker), which can quickly elevate our programs to higher performance with the power of GPU acceleration!</p>
 <h2 id="goals-3"><a class="header" href="#goals-3">Goals</a></h2>
 <ul>
@@ -1302,9 +1341,15 @@ Fri Aug 16 21:50:56 2024
 <p>Almost every conceivable project can be run on Metis using this technique, from CUDA-based quantum simulations, to machine learning models, to facial recognition software.</p>
 <p>For those whos' projects are complete using this tactic, you can safely stop reading here, if you would like. If SSH automation (Chapter 4.1) interests you, you can also safely skip to that chapter.</p>
 <p>The next chapter, Chapter 3.3, will provide insight into writing your own base images from the ground up, and some tactics for optimizing base images for build-time and size.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="creating-your-own-docker-base-images"><a class="header" href="#creating-your-own-docker-base-images">Creating your Own Docker Base Images</a></h1>
-<p>Unlike previous chapters, this will not have an example project, and will instead be more free-form to act as a basepoint for your own research.</p>
-<p>In this chapter, we will instead discuss some possible venues for where to learn Dockerfile syntax, building images, and running them on Metis.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="33-creating-your-own-docker-base-images"><a class="header" href="#33-creating-your-own-docker-base-images">3.3. Creating your Own Docker Base Images</a></h1>
+<p>Unlike previous chapters, this will not have an example project, and will instead be more free-form to act as a basepoint for your own research!</p>
+<p>We will discuss some possible venues from where to learn Dockerfile syntax, building images, and running them on Metis to create a solution that fits your quota.</p>
+<h2 id="goals-4"><a class="header" href="#goals-4">Goals</a></h2>
+<ul>
+<li>Look at some examples of a <code>Dockerfile</code></li>
+<li>Get a rough idea for how to write your own <code>Dockerfile</code></li>
+<li>Get a rough idea on resources about publishing yor own Docker Images</li>
+</ul>
 <h2 id="what-actually-is-a-docker-image"><a class="header" href="#what-actually-is-a-docker-image">What Actually Is a Docker Image?</a></h2>
 <p>In the past, we've only used images from the <a href="https://hub.docker.com">Docker Hub</a>. But how are those images created?</p>
 <p>Docker Images are defined and built from a <a href="https://docs.docker.com/reference/dockerfile/"><code>Dockerfile</code></a>.</p>
@@ -1379,10 +1424,9 @@ CMD .venv/bin/pip/python main.py
 - main.py
 - Dockerfile
 </code></pre>
-<p>The reason why Dockerfiles become useful the more complex and dependency-heavy your project is.</p>
-<p>Each command in a <code>Dockerfile</code> is cached step-by-step, which means, after the first time the above <code>Dockerfile</code> is built, steps such as dependency installation with <code>apt</code> are not performed again.</p>
-<p>This means that builds with <code>Dockerfile</code> are exceptionally fast if properly optimized.</p>
-<p>Linked <a href="https://www.digitalocean.com/community/tutorials/how-to-optimize-docker-images-for-production">here</a> is a fan-favorite crash course in optimizing <code>Dockerfiles</code>!</p>
+<p>The reason why Dockerfiles become useful is more apparent the more complex and dependency-heavy your project is. Each command in a <code>Dockerfile</code> is cached step-by-step, which means, after the first time the above <code>Dockerfile</code> is built, steps such as dependency installation with <code>apt</code> are not performed again.</p>
+<p>This means that builds with <code>Dockerfile</code> are exceptionally fast, if properly optimized!</p>
+<p>Linked <a href="https://www.digitalocean.com/community/tutorials/how-to-optimize-docker-images-for-production">here</a> is a fan-favorite crash course in optimizing <code>Dockerfiles</code>.</p>
 <h2 id="how-do-i-write-a-dockerfile-from-the-ground-up"><a class="header" href="#how-do-i-write-a-dockerfile-from-the-ground-up">How Do I Write a <code>Dockerfile</code> From the Ground Up?</a></h2>
 <p>This various from project-to-project based on decisions such as:</p>
 <ul>
@@ -1403,6 +1447,8 @@ CMD .venv/bin/pip/python main.py
 <p>Once you have written and built your image, you should test it locally on your own machine. In fact, all Docker development is best done on your local machine.</p>
 <h2 id="publishing-your-image-to-a-public-registry"><a class="header" href="#publishing-your-image-to-a-public-registry">Publishing your Image to a Public Registry</a></h2>
 <p>Now, unfortunately, I have not found a way to build Docker Images on a login node on Metis in a way that allows you to copy the image over to the desired compute node.</p>
+<p>The workaround is to build them locally, publish our images, and then pull them onto the compute node.</p>
+<h2 id="how-do-i-choose-where-to-publish"><a class="header" href="#how-do-i-choose-where-to-publish">How Do I Choose Where to Publish?</a></h2>
 <p>There are two good options for public registries:</p>
 <ul>
 <li>Docker Hub</li>
@@ -1415,11 +1461,218 @@ CMD .venv/bin/pip/python main.py
 <li><a href="https://docs.docker.com/build/ci/github-actions/">GitHub's Documentation</a></li>
 <li><a href="https://github.com/igait-niu/igait-openpose"><code>igait-openpose</code></a> (runs on Metis)</li>
 <li><a href="https://github.com/igait-niu/igait-backend"><code>igait-backend</code></a> (runs on AWS)</li>
+<li>building
+With this approach, you can containerize virtually any project with ease.</li>
 </ul>
-<p>With this approach, you can containerize virtually any project with ease.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="advanced-metis-usage-techniques"><a class="header" href="#advanced-metis-usage-techniques">Advanced Metis Usage Techniques</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="ssh-automation-with-metis"><a class="header" href="#ssh-automation-with-metis">SSH Automation with Metis</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="helpful-resources"><a class="header" href="#helpful-resources">Helpful Resources</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="4-advanced-metis-usage-techniques"><a class="header" href="#4-advanced-metis-usage-techniques">4. Advanced Metis Usage Techniques</a></h1>
+<p>The first and only advanced technique this book will cover with examples is SSH automation.</p>
+<p>This allows a Metis user to automate what would otherwise be:</p>
+<ul>
+<li><strong>1</strong> - Logging into Metis over SSH</li>
+<li><strong>2</strong> - Running job submission commands</li>
+<li><strong>3</strong> - Retrieving a job ID</li>
+</ul>
+<p>By doing this, we can intergrate Metis into the workflow of any existing web server!</p>
+<p>This technique also opens the door to other techniques, three of which I will briefly mention below. Because of the varyied and complex nature of implementation, they will only be described conceptually.</p>
+<h3 id="providing-files-to-metis-remotely"><a class="header" href="#providing-files-to-metis-remotely">Providing Files to Metis Remotely</a></h3>
+<p>By adding file IDs, download links, or using another way to communicate a download location, you can use the arguments on a job submission request to provide Metis with a way to download files for processing.</p>
+<p>This can be accomplished by reading the provided arguments in your PBS script, and using <code>wget</code>, <code>git</code>, <code>curl</code>, Git LFS, or another download tool to then download the files onto Metis and into the PBS job's working directory.</p>
+<h3 id="web-server-completion-reporting"><a class="header" href="#web-server-completion-reporting">Web Server Completion Reporting</a></h3>
+<p>Since PBS jobs on Metis have the ability to connect to the internet, it's possible to then ping your webserver to let it know it's finished, instead of guessing.</p>
+<p>The process can look like:</p>
+<ul>
+<li>Create a database to track jobs on your webserver</li>
+<li>Create a route that allows updating each job entry via HTTP</li>
+<li>Create a new job data structure in your database with a unique ID for a job</li>
+<li>Pass the unique ID to the SSH automation as an argument when submitting a new job</li>
+<li>Recieve and note that argument in your PBS script file</li>
+<li>When work in your PBS script file is done, at the very end, send an HTTP request to the updating route</li>
+<li>Update the database entry via the route, and handle any interpretation logic for the results of your job</li>
+</ul>
+<p>This means your server can be aware of the moment your job is complete, and accomplish interpretation results immediately.</p>
+<p>Due to the complex and implementation-specific nature of this process, I have not included an example. However, this technique was implemented in our backend for the iGait project, the link to which can be found <a href="https://github.com/igait-niu/igait-backend">here</a>!</p>
+<h3 id="event-reporting-websocket"><a class="header" href="#event-reporting-websocket">Event Reporting Websocket</a></h3>
+<p>This technique only applies to jobs which are short enough to be tracked throughout the lifecycle of a single websocket connection, but can provide real-time results nonetheless.</p>
+<p>The steps are mildly similar to the previous technique:</p>
+<ul>
+<li>Create an (asynchronus and thread-safe) websocket-compatible route, that when opened, first broadcasts a 'starting' event</li>
+<li>Create a route that allows updating each job entry via HTTP</li>
+<li>Create a new job data structure in your database with a unique ID for a job</li>
+<li>Pass the unique ID to the SSH automation as an argument when submitting a new job</li>
+<li>Recieve and note that argument in your PBS script file</li>
+<li>At each step, send an HTTP request to the webserver with any events you would like to broadcast</li>
+<li>At each invocation on the HTTP route, grab a handle to the websocket the ID corresponds to, and broadcast the information from the HTTP request</li>
+<li>When the job provides a completion signal, or when you send a fatal error event from your PBS script, close the websocket</li>
+</ul>
+<p>This is more effective for jobs that may not have a 'final output', but rather, work in chunks. Two examples are audio encoding/decoding or token-by-token output from a machine learning model</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="41-ssh-automation-with-metis"><a class="header" href="#41-ssh-automation-with-metis">4.1. SSH Automation with Metis</a></h1>
+<p>While Metis is an incredibly powerful tool, it does not provide native tooling to allow for automatic job submission.</p>
+<p>One solution is to write our own software which submits the job on our behalf, using SSH-related libraries to open a connection and submit commands!</p>
+<h2 id="goals-5"><a class="header" href="#goals-5">Goals</a></h2>
+<ul>
+<li>Learn how to automate an SSH session and commands</li>
+<li>Learn how to add your system as a known host</li>
+<li>Understand the importance of hardening your code</li>
+</ul>
+<h2 id="the-problems-1"><a class="header" href="#the-problems-1">The Problem(s)</a></h2>
+<p>First, let's talk about what Metis can and can't do.</p>
+<p>There are a few problems with automation on Metis that make it more difficult than a standard server:</p>
+<ul>
+<li>You cannot host a webserver on Metis</li>
+<li>Ports cannot be forwarded</li>
+</ul>
+<p>This means that one cannot simply host a webserver, which could otherwise recieve requests to start jobs automatically.</p>
+<p>So, what can we do?</p>
+<h2 id="the-solution-1"><a class="header" href="#the-solution-1">The Solution</a></h2>
+<p>When asking why you can't automate something, one of the first questions is to ask "Well, how am I able to do it manually?".</p>
+<p>In this case, we are using SSH to connect, and we are then running <code>qsub</code> to submit our jobs.</p>
+<p>Well, can that be done programmatically?</p>
+<p>Yes, but it's a little more complicated than doing it by hand.</p>
+<h2 id="implementation-1"><a class="header" href="#implementation-1">Implementation</a></h2>
+<p>For the sake of this guide, I will be using the <a href="https://www.rust-lang.org/">Rust programming language</a>. This is a programming language that best illustrates potential failure points in a program, forcing you to cover error cases in advance.</p>
+<p>SSH has many potential points of failure, so using it can help you to think ahead to cover your bases!</p>
+<p>However, you don't need to use Rust, you can just as easily write your connection code in Python, C, or any language that suits your need - as long as you write code that can handle and communicate failure well.</p>
+<p>For instance, here is example Rust code to submit a <code>qsub</code> job (if you would like to follow along, please see the repository <a href="">here</a>!):</p>
+<pre><pre class="playground"><code class="language-rust">use openssh::{Session, KnownHosts};
+
+async fn submit_pbs_job (
+    username: &amp;str,
+    path: &amp;str,
+    arguments: Vec&lt;(&amp;str, &amp;str)&gt;
+) -&gt; Result&lt;String, String&gt; {
+    // Open a multiplexed SSH session
+    let session = Session::connect_mux(&amp;format!("{username}@metis.niu.edu"), KnownHosts::Strict).await
+        .map_err(|err| format!("Couldn't connect to METIS! Are your credentials correct? Raw error:\n{err}"))?;
+
+    // Build and run the `qsub`` command
+    let mut submit_job_command_output = session
+        .command("qsub");
+
+    // Build the arguments string
+    let stringified_arguments = arguments
+        .iter()
+        .map(|(key, value)| format!("{key}={value}"))
+        .collect::&lt;Vec&lt;String&gt;&gt;()
+        .join(",");
+
+    // Append the arguments string to the command, if there are any arguments
+    let submit_job_command_output = if stringified_arguments.len() &gt; 0 {
+        submit_job_command_output
+            .arg("-v")
+            .arg(stringified_arguments)
+    } else {
+        &amp;mut submit_job_command_output
+    };
+
+    // Append the job script path to the command
+    let submit_job_command_output = submit_job_command_output
+        .arg(path)
+        .output().await
+        .map_err(|err| format!("Failed to run qsub command! Raw error:\n{err}"))?;
+
+    // Check if the command was successful
+    if !submit_job_command_output.status.success() {
+        let err = String::from_utf8(submit_job_command_output.stderr)
+            .map_err(|err| format!("Failed to decode the error message! Raw error:\n{err}"))?;
+
+        return Err(format!("When running the qsub command, the following error occurred:\n{err}"));
+    } 
+
+    // Otherwise, return the output (as a string)
+    let successful_output = String::from_utf8(submit_job_command_output.stdout)
+        .map_err(|err| format!("Failed to decode the output message! Raw error:\n{err}"))?;
+
+    Ok(successful_output)
+}
+
+#[tokio::main]
+async fn main() {
+    // Submit a job to the METIS cluster
+    let job_id = submit_pbs_job("z1994244", "/home/z1994244/projects/cpp/hello_world/run.pbs", vec![
+        ("ARGUMENT_1", "VALUE_1"),
+        ("ARGUMENT_2", "VALUE_2"),
+        ("ARGUMENT_3", "VALUE_3"),
+    ]).await;
+
+    // Check if the job was submitted successfully
+    match job_id {
+        Ok(job_id) =&gt; println!("Job submitted successfully! Job ID: {job_id}"),
+        Err(err) =&gt; eprintln!("Failed to submit the job! Error message:\n{err}"),
+    }
+}</code></pre></pre>
+<p>Our first step is to use an SSH library - in this case, the crate <code>openssh</code> - to open a <a href="https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing">multiplexed</a> SSH connection.</p>
+<p>Many other libraries exist for other languages, such as <code>ssh-python</code> for Python and <code>ssh</code> for Go.</p>
+<p>However, it's worth noting just how many potential points of failure there are:</p>
+<ul>
+<li>The SSH can fail to open because there wasn't a known host</li>
+<li>The command it can fail to send over SSH</li>
+<li>The <code>qsub</code> command can fail (on Metis's end), and return an error</li>
+<li>The <code>stderr</code> from reading the failure reason from Metis can provide invalid UTF-8 (unlikely, but possible!)</li>
+<li>The output from <code>stdout</code> of the <code>qsub</code> command can provide invalid UTF-8 (unlikely, but possible!)</li>
+</ul>
+<p>The first failure will likely happen, unless you've aleady made Metis a known host on the system you will be automating SSH from.</p>
+<p>So, how do we add Metis as a known host? Well, we need to create an SSH key, and copy it over to Metis. This allows Metis to skip password-based authentication thanks to knowing it's us!</p>
+<p>You can hit enter through all of the prompts in the <code>ssh-keygen</code> command, but run the following <strong>on your host machine, not Metis</strong>:</p>
+<pre><code>$ ssh-keygen
+$ ssh-copy-id &lt;your_account_username&gt;@metis.niu.edu
+</code></pre>
+<p>Now that Metis is a known host, we can test our program!</p>
+<p>If you are following along with this tutorial in Rust, you can find the codebase <a href="">here</a>, as you'll need to have the <code>openssh</code> and <code>tokio</code> crates installed and configured.</p>
+<p>Testing our program:</p>
+<pre><code>$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.04s
+     Running `target/debug/igait-ssh-testing`
+Job submitted successfully! Job ID: 18734.cm
+</code></pre>
+<p>Congratulations! It worked, and you've just submitted a PBS job automatically!</p>
+<h2 id="important-notes"><a class="header" href="#important-notes">Important Notes</a></h2>
+<p>Many <code>openssh</code> implementations, including in Rust, only run commands from the home directory. In some implementations, you can change this, but in many, you cannot. This is why, throughout our projects, we've been providing absolute paths. Otherwise, the <code>$PBS_O_WORKDIR</code> for our SSH automation would resolve to <code>~/.</code>, which would cause unexpected failures.</p>
+<p>By writing our paths in absolute, we guarantee proper execution.</p>
+<p>Now, where is our output? Well, as previously mentioned, often, commands are run from the <code>~/.</code> (home) directory. Sure enough, after manually logging into Metis:</p>
+<pre><code>$ ls
+bin  examples  hello_world.o18734  projects  rundir
+</code></pre>
+<p>While not shown here, it is possible to automatically read the contents of this output folder, using a <code>cat</code> command or the likes after the expected run time is over.</p>
+<p>It cannot be understated how important it is that you are extremely careful whenever automating your workflow!</p>
+<p>You must purify your inputs, and ensure it is physically impossible for an attacker to exploit your backend in any way possible. To not do so would endanger the work of fellow NIU researchers, students and staff.</p>
+<p>However, as mentioned in the preface to this chapter, it's an incredibly effective method that can be further evolved into even more effecient and better integrated systems!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="5-conclusion-and-helpful-resources"><a class="header" href="#5-conclusion-and-helpful-resources">5. Conclusion and Helpful Resources</a></h1>
+<p>This concludes my documentation for the NIU Metis supercomputing systems.</p>
+<p>I genuinely hope this helps you achieve your goals on Metis, as using complex systems such as Metis is often daunting and time-consuming even for the most tenured of Linux users.</p>
+<p>Despite being a Linux user, I am a strong believer in 'less time working on getting ready to work'. This isn't to say I don't like planning - I use kanban boards for the most basic of tasks - but I do not enjoy spending time troubleshooting. While Linux is a large improvement over Windows for the purpose of development, things are not perfect, and much of a Linux user's time is spent working to get something fixed, rather than working on projects.</p>
+<p>I hope this guide helped you streamline getting started on Metis, below you can find additional resources to help your time on the Metis platform!</p>
+<h2 id="helpful-resources"><a class="header" href="#helpful-resources">Helpful Resources</a></h2>
+<h3 id="docker-podman-and-nvidia-container-toolkit"><a class="header" href="#docker-podman-and-nvidia-container-toolkit">Docker, Podman, and NVIDIA Container Toolkit</a></h3>
+<ul>
+<li><a href="https://docs.docker.com/">Docker's Documentation</a></li>
+<li><a href="https://docs.podman.io/">Podman's Documentation</a></li>
+<li><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/index.html">NVIDIA Container Toolkit Documentation</a></li>
+</ul>
+<h3 id="cuda-and-openmpi"><a class="header" href="#cuda-and-openmpi">CUDA and OpenMPI</a></h3>
+<ul>
+<li><a href="https://developer.nvidia.com/blog/even-easier-introduction-cuda/">NVIDIA's Amazing Introduction to CUDA</a></li>
+<li><a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#features-and-technical-specifications">NVIDIA CUDA Feature Availability</a></li>
+<li><a href="https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf">NVIDIA A100 Technical Documentation</a></li>
+<li><a href="https://www.openmp.org/wp-content/uploads/omp-hands-on-SC08.pdf">OpenMPI Into-The-Fire Introduction</a></li>
+<li><a href="https://docs.open-mpi.org/en/v5.0.x/index.html">OpenMPI Documentation</a></li>
+</ul>
+<h3 id="pbs-professional"><a class="header" href="#pbs-professional">PBS Professional</a></h3>
+<ul>
+<li><a href="https://help.altair.com/2024.1.0/PBS%20Professional/PBSProgramGuide2024.1.pdf">PBS Professional Documentation</a></li>
+<li><a href="https://www.nas.nasa.gov/hecc/support/kb/Commonly-Used-PBS-Commands_174.html">NASA's PBS Quick Reference</a></li>
+<li><a href="https://www.jlab.org/hpc/PBS/qsub.html"><code>qsub</code> Documentation</a></li>
+<li><a href="https://www.jlab.org/hpc/PBS/qstat.html"><code>qstat</code> Documentation</a></li>
+<li><a href="https://www.jlab.org/hpc/PBS/qdel.html"><code>qdel</code> Documentation</a></li>
+</ul>
+<h3 id="metis"><a class="header" href="#metis">Metis</a></h3>
+<ul>
+<li><a href="https://www.niu.edu/crcd/current-users/getting-started/index.shtml">NIU's Official Metis Documentation</a></li>
+</ul>
+<h2 id="final-notes"><a class="header" href="#final-notes">Final Notes</a></h2>
+<p>I am an undergraduate student at NIU, and my GitHub is <a href="https://github.com/hiibolt">@hiibolt</a>. If find errors or want additional clarification, feel free to open an issue on <a href="https://github.com/hiibolt/niu-metis-documentation">this book's repository</a>, or email me at <code>me@hiibolt.com</code>.</p>
+<p>You can find more of my computation writing on my <a href="https://blog.hiibolt.com">blog</a>, on which I have an article about my time with the iGait development team, which I greatly enjoyed!</p>
+<p>Thank you so much for taking time out of your day to read my work, and I wish you the best of luck in your academic endeavors.</p>
+<p><em>Stay cozy, this is <a href="https://github.com/hiibolt">@hiibolt</a>, signing out :3</em></p>
 
                     </main>
 

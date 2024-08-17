@@ -1,19 +1,59 @@
-# 2. Basic Metis Usage
-This first chapter will provide two into-the-fire projects that will teach you the core systems of Metis. This will be done through a simple C++ project, followed a optimized version written with CUDA.
+# 1. Introduction
+Welcome! This book serves as an all-in-one crash course in utilizing Metis, as well as some advanced techniques.
 
-These chapters lay the foundational skills needed to use the advanced techniques used in the following chapters, it is highly recommended that you read them before proceeding.
+This documentation is not meant to replace NIU's documentation, but rather, to make it more beginner-friendly and to save you time!
 
-## Overview of the Chapters
-### Chapter 2.1: C++ on Metis
-* Goals: Familiarize with basic commands and job submission on Metis.
-* C++ Boilerplate: Create and run a basic "Hello, World" C++ program with computational loops.
-* PBS Basics: Write a PBS job script to run your C++ program on compute nodes.
-* Execution: Compile and run the C++ program locally and via PBS.
-* Outcome: Understand job submission, the PBS script structure, and basic module commands.
-### Chapter 2.2: Building a CUDA Project from the Ground Up
-* Goals: Learn to use CUDA for GPU programming on Metis.
-* CUDA Boilerplate: Write a CUDA program to achieve the same task as in Chapter 1.1 but using GPU acceleration.
-* CUDA Modules: Install and use the CUDA compiler (nvcc) with module commands.
-* Execution: Compile and run your CUDA program, observing performance improvements.
-* PBS for CUDA: Adapt the PBS script to load CUDA modules and compile with nvcc.
-* Outcome: Leverage CUDA for faster computation and understand the structure of CUDA programs and PBS scripts.
+While this book does assume a basic understanding of Linux and C++, it is not required.
+
+If you have not logged into Metis before, or if it's been some time since you've used Linux, NIU CRCD has [comprehensive documentation](https://www.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml) on how to open a SSH connection, and a quick Linux refresher.
+
+If you would also like to refresh yourself on C++, w3schools has a wonderful [quick reference](https://www.w3schools.com/cpp/default.asp) available.
+
+Although this guide is about how to employ Docker on Metis, it does not assume you have previous experience with it, and includes a crash course on basic usage. The skills in that section provide tools to build even some of the most advanced applications, and also includes resources for those applications which require more.
+
+## Primary Purpose
+The goal of this book is to allow researchers at NIU to hit the ground running with their research. Our goal is for you to focus less on getting Metis to work for you - and more on completing your work as a whole.
+
+It's possible to create applications that will work regardless of what Metis has available to you for installation. Furthermore, you no longer have to develop directly on Metis - you can develop and build locally on hardware you're used to. This will allow you to focus on writing your application - without having to worry whether it can run on Metis.
+
+We will do so by employing [Docker](https://www.docker.com/), an extremely powerful containerization and encapsulation tool that allows developers to define virtual machines with a level of granularity rarely found in modern computing. Docker allows you to select an operation system as a base, install packages and libraries, and define run behaviour.
+
+All of this is defined in a singular, simple, and human-readable file that can be build to be reproduced on any system - including Metis.
+
+
+### Explored Use Cases
+There are five use cases covered here, with increasing levels of control over Metis:
+* **Running a C++ project**
+    - No additional configuration
+    - PBS only
+* **Running a CUDA project**
+    - Loading CUDA via the `module` command
+    - PBS only
+* **Running a language not installed on Metis, such as Rust**
+    - Downloading a pre-built Docker Image with `cargo` installed
+    - PBS with Docker via Podman
+* **Running packages not installed on Metis with GPU passthrough**
+    - Downloading a pre-built Docker Image
+    - Passing through GPUs to Docker
+    - PBS with Docker and NVIDIA Container Toolkit via Podman
+* **Running virtually any project using custom Docker Images**
+    - Writing, building, and publishing your own Docker Image
+    - Passing through GPUs to Docker
+    - PBS with Docker and NVIDIA Container Toolkit via Podman
+
+### Advanced Techniques
+This guide will also explore one additional advanced technique:
+* **SSH Automation**
+    - Demonstrates programmatic submission of PBS jobs via SSH for the purpose of fitting Metis into existing systems.
+
+## Where Do I Need to Read to?
+### Cases Where Docker May Not Be Needed
+Check if your use case is either of the two below. If it is, you can safely stop reading after Chapter 2.2.
+- Native C, Go, or Python applications with pre-existing or no dependencies
+- OpenMPI-based applications
+### Cases Where Docker Is Needed
+If you only need CPU-based computation, you can safely stop reading after Chapter 3.1. If you need GPU passthrough or have a complicated project, it is recommended to read this book in its entirety!
+- Applications with a language not listed above
+- Applications with dependencies Metis does not have encapsulated in its modulefiles
+- Applications with complex or circular dependencies
+- Applications which require a different operating system

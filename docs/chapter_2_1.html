@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Using Pre-Made Docker Images - NIU Metis Documentation</title>
+        <title>Building a C++ Project from the Ground Up - NIU Metis Documentation</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_0.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_0_1.html"><strong aria-hidden="true">1.1.</strong> Recommended Development Environment</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html" class="active"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_2_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Helpful Resources</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html" class="active"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Conclusion and Helpful Resources</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,114 +173,107 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="using-pre-made-docker-images"><a class="header" href="#using-pre-made-docker-images">Using Pre-Made Docker Images</a></h1>
-<p>We will first begin by using a language which is <em>not</em> among the modules which Metis provides, Python 3.11.</p>
-<p>In actuality, Metis does offer Python, as seen below:</p>
-<pre><code>$ module av python
--------------------- /etc/modulefiles ---------------------
-python/python-3.9.10  python/python-3.12.4
-</code></pre>
-<p>...but, at the time of writing this, it does not have Python 3.11, which is among the most commonly used versions.</p>
-<p>So, how do we fix this?</p>
-<p>Well, we ourselves can't fix the global modulefiles on Metis, which means under normal circumstances, we would have to reach out to Metis staff to have the module fixed - something that takes away from both your own time and the time of the Metis staff.</p>
-<p>You are able to define your own modulefiles, but this is a time consuming task, and it can't solve everything.</p>
+                        <h1 id="21-building-a-c-project-from-the-ground-up"><a class="header" href="#21-building-a-c-project-from-the-ground-up">2.1. Building a C++ Project from the Ground Up</a></h1>
+<p>This introductory project will teach you the absolute minimal nessecary information to create a basic C++ project on the Metis supercomputer.</p>
+<p>Before we tackle more robust and complex technologies such as CUDA or OpenMPI, our goal is to familiarize ourselves with Metis before abstracting and building upon our understanding.</p>
+<p>We'll instead opt to start with the most basic of programs - "Hello, World" (with, of course, a computationally intensive task) - to get started!</p>
 <h2 id="goals"><a class="header" href="#goals">Goals</a></h2>
 <ul>
-<li>Learn how to use Podman and Docker</li>
-<li>Learn how to install dependencies via Podman's CLI</li>
-<li>Learn how to use Podman in a PBS script file</li>
-<li>Learn how to kill Podman to avoid uptime emails and alerts</li>
+<li>Get a feel for the <code>module</code> commands</li>
+<li>Get a feel for the <a href="https://altair.com/pbs-professional">PBS Professional</a> job submission system</li>
+<li>Understand the layout of a <code>.pbs</code> job script file</li>
+<li>Get a feel for the <code>qsub</code> command</li>
 </ul>
-<h2 id="the-problem"><a class="header" href="#the-problem">The Problem</a></h2>
-<p>Modulefiles struggle or are outright impossible to create with any of the following cases:</p>
-<ul>
-<li>Packages which can only run on certain operating systems, and specific versions of those operating systems</li>
-<li>Packages which have dense dependency trees</li>
-<li>Packages which have circular dependencies</li>
-<li>Packages which need elevated permissions</li>
-<li>Packages with long build times, where a distributed binary may be preferred</li>
-<li>Closed-source or unfree packages (which are very common in machine learning!)</li>
-<li>Huge numbers of dependencies</li>
-</ul>
-<p>This isn't to say it's impossible to manually build every single dependency for your project, and also include them manually.</p>
-<p>However, this is an <strong>extremely</strong> time-consuming process, and time spent doing this will only take away from your core work.</p>
-<p>Dependency installation should be a matter of lines, not weeks.</p>
-<h2 id="the-solution"><a class="header" href="#the-solution">The Solution</a></h2>
-<p><a href="https://www.docker.com/">Docker</a>, an extremely powerful containerization and encapsulation tool that allows developers to define virtual machines with a level of granularity rarely found in modern computing. Docker allows you to select an operation system as a base, install packages and libraries, and define run behaviour.</p>
-<p>We will be using an overlay on Docker called <a href="https://podman.io/">Podman</a>. It allows us to use Docker containers despite not having elevated permissions on Metis. Understanding of Podman isn't required - all Docker commands can have <code>docker</code> replaced with <code>podman</code> (or in our case, <code>/bin/podman</code>).</p>
-<p>If you haven't already, create your projects directory, a new directory for Docker projects, and finally a directory for this project:</p>
+<h2 id="c-boilerplate"><a class="header" href="#c-boilerplate">C++ Boilerplate</a></h2>
+<p>First, let's start by creating a folder for our projects, then a folder for C++, and finally a folder for this project:</p>
 <pre><code class="language-bash">$ mkdir ~/projects
-$ mkdir ~/projects/docker
-$ mkdir ~/projects/docker/premade_image
-$ cd ~/projects/docker/premade_image
+$ mkdir ~/projects/cpp
+$ mkdir ~/projects/cpp/cpp_on_metis
+$ cd ~/projects/cpp/cpp_on_metis
 </code></pre>
-<p>Next, let's create a <code>main.py</code> file with the following contents:</p>
-<pre><code class="language-python">print( "Hello, Metis!" )
-</code></pre>
-<p>Now, how do we get Docker to run this file?</p>
-<p>For your own projects, you can search the <a href="https://hub.docker.com/">Docker Hub</a> for programming languages, software, and more. You can also use a base image like <code>ubuntu:22.04</code> or <code>debian:bookworm</code>, which contain nothing but the operating system with no additional packages or programming languages.</p>
-<p>From there, you can use the <code>exec</code> command to install the languages or packages with that operating system's respective package manager. We will go over the usage of the <code>exec</code> command with examples shortly!</p>
-<p>We'll start by downloading and running a <a href="https://docs.docker.com/guides/docker-concepts/the-basics/what-is-an-image/">Docker Image</a>, which will be built on the Debian operating system version 12.6 "Bookworm", and include Python 3.11.9:</p>
-<pre><code>$ /bin/podman run             \
-    -v ./.:/home            \
-    -w /home                \
-    --name python_container \
-    -t -d                   \
-    python:3.12.5-bookworm
-WARN[0000] Network file system detected as backing store.  Enforcing overlay option `force_mask="700"`.  Add it to storage.conf to silence this warning 
-f258979e09d0923ebb815b0b0baae9ae9cb2de18ace02a4aa282920c673073d9
-</code></pre>
-<p>The first line with the warning can be safely ignored. It's likely that by the time you are reading this, it's been silenced.</p>
-<p>Next, let's run our Python script!</p>
-<pre><code>$ /bin/podman exec python_container python3 main.py
-...
-Hello, World!
-</code></pre>
-<p>Congratulations! You've just run a version of Python that's not installed on Metis at all. But, what if our Python script needed some dependencies?</p>
-<p>Overwrite the <code>main.py</code> file with the following contents:</p>
-<pre><code class="language-python">import numpy as np
+<p>Let's start by creating a <code>main.cpp</code> file with the following contents:</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
 
-print( "Hello, Metis!" )
+int main () {
+    // Say hello to the user
+    std::cout &lt;&lt; "Hello, Metis!" &lt;&lt; std::endl;
+
+    // Initialize our counter variables
+    unsigned long long int counter = 0;
+    unsigned long long int number_of_divisible_by_two = 0;
+    unsigned long long int number_of_divisible_by_three = 0;
+    unsigned long long int number_of_divisible_by_five = 0;
+
+    // First, iterate through a 3D grid to get to our block
+    for ( int grid_z = 0; grid_z &lt; 1000; grid_z++ ) {
+        for ( int grid_y = 0; grid_y &lt; 100; grid_y++ ) {
+            for ( int grid_x = 0; grid_x &lt; 100; grid_x++ ) {
+
+                // Second, iterate through the 3D block
+                for ( int block_z = 0; block_z &lt; 10; block_z++ ) {
+                    for ( int block_y = 0; block_y &lt; 10; block_y++ ) {
+                        for ( int block_x = 0; block_x &lt; 10; block_x++ ) {
+                            counter += 1;
+
+                            if ( counter % 2 == 0 )
+                                number_of_divisible_by_two += 1;
+                            if ( counter % 3 == 0 )
+                                number_of_divisible_by_three += 1;
+                            if ( counter % 5 == 0 )
+                                number_of_divisible_by_five += 1;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    // Provide our results to the user
+    std::cout &lt;&lt; std::endl
+              &lt;&lt; "- Numbers divisible by two: "       &lt;&lt; number_of_divisible_by_two       &lt;&lt; std::endl
+              &lt;&lt; "- Numbers divisible by three: "     &lt;&lt; number_of_divisible_by_three     &lt;&lt; std::endl
+              &lt;&lt; "- Numbers divisible by five: "      &lt;&lt; number_of_divisible_by_five      &lt;&lt; std::endl;
+
+    return 0;
+}
 </code></pre>
-<p>If we try to run our script again, we get an error:</p>
-<pre><code>$ /bin/podman exec python_container python3 main.py
-...
-Traceback (most recent call last):
-  File "/home/main.py", line 1, in &lt;module&gt;
-    import numpy as np
-ModuleNotFoundError: No module named 'numpy'
+<p>This program does two things - it says hello to the user, and then takes count of the numbers divisible by 2, 3, and 5 from 0 up to 10 billion.</p>
+<p>This is done with multiple nested loops - the reason for which will be explained, and the code optimized, in the following chapter on CUDA. For now, what's apparent and important is that this is a computationally intensive task.</p>
+<p>Next, let's build and run this code. By default, Metis users have GCC and G++ (version 11.3.0) preinstalled, which we will now use:</p>
+<pre><code class="language-bash">$ g++ -o hello_world main.cpp
+$ ./hello_world
 </code></pre>
-<p>Let's create our <a href="https://docs.python.org/3/library/venv.html">Python virtual environment</a>, and install <code>numpy</code> using the <code>exec</code> command! Run the following:</p>
-<pre><code class="language-bash">$ /bin/podman exec python_container python -m venv .venv
-$ /bin/podman exec python_container .venv/bin/pip  install numpy
-</code></pre>
-<p>Running our script again:</p>
-<pre><code>$ /bin/podman exec python_container python3 main.py
-...
-Hello, Metis!
-</code></pre>
-<p>Nicely done! Lastly, let's kill and remove our container:</p>
-<pre><code class="language-bash">$ /bin/podman kill python_container
-$ /bin/podman rm python_container
-</code></pre>
-<p>Again, congratulations! You've successfully downloaded a Docker Image, installed some dependancies, and run them on the login node!</p>
-<h2 id="docker-in-pbs"><a class="header" href="#docker-in-pbs">Docker in PBS</a></h2>
-<p>Now, we just ran that Docker image on the <em>login node</em>, not the compute nodes. So how do we write a PBS file to automate what we just did?</p>
-<p>Create a <code>run.pbs</code> file with the following contents:</p>
+<p>After ten to twenty seconds, we should see our results!</p>
+<h2 id="getting-started-with-pbs"><a class="header" href="#getting-started-with-pbs">Getting Started with PBS</a></h2>
+<p>Now, we are not currently making full use of Metis with this current setup. What we just ran our code on is called the 'login node', which has nowhere near the amount of computational power that is available to the 'compute nodes', which are where computationally intensive or time-consuming programs should be run.</p>
+<p>But how do we do so?</p>
+<p>Metis has many users, and each user may have various types of programs, each program with varying hardware requirements. As such, Metis uses a resource manager and job scheduling system by Altair, called <a href="https://altair.com/pbs-professional">PBS Professional</a>.</p>
+<p>In order to make use of this program, we must describe to the system what we need from it, which could be things such as:</p>
+<ul>
+<li>CPU cores</li>
+<li>CPU count</li>
+<li>RAM size</li>
+<li>GPU chunks</li>
+<li>Estimated runtime</li>
+</ul>
+<p>...and more.</p>
+<p>To do so, we use a PBS script file. For those familiar with systems scripting, this is similar to a <code>.sh</code> file on Linux, or a <code>.bat</code> file on Windows.</p>
+<p>Let's get started by creating a <code>run.pbs</code> file with the following contents:</p>
 <pre><code class="language-bash">#!/bin/bash
 
-#PBS -N premade_image
+#PBS -N hello_world
 #PBS -j oe
 
-#Note - on Metis   
+#Note - on Metis
 #              Nchunks&lt;=32, for GPU chunks
 #              Nchunks&lt;=4096/Ncpus for CPU-only chunks
-#              (run 'shownodes' command to find the number of free cpus) 
-#              Ncpus&lt;=128, the total number of CPUs per node is 128 
-#              NPmpi&lt;=Ncpus, the total number of CPUs allocated for MPI tasks, 
-#                              request NPmpi=Ncpus for non-OPENMP jobs                           
-#              Ngpus==1,  the total number of GPUs per node is 1    
-#              X&lt;=256,  28 of 32 Metis modes have 256 GB of RAM                       
+#              (run 'shownodes' command to find the number of free cpus)
+#              Ncpus&lt;=128, the total number of CPUs per node is 128
+#              NPmpi&lt;=Ncpus, the total number of CPUs allocated for MPI tasks,
+#                              request NPmpi=Ncpus for non-OPENMP jobs
+#              Ngpus==1,  the total number of GPUs per node is 1
+#              X&lt;=256,  28 of 32 Metis modes have 256 GB of RAM
 #                       special jobs can request up to 1024 GB of RAM (4 nodes)
 #
 # Below, we request two chunks;
@@ -292,129 +285,157 @@ $ /bin/podman rm python_container
 #--PBS -m ae
 #--#PBS -M account@niu.edu
 
-PROJECT_DIRECTORY=/home/z1994244/projects/docker/premade_image
-echo "This job's working directory is $PROJECT_DIRECTORY"
+# Navigate to our working directory
+PROJECT_DIRECTORY=/home/&lt;your_account_username&gt;/projects/cpp/cpp_on_metis
+echo "The job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
-# Enable linger for the user
+# Install GCC
 echo ""
-echo "Enabling linger for the user..."
-loginctl enable-linger z1994244
+echo "Loading GCC..."
+module purge; module load gcc/gcc-12.3.0
+module list
 echo "Done!"
 
-# Start the container
-# 
-# There are five flags, most of which will never change:
-# - `-v $PROJECT_DIRECTORY:/home` mounts the project directory to the `/home` 
-#    directory in the container.
-# - `-w /home` sets the working directory in the container to `/home`.
-# - `-t` allocates a pseudo-TTY. This is useful for running the container in
-#    the background.
-# - `-d` runs the container in the background.
-#
-# The last argument is the image name. This is the only thing that will change
-#  between projects, this is the name of the image we want to run.
-# 
-# For instance, in this case, we are running the `python:3.12.5-bookworm` image:
-# - `python` is the name of the image.
-# - `3.12.5-bookworm` is the tag of the image, which specifies the version of the
-#    image we want to run.
-#
-# Millions of pre-built images are available on Docker Hub, and will likely 
-#  already have an image that suits your needs! You can search for images here:
-#  https://hub.docker.com/
-#
-# Note: There may be many logs that are printed to the console when the container
-#  is started. Despite being error-level, this is normal, and you can ignore them.
+# Compile our code
 echo ""
-echo "Starting the container..."
-/bin/podman run                  \
-    -v $PROJECT_DIRECTORY:/home  \
-    -w /home                     \
-    --name python_container      \
-    -t -d                        \
-    python:3.12.5-bookworm       \
-    &gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
+echo "Compiling code..."
+g++ main.cpp -o hello_world
 echo "Done!"
 
-# Run our python script
-#
-# The `exec` command runs a command in a running container. In this case, we are
-#  running the `python3 main.py` command in the `python_container` container.
-# 
-# There is a generic error message, which can be ignored.
+# Run our binary
 echo ""
-echo "Running the python script..."
-/bin/podman exec python_container python3 main.py
+echo "Executing binary..."
+./hello_world
 echo "Done!"
 
-# Kill the container
-#
-# The `kill` command stops a running container. In this case, we are stopping the
-#  `python_container` container.
-echo ""
-echo "Stopping the container..."
-/bin/podman kill python_container \
-    &gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
-echo "Done!"
-
-# Remove the container
-#
-# The `rm` command removes a container. In this case, we are removing the
-#  `python_container` container.
-echo ""
-echo "Removing the container..."
-/bin/podman rm python_container \
-    &gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
-echo "Done!"
+# Clean up our binary
+rm ./hello_world
 </code></pre>
-<p>This is largly the same, and only two things need to be modified to fit your Metis account:</p>
-<pre><code>...
-
-PROJECT_DIRECTORY=/home/&lt;your_account_name&gt;/projects/docker/premade_image
-echo "This job's working directory is $PROJECT_DIRECTORY"
-cd $PROJECT_DIRECTORY
-
-# Enable linger for the user
-echo ""
-echo "Enabling linger for the user..."
-loginctl enable-linger &lt;your_account_name&gt;
-echo "Done!"
+<p>Before we move on, let's dissect what this does.</p>
+<pre><code class="language-bash">1.  #!/bin/bash
+2.
+3.  #PBS -N hello_world
+4.  #PBS -j oe
+5.  
+6.  #Note - on Metis
+7.  #              Nchunks&lt;=32, for GPU chunks
+8.  #              Nchunks&lt;=4096/Ncpus for CPU-only chunks
+9.  #              (run 'shownodes' command to find the number of free cpus)
+10. #              Ncpus&lt;=128, the total number of CPUs per node is 128
+11. #              NPmpi&lt;=Ncpus, the total number of CPUs allocated for MPI tasks,
+12. #                              request NPmpi=Ncpus for non-OPENMP jobs
+13. #              Ngpus==1,  the total number of GPUs per node is 1
+14. #              X&lt;=256,  28 of 32 Metis modes have 256 GB of RAM
+15. #                       special jobs can request up to 1024 GB of RAM (4 nodes)
+16. #
+17. # Below, we request two chunks;
+18. #  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
+19. #PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+20. #PBS -l walltime=00:15:00
+21. 
+22. # When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
+23. #--PBS -m ae
+24. #--#PBS -M account@niu.edu
 
 ...
 </code></pre>
-<p>Be sure to replace the two <code>&lt;your_account_name&gt;</code> instances with your own account! The linger command is unique to Podman (Docker) jobs in PBS, and ensures it has the nessecary permissions to run your jobs.</p>
-<p>With that, let's test our job!</p>
-<pre><code>$ qsub run.pbs
-18712.cm
-$ cat premade_image.o18712
-This job's working directory is /home/z1994244/projects/docker/premade_image
+<p>Lines starting with <code>#PBS</code> are not comments, rather, they are PBS-specific commands.</p>
+<p>The following lines are important to understand:</p>
+<ul>
+<li>Line 1 is a <a href="https://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a> which specifies that the file's commands are to be interpreted by <a href="https://www.gnu.org/software/bash/manual/bash.html">bash</a>.</li>
+<li>Line 3 specifies the name of our file.</li>
+<li>Line 19 specifies the hardware requirements for our job</li>
+<li>Line 20 specifies the estimated runtime of our job</li>
+<li>Lines 23 and 24 specify options for recieveing emails regarding various events</li>
+</ul>
+<p>For this job, none of this needs to be modified. The next section, however, will need to be:</p>
+<pre><code class="language-bash">...
 
-Enabling linger for the user...
-Done!
+26. # Navigate to our working directory
+27. PROJECT_DIRECTORY=/home/&lt;your_account_username&gt;/projects/cpp/cpp_on_metis
+28. echo "The job's working directory is $PROJECT_DIRECTORY"
+29. cd $PROJECT_DIRECTORY
 
-Starting the container...
-Done!
-
-Running the python script...
-time="2024-08-16T14:57:08-05:00" level=warning msg="Network file system detected as backing store.  Enforcing overlay option `force_mask=\"700\"`.  Add it to storage.conf to silence this warning"
-Error: can only create exec sessions on running containers: container state improper
-Done!
-
-Stopping the container...
-Done!
-
-Removing the container...
-Done!
+...
 </code></pre>
-<p>Lastly, we must kill off our Podman processes on the login node, or else we'll recieve emails about extended uptime. There are many, so it's easier to kill everything under your name. This will close your shell connection, so please save any unfinished work before doing so. This will cause additional load times next time you login to Metis (10-20 seconds), but is important to do.</p>
-<pre><code class="language-bash">pkill -U &lt;your_account_username&gt;
+<p>It's important that we hard-code the exact path on line 27 by replacing <code>&lt;your_account_username&gt;</code> with your Metis account's username.</p>
+<p>The reason for this only becomes relevant if you have interest in creating non-C++ projects or automating your job submission, so it is worth noting that you can replace <code>/home/&lt;your_account_username&gt;/projects/cpp/cpp_on_metis</code> with <code>$PBS_O_WORKDIR</code> if you would like. This will be populated with where the job is run from.</p>
+<p>Next, we will familiarize ourselves with the <code>module</code> commands, which are used on lines 31-36:</p>
+<pre><code class="language-bash">...
+
+31. # Install GCC
+32. echo ""
+33. echo "Loading GCC..."
+34. module purge; module load gcc/gcc-12.3.0
+35. module list
+36. echo "Done!"
+
+...
+</code></pre>
+<p>The <code>module</code> commands are somewhat akin to a package manager, allowing you to load packages ("modules") into your environment.</p>
+<p>Unlike you, the compute node does not have <code>gcc</code> pre-installed. So to make it available to the compute node, we must install it, done in the following fashion:</p>
+<ul>
+<li>Line 34 clears all packages with <code>module purge</code>, then installs GCC with <code>module load gcc/gcc-12.3.0</code>.</li>
+<li>Line 35 lets you see what's currently installed with <code>module list</code>.</li>
+</ul>
+<p>This process for installing a package is the same on both the login and compute node. To see what packages are available to you, you can run <code>module av</code>. To narrow your search by a specific key word, use <code>module av &lt;keyword&gt;</code>.</p>
+<pre><code class="language-bash">...
+
+38. # Compile our code
+39. echo ""
+40. echo "Compiling code..."
+41. g++ main.cpp -o hello_world
+42. echo "Done!"
+43. 
+44. # Run our binary
+45. echo ""
+46. echo "Executing binary..."
+47. ./hello_world
+48. echo "Done!"
+49. 
+50. # Clean up our binary
+51. rm ./hello_world
+
+...
+</code></pre>
+<p>The remaining lines are what you are accustomed to, they use the same build command from before, then run the binary, and finally clean up any artifacts.</p>
+<h2 id="launching-a-job-with-pbs"><a class="header" href="#launching-a-job-with-pbs">Launching a Job with PBS</a></h2>
+<p>We're ready to go! All that's left is to start our job, which can be done easily with the following command:</p>
+<pre><code class="language-bash">$ qsub run.pbs
+</code></pre>
+<p>The output will look something like this:</p>
+<pre><code class="language-bash">18681.cm
+</code></pre>
+<p>This tells us the id number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!</p>
+<pre><code class="language-bash">$ ls
+hello_world.o18681 main.cpp run.pbs
+</code></pre>
+<p>Reading the output from our job:</p>
+<pre><code>$ cat hello_world.o18681
+The job's working directory is /home/&lt;your_account_username&gt;/projects/cpp/cpp_on_metis
+
+Loading GCC...
+Currently Loaded Modulefiles:
+ 1) gcc/gcc-12.3.0  
+Done!
+
+Compiling code...
+Done!
+
+Executing binary...
+Hello, Metis!
+
+- Numbers divisible by two: 5000000000
+- Numbers divisible by three: 3333333333
+- Numbers divisible by five: 2000000000
+Done!
 </code></pre>
 <h2 id="closing-thoughts"><a class="header" href="#closing-thoughts">Closing Thoughts</a></h2>
-<p>Congratulations! You now have the skills needed to tackle most CPU-only applications.</p>
-<p>You can modify the base image to fit the operating system, languages, and software you need! You can also add or modify <code>exec</code> commands to install more languages, libraries, or software to be able to load anything else your software might need.</p>
-<p>If you'd like to learn more about the <code>run</code>, <code>exec</code>, <code>kill</code>, or <code>rm</code> commands, additional documentation can be found in the <strong>Helpful Resources</strong> chapter!</p>
-<p>If your application does not make use of the GPU, and you have no interest in automation or integration, you likely don't need to read any further. If you do, then feel free to continue onto <strong>Chapter 3.2 - Using GPU Acceleration with Docker</strong>!</p>
+<p>Congratulations! You've successfully launched your first job on the Metis supercomputer.</p>
+<p>This is an impressive achievement. Those who are satisfied with the performance of their programs and are comfortable with only using the C family may even be able to stop here.</p>
+<p>However, Metis is capable of much, much more.</p>
+<p>In the next chapter, we will discuss utilizing CUDA to weaponize the power of graphics card programming to drastically reduce the computation times of our programs, as well as learning more about the <code>module</code> and PBS-related commands.</p>
 
                     </main>
 

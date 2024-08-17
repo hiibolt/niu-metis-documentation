@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_0.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_0_1.html"><strong aria-hidden="true">1.1.</strong> Recommended Development Environment</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_2_3.html" class="active"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">5.</strong> Helpful Resources</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html" class="active"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Conclusion and Helpful Resources</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,9 +173,15 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="creating-your-own-docker-base-images"><a class="header" href="#creating-your-own-docker-base-images">Creating your Own Docker Base Images</a></h1>
-<p>Unlike previous chapters, this will not have an example project, and will instead be more free-form to act as a basepoint for your own research.</p>
-<p>In this chapter, we will instead discuss some possible venues for where to learn Dockerfile syntax, building images, and running them on Metis.</p>
+                        <h1 id="33-creating-your-own-docker-base-images"><a class="header" href="#33-creating-your-own-docker-base-images">3.3. Creating your Own Docker Base Images</a></h1>
+<p>Unlike previous chapters, this will not have an example project, and will instead be more free-form to act as a basepoint for your own research!</p>
+<p>We will discuss some possible venues from where to learn Dockerfile syntax, building images, and running them on Metis to create a solution that fits your quota.</p>
+<h2 id="goals"><a class="header" href="#goals">Goals</a></h2>
+<ul>
+<li>Look at some examples of a <code>Dockerfile</code></li>
+<li>Get a rough idea for how to write your own <code>Dockerfile</code></li>
+<li>Get a rough idea on resources about publishing yor own Docker Images</li>
+</ul>
 <h2 id="what-actually-is-a-docker-image"><a class="header" href="#what-actually-is-a-docker-image">What Actually Is a Docker Image?</a></h2>
 <p>In the past, we've only used images from the <a href="https://hub.docker.com">Docker Hub</a>. But how are those images created?</p>
 <p>Docker Images are defined and built from a <a href="https://docs.docker.com/reference/dockerfile/"><code>Dockerfile</code></a>.</p>
@@ -250,10 +256,9 @@ CMD .venv/bin/pip/python main.py
 - main.py
 - Dockerfile
 </code></pre>
-<p>The reason why Dockerfiles become useful the more complex and dependency-heavy your project is.</p>
-<p>Each command in a <code>Dockerfile</code> is cached step-by-step, which means, after the first time the above <code>Dockerfile</code> is built, steps such as dependency installation with <code>apt</code> are not performed again.</p>
-<p>This means that builds with <code>Dockerfile</code> are exceptionally fast if properly optimized.</p>
-<p>Linked <a href="https://www.digitalocean.com/community/tutorials/how-to-optimize-docker-images-for-production">here</a> is a fan-favorite crash course in optimizing <code>Dockerfiles</code>!</p>
+<p>The reason why Dockerfiles become useful is more apparent the more complex and dependency-heavy your project is. Each command in a <code>Dockerfile</code> is cached step-by-step, which means, after the first time the above <code>Dockerfile</code> is built, steps such as dependency installation with <code>apt</code> are not performed again.</p>
+<p>This means that builds with <code>Dockerfile</code> are exceptionally fast, if properly optimized!</p>
+<p>Linked <a href="https://www.digitalocean.com/community/tutorials/how-to-optimize-docker-images-for-production">here</a> is a fan-favorite crash course in optimizing <code>Dockerfiles</code>.</p>
 <h2 id="how-do-i-write-a-dockerfile-from-the-ground-up"><a class="header" href="#how-do-i-write-a-dockerfile-from-the-ground-up">How Do I Write a <code>Dockerfile</code> From the Ground Up?</a></h2>
 <p>This various from project-to-project based on decisions such as:</p>
 <ul>
@@ -274,6 +279,8 @@ CMD .venv/bin/pip/python main.py
 <p>Once you have written and built your image, you should test it locally on your own machine. In fact, all Docker development is best done on your local machine.</p>
 <h2 id="publishing-your-image-to-a-public-registry"><a class="header" href="#publishing-your-image-to-a-public-registry">Publishing your Image to a Public Registry</a></h2>
 <p>Now, unfortunately, I have not found a way to build Docker Images on a login node on Metis in a way that allows you to copy the image over to the desired compute node.</p>
+<p>The workaround is to build them locally, publish our images, and then pull them onto the compute node.</p>
+<h2 id="how-do-i-choose-where-to-publish"><a class="header" href="#how-do-i-choose-where-to-publish">How Do I Choose Where to Publish?</a></h2>
 <p>There are two good options for public registries:</p>
 <ul>
 <li>Docker Hub</li>
@@ -286,18 +293,19 @@ CMD .venv/bin/pip/python main.py
 <li><a href="https://docs.docker.com/build/ci/github-actions/">GitHub's Documentation</a></li>
 <li><a href="https://github.com/igait-niu/igait-openpose"><code>igait-openpose</code></a> (runs on Metis)</li>
 <li><a href="https://github.com/igait-niu/igait-backend"><code>igait-backend</code></a> (runs on AWS)</li>
+<li>building
+With this approach, you can containerize virtually any project with ease.</li>
 </ul>
-<p>With this approach, you can containerize virtually any project with ease.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="chapter_2_2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="chapter_3_2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="chapter_3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="chapter_4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -307,11 +315,11 @@ CMD .venv/bin/pip/python main.py
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="chapter_2_2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="chapter_3_2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="chapter_3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="chapter_4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

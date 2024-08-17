@@ -1,8 +1,13 @@
-# Creating your Own Docker Base Images
+# 3.3. Creating your Own Docker Base Images
 
-Unlike previous chapters, this will not have an example project, and will instead be more free-form to act as a basepoint for your own research.
+Unlike previous chapters, this will not have an example project, and will instead be more free-form to act as a basepoint for your own research!
 
-In this chapter, we will instead discuss some possible venues for where to learn Dockerfile syntax, building images, and running them on Metis.
+We will discuss some possible venues from where to learn Dockerfile syntax, building images, and running them on Metis to create a solution that fits your quota.
+
+## Goals
+* Look at some examples of a `Dockerfile`
+* Get a rough idea for how to write your own `Dockerfile`
+* Get a rough idea on resources about publishing yor own Docker Images
 
 ## What Actually Is a Docker Image?
 In the past, we've only used images from the [Docker Hub](https://hub.docker.com). But how are those images created?
@@ -85,13 +90,11 @@ src/
 - Dockerfile
 ```
 
-The reason why Dockerfiles become useful the more complex and dependency-heavy your project is. 
+The reason why Dockerfiles become useful is more apparent the more complex and dependency-heavy your project is. Each command in a `Dockerfile` is cached step-by-step, which means, after the first time the above `Dockerfile` is built, steps such as dependency installation with `apt` are not performed again.
 
-Each command in a `Dockerfile` is cached step-by-step, which means, after the first time the above `Dockerfile` is built, steps such as dependency installation with `apt` are not performed again.
+This means that builds with `Dockerfile` are exceptionally fast, if properly optimized!
 
-This means that builds with `Dockerfile` are exceptionally fast if properly optimized. 
-
-Linked [here](https://www.digitalocean.com/community/tutorials/how-to-optimize-docker-images-for-production) is a fan-favorite crash course in optimizing `Dockerfiles`!
+Linked [here](https://www.digitalocean.com/community/tutorials/how-to-optimize-docker-images-for-production) is a fan-favorite crash course in optimizing `Dockerfiles`.
 
 ## How Do I Write a `Dockerfile` From the Ground Up?
 This various from project-to-project based on decisions such as:
@@ -115,6 +118,10 @@ Once you have written and built your image, you should test it locally on your o
 ## Publishing your Image to a Public Registry
 Now, unfortunately, I have not found a way to build Docker Images on a login node on Metis in a way that allows you to copy the image over to the desired compute node.
 
+The workaround is to build them locally, publish our images, and then pull them onto the compute node.
+
+## How Do I Choose Where to Publish?
+
 There are two good options for public registries:
 - Docker Hub
 - GitHub Container Repository (GHCR)
@@ -127,5 +134,5 @@ GitHub Actions is significantly more ideal, but does build slower. Our team chos
 - [GitHub's Documentation](https://docs.docker.com/build/ci/github-actions/)
 - [`igait-openpose`](https://github.com/igait-niu/igait-openpose) (runs on Metis)
 - [`igait-backend`](https://github.com/igait-niu/igait-backend) (runs on AWS)
-
+ - building 
 With this approach, you can containerize virtually any project with ease.
