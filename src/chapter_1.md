@@ -18,7 +18,7 @@ It's possible to create applications that will work regardless of what Metis has
 
 We will do so by employing [Docker](https://www.docker.com/), an extremely powerful containerization and encapsulation tool that allows developers to define virtual machines with a level of granularity rarely found in modern computing. Docker allows you to select an operating system as a base, install packages and libraries, and define run behaviour.
 
-All of this is defined in a singular, simple, and human-readable file that can be build to be reproduced on any system - including Metis.
+All of this is defined in a singular, simple, and human-readable file that can be built to be reproduced on any system - including Metis.
 
 
 ### Explored Use Cases
