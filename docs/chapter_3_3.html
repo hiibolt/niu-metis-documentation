@@ -242,14 +242,10 @@ COPY . .
 # The CMD instruction specifies the command that will be executed when the container
 #  is run, but not when the image is built. For instance, the following command will
 #  be executed when the container is run:
-#  - `.venv/bin/pip/python main.py` (runs the `main.py` script)
+#  - `.venv/bin/python3 main.py` (runs the `main.py` script)
 #
-# In this case, the command is `python main.py`, which will run the `main.py` script.
-#
-# It's worth noting that the arguments are array elements in the CMD instruction,
-#  so the command `python main.py` is split into `["python", "main.py"]`. This will 
-#  ensure that the command is executed correctly when the container is run.
-CMD .venv/bin/pip/python main.py
+# In this case, the command is `.vent/bin/python3 main.py`, which will run the `main.py` script.
+CMD .venv/bin/python3 main.py
 </code></pre>
 <p><code>Dockerfile</code>s live in the root of a project. An example Python project layout:</p>
 <pre><code>src/
