@@ -1,4 +1,5 @@
 # 3.3. Creating your Own Docker Base Images
+*You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/custom_image)!*
 
 Unlike previous chapters, this will not have an example project, and will instead be more free-form to act as a basepoint for your own research!
 

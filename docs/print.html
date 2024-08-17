@@ -268,6 +268,7 @@
 <li>Outcome: Leverage CUDA for faster computation and understand the structure of CUDA programs and PBS scripts.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="21-building-a-c-project-from-the-ground-up"><a class="header" href="#21-building-a-c-project-from-the-ground-up">2.1. Building a C++ Project from the Ground Up</a></h1>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cpp/cpp_on_metis">in this book's repository</a>!</em></p>
 <p>This introductory project will teach you the absolute minimal nessecary information to create a basic C++ project on the Metis supercomputer.</p>
 <p>Before we tackle more robust and complex technologies such as CUDA or OpenMPI, our goal is to familiarize ourselves with Metis before abstracting and building upon our understanding.</p>
 <p>We'll instead opt to start with the most basic of programs - "Hello, World" (with, of course, a computationally intensive task) - to get started!</p>
@@ -531,6 +532,7 @@ Done!
 <p>However, Metis is capable of much, much more.</p>
 <p>In the next chapter, we will discuss utilizing CUDA to weaponize the power of graphics card programming to drastically reduce the computation times of our programs, as well as learning more about the <code>module</code> and PBS-related commands.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="22-building-a-cuda-project-from-the-ground-up"><a class="header" href="#22-building-a-cuda-project-from-the-ground-up">2.2. Building a CUDA Project from the Ground Up</a></h1>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cuda/cuda_on_metis">in this book's repository</a>!</em></p>
 <p>The next part of this introductory chapter will teach you how to build, compile, and run a CUDA program from the ground up on Metis.</p>
 <p>CUDA stands for Compute Unified Device Architecture, and it is proprietary NVIDIA-distributed software that allows developers to perform matrice-based operations at unbelievable speeds using the heavily optimized CUDA cores found only on NVIDIA GPUs.</p>
 <p>This chapter will teach you how to run CUDA code on Metis, but it will not teach you how to write it. There are many fantastic resources on how to write it, some of which are linked below:</p>
@@ -839,6 +841,7 @@ openmpi/openmpi-4.1.6-gcc-11.4.0-cuda-11.8
 <li><strong>Outcome</strong>: You will be able to create, customize, and share Docker images, enabling a flexible and reproducible environment for your work.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="31-using-pre-made-docker-images"><a class="header" href="#31-using-pre-made-docker-images">3.1. Using Pre-Made Docker Images</a></h1>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image">in this book's repository</a>!</em></p>
 <p>We will first begin by using a language which is <em>not</em> among the modules which Metis provides, Python 3.11.</p>
 <p>In actuality, Metis does offer Python, as seen below:</p>
 <pre><code>$ module av python
@@ -1081,6 +1084,7 @@ Done!
 <p>If you'd like to learn more about the <code>run</code>, <code>exec</code>, <code>kill</code>, or <code>rm</code> commands, additional documentation can be found in the <strong>Helpful Resources</strong> chapter!</p>
 <p>If your application does not make use of the GPU, and you have no interest in automation or integration, you likely don't need to read any further. If you do, then feel free to continue onto <strong>Chapter 3.2 - Using GPU Acceleration with Docker</strong>!</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="32-using-gpu-acceleration-with-docker"><a class="header" href="#32-using-gpu-acceleration-with-docker">3.2. Using GPU Acceleration With Docker</a></h1>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image_gpu">in this book's repository</a>!</em></p>
 <p>Now we must address how to use GPU passthrough on Metis with Podman (Docker), which can quickly elevate our programs to higher performance with the power of GPU acceleration!</p>
 <h2 id="goals-3"><a class="header" href="#goals-3">Goals</a></h2>
 <ul>
@@ -1344,6 +1348,7 @@ Fri Aug 16 21:50:56 2024
 <p>For those whos' projects are complete using this tactic, you can safely stop reading here, if you would like. If SSH automation (Chapter 4.1) interests you, you can also safely skip to that chapter.</p>
 <p>The next chapter, Chapter 3.3, will provide insight into writing your own base images from the ground up, and some tactics for optimizing base images for build-time and size.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="33-creating-your-own-docker-base-images"><a class="header" href="#33-creating-your-own-docker-base-images">3.3. Creating your Own Docker Base Images</a></h1>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/custom_image">in this book's repository</a>!</em></p>
 <p>Unlike previous chapters, this will not have an example project, and will instead be more free-form to act as a basepoint for your own research!</p>
 <p>We will discuss some possible venues from where to learn Dockerfile syntax, building images, and running them on Metis to create a solution that fits your quota.</p>
 <h2 id="goals-4"><a class="header" href="#goals-4">Goals</a></h2>
@@ -1504,6 +1509,7 @@ With this approach, you can containerize virtually any project with ease.</li>
 </ul>
 <p>This is more effective for jobs that may not have a 'final output', but rather, work in chunks. Two examples are audio encoding/decoding or token-by-token output from a machine learning model</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="41-ssh-automation-with-metis"><a class="header" href="#41-ssh-automation-with-metis">4.1. SSH Automation with Metis</a></h1>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust">in this book's repository</a>!</em></p>
 <p>While Metis is an incredibly powerful tool, it does not provide native tooling to allow for automatic job submission.</p>
 <p>One solution is to write our own software which submits the job on our behalf, using SSH-related libraries to open a connection and submit commands!</p>
 <h2 id="goals-5"><a class="header" href="#goals-5">Goals</a></h2>
@@ -1667,7 +1673,7 @@ bin  examples  hello_world.o18734  projects  rundir
 <li><a href="https://www.niu.edu/crcd/current-users/getting-started/index.shtml">NIU's Official Metis Documentation</a></li>
 </ul>
 <h2 id="final-notes"><a class="header" href="#final-notes">Final Notes</a></h2>
-<p>I am an undergraduate student at NIU, and my GitHub is <a href="https://github.com/hiibolt">@hiibolt</a>. If find errors or want additional clarification, feel free to open an issue on <a href="https://github.com/hiibolt/niu-metis-documentation">this book's repository</a>, or email me at <code>me@hiibolt.com</code>.</p>
+<p>I am an undergraduate student at NIU, and my GitHub is <a href="https://github.com/hiibolt">@hiibolt</a>. If you find errors or want additional clarification, feel free to open an issue on <a href="https://github.com/hiibolt/niu-metis-documentation">this book's repository</a>, or email me at <code>me@hiibolt.com</code>.</p>
 <p>You can find more of my computation writing on my <a href="https://blog.hiibolt.com">blog</a>, on which I have an article about my time with the iGait development team, which I greatly enjoyed!</p>
 <p>Thank you so much for taking time out of your day to read my work, and I wish you the best of luck in your academic endeavors.</p>
 <p><em>Stay cozy, this is <a href="https://github.com/hiibolt">@hiibolt</a>, signing out :3</em></p>

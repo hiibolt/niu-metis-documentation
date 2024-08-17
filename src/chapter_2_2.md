@@ -1,4 +1,6 @@
 # 2.2. Building a CUDA Project from the Ground Up
+*You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cuda/cuda_on_metis)!*
+
 The next part of this introductory chapter will teach you how to build, compile, and run a CUDA program from the ground up on Metis.
 
 CUDA stands for Compute Unified Device Architecture, and it is proprietary NVIDIA-distributed software that allows developers to perform matrice-based operations at unbelievable speeds using the heavily optimized CUDA cores found only on NVIDIA GPUs.

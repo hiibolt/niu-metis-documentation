@@ -1,4 +1,5 @@
 # 3.1. Using Pre-Made Docker Images
+*You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image)!*
 
 We will first begin by using a language which is *not* among the modules which Metis provides, Python 3.11.
 

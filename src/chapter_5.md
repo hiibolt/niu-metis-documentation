@@ -28,7 +28,7 @@ I hope this guide helped you streamline getting started on Metis, below you can 
 - [NIU's Official Metis Documentation](https://www.niu.edu/crcd/current-users/getting-started/index.shtml)
 
 ## Final Notes
-I am an undergraduate student at NIU, and my GitHub is [@hiibolt](https://github.com/hiibolt). If find errors or want additional clarification, feel free to open an issue on [this book's repository](https://github.com/hiibolt/niu-metis-documentation), or email me at `me@hiibolt.com`.
+I am an undergraduate student at NIU, and my GitHub is [@hiibolt](https://github.com/hiibolt). If you find errors or want additional clarification, feel free to open an issue on [this book's repository](https://github.com/hiibolt/niu-metis-documentation), or email me at `me@hiibolt.com`.
 
 You can find more of my computation writing on my [blog](https://blog.hiibolt.com), on which I have an article about my time with the iGait development team, which I greatly enjoyed!
 

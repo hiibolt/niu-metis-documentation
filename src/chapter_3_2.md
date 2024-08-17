@@ -1,4 +1,6 @@
 # 3.2. Using GPU Acceleration With Docker
+*You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image_gpu)!*
+
 Now we must address how to use GPU passthrough on Metis with Podman (Docker), which can quickly elevate our programs to higher performance with the power of GPU acceleration!
 
 ## Goals

@@ -1,4 +1,6 @@
 # 2.1. Building a C++ Project from the Ground Up
+*You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cpp/cpp_on_metis)!*
+
 This introductory project will teach you the absolute minimal nessecary information to create a basic C++ project on the Metis supercomputer.
 
 Before we tackle more robust and complex technologies such as CUDA or OpenMPI, our goal is to familiarize ourselves with Metis before abstracting and building upon our understanding. 
