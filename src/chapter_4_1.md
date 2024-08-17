@@ -122,9 +122,9 @@ However, it's worth noting just how many potential points of failure there are:
 
 The first failure will likely happen - unless you've aleady made Metis a known host on the system you will be automating SSH from.
 
-So, how do we add Metis as a known host? We need to create an SSH key, and copy it over to Metis. This allows Metis to skip password-based authentication thanks to knowing it's us!
+So, how do we add Metis as a known host? We need to create an SSH key, and copy it over to Metis. This allows us to bypass password-based authentication!
 
-You can hit enter through all of the prompts in the `ssh-keygen` command, but run the following **on your host machine, not Metis**:
+You can hit enter through all of the prompts in the `ssh-keygen` command, but run the following **on your local machine, not Metis**:
 ```
 $ ssh-keygen
 $ ssh-copy-id <your_account_username>@metis.niu.edu
