@@ -10,3 +10,5 @@ You can find the link to the book in the top right of this page, or click [here]
 
 ## ❤️ Acknowledgments
 While my work was sponsored by the [NIU Student Engagement Fund](https://www.niu.edu/engaged-learning/funding/undergrad-research-funding.shtml) and [Illinois Innovation Network](https://iin.uillinois.edu/), it was a massive goal, and I wouldn't have been able to complete it without the help of the amazing members of the NIU iGait Research Team!
+
+I would also like to thank the many NIU faculty and students who reached out to help mentor and train me, I will forever be appreciative of the support from NIU's academics.
