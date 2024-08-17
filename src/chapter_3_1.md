@@ -106,12 +106,12 @@ ModuleNotFoundError: No module named 'numpy'
 Let's create our [Python virtual environment](https://docs.python.org/3/library/venv.html), and install `numpy` using the `exec` command! Run the following:
 ```bash
 $ /bin/podman exec python_container python -m venv .venv
-$ /bin/podman exec python_container .venv/bin/pip  install numpy
+$ /bin/podman exec python_container .venv/bin/pip install numpy
 ```
 
 Running our script again:
 ```
-$ /bin/podman exec python_container python3 main.py
+$ /bin/podman exec python_container .venv/bin/python3 main.py
 ...
 Hello, Metis!
 ```
@@ -154,14 +154,14 @@ Create a `run.pbs` file with the following contents:
 #--PBS -m ae
 #--#PBS -M account@niu.edu
 
-PROJECT_DIRECTORY=/home/z1994244/projects/docker/premade_image
+PROJECT_DIRECTORY=/home/<your_account_name>/projects/docker/premade_image
 echo "This job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
 # Enable linger for the user
 echo ""
 echo "Enabling linger for the user..."
-loginctl enable-linger z1994244
+loginctl enable-linger <your_account_name>
 echo "Done!"
 
 # Start the container
@@ -207,7 +207,7 @@ echo "Done!"
 # There is a generic error message, which can be ignored.
 echo ""
 echo "Running the python script..."
-/bin/podman exec python_container python3 main.py
+/bin/podman exec python_container .venv/bin/python3 main.py
 echo "Done!"
 
 # Kill the container
