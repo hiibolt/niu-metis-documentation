@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Podman - NIU Metis Documentation</title>
+        <title>Modules - NIU Metis Documentation</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html"><strong aria-hidden="true">5.1.</strong> System Commands</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1_1.html"><strong aria-hidden="true">5.1.1.</strong> module</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5_2.html" class="active"><strong aria-hidden="true">5.2.</strong> Podman</a></li><li class="chapter-item expanded "><a href="chapter_5_3.html"><strong aria-hidden="true">5.3.</strong> Docker</a></li><li class="chapter-item expanded "><a href="chapter_5_4.html"><strong aria-hidden="true">5.4.</strong> PBS Professional</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Conclusion and Helpful Resources</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html"><strong aria-hidden="true">5.1.</strong> Bash</a></li><li class="chapter-item expanded "><a href="chapter_5_2.html" class="active"><strong aria-hidden="true">5.2.</strong> Modules</a></li><li class="chapter-item expanded "><a href="chapter_5_3.html"><strong aria-hidden="true">5.3.</strong> Podman and Docker</a></li><li class="chapter-item expanded "><a href="chapter_5_4.html"><strong aria-hidden="true">5.4.</strong> PBS Professional</a></li><li class="chapter-item expanded "><a href="chapter_5_5.html"><strong aria-hidden="true">5.5.</strong> Monitoring and Profiling</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Conclusion and Helpful Resources</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,36 +173,13 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="podman-quick-reference"><a class="header" href="#podman-quick-reference">Podman Quick Reference</a></h1>
-<h2 id="cleaning-your-user-directory"><a class="header" href="#cleaning-your-user-directory">Cleaning Your User Directory</a></h2>
-<p>It's very important that you routinely run <code>/bin/podman system prune</code>. The reason for this is because Podman <em>can't run cleanup commands</em> if you don't have any remaining disk quota!</p>
-<p>Because Metis users (without special request) have a maximum home (<code>~/*</code>) directory size of ~25GB, it's critical to stay under this limit while developing with Podman.</p>
-<p><em>If you run into this issue, either contact CRCD to have your quota temporarily increased, or see <strong>Force Cleaning Podman</strong>!</em></p>
-<h3 id="force-cleaning-podman"><a class="header" href="#force-cleaning-podman">Force Cleaning Podman</a></h3>
-<p>If you're not careful and don't routinely clean Podman, you might reach a stalemate where you can't do anything on Metis because you have no disk quota, but you also can't use Podman's cleaning utilities!</p>
-<p>Example:</p>
-<pre><code>$ podman inspect
-...
-
-Error: close /home/&lt;your_metis_username&gt;/.local/share/containers/storage/overlay/.has_mount_program: disk quota exceeded
-</code></pre>
-<p>First, confirm it's Podman using most of your storage:</p>
-<pre><code class="language-bash">du -sh ~/.local/share/containers/storage/overlay
-26GB
-</code></pre>
-<p>Then, we will manually delete the <code>overlay</code> directory. It's currently unclear what side effects manually performing this action does, so it may be better to have your quota increased instead. The commands will be listed below, nonetheless:</p>
-<pre><code class="language-bash">$ rm -rf ~/.local/share/containers/storage/overlay
-$ mkdir ~/.local/share/containers/storage/overlay
-</code></pre>
-<p>Then, you'll need to "reset" Podman:</p>
-<pre><code class="language-bash">$ /bin/podman system reset
-</code></pre>
+                        <h1 id="52-modules"><a class="header" href="#52-modules">5.2. Modules</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="chapter_5_1_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="chapter_5_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
@@ -216,7 +193,7 @@ $ mkdir ~/.local/share/containers/storage/overlay
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="chapter_5_1_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="chapter_5_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 

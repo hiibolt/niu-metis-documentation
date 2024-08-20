@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html"><strong aria-hidden="true">5.1.</strong> System Commands</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1_1.html"><strong aria-hidden="true">5.1.1.</strong> module</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5_2.html"><strong aria-hidden="true">5.2.</strong> Podman</a></li><li class="chapter-item expanded "><a href="chapter_5_3.html"><strong aria-hidden="true">5.3.</strong> Docker</a></li><li class="chapter-item expanded "><a href="chapter_5_4.html"><strong aria-hidden="true">5.4.</strong> PBS Professional</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Conclusion and Helpful Resources</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html"><strong aria-hidden="true">5.1.</strong> Bash</a></li><li class="chapter-item expanded "><a href="chapter_5_2.html"><strong aria-hidden="true">5.2.</strong> Modules</a></li><li class="chapter-item expanded "><a href="chapter_5_3.html"><strong aria-hidden="true">5.3.</strong> Podman and Docker</a></li><li class="chapter-item expanded "><a href="chapter_5_4.html"><strong aria-hidden="true">5.4.</strong> PBS Professional</a></li><li class="chapter-item expanded "><a href="chapter_5_5.html"><strong aria-hidden="true">5.5.</strong> Monitoring and Profiling</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Conclusion and Helpful Resources</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -1644,9 +1644,92 @@ bin  examples  hello_world.o18734  projects  rundir
 <p>You must purify your inputs, and ensure it is physically impossible for an attacker to exploit your backend in any way possible. To not do so would endanger the work of fellow NIU researchers, students and staff.</p>
 <p>However, as mentioned in the preface to this chapter, it's an incredibly effective method that can be further evolved into even more effecient and better integrated systems!</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="command-quick-reference"><a class="header" href="#command-quick-reference">Command Quick Reference</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="system-commands"><a class="header" href="#system-commands">System Commands</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="module"><a class="header" href="#module">module</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="podman-quick-reference"><a class="header" href="#podman-quick-reference">Podman Quick Reference</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="51-bash-commands"><a class="header" href="#51-bash-commands">5.1. Bash Commands</a></h1>
+<p>This section is a summary of the <a href="https://www.gnu.org/software/bash/manual/bash.html">Bash Reference</a> to serve as a general introduction or refresher on some common <a href="https://www.gnu.org/software/bash/">Bash</a> commands to help newer Linux users, or those who have not used it in some time.</p>
+<h2 id="common-commands"><a class="header" href="#common-commands">Common Commands</a></h2>
+<h3 id="-ls"><a class="header" href="#-ls"><code>$ ls</code></a></h3>
+<p>Lists the contents in the current directory.</p>
+<p>Example:</p>
+<pre><code>$ ls
+bin examples 
+</code></pre>
+<p>Common Arguments:</p>
+<ul>
+<li>
+<p><code>-a</code></p>
+<p>Prints everything, including hidden files.</p>
+<p>Example:</p>
+<pre><code class="language-bash">[you@metis ~]$ ls -a
+.              .dbus           .kde
+..             .dotnet         .kshrc   
+.bash_history  .emacs          .local           
+.bash_logout   .esd_auth       .mozilla       
+.bash_profile  examples        .ssh       
+.bashrc        .gitconfig      .wget-hsts      
+bin            .nv             .Xauthority
+.cache         .python_history .xemacs
+.config        .jupyter        .zshrc
+</code></pre>
+</li>
+</ul>
+<h3 id="-cd-path"><a class="header" href="#-cd-path"><code>$ cd &lt;path&gt;</code></a></h3>
+<p>Changes the current directory to the specified path.</p>
+<p>There are a few types of paths in a Unix-based filesystem, mainly being:</p>
+<ul>
+<li>
+<p>Absolute Path</p>
+<p>Absolute paths always lead to the same location, no matter the context they are interpreted from.</p>
+<p>They typically start with <code>/</code>, which is the root (base level) of the filesystem, but they can also start with <code>~</code>, which is your home directory.</p>
+<p>For example, your home directory (akin to a desktop in a graphical OS) is at <code>/home/you</code> or <code>~</code>.</p>
+</li>
+<li>
+<p>Relative Path</p>
+<p>Relative paths are dependent on where they are run from, and are specified by <em>not</em> starting with a <code>/</code>.</p>
+<p>For example, if you are in your home directory, the <code>bin</code> directory can be referenced by <code>./bin</code>.</p>
+<p>The <code>.</code> signifies "current directory", but you can also use "..", which would represent "up one directory".</p>
+</li>
+</ul>
+<p>Here is an example of changing to your <code>bin</code> directory based on an absolute path:</p>
+<pre><code class="language-bash">[you@metis ~]$ cd /home/you/bin
+[you@metis bin]$
+</code></pre>
+<p><em>(<code>cd ~/bin</code> would be equivalent!)</em></p>
+<p>Changing directory to your <code>bin</code> directory relative to your current directory (that being <code>~</code>):</p>
+<pre><code class="language-bash">[you@metis ~]$ cd bin
+[you@metis bin]$
+</code></pre>
+<p><em>(<code>cd ./bin</code> would be equivalent!)</em></p>
+<p>Going up a directory, then into the examples directory:</p>
+<pre><code class="language-bash">[you@metis bin]$ cd ../examples
+[you@metis examples]$
+</code></pre>
+<h3 id="-touch-file_name--file_name"><a class="header" href="#-touch-file_name--file_name"><code>$ touch &lt;file_name | file_name&gt;</code></a></h3>
+<p>Creates a new file with empty contents.</p>
+<p>Example:</p>
+<pre><code class="language-bash">[you@metis ~]$ touch hello.txt
+[you@metis ~]$ ls
+bin projects hello.txt
+</code></pre>
+<h3 id="-nano-file_name--file_pathfile_name"><a class="header" href="#-nano-file_name--file_pathfile_name"><code>$ nano &lt;file_name | file_path/file_name&gt;</code></a></h3>
+<p>A simplistic terminal file editor, useful for quick edits.</p>
+<p>Shouldn't be used for large files; instead, you should use <code>emacs</code>, <code>vim</code>, or ideally, an editor on <em>your</em> machine with remote SSH capability. See <strong>Chapter 1.1</strong> for more information on setting up Visual Studio Code, a popular option.</p>
+<p>Example:</p>
+<pre><code class="language-bash">[you@metis ~]$ touch hello.txt
+[you@metis ~]$ nano hello.txt
+</code></pre>
+<h2 id="help-commands"><a class="header" href="#help-commands">Help Commands</a></h2>
+<p>Should you feel confused on the usage of any command, you can print additional helpful information on many commands!</p>
+<p>The 5 common ways to print help on a command, in order of the density of information output:</p>
+<ul>
+<li><code>$ info &lt;command&gt;</code></li>
+<li><code>$ man &lt;command&gt;</code></li>
+<li><code>$ &lt;command&gt; --help</code></li>
+<li><code>$ &lt;command&gt; -h</code></li>
+<li><code>$ &lt;command&gt; -?</code></li>
+</ul>
+<p>Generally, first try <code>$ &lt;command&gt; --help</code>, and if you're still confused, try <code>$ man &lt;command&gt;</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="52-modules"><a class="header" href="#52-modules">5.2. Modules</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="53-podman-and-docker-quick-reference"><a class="header" href="#53-podman-and-docker-quick-reference">5.3. Podman and Docker Quick Reference</a></h1>
 <h2 id="cleaning-your-user-directory"><a class="header" href="#cleaning-your-user-directory">Cleaning Your User Directory</a></h2>
 <p>It's very important that you routinely run <code>/bin/podman system prune</code>. The reason for this is because Podman <em>can't run cleanup commands</em> if you don't have any remaining disk quota!</p>
 <p>Because Metis users (without special request) have a maximum home (<code>~/*</code>) directory size of ~25GB, it's critical to stay under this limit while developing with Podman.</p>
@@ -1670,9 +1753,171 @@ $ mkdir ~/.local/share/containers/storage/overlay
 <p>Then, you'll need to "reset" Podman:</p>
 <pre><code class="language-bash">$ /bin/podman system reset
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="docker"><a class="header" href="#docker">Docker</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="pbs-professional"><a class="header" href="#pbs-professional">PBS Professional</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="5-conclusion-and-helpful-resources"><a class="header" href="#5-conclusion-and-helpful-resources">5. Conclusion and Helpful Resources</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="54-pbs-professional"><a class="header" href="#54-pbs-professional">5.4. PBS Professional</a></h1>
+<p>A summarization of the <a href="https://2021.help.altair.com/2021.1.2/PBS%20Professional/PBSUserGuide2021.1.2.pdf">PBS Professional user's guide by Altair</a> for the <a href="https://altair.com/pbs-professional/">PBS Professional</a> system.</p>
+<h2 id="primary-commands"><a class="header" href="#primary-commands">Primary Commands</a></h2>
+<h3 id="-qsub-script_path"><a class="header" href="#-qsub-script_path"><code>$ qsub &lt;script_path&gt;</code></a></h3>
+<p>Submits an executable PBS script to a batch server, outputting the ID of the newly created job.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qsub ./run.pbs
+20000.cm
+</code></pre>
+<p>Common Options:</p>
+<ul>
+<li>
+<p><code>-v variable_list</code></p>
+<p>Adds additional environment variables to the context of the PBS script.</p>
+<p>Multiple variables can be seperated by a comma, and an environment variable can be extracted from the context where <code>qsub</code> is invoked by <em>not</em> providing a value with an <code>=</code> sign.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qsub -v foo=bar,lorem ./run.pbs
+20000.cm
+</code></pre>
+</li>
+<li>
+<p><code>-V</code></p>
+<p>Exports all environment variables in the context where <code>qsub</code> is invoked to the context of the PBS script.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qsub -V ./run.pbs
+20000.cm
+</code></pre>
+</li>
+<li>
+<p><code>-I</code></p>
+<p>Makes your job psuedo-interactive, connecting standard input, output, and error streams to the context where <code>qsub</code> is executed from.</p>
+<p>This can be useful for creating programs where input is required and would otherwise time out.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qsub -I ./mult_by_two.pbs
+Enter the number you want to multiply by 2: 4
+Now enter the number you want to divide by: 4
+...
+</code></pre>
+</li>
+</ul>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qsub.html">Command Manual</a></em></small></p>
+<h3 id="-qstat-job_id"><a class="header" href="#-qstat-job_id"><code>$ qstat &lt;job_id&gt;</code></a></h3>
+<p>Displays the human-readable status of a job.</p>
+<p>It can be more convenient to always use the <code>-H</code> flag.</p>
+<p>Common Job States:</p>
+<ul>
+<li><code>Q</code> |	Queued</li>
+<li><code>R</code> |	Running</li>
+<li><code>E</code> |	Exiting</li>
+<li><code>F</code> | Finished</li>
+</ul>
+<p>Uncommon Job States:</p>
+<ul>
+<li><code>H</code> |	 Held</li>
+<li><code>T</code> |	 Being transported to a different location (unlikely)</li>
+<li><code>W</code> |	 Waiting for its execution time (if you specified a set start datetime)</li>
+</ul>
+<p><em>If in an uncommon state (unintentionally) for substantial time, consider reaching out to CRCD.</em></p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qstat -H 18769
+
+cm:
+                                                            Req'd  Req'd   Elap
+Job ID          Username Queue    Jobname    SessID NDS TSK Memory Time  S Time
+--------------- -------- -------- ---------- ------ --- --- ------ ----- - -----
+18769.cm        z1994244 short    ml_retrai* 35427*   1  16   64gb 00:15 F 00:04
+</code></pre>
+<p>Common Options:</p>
+<ul>
+<li><code>-f</code> | Prints all available data on a job.</li>
+<li><code>-x</code> | Prints even if the job is historical.</li>
+<li><code>-H</code> | Prints even if the job is historical (with a little bit more data).</li>
+</ul>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qstat.html">Command Manual</a></em></small></p>
+<h3 id="-qdel-job_id"><a class="header" href="#-qdel-job_id"><code>$ qdel &lt;job_id&gt;</code></a></h3>
+<p>Deletes a job by either cancelling or killing it.</p>
+<p>Notes:</p>
+<ul>
+<li>This effect is achieved by sending a <code>SIGTERM</code> signal to your program, followed by a <code>SIGKILL</code> signal. If you want to plan ahead for graceful shutdowns, write your program to intercept these.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-bash">$ qdel 18769
+</code></pre>
+<p>Common Options:</p>
+<ul>
+<li>
+<p><code>-W &lt;seconds&gt;</code></p>
+<p>The number of seconds between the <code>SIGTERM</code> and <code>SIGKILL</code> signals.</p>
+<p>For example, if you have a program which can handle graceful shutdown in about ~5 seconds, but also want to eventually force kill it after 10:</p>
+<pre><code class="language-bash">$ qdel -W 10 18769
+</code></pre>
+</li>
+</ul>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qdel.html">Command Manual</a></em></small></p>
+<h3 id="-qhist"><a class="header" href="#-qhist"><code>$ qhist</code></a></h3>
+<p>Prints the history of all batch jobs.</p>
+<pre><code class="language-bash">$ qhist
+9646  person_1   project_1       short           1     1    1.0     127  2024/04/05 14:43:20       0:03  2024/04/05 14:43:23       30:01
+9648  person_2   project_2       short           2    16    8.0       0  2024/04/05 14:43:44       0:07  2024/04/05 14:43:51       15:00
+...
+</code></pre>
+<p>Notes:</p>
+<ul>
+<li>
+<p>Not very useful by itself due to the slew of output, but when paired with <code>grep</code> or <code>awk</code>, you can filter output by user, project, date, etc to only list what you're looking for.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qhist | grep z1994244
+9699  z1994244   zwlab       short           1     1    1.0     127  2024/04/05 14:43:20       0:03  2024/04/05 14:43:23       30:01
+9733  z1994244   zwlab       short           2    16    8.0       0  2024/04/05 14:43:44       0:07  2024/04/05 14:43:51       15:00
+...
+</code></pre>
+</li>
+</ul>
+<p>Common Options:</p>
+<ul>
+<li>
+<p><code>-D|--dates &lt;mm/dd/yyyy[-mm/dd/yyyy] | today | week | month | quarter | year&gt;</code></p>
+<p>Filters by a time range.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qhist -D year
+18768  person_1   project_1       short        1    16   16.0       0  2024/08/19 16:42:41       5:54  2024/08/19 16:48:35       15:00
+18769  person_2   project_2       short        1    16   16.0       0  2024/08/19 17:06:59       4:38  2024/08/19 17:11:37       15:00
+...
+</code></pre>
+</li>
+</ul>
+<p><small><em>Command Manual: <code>$ qhist --help</code></em></small></p>
+<h2 id="other-commands"><a class="header" href="#other-commands">Other Commands</a></h2>
+<p>These are commands which aren't as useful as the above four, but do exist and have potential applications, so they are here.</p>
+<p>Commands tagged with "❗" are potentially pointless or ineffective on Metis.</p>
+<h3 id="-qsig-job_id"><a class="header" href="#-qsig-job_id"><code>$ qsig &lt;job_id&gt;</code></a></h3>
+<p>Sends a signal to a job. By default, this is the <code>SIGTERM</code> signal.</p>
+<p>Common Options:</p>
+<ul>
+<li>
+<p><code>-s signal</code></p>
+<p>Specifies the signal.</p>
+<p>Supports integer representation (such as <code>9</code>), or the string name with/without <code>SIG</code> (<code>SIGKILL</code> or <code>KILL</code>)</p>
+</li>
+</ul>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qsig.html">Command Manual</a></em></small></p>
+<h3 id="-qmsg-job_id"><a class="header" href="#-qmsg-job_id"><code>$ qmsg &lt;job_id&gt;</code></a></h3>
+<p>Writes a message to one or more output files of a job for the purpose of leaving informative comments.</p>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qmsg.html">Command Manual</a></em></small></p>
+<h3 id="-qalter-job_id"><a class="header" href="#-qalter-job_id"><code>$ qalter &lt;job_id&gt;</code></a></h3>
+<p>Alters an attribute of a job.</p>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qalter.html">Command Manual</a></em></small></p>
+<h3 id="-qmove-destination-job_id"><a class="header" href="#-qmove-destination-job_id"><code>$ qmove &lt;destination&gt; &lt;job_id&gt;</code></a></h3>
+<p>❗ Moves a job from its queue to another destination.</p>
+<p><em>The potential destinations on Metis are unclear.</em></p>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qmove.html">Command Manual</a></em></small></p>
+<h3 id="-qhold-job_id"><a class="header" href="#-qhold-job_id"><code>$ qhold &lt;job_id&gt;</code></a></h3>
+<p>❗ Places a request to 'hold' a job.</p>
+<p><em>It's unclear if Metis supports checkpointing. If you believe this command would be helpful, contact CRCD for additional information.</em></p>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qhold.html">Command Manual</a></em></small></p>
+<h3 id="-qrls-job_id"><a class="header" href="#-qrls-job_id"><code>$ qrls &lt;job_id&gt;</code></a></h3>
+<p>❗ Releases the hold on a job.</p>
+<p><em>It's unclear if Metis supports checkpointing. If you believe this command would be helpful, contact CRCD for additional information.</em></p>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qrls.html">Command Manual</a></em></small></p>
+<h3 id="-qselect"><a class="header" href="#-qselect"><code>$ qselect</code></a></h3>
+<p>❗ Lists job IDs matching a certain criteria.</p>
+<p><em>Appears to be entirely broken. Use the <code>qhist</code> with <code>grep</code> or <code>awk</code> to filter output instead.</em></p>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qselect.html">Command Manual</a></em></small></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="55-monitoring-and-profiling"><a class="header" href="#55-monitoring-and-profiling">5.5. Monitoring and Profiling</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="6-conclusion-and-helpful-resources"><a class="header" href="#6-conclusion-and-helpful-resources">6. Conclusion and Helpful Resources</a></h1>
 <p>This concludes my documentation for the NIU Metis supercomputing systems.</p>
 <p>I genuinely hope this helps you achieve your goals on Metis, as using complex systems such as Metis is often daunting and time-consuming even for the most tenured of Linux users.</p>
 <p>Despite being a Linux user, I am a strong believer in 'less time working on preparing to work'. This isn't to say I don't like planning - I use kanban boards for the most basic of tasks - but I do not enjoy spending time troubleshooting. While Linux is a large improvement over Windows for the purpose of development, things are not perfect, and much of a Linux user's time is spent working to get something fixed, rather than working on projects - the problem this guide aims to solve.</p>
@@ -1692,7 +1937,7 @@ $ mkdir ~/.local/share/containers/storage/overlay
 <li><a href="https://www.openmp.org/wp-content/uploads/omp-hands-on-SC08.pdf">OpenMPI Into-The-Fire Introduction</a></li>
 <li><a href="https://docs.open-mpi.org/en/v5.0.x/index.html">OpenMPI Documentation</a></li>
 </ul>
-<h3 id="pbs-professional-1"><a class="header" href="#pbs-professional-1">PBS Professional</a></h3>
+<h3 id="pbs-professional"><a class="header" href="#pbs-professional">PBS Professional</a></h3>
 <ul>
 <li><a href="https://help.altair.com/2024.1.0/PBS%20Professional/PBSProgramGuide2024.1.pdf">PBS Professional Documentation</a></li>
 <li><a href="https://www.nas.nasa.gov/hecc/support/kb/Commonly-Used-PBS-Commands_174.html">NASA's PBS Quick Reference</a></li>

@@ -1,4 +1,4 @@
-# 5. Conclusion and Helpful Resources
+# 6. Conclusion and Helpful Resources
 This concludes my documentation for the NIU Metis supercomputing systems.
 
 I genuinely hope this helps you achieve your goals on Metis, as using complex systems such as Metis is often daunting and time-consuming even for the most tenured of Linux users.
