@@ -1,25 +1,16 @@
 # 1. Introduction
-Welcome! This book serves as an all-in-one crash course in utilizing Metis, as well as some advanced techniques.
+Welcome! This book serves as an all-in-one crash course in utilizing Metis.
 
-This documentation is not meant to replace NIU's documentation, but rather, to make it more beginner-friendly and to save you time!
+It aims to allow anyone from any discipline, regardless of Linux experience, to get started. As such, no knowledge of any language is required to follow any example, as the focus of the examples is instead to help you understand Metis.
 
-While this book does assume a basic understanding of Linux and C++, it is not required.
-
-If you have not logged into Metis before, or if it's been some time since you've used Linux, NIU CRCD has [comprehensive documentation](https://www.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml) on how to open a SSH connection, and a quick Linux refresher. If you would also like to refresh yourself on C++, w3schools has a wonderful [quick reference](https://www.w3schools.com/cpp/default.asp) available.
-
-Although this guide is about how to employ Docker on Metis, it does not assume you have previous experience with it, and includes a crash course on basic usage. The skills in that section provide tools to build even some of the most advanced applications, and also includes resources for those applications which require more.
-
-For your convenience, every project example in this book can be found in [the repository for this book](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects)!
+On top of this, should a step confuse you, the final product of every project example in this book can also be found in this book's [repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects).
 
 ## Primary Purpose
-The goal of this book is to allow researchers at NIU to hit the ground running with their research. Our goal is for you to focus less on getting Metis to work for you - and more on completing your work as a whole.
+The goal of this book is to allow faculty at NIU to hit the ground running with their work. 
 
-It's possible to create applications that will work regardless of what Metis has available to you for installation. Furthermore, you no longer have to develop directly on Metis - you can develop and build locally on hardware you're used to. This will allow you to focus on writing your application - without having to worry whether it can run on Metis.
+We want you to focus on completing your work - not getting the hardware to work.
 
-We will do so by employing [Docker](https://www.docker.com/), an extremely powerful containerization and encapsulation tool that allows developers to define virtual machines with a level of granularity rarely found in modern computing. Docker allows you to select an operating system as a base, install packages and libraries, and define run behaviour.
-
-All of this is defined in a singular, simple, and human-readable file that can be built to be reproduced on any system - including Metis.
-
+This book will teach you the skills to help focus on writing your application from the ground up.
 
 ### Explored Use Cases
 There are five use cases covered here, with increasing levels of control over Metis:
@@ -40,20 +31,25 @@ There are five use cases covered here, with increasing levels of control over Me
     - Writing, building, and publishing your own Docker Image
     - Passing through GPUs to Docker
     - PBS with Docker and NVIDIA Container Toolkit via Podman
-
-### Advanced Techniques
-This guide will also explore one additional advanced technique:
 * **Chapter 4.1 - SSH Automation**
     - Demonstrates programmatic submission of PBS jobs via SSH for the purpose of fitting Metis into existing systems.
 
 ## Where Do I Need to Read to?
 ### Cases Where Docker May Not Be Needed
-Check if your use case is either of the two below. If it is, you can safely stop reading after **Chapter 2.2**.
-- Native C, Go, or Python applications with pre-existing or no dependencies
+IF your application is either of the following, you shouldn't or can't use Docker.
+- Native C, Go, or Python applications *with pre-installed or no dependencies*
 - OpenMPI-based applications
+
+If it's one of those two, chapters **2.1** and **2.2** will be of great use!
+
+The following chapters may not be as useful, as they touch primarily on Docker.
 ### Cases Where Docker Is Needed
-If you only need CPU-based computation, you can safely stop reading after **Chapter 3.1**. If you need GPU passthrough or have a complicated project, it is recommended to read this book in its entirety!
+If your application is any of the following, it's highly recommended to use Docker: 
 - Applications with a language not listed above
 - Applications with dependencies Metis does not have encapsulated in its modulefiles
 - Applications with complex or circular dependencies
 - Applications which require a different operating system
+
+If you only need CPU-based computation, chapters **2-3.1** will teach you everything you need.
+
+If you need GPU passthrough or have a complicated project, it is recommended to read this book in its entirety!

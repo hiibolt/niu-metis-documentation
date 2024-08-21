@@ -1,5 +1,7 @@
 # Summary
 - [Introduction](./chapter_1.md)
+    - [Connecting to Metis](./chapter_1_1.md)
+    - [Remote Workspaces in VSCode](./chapter_1_2.md)
 - [Basic Metis Usage](./chapter_2.md)
     - [Building a C++ Project from the Ground Up](./chapter_2_1.md)
     - [Building a CUDA Project from the Ground Up](./chapter_2_2.md)
@@ -13,6 +15,7 @@
     - [Bash](./chapter_5_1.md)
     - [Modules](./chapter_5_2.md)
     - [Podman and Docker](./chapter_5_3.md)
-    - [PBS Professional](./chapter_5_4.md)
-    - [Monitoring and Profiling](./chapter_5_5.md)
+    - [Monitoring and Profiling](./chapter_5_4.md)
+    - [PBS Professional](./chapter_5_5.md)
+        - [PBS Files](./chapter_5_5_1.md)
 - [Conclusion and Helpful Resources](./chapter_6.md)

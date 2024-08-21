@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html"><strong aria-hidden="true">5.1.</strong> Bash</a></li><li class="chapter-item expanded "><a href="chapter_5_2.html"><strong aria-hidden="true">5.2.</strong> Modules</a></li><li class="chapter-item expanded "><a href="chapter_5_3.html"><strong aria-hidden="true">5.3.</strong> Podman and Docker</a></li><li class="chapter-item expanded "><a href="chapter_5_4.html"><strong aria-hidden="true">5.4.</strong> PBS Professional</a></li><li class="chapter-item expanded "><a href="chapter_5_5.html"><strong aria-hidden="true">5.5.</strong> Monitoring and Profiling</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Conclusion and Helpful Resources</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">1.1.</strong> Connecting to Metis</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">1.2.</strong> Remote Workspaces in VSCode</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html"><strong aria-hidden="true">5.1.</strong> Bash</a></li><li class="chapter-item expanded "><a href="chapter_5_2.html"><strong aria-hidden="true">5.2.</strong> Modules</a></li><li class="chapter-item expanded "><a href="chapter_5_3.html"><strong aria-hidden="true">5.3.</strong> Podman and Docker</a></li><li class="chapter-item expanded "><a href="chapter_5_4.html"><strong aria-hidden="true">5.4.</strong> Monitoring and Profiling</a></li><li class="chapter-item expanded "><a href="chapter_5_5.html"><strong aria-hidden="true">5.5.</strong> PBS Professional</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_5_1.html"><strong aria-hidden="true">5.5.1.</strong> PBS Files</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Conclusion and Helpful Resources</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -175,17 +175,13 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="1-introduction"><a class="header" href="#1-introduction">1. Introduction</a></h1>
-<p>Welcome! This book serves as an all-in-one crash course in utilizing Metis, as well as some advanced techniques.</p>
-<p>This documentation is not meant to replace NIU's documentation, but rather, to make it more beginner-friendly and to save you time!</p>
-<p>While this book does assume a basic understanding of Linux and C++, it is not required.</p>
-<p>If you have not logged into Metis before, or if it's been some time since you've used Linux, NIU CRCD has <a href="https://www.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml">comprehensive documentation</a> on how to open a SSH connection, and a quick Linux refresher. If you would also like to refresh yourself on C++, w3schools has a wonderful <a href="https://www.w3schools.com/cpp/default.asp">quick reference</a> available.</p>
-<p>Although this guide is about how to employ Docker on Metis, it does not assume you have previous experience with it, and includes a crash course on basic usage. The skills in that section provide tools to build even some of the most advanced applications, and also includes resources for those applications which require more.</p>
-<p>For your convenience, every project example in this book can be found in <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects">the repository for this book</a>!</p>
+<p>Welcome! This book serves as an all-in-one crash course in utilizing Metis.</p>
+<p>It aims to allow anyone from any discipline, regardless of Linux experience, to get started. As such, no knowledge of any language is required to follow any example, as the focus of the examples is instead to help you understand Metis.</p>
+<p>On top of this, should a step confuse you, the final product of every project example in this book can also be found in this book's <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects">repository</a>.</p>
 <h2 id="primary-purpose"><a class="header" href="#primary-purpose">Primary Purpose</a></h2>
-<p>The goal of this book is to allow researchers at NIU to hit the ground running with their research. Our goal is for you to focus less on getting Metis to work for you - and more on completing your work as a whole.</p>
-<p>It's possible to create applications that will work regardless of what Metis has available to you for installation. Furthermore, you no longer have to develop directly on Metis - you can develop and build locally on hardware you're used to. This will allow you to focus on writing your application - without having to worry whether it can run on Metis.</p>
-<p>We will do so by employing <a href="https://www.docker.com/">Docker</a>, an extremely powerful containerization and encapsulation tool that allows developers to define virtual machines with a level of granularity rarely found in modern computing. Docker allows you to select an operating system as a base, install packages and libraries, and define run behaviour.</p>
-<p>All of this is defined in a singular, simple, and human-readable file that can be built to be reproduced on any system - including Metis.</p>
+<p>The goal of this book is to allow faculty at NIU to hit the ground running with their work.</p>
+<p>We want you to focus on completing your work - not getting the hardware to work.</p>
+<p>This book will teach you the skills to help focus on writing your application from the ground up.</p>
 <h3 id="explored-use-cases"><a class="header" href="#explored-use-cases">Explored Use Cases</a></h3>
 <p>There are five use cases covered here, with increasing levels of control over Metis:</p>
 <ul>
@@ -221,10 +217,6 @@
 <li>PBS with Docker and NVIDIA Container Toolkit via Podman</li>
 </ul>
 </li>
-</ul>
-<h3 id="advanced-techniques"><a class="header" href="#advanced-techniques">Advanced Techniques</a></h3>
-<p>This guide will also explore one additional advanced technique:</p>
-<ul>
 <li><strong>Chapter 4.1 - SSH Automation</strong>
 <ul>
 <li>Demonstrates programmatic submission of PBS jobs via SSH for the purpose of fitting Metis into existing systems.</li>
@@ -233,21 +225,79 @@
 </ul>
 <h2 id="where-do-i-need-to-read-to"><a class="header" href="#where-do-i-need-to-read-to">Where Do I Need to Read to?</a></h2>
 <h3 id="cases-where-docker-may-not-be-needed"><a class="header" href="#cases-where-docker-may-not-be-needed">Cases Where Docker May Not Be Needed</a></h3>
-<p>Check if your use case is either of the two below. If it is, you can safely stop reading after <strong>Chapter 2.2</strong>.</p>
+<p>IF your application is either of the following, you shouldn't or can't use Docker.</p>
 <ul>
-<li>Native C, Go, or Python applications with pre-existing or no dependencies</li>
+<li>Native C, Go, or Python applications <em>with pre-installed or no dependencies</em></li>
 <li>OpenMPI-based applications</li>
 </ul>
+<p>If it's one of those two, chapters <strong>2.1</strong> and <strong>2.2</strong> will be of great use!</p>
+<p>The following chapters may not be as useful, as they touch primarily on Docker.</p>
 <h3 id="cases-where-docker-is-needed"><a class="header" href="#cases-where-docker-is-needed">Cases Where Docker Is Needed</a></h3>
-<p>If you only need CPU-based computation, you can safely stop reading after <strong>Chapter 3.1</strong>. If you need GPU passthrough or have a complicated project, it is recommended to read this book in its entirety!</p>
+<p>If your application is any of the following, it's highly recommended to use Docker:</p>
 <ul>
 <li>Applications with a language not listed above</li>
 <li>Applications with dependencies Metis does not have encapsulated in its modulefiles</li>
 <li>Applications with complex or circular dependencies</li>
 <li>Applications which require a different operating system</li>
 </ul>
+<p>If you only need CPU-based computation, chapters <strong>2-3.1</strong> will teach you everything you need.</p>
+<p>If you need GPU passthrough or have a complicated project, it is recommended to read this book in its entirety!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="11-connecting-to-metis"><a class="header" href="#11-connecting-to-metis">1.1. Connecting to Metis</a></h1>
+<p>The Metis cluster is easily accessible via the <a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a> protocol.</p>
+<p>Each operating system has various possible SSH clients - we will be using the OpenSSH client, as it is pre-installed on most operating systems and very straightforward.</p>
+<h2 id="windows-10-and-11"><a class="header" href="#windows-10-and-11">Windows 10 and 11</a></h2>
+<p>As of 2024, both Windows 10 and Windows 11 have the OpenSSH client pre-installed. If you don't have it installed, update your operating system using the Windows Updater.</p>
+<p>To connect, open either <strong>Windows PowerShell</strong> or <strong>Command Prompt</strong>, and run the following:</p>
+<pre><code class="language-ps">PS C:\...\&gt; ssh you@metis.niu.edu
+</code></pre>
+<p>When prompted, enter your temporary password.</p>
+<p>On your first login, you will be prompted to create a new password. Ensure that it's something memorable, but very secure!</p>
+<p>Then, close your session:</p>
+<pre><code class="language-bash">[you@metis ~]$ exit
+</code></pre>
+<p>And re-login to test your new password:</p>
+<pre><code class="language-ps">PS C:\...\&gt; ssh you@metis.niu.edu
+</code></pre>
+<h2 id="linux-and-macos"><a class="header" href="#linux-and-macos">Linux and MacOS</a></h2>
+<p>Most major distributions and the latest versions of MacOS have the OpenSSH client installed.</p>
+<p>Run the following:</p>
+<pre><code class="language-bash">$ ssh you@metis.niu.edu
+</code></pre>
+<p>When prompted, enter your temporary password.</p>
+<p>On your first login, you will be prompted to create a new password. Ensure that it's something memorable, but secure!</p>
+<p>Then, close your session:</p>
+<pre><code class="language-bash">[you@metis ~]$ exit
+</code></pre>
+<p>And re-login to test your new password:</p>
+<pre><code class="language-bash">$ ssh you@metis.niu.edu
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="12-remote-workspaces-in-vscode"><a class="header" href="#12-remote-workspaces-in-vscode">1.2. Remote Workspaces in VSCode</a></h1>
+<p><small><em>If you encounter issues, see the <a href="https://code.visualstudio.com/docs/remote/ssh">official documentation</a>!</em></small></p>
+<p>There are many text editors which support using a remote machine, but one of the easiest is with Microsoft's Visual Studio Code.</p>
+<h2 id="installing-vscode-and-remote-explorer"><a class="header" href="#installing-vscode-and-remote-explorer">Installing VSCode and Remote Explorer</a></h2>
+<p>If you haven't already, first install <a href="https://code.visualstudio.com/">Visual Studio Code</a>. Note that Visual Studio Code and Visual Studio are <em>not</em> the same thing.</p>
+<p>Next, navigate to the <strong>Extensions</strong> tab, and install the <strong>Remote Development</strong> extension by Microsoft. Then, restart VSCode.</p>
+<h2 id="adding-metis-as-a-remote-host"><a class="header" href="#adding-metis-as-a-remote-host">Adding Metis as a Remote Host</a></h2>
+<p>On the left panel, click on <strong>Remote Explorer</strong>:</p>
+<p><img src="images/vscode_icon.png" alt="Remote Explorer Icon" /></p>
+<p>Then, make sure you are in the <strong>Remotes (Tunnel/SSH)</strong> section:</p>
+<p><img src="images/remote_explorer_options.png" alt="Remote Explorer Sections" /></p>
+<p>Next, create a new SSH host:</p>
+<p><img src="images/create_remote.png" alt="Creating a New SSH Host" /></p>
+<p>This will prompt you for your SSH command. It is slightly easier to add the <code>-y</code> flag, as seen below:</p>
+<p><img src="images/adding_command.png" alt="Example SSH Command" /></p>
+<p>It will then as you where to save your SSH configuration. It doesn't really matter which you pick, but the option in your <code>Users</code> folder is ideal.</p>
+<p>After choosing a location, you'll see a prompt in the bottom right, on which you should click <strong>Connect</strong>:</p>
+<p><img src="images/click_connect.png" alt="Click Connect" /></p>
+<p>This will open a new VSCode window, where you are now connected to Metis graphically!</p>
+<h2 id="adding-a-folder"><a class="header" href="#adding-a-folder">Adding a Folder</a></h2>
+<p>When this new window opens, you can click the <strong>Open Folder</strong> option to choose your first folder:</p>
+<p><img src="images/open_new_folder.png" alt="Opening a New Folder" /></p>
+<p>It's recommended you start with <code>/home/you</code>.</p>
+<p>If you've been allocated a project, you may also want to open <code>/lstr/sahara/your_project</code>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="2-basic-metis-usage"><a class="header" href="#2-basic-metis-usage">2. Basic Metis Usage</a></h1>
 <p>This first chapter will provide two into-the-fire projects that will teach you the core systems of Metis. This will be done through a simple C++ project, followed by an optimized version written with CUDA.</p>
+<p>Reminder - you don't need to know Bash (Linux Commands), C++, or CUDA to follow along! It may help your understanding to know some basic Bash commands, so feel free to quickly glance over <strong>Chapter 5.1 - Bash</strong>.</p>
 <p>These chapters lay the foundational skills needed to use the advanced techniques in the following chapters, and it is highly recommended that you read them before proceeding!</p>
 <h2 id="overview-of-the-chapters"><a class="header" href="#overview-of-the-chapters">Overview of the Chapters</a></h2>
 <h3 id="chapter-21-c-on-metis"><a class="header" href="#chapter-21-c-on-metis">Chapter 2.1: C++ on Metis</a></h3>
@@ -818,7 +868,7 @@ openmpi/openmpi-4.1.6-gcc-11.4.0-cuda-11.8
 </code></pre>
 <p>Using a combination of both OpenMPI for coordinating large-scale tasks across many processors and CUDA for handling tasks best accelerated by GPU programming will allow you to fully harness the hardware of Metis.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="3-intermediate-metis-usage-with-metis"><a class="header" href="#3-intermediate-metis-usage-with-metis">3. Intermediate Metis Usage with Metis</a></h1>
-<p>In this chapter, we will dive deeper into advanced Docker techniques, expanding on the foundational knowledge covered in Chapters 2.1 and 2.2.</p>
+<p>In this chapter, we will dive deep into Docker and PBS techniques, expanding on the foundational knowledge covered in Chapters 2.1 and 2.2.</p>
 <p>We'll explore how to combine these techniques to create a robust workflow for your projects on Metis, including handling custom Docker images, leveraging GPU acceleration, and managing complex dependencies.</p>
 <h2 id="overview-of-the-chapters-1"><a class="header" href="#overview-of-the-chapters-1">Overview of the Chapters</a></h2>
 <h3 id="chapter-31-using-pre-made-docker-images"><a class="header" href="#chapter-31-using-pre-made-docker-images">Chapter 3.1: Using Pre-Made Docker Images</a></h3>
@@ -1471,7 +1521,7 @@ CMD .venv/bin/python3 main.py
 </ul>
 <p>With this approach, you can containerize virtually any project with ease.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="4-advanced-metis-usage-techniques"><a class="header" href="#4-advanced-metis-usage-techniques">4. Advanced Metis Usage Techniques</a></h1>
-<p>The first and only advanced technique this book will cover with examples is SSH automation.</p>
+<p>One of the most powerful tricks on Metis is SSH automation.</p>
 <p>This allows a Metis user to automate what would otherwise be:</p>
 <ul>
 <li><strong>1</strong> - Logging into Metis over SSH</li>
@@ -1479,10 +1529,36 @@ CMD .venv/bin/python3 main.py
 <li><strong>3</strong> - Retrieving a job ID</li>
 </ul>
 <p>By doing this, we can intergrate Metis into the workflow of any existing web server!</p>
-<p>This technique also opens the door to other techniques, three of which I will briefly mention below. Because of the varied and complex nature of implementation, they will only be described conceptually.</p>
+<p>This technique also opens the door to other techniques, three of which will be briefly mentioned below. Because of the varied and complex nature of implementation, they will only be described conceptually.</p>
 <h3 id="providing-files-to-metis-remotely"><a class="header" href="#providing-files-to-metis-remotely">Providing Files to Metis Remotely</a></h3>
 <p>By adding file IDs, download links, or using another way to communicate a download location, you can use the arguments on a job submission request to provide Metis with a way to download files for processing.</p>
 <p>This can be accomplished by reading the provided arguments in your PBS script, and using <code>wget</code>, <code>git</code>, <code>curl</code>, Git LFS, or another download tool to then download the files onto Metis and into the PBS job's working directory.</p>
+<p><strong>Psuedocode Example</strong>:</p>
+<p><code>main.py</code>:</p>
+<pre><code class="language-python">...
+
+file_download_link = "https://s3.amazon.com/.../hello_world.txt";
+
+submit_metis_command([
+    "qsub",
+    "-v",
+    f"DOWNLOAD_LINK={file_download_link}"
+    "run.pbs"
+]);
+
+...
+</code></pre>
+<p><code>run.pbs</code>:</p>
+<pre><code class="language-bash">...
+
+# Downloads the target file
+wget -O hello_world.txt $DOWNLOAD_LINK
+
+# Outputs the content of the file
+cat hello_world.txt
+
+...
+</code></pre>
 <h3 id="web-server-completion-reporting"><a class="header" href="#web-server-completion-reporting">Web Server Completion Reporting</a></h3>
 <p>Since PBS jobs on Metis have the ability to connect to the internet, it's possible to then ping your webserver to let it know it's finished, instead of guessing.</p>
 <p>The process can look like:</p>
@@ -1644,8 +1720,9 @@ bin  examples  hello_world.o18734  projects  rundir
 <p>You must purify your inputs, and ensure it is physically impossible for an attacker to exploit your backend in any way possible. To not do so would endanger the work of fellow NIU researchers, students and staff.</p>
 <p>However, as mentioned in the preface to this chapter, it's an incredibly effective method that can be further evolved into even more effecient and better integrated systems!</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="command-quick-reference"><a class="header" href="#command-quick-reference">Command Quick Reference</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="51-bash-commands"><a class="header" href="#51-bash-commands">5.1. Bash Commands</a></h1>
-<p>This section is a summary of the <a href="https://www.gnu.org/software/bash/manual/bash.html">Bash Reference</a> to serve as a general introduction or refresher on some common <a href="https://www.gnu.org/software/bash/">Bash</a> commands to help newer Linux users, or those who have not used it in some time.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="51-bash"><a class="header" href="#51-bash">5.1. Bash</a></h1>
+<p>This section is a summary of the most common <a href="https://www.gnu.org/software/bash/">Bash</a> commands to serve as a general introduction or refresher to help newer Linux users, or those who have not used it in some time.</p>
+<p>To learn even more about Bash, see the <a href="https://www.gnu.org/software/bash/manual/bash.html">GNU Bash Reference</a>!</p>
 <h2 id="common-commands"><a class="header" href="#common-commands">Common Commands</a></h2>
 <h3 id="-ls"><a class="header" href="#-ls"><code>$ ls</code></a></h3>
 <p>Lists the contents in the current directory.</p>
@@ -1659,7 +1736,7 @@ bin examples
 <p><code>-a</code></p>
 <p>Prints everything, including hidden files.</p>
 <p>Example:</p>
-<pre><code class="language-bash">[you@metis ~]$ ls -a
+<pre><code>[you@metis ~]$ ls -a
 .              .dbus           .kde
 ..             .dotnet         .kshrc   
 .bash_history  .emacs          .local           
@@ -1672,6 +1749,7 @@ bin            .nv             .Xauthority
 </code></pre>
 </li>
 </ul>
+<p><small><em><a href="https://www.man7.org/linux/man-pages/man1/ls.1.html">Command Manual</a></em></small></p>
 <h3 id="-cd-path"><a class="header" href="#-cd-path"><code>$ cd &lt;path&gt;</code></a></h3>
 <p>Changes the current directory to the specified path.</p>
 <p>There are a few types of paths in a Unix-based filesystem, mainly being:</p>
@@ -1703,6 +1781,7 @@ bin            .nv             .Xauthority
 <pre><code class="language-bash">[you@metis bin]$ cd ../examples
 [you@metis examples]$
 </code></pre>
+<p><small><em><a href="https://man7.org/linux/man-pages/man1/cd.1p.html">Command Manual</a></em></small></p>
 <h3 id="-touch-file_name--file_name"><a class="header" href="#-touch-file_name--file_name"><code>$ touch &lt;file_name | file_name&gt;</code></a></h3>
 <p>Creates a new file with empty contents.</p>
 <p>Example:</p>
@@ -1710,6 +1789,7 @@ bin            .nv             .Xauthority
 [you@metis ~]$ ls
 bin projects hello.txt
 </code></pre>
+<p><small><em><a href="https://man7.org/linux/man-pages/man1/touch.1.html">Command Manual</a></em></small></p>
 <h3 id="-nano-file_name--file_pathfile_name"><a class="header" href="#-nano-file_name--file_pathfile_name"><code>$ nano &lt;file_name | file_path/file_name&gt;</code></a></h3>
 <p>A simplistic terminal file editor, useful for quick edits.</p>
 <p>Shouldn't be used for large files; instead, you should use <code>emacs</code>, <code>vim</code>, or ideally, an editor on <em>your</em> machine with remote SSH capability. See <strong>Chapter 1.1</strong> for more information on setting up Visual Studio Code, a popular option.</p>
@@ -1717,6 +1797,32 @@ bin projects hello.txt
 <pre><code class="language-bash">[you@metis ~]$ touch hello.txt
 [you@metis ~]$ nano hello.txt
 </code></pre>
+<p><small><em><a href="https://www.nano-editor.org/dist/v2.1/nano.html">Command Manual</a></em></small></p>
+<h3 id="-mkdir-dir_name--dir_pathdir_name"><a class="header" href="#-mkdir-dir_name--dir_pathdir_name"><code>$ mkdir &lt;dir_name | dir_path/dir_name&gt;</code></a></h3>
+<p>Creates a new and empty directory.</p>
+<p>Example:</p>
+<pre><code>[you@metis.niu.edu ~]$ mkdir hello
+[you@metis.niu.edu ~]$ ls
+bin examples hello
+</code></pre>
+<p><small><em><a href="https://www.man7.org/linux/man-pages/man1/mkdir.1.html">Command Manual</a></em></small></p>
+<h3 id="-export-varstring--expression"><a class="header" href="#-export-varstring--expression"><code>$ export &lt;var&gt;=&lt;string | expression&gt;</code></a></h3>
+<p>Sets an environment variable. Unless somehow preserved, these will be cleared when you close the session!</p>
+<p>Example:</p>
+<pre><code>[you@metis.niu.edu ~]$ export FOO="bar"
+</code></pre>
+<p><small><em><a href="https://www.man7.org/linux/man-pages/man1/export.1p.html">Command Manual</a></em></small></p>
+<h3 id="-echo-string--expression"><a class="header" href="#-echo-string--expression"><code>$ echo &lt;string | expression&gt;</code></a></h3>
+<p>Outputs the specified string or expression to stdout (the terminal).</p>
+<p>You can output environment variables by prefacing a variable name with <code>$</code>.</p>
+<p>Example:</p>
+<pre><code>[you@metis.niu.edu ~]$ echo "Hello, Metis!"
+Hello, Metis!
+[you@metis.niu.edu ~]$ export FOO="Hello, Metis!"
+[you@metis.niu.edu ~]$ echo "$FOO"
+Hello, Metis!
+</code></pre>
+<p><small><em><a href="https://www.man7.org/linux/man-pages/man1/echo.1.html">Command Manual</a></em></small></p>
 <h2 id="help-commands"><a class="header" href="#help-commands">Help Commands</a></h2>
 <p>Should you feel confused on the usage of any command, you can print additional helpful information on many commands!</p>
 <p>The 5 common ways to print help on a command, in order of the density of information output:</p>
@@ -1753,7 +1859,8 @@ $ mkdir ~/.local/share/containers/storage/overlay
 <p>Then, you'll need to "reset" Podman:</p>
 <pre><code class="language-bash">$ /bin/podman system reset
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="54-pbs-professional"><a class="header" href="#54-pbs-professional">5.4. PBS Professional</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="54-monitoring-and-profiling"><a class="header" href="#54-monitoring-and-profiling">5.4. Monitoring and Profiling</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="55-pbs-professional"><a class="header" href="#55-pbs-professional">5.5. PBS Professional</a></h1>
 <p>A summarization of the <a href="https://2021.help.altair.com/2021.1.2/PBS%20Professional/PBSUserGuide2021.1.2.pdf">PBS Professional user's guide by Altair</a> for the <a href="https://altair.com/pbs-professional/">PBS Professional</a> system.</p>
 <h2 id="primary-commands"><a class="header" href="#primary-commands">Primary Commands</a></h2>
 <h3 id="-qsub-script_path"><a class="header" href="#-qsub-script_path"><code>$ qsub &lt;script_path&gt;</code></a></h3>
@@ -1916,13 +2023,11 @@ Job ID          Username Queue    Jobname    SessID NDS TSK Memory Time  S Time
 <p>❗ Lists job IDs matching a certain criteria.</p>
 <p><em>Appears to be entirely broken. Use the <code>qhist</code> with <code>grep</code> or <code>awk</code> to filter output instead.</em></p>
 <p><small><em><a href="https://www.jlab.org/hpc/PBS/qselect.html">Command Manual</a></em></small></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="55-monitoring-and-profiling"><a class="header" href="#55-monitoring-and-profiling">5.5. Monitoring and Profiling</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="551-pbs-files"><a class="header" href="#551-pbs-files">5.5.1. PBS Files</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="6-conclusion-and-helpful-resources"><a class="header" href="#6-conclusion-and-helpful-resources">6. Conclusion and Helpful Resources</a></h1>
 <p>This concludes my documentation for the NIU Metis supercomputing systems.</p>
-<p>I genuinely hope this helps you achieve your goals on Metis, as using complex systems such as Metis is often daunting and time-consuming even for the most tenured of Linux users.</p>
-<p>Despite being a Linux user, I am a strong believer in 'less time working on preparing to work'. This isn't to say I don't like planning - I use kanban boards for the most basic of tasks - but I do not enjoy spending time troubleshooting. While Linux is a large improvement over Windows for the purpose of development, things are not perfect, and much of a Linux user's time is spent working to get something fixed, rather than working on projects - the problem this guide aims to solve.</p>
-<p>I hope this guide helped streamline your getting started on Metis. Below you can find additional resources to help your time on the Metis platform!</p>
-<h2 id="helpful-resources"><a class="header" href="#helpful-resources">Helpful Resources</a></h2>
+<p>I hope this helps you achieve your goals on Metis, and streamlined your getting started on Metis.</p>
+<h2 id="works-cited"><a class="header" href="#works-cited">Works Cited</a></h2>
 <h3 id="docker-podman-and-nvidia-container-toolkit"><a class="header" href="#docker-podman-and-nvidia-container-toolkit">Docker, Podman, and NVIDIA Container Toolkit</a></h3>
 <ul>
 <li><a href="https://docs.docker.com/">Docker's Documentation</a></li>
@@ -1941,18 +2046,21 @@ Job ID          Username Queue    Jobname    SessID NDS TSK Memory Time  S Time
 <ul>
 <li><a href="https://help.altair.com/2024.1.0/PBS%20Professional/PBSProgramGuide2024.1.pdf">PBS Professional Documentation</a></li>
 <li><a href="https://www.nas.nasa.gov/hecc/support/kb/Commonly-Used-PBS-Commands_174.html">NASA's PBS Quick Reference</a></li>
-<li><a href="https://www.jlab.org/hpc/PBS/qsub.html"><code>qsub</code> Documentation</a></li>
-<li><a href="https://www.jlab.org/hpc/PBS/qstat.html"><code>qstat</code> Documentation</a></li>
-<li><a href="https://www.jlab.org/hpc/PBS/qdel.html"><code>qdel</code> Documentation</a></li>
+<li><a href="https://www.jlab.org/hpc/PBS/qsub.html">JLab's PBS Documentation</a></li>
 </ul>
 <h3 id="metis"><a class="header" href="#metis">Metis</a></h3>
 <ul>
 <li><a href="https://www.niu.edu/crcd/current-users/getting-started/index.shtml">NIU's Official Metis Documentation</a></li>
 </ul>
+<h3 id="openssh-and-vscode"><a class="header" href="#openssh-and-vscode">OpenSSH and VSCode</a></h3>
+<ul>
+<li><a href="https://www.openssh.com/manual.html">OpenSSH Manual</a></li>
+<li><a href="https://code.visualstudio.com/docs/remote/ssh">VSCode Remote Explorer Documentation</a></li>
+</ul>
 <h2 id="final-notes"><a class="header" href="#final-notes">Final Notes</a></h2>
 <p>I am an undergraduate student at NIU, and my GitHub is <a href="https://github.com/hiibolt">@hiibolt</a>. If you find errors or want additional clarification, feel free to open an issue on <a href="https://github.com/hiibolt/niu-metis-documentation">this book's repository</a>, or email me at <code>me@hiibolt.com</code>.</p>
-<p>You can find more of my computation writing on my <a href="https://blog.hiibolt.com">blog</a>, on which I have an article about my time with the iGait development team, which I greatly enjoyed!</p>
-<p>Thank you so much for taking time out of your day to read my work, and I wish you the best of luck in your academic endeavors.</p>
+<p>You can find more of my computation writing on my <a href="https://blog.hiibolt.com">blog</a>, on which I have an article about my time with the iGait development team, which I greatly enjoyed.</p>
+<p>Thank you so much for reading my work, I wish you the best of luck in your academic endeavors.</p>
 <p><em>Stay cozy, this is <a href="https://github.com/hiibolt">@hiibolt</a>, signing out :3</em></p>
 
                     </main>
@@ -1972,6 +2080,22 @@ Job ID          Username Queue    Jobname    SessID NDS TSK Memory Time  S Time
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

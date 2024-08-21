@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html" class="active"><strong aria-hidden="true">5.1.</strong> Bash</a></li><li class="chapter-item expanded "><a href="chapter_5_2.html"><strong aria-hidden="true">5.2.</strong> Modules</a></li><li class="chapter-item expanded "><a href="chapter_5_3.html"><strong aria-hidden="true">5.3.</strong> Podman and Docker</a></li><li class="chapter-item expanded "><a href="chapter_5_4.html"><strong aria-hidden="true">5.4.</strong> PBS Professional</a></li><li class="chapter-item expanded "><a href="chapter_5_5.html"><strong aria-hidden="true">5.5.</strong> Monitoring and Profiling</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Conclusion and Helpful Resources</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">1.1.</strong> Connecting to Metis</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">1.2.</strong> Remote Workspaces in VSCode</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html" class="active"><strong aria-hidden="true">5.1.</strong> Bash</a></li><li class="chapter-item expanded "><a href="chapter_5_2.html"><strong aria-hidden="true">5.2.</strong> Modules</a></li><li class="chapter-item expanded "><a href="chapter_5_3.html"><strong aria-hidden="true">5.3.</strong> Podman and Docker</a></li><li class="chapter-item expanded "><a href="chapter_5_4.html"><strong aria-hidden="true">5.4.</strong> Monitoring and Profiling</a></li><li class="chapter-item expanded "><a href="chapter_5_5.html"><strong aria-hidden="true">5.5.</strong> PBS Professional</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_5_1.html"><strong aria-hidden="true">5.5.1.</strong> PBS Files</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Conclusion and Helpful Resources</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,8 +173,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="51-bash-commands"><a class="header" href="#51-bash-commands">5.1. Bash Commands</a></h1>
-<p>This section is a summary of the <a href="https://www.gnu.org/software/bash/manual/bash.html">Bash Reference</a> to serve as a general introduction or refresher on some common <a href="https://www.gnu.org/software/bash/">Bash</a> commands to help newer Linux users, or those who have not used it in some time.</p>
+                        <h1 id="51-bash"><a class="header" href="#51-bash">5.1. Bash</a></h1>
+<p>This section is a summary of the most common <a href="https://www.gnu.org/software/bash/">Bash</a> commands to serve as a general introduction or refresher to help newer Linux users, or those who have not used it in some time.</p>
+<p>To learn even more about Bash, see the <a href="https://www.gnu.org/software/bash/manual/bash.html">GNU Bash Reference</a>!</p>
 <h2 id="common-commands"><a class="header" href="#common-commands">Common Commands</a></h2>
 <h3 id="-ls"><a class="header" href="#-ls"><code>$ ls</code></a></h3>
 <p>Lists the contents in the current directory.</p>
@@ -188,7 +189,7 @@ bin examples
 <p><code>-a</code></p>
 <p>Prints everything, including hidden files.</p>
 <p>Example:</p>
-<pre><code class="language-bash">[you@metis ~]$ ls -a
+<pre><code>[you@metis ~]$ ls -a
 .              .dbus           .kde
 ..             .dotnet         .kshrc   
 .bash_history  .emacs          .local           
@@ -201,6 +202,7 @@ bin            .nv             .Xauthority
 </code></pre>
 </li>
 </ul>
+<p><small><em><a href="https://www.man7.org/linux/man-pages/man1/ls.1.html">Command Manual</a></em></small></p>
 <h3 id="-cd-path"><a class="header" href="#-cd-path"><code>$ cd &lt;path&gt;</code></a></h3>
 <p>Changes the current directory to the specified path.</p>
 <p>There are a few types of paths in a Unix-based filesystem, mainly being:</p>
@@ -232,6 +234,7 @@ bin            .nv             .Xauthority
 <pre><code class="language-bash">[you@metis bin]$ cd ../examples
 [you@metis examples]$
 </code></pre>
+<p><small><em><a href="https://man7.org/linux/man-pages/man1/cd.1p.html">Command Manual</a></em></small></p>
 <h3 id="-touch-file_name--file_name"><a class="header" href="#-touch-file_name--file_name"><code>$ touch &lt;file_name | file_name&gt;</code></a></h3>
 <p>Creates a new file with empty contents.</p>
 <p>Example:</p>
@@ -239,6 +242,7 @@ bin            .nv             .Xauthority
 [you@metis ~]$ ls
 bin projects hello.txt
 </code></pre>
+<p><small><em><a href="https://man7.org/linux/man-pages/man1/touch.1.html">Command Manual</a></em></small></p>
 <h3 id="-nano-file_name--file_pathfile_name"><a class="header" href="#-nano-file_name--file_pathfile_name"><code>$ nano &lt;file_name | file_path/file_name&gt;</code></a></h3>
 <p>A simplistic terminal file editor, useful for quick edits.</p>
 <p>Shouldn't be used for large files; instead, you should use <code>emacs</code>, <code>vim</code>, or ideally, an editor on <em>your</em> machine with remote SSH capability. See <strong>Chapter 1.1</strong> for more information on setting up Visual Studio Code, a popular option.</p>
@@ -246,6 +250,32 @@ bin projects hello.txt
 <pre><code class="language-bash">[you@metis ~]$ touch hello.txt
 [you@metis ~]$ nano hello.txt
 </code></pre>
+<p><small><em><a href="https://www.nano-editor.org/dist/v2.1/nano.html">Command Manual</a></em></small></p>
+<h3 id="-mkdir-dir_name--dir_pathdir_name"><a class="header" href="#-mkdir-dir_name--dir_pathdir_name"><code>$ mkdir &lt;dir_name | dir_path/dir_name&gt;</code></a></h3>
+<p>Creates a new and empty directory.</p>
+<p>Example:</p>
+<pre><code>[you@metis.niu.edu ~]$ mkdir hello
+[you@metis.niu.edu ~]$ ls
+bin examples hello
+</code></pre>
+<p><small><em><a href="https://www.man7.org/linux/man-pages/man1/mkdir.1.html">Command Manual</a></em></small></p>
+<h3 id="-export-varstring--expression"><a class="header" href="#-export-varstring--expression"><code>$ export &lt;var&gt;=&lt;string | expression&gt;</code></a></h3>
+<p>Sets an environment variable. Unless somehow preserved, these will be cleared when you close the session!</p>
+<p>Example:</p>
+<pre><code>[you@metis.niu.edu ~]$ export FOO="bar"
+</code></pre>
+<p><small><em><a href="https://www.man7.org/linux/man-pages/man1/export.1p.html">Command Manual</a></em></small></p>
+<h3 id="-echo-string--expression"><a class="header" href="#-echo-string--expression"><code>$ echo &lt;string | expression&gt;</code></a></h3>
+<p>Outputs the specified string or expression to stdout (the terminal).</p>
+<p>You can output environment variables by prefacing a variable name with <code>$</code>.</p>
+<p>Example:</p>
+<pre><code>[you@metis.niu.edu ~]$ echo "Hello, Metis!"
+Hello, Metis!
+[you@metis.niu.edu ~]$ export FOO="Hello, Metis!"
+[you@metis.niu.edu ~]$ echo "$FOO"
+Hello, Metis!
+</code></pre>
+<p><small><em><a href="https://www.man7.org/linux/man-pages/man1/echo.1.html">Command Manual</a></em></small></p>
 <h2 id="help-commands"><a class="header" href="#help-commands">Help Commands</a></h2>
 <p>Should you feel confused on the usage of any command, you can print additional helpful information on many commands!</p>
 <p>The 5 common ways to print help on a command, in order of the density of information output:</p>
@@ -287,6 +317,22 @@ bin projects hello.txt
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

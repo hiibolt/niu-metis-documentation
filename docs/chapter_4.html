@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html" class="active"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html"><strong aria-hidden="true">5.1.</strong> Bash</a></li><li class="chapter-item expanded "><a href="chapter_5_2.html"><strong aria-hidden="true">5.2.</strong> Modules</a></li><li class="chapter-item expanded "><a href="chapter_5_3.html"><strong aria-hidden="true">5.3.</strong> Podman and Docker</a></li><li class="chapter-item expanded "><a href="chapter_5_4.html"><strong aria-hidden="true">5.4.</strong> PBS Professional</a></li><li class="chapter-item expanded "><a href="chapter_5_5.html"><strong aria-hidden="true">5.5.</strong> Monitoring and Profiling</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Conclusion and Helpful Resources</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">1.1.</strong> Connecting to Metis</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">1.2.</strong> Remote Workspaces in VSCode</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Intermediate Metis Usage with Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html" class="active"><strong aria-hidden="true">4.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> SSH Automation with Metis</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html"><strong aria-hidden="true">5.1.</strong> Bash</a></li><li class="chapter-item expanded "><a href="chapter_5_2.html"><strong aria-hidden="true">5.2.</strong> Modules</a></li><li class="chapter-item expanded "><a href="chapter_5_3.html"><strong aria-hidden="true">5.3.</strong> Podman and Docker</a></li><li class="chapter-item expanded "><a href="chapter_5_4.html"><strong aria-hidden="true">5.4.</strong> Monitoring and Profiling</a></li><li class="chapter-item expanded "><a href="chapter_5_5.html"><strong aria-hidden="true">5.5.</strong> PBS Professional</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_5_1.html"><strong aria-hidden="true">5.5.1.</strong> PBS Files</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Conclusion and Helpful Resources</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -174,7 +174,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="4-advanced-metis-usage-techniques"><a class="header" href="#4-advanced-metis-usage-techniques">4. Advanced Metis Usage Techniques</a></h1>
-<p>The first and only advanced technique this book will cover with examples is SSH automation.</p>
+<p>One of the most powerful tricks on Metis is SSH automation.</p>
 <p>This allows a Metis user to automate what would otherwise be:</p>
 <ul>
 <li><strong>1</strong> - Logging into Metis over SSH</li>
@@ -182,10 +182,36 @@
 <li><strong>3</strong> - Retrieving a job ID</li>
 </ul>
 <p>By doing this, we can intergrate Metis into the workflow of any existing web server!</p>
-<p>This technique also opens the door to other techniques, three of which I will briefly mention below. Because of the varied and complex nature of implementation, they will only be described conceptually.</p>
+<p>This technique also opens the door to other techniques, three of which will be briefly mentioned below. Because of the varied and complex nature of implementation, they will only be described conceptually.</p>
 <h3 id="providing-files-to-metis-remotely"><a class="header" href="#providing-files-to-metis-remotely">Providing Files to Metis Remotely</a></h3>
 <p>By adding file IDs, download links, or using another way to communicate a download location, you can use the arguments on a job submission request to provide Metis with a way to download files for processing.</p>
 <p>This can be accomplished by reading the provided arguments in your PBS script, and using <code>wget</code>, <code>git</code>, <code>curl</code>, Git LFS, or another download tool to then download the files onto Metis and into the PBS job's working directory.</p>
+<p><strong>Psuedocode Example</strong>:</p>
+<p><code>main.py</code>:</p>
+<pre><code class="language-python">...
+
+file_download_link = "https://s3.amazon.com/.../hello_world.txt";
+
+submit_metis_command([
+    "qsub",
+    "-v",
+    f"DOWNLOAD_LINK={file_download_link}"
+    "run.pbs"
+]);
+
+...
+</code></pre>
+<p><code>run.pbs</code>:</p>
+<pre><code class="language-bash">...
+
+# Downloads the target file
+wget -O hello_world.txt $DOWNLOAD_LINK
+
+# Outputs the content of the file
+cat hello_world.txt
+
+...
+</code></pre>
 <h3 id="web-server-completion-reporting"><a class="header" href="#web-server-completion-reporting">Web Server Completion Reporting</a></h3>
 <p>Since PBS jobs on Metis have the ability to connect to the internet, it's possible to then ping your webserver to let it know it's finished, instead of guessing.</p>
 <p>The process can look like:</p>
@@ -244,6 +270,22 @@
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

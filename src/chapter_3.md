@@ -1,6 +1,6 @@
 # 3. Intermediate Metis Usage with Metis
 
-In this chapter, we will dive deeper into advanced Docker techniques, expanding on the foundational knowledge covered in Chapters 2.1 and 2.2.
+In this chapter, we will dive deep into Docker and PBS techniques, expanding on the foundational knowledge covered in Chapters 2.1 and 2.2.
 
 We'll explore how to combine these techniques to create a robust workflow for your projects on Metis, including handling custom Docker images, leveraging GPU acceleration, and managing complex dependencies.
 

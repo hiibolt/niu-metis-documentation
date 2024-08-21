@@ -1,6 +1,8 @@
-# 5.1. Bash Commands
+# 5.1. Bash
 
-This section is a summary of the [Bash Reference](https://www.gnu.org/software/bash/manual/bash.html) to serve as a general introduction or refresher on some common [Bash](https://www.gnu.org/software/bash/) commands to help newer Linux users, or those who have not used it in some time.
+This section is a summary of the most common [Bash](https://www.gnu.org/software/bash/) commands to serve as a general introduction or refresher to help newer Linux users, or those who have not used it in some time.
+
+To learn even more about Bash, see the [GNU Bash Reference](https://www.gnu.org/software/bash/manual/bash.html)!
 
 ## Common Commands
 ### `$ ls`
@@ -19,7 +21,7 @@ Common Arguments:
     Prints everything, including hidden files.
 
     Example:
-    ```bash
+    ```
     [you@metis ~]$ ls -a
     .              .dbus           .kde
     ..             .dotnet         .kshrc   
@@ -31,6 +33,8 @@ Common Arguments:
     .cache         .python_history .xemacs
     .config        .jupyter        .zshrc
     ```
+
+<small>*[Command Manual](https://www.man7.org/linux/man-pages/man1/ls.1.html)*</small>
 
 
 ### `$ cd <path>`
@@ -75,6 +79,8 @@ Going up a directory, then into the examples directory:
 [you@metis examples]$
 ```
 
+<small>*[Command Manual](https://man7.org/linux/man-pages/man1/cd.1p.html)*</small>
+
 ### `$ touch <file_name | file_name>`
 
 Creates a new file with empty contents.
@@ -85,6 +91,8 @@ Example:
 [you@metis ~]$ ls
 bin projects hello.txt
 ```
+
+<small>*[Command Manual](https://man7.org/linux/man-pages/man1/touch.1.html)*</small>
 
 ### `$ nano <file_name | file_path/file_name>`
 
@@ -97,6 +105,49 @@ Example:
 [you@metis ~]$ touch hello.txt
 [you@metis ~]$ nano hello.txt
 ```
+
+<small>*[Command Manual](https://www.nano-editor.org/dist/v2.1/nano.html)*</small>
+
+### `$ mkdir <dir_name | dir_path/dir_name>`
+
+Creates a new and empty directory.
+
+Example:
+```
+[you@metis.niu.edu ~]$ mkdir hello
+[you@metis.niu.edu ~]$ ls
+bin examples hello
+```
+
+<small>*[Command Manual](https://www.man7.org/linux/man-pages/man1/mkdir.1.html)*</small>
+
+### `$ export <var>=<string | expression>`
+
+Sets an environment variable. Unless somehow preserved, these will be cleared when you close the session!
+
+Example:
+```
+[you@metis.niu.edu ~]$ export FOO="bar"
+```
+
+<small>*[Command Manual](https://www.man7.org/linux/man-pages/man1/export.1p.html)*</small>
+
+### `$ echo <string | expression>`
+
+Outputs the specified string or expression to stdout (the terminal).
+
+You can output environment variables by prefacing a variable name with `$`.
+
+Example:
+```
+[you@metis.niu.edu ~]$ echo "Hello, Metis!"
+Hello, Metis!
+[you@metis.niu.edu ~]$ export FOO="Hello, Metis!"
+[you@metis.niu.edu ~]$ echo "$FOO"
+Hello, Metis!
+```
+
+<small>*[Command Manual](https://www.man7.org/linux/man-pages/man1/echo.1.html)*</small>
 
 ## Help Commands
 

@@ -1,5 +1,5 @@
 # 4. Advanced Metis Usage Techniques
-The first and only advanced technique this book will cover with examples is SSH automation.
+One of the most powerful tricks on Metis is SSH automation.
 
 This allows a Metis user to automate what would otherwise be:
 * **1** - Logging into Metis over SSH
@@ -8,12 +8,43 @@ This allows a Metis user to automate what would otherwise be:
 
 By doing this, we can intergrate Metis into the workflow of any existing web server!
 
-This technique also opens the door to other techniques, three of which I will briefly mention below. Because of the varied and complex nature of implementation, they will only be described conceptually.
+This technique also opens the door to other techniques, three of which will be briefly mentioned below. Because of the varied and complex nature of implementation, they will only be described conceptually.
 
 ### Providing Files to Metis Remotely
 By adding file IDs, download links, or using another way to communicate a download location, you can use the arguments on a job submission request to provide Metis with a way to download files for processing.
 
 This can be accomplished by reading the provided arguments in your PBS script, and using `wget`, `git`, `curl`, Git LFS, or another download tool to then download the files onto Metis and into the PBS job's working directory.
+
+**Psuedocode Example**:
+
+`main.py`:
+```python
+...
+
+file_download_link = "https://s3.amazon.com/.../hello_world.txt";
+
+submit_metis_command([
+    "qsub",
+    "-v",
+    f"DOWNLOAD_LINK={file_download_link}"
+    "run.pbs"
+]);
+
+...
+```
+
+`run.pbs`:
+```bash
+...
+
+# Downloads the target file
+wget -O hello_world.txt $DOWNLOAD_LINK
+
+# Outputs the content of the file
+cat hello_world.txt
+
+...
+```
 
 ### Web Server Completion Reporting
 Since PBS jobs on Metis have the ability to connect to the internet, it's possible to then ping your webserver to let it know it's finished, instead of guessing.
