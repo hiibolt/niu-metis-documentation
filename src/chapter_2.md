@@ -3,7 +3,7 @@ This first chapter will provide two into-the-fire projects that will teach you t
 
 Reminder - you don't need to know Bash (Linux Commands), C++, or CUDA to follow along! It may help your understanding to know some basic Bash commands, so feel free to quickly glance over **Chapter 5.1 - Bash**.
 
-These chapters lay the foundational skills needed to use the advanced techniques in the following chapters, and it is highly recommended that you read them before proceeding!
+These next two chapters lay the foundational skills needed to use the advanced techniques in the following chapters, and it is highly recommended that you read them before proceeding!
 
 ## Overview of the Chapters
 ### Chapter 2.1: C++ on Metis

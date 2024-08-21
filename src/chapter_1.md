@@ -6,14 +6,14 @@ It aims to allow anyone from any discipline, regardless of Linux experience, to 
 On top of this, should a step confuse you, the final product of every project example in this book can also be found in this book's [repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects).
 
 ## Primary Purpose
-The goal of this book is to allow faculty at NIU to hit the ground running with their work. 
+The goal of this book is to allow faculty at NIU to hit the ground running with their research. 
 
 We want you to focus on completing your work - not getting the hardware to work.
 
 This book will teach you the skills to help focus on writing your application from the ground up.
 
 ### Explored Use Cases
-There are five use cases covered here, with increasing levels of control over Metis:
+There are six use cases covered here, with increasing levels of control over Metis:
 * **Chapter 2.1 - Running a C++ project**
     - No additional configuration
     - PBS only
@@ -34,9 +34,9 @@ There are five use cases covered here, with increasing levels of control over Me
 * **Chapter 4.1 - SSH Automation**
     - Demonstrates programmatic submission of PBS jobs via SSH for the purpose of fitting Metis into existing systems.
 
-## Where Do I Need to Read to?
+## Where Should I Read to?
 ### Cases Where Docker May Not Be Needed
-IF your application is either of the following, you shouldn't or can't use Docker.
+If your application is either of the following, you shouldn't use Docker.
 - Native C, Go, or Python applications *with pre-installed or no dependencies*
 - OpenMPI-based applications
 
@@ -52,4 +52,4 @@ If your application is any of the following, it's highly recommended to use Dock
 
 If you only need CPU-based computation, chapters **2-3.1** will teach you everything you need.
 
-If you need GPU passthrough or have a complicated project, it is recommended to read this book in its entirety!
+If you need GPU passthrough or have a very complicated project, it is recommended to read this book in its entirety!

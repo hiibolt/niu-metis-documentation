@@ -31,4 +31,4 @@ You can find more of my computation writing on my [blog](https://blog.hiibolt.co
 
 Thank you so much for reading my work, I wish you the best of luck in your academic endeavors.
 
-*Stay cozy, this is [@hiibolt](https://github.com/hiibolt), signing out :3*
+*Stay cozy, this is @hiibolt, signing out :3*
