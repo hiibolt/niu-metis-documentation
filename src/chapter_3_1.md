@@ -64,7 +64,11 @@ For your own projects, you can search the [Docker Hub](https://hub.docker.com/) 
 
 From there, you can use the `exec` command to install the languages or packages with that operating system's respective package manager. We will go over the usage of the `exec` command with examples shortly!
 
-We'll start by downloading and running a [Docker Image](https://docs.docker.com/guides/docker-concepts/the-basics/what-is-an-image/), which will be built on the Debian operating system version 12.6 "Bookworm", and include Python 3.11.9:
+We'll start by downloading and running a [Docker Image](https://docs.docker.com/guides/docker-concepts/the-basics/what-is-an-image/), which will be built on the Debian operating system version 12.6 "Bookworm", and include Python 3.11.9.
+
+***Note**: If you see something like `ERRO[0000] cannot find UID/GID for user z1994244: no subuid ranges found for user "z1994244" in /etc/subuid - check rootless mode in man pages.`, it's okay! This error sometimes occurs the first time you run a command, and if it does, simply wait a few seconds and run it again.*
+
+Downloading and starting our container:
 ```
 $ /bin/podman run             \
     -v ./.:/home            \

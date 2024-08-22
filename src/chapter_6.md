@@ -1,13 +1,15 @@
-# 6. Conclusion and Helpful Resources
+# 6. Conclusion, Citations, and Contact
 This concludes my documentation for the NIU Metis supercomputing systems.
 
-I hope this helps you achieve your goals on Metis, and streamlined your getting started on Metis. 
+I hope this helps you achieve your goals on Metis, and streamlined the process of getting started!
 
 ## Works Cited
 ### Docker, Podman, and NVIDIA Container Toolkit
 - [Docker's Documentation](https://docs.docker.com/)
 - [Podman's Documentation](https://docs.podman.io/)
 - [NVIDIA Container Toolkit Documentation](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/index.html)
+- [DigitalOcean's Docker Optimization Guide](https://www.digitalocean.com/community/tutorials/how-to-optimize-docker-images-for-production)
+- [G4G's Docker Hub Publishing Guide](https://www.geeksforgeeks.org/docker-publishing-images-to-docker-hub/)
 ### CUDA and OpenMPI
 - [NVIDIA's Amazing Introduction to CUDA](https://developer.nvidia.com/blog/even-easier-introduction-cuda/)
 - [NVIDIA CUDA Feature Availability](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#features-and-technical-specifications)
@@ -23,6 +25,9 @@ I hope this helps you achieve your goals on Metis, and streamlined your getting 
 ### OpenSSH and VSCode
 - [OpenSSH Manual](https://www.openssh.com/manual.html)
 - [VSCode Remote Explorer Documentation](https://code.visualstudio.com/docs/remote/ssh)
+### Modules and Modulefiles
+- [Official Modules Documentation](https://modules.readthedocs.io/en/v5.4.0/modulefile.html#description)
+- [RHEL Modules Documentation](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/installing_managing_and_removing_user-space_components/introduction-to-modules_using-appstream)
 
 ## Final Notes
 I am an undergraduate student at NIU, and my GitHub is [@hiibolt](https://github.com/hiibolt). If you find errors or want additional clarification, feel free to open an issue on [this book's repository](https://github.com/hiibolt/niu-metis-documentation), or email me at `me@hiibolt.com`.

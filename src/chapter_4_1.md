@@ -1,5 +1,5 @@
 # 4.1. SSH Automation with Metis
-*You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust)!*
+*You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust/ssh-automation)!*
 
 While Metis is an incredibly powerful tool, it does not provide native tooling to allow for automatic job submission.
 

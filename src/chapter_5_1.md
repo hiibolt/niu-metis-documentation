@@ -2,7 +2,7 @@
 
 This section is a summary of the most common [Bash](https://www.gnu.org/software/bash/) commands to serve as a general introduction or refresher to help newer Linux users, or those who have not used it in some time.
 
-To learn even more about Bash, see the [GNU Bash Reference](https://www.gnu.org/software/bash/manual/bash.html)!
+Interested in learning even more about Bash? The [GNU Bash Reference](https://www.gnu.org/software/bash/manual/bash.html) is an amazing resource!
 
 ## Common Commands
 ### `$ ls`
@@ -11,7 +11,7 @@ Lists the contents in the current directory.
 
 Example:
 ```
-$ ls
+[you@metis.niu.edu ~]$ ls
 bin examples 
 ```
 

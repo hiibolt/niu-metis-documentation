@@ -8,7 +8,7 @@ We will discuss some possible venues from where to learn Dockerfile syntax, buil
 ## Goals
 * Look at some examples of a `Dockerfile`
 * Get a rough idea for how to write your own `Dockerfile`
-* Get a rough idea on resources about publishing yor own Docker Images
+* Get a rough idea on resources about publishing your own custom Docker Images
 
 ## What Actually Is a Docker Image?
 In the past, we've only used images from the [Docker Hub](https://hub.docker.com). But how are those images created?
