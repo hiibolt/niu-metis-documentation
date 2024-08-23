@@ -1,7 +1,7 @@
 # 1. Introduction
 Welcome! This book serves as an all-in-one crash course in utilizing Metis.
 
-It aims to allow anyone from any discipline, regardless of Linux experience, to get started. As such, no knowledge of any language is required to follow any example, as the focus of the examples is instead to help you understand Metis.
+It aims to allow anyone from any discipline, regardless of Linux experience, to get started. As such, no knowledge of any language is required to follow any example, as the focus of the examples are instead to help you understand Metis.
 
 On top of this, should a step confuse you, the final product of every project example in this book can also be found in this book's [repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects).
 
@@ -24,7 +24,7 @@ There are six use cases covered here, with increasing levels of control over Met
     - Downloading a pre-built Docker Image with `python` version 3.11 installed
     - PBS with Docker via Podman
 * **Chapter 3.2 - Running packages not installed on Metis with GPU passthrough**
-    - Downloading a pre-built Docker Image
+    - Downloading a pre-built Docker Image with the requirements for CUDA
     - Passing through GPUs to Docker
     - PBS with Docker and NVIDIA Container Toolkit via Podman
 * **Chapter 3.3 - Running virtually any project using custom Docker Images**

@@ -175,7 +175,7 @@
                     <main>
                         <h1 id="1-introduction"><a class="header" href="#1-introduction">1. Introduction</a></h1>
 <p>Welcome! This book serves as an all-in-one crash course in utilizing Metis.</p>
-<p>It aims to allow anyone from any discipline, regardless of Linux experience, to get started. As such, no knowledge of any language is required to follow any example, as the focus of the examples is instead to help you understand Metis.</p>
+<p>It aims to allow anyone from any discipline, regardless of Linux experience, to get started. As such, no knowledge of any language is required to follow any example, as the focus of the examples are instead to help you understand Metis.</p>
 <p>On top of this, should a step confuse you, the final product of every project example in this book can also be found in this book's <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects">repository</a>.</p>
 <h2 id="primary-purpose"><a class="header" href="#primary-purpose">Primary Purpose</a></h2>
 <p>The goal of this book is to allow faculty at NIU to hit the ground running with their research.</p>
@@ -204,7 +204,7 @@
 </li>
 <li><strong>Chapter 3.2 - Running packages not installed on Metis with GPU passthrough</strong>
 <ul>
-<li>Downloading a pre-built Docker Image</li>
+<li>Downloading a pre-built Docker Image with the requirements for CUDA</li>
 <li>Passing through GPUs to Docker</li>
 <li>PBS with Docker and NVIDIA Container Toolkit via Podman</li>
 </ul>
@@ -265,22 +265,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
