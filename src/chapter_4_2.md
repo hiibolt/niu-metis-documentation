@@ -1,8 +1,8 @@
 # 4.2. Conceptual Techniques
 
-Each of these techniques requires SSH automation to work; but can allow you to completetly integrate Metis as a backend, while maintaining safety and security! 
+Each of these techniques requires SSH automation to work; but can allow you to completetly integrate Metis as a backend, all while maintaining safety and security! 
 
-However, each is only described conceptually as implementation varies depending on your use-case.
+However, each is only described conceptually as implementation varies depending on your use case.
 
 ## Providing Files to Metis Remotely
 By adding file IDs, download links, or using another way to communicate a download location, you can use the arguments on a job submission request to provide Metis with a way to download files for processing.

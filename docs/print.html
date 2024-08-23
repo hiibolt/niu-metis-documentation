@@ -1535,24 +1535,17 @@ CMD .venv/bin/python3 main.py
 <h2 id="overview-of-the-chapters-2"><a class="header" href="#overview-of-the-chapters-2">Overview of the Chapters</a></h2>
 <h3 id="chapter-41-ssh-automation-with-metis"><a class="header" href="#chapter-41-ssh-automation-with-metis">Chapter 4.1: SSH Automation with Metis</a></h3>
 <ul>
-<li><strong>Goals</strong>: Learn how to automate SSH commands with Metis..</li>
-<li><strong>Problem</strong>: Metis does not allow webservers, making automation difficult.</li>
+<li><strong>Goals</strong>: Learn how to automate commands over SSH with Metis.</li>
+<li><strong>Problem</strong>: Metis does not allow web servers, making automation difficult.</li>
 <li><strong>Solution</strong>: Use an SSH library to open a multiplexed connection for execution.</li>
 <li><strong>Outcome</strong>: You will be able to run any command on Metis programmatically.</li>
 </ul>
-<h3 id="chapter-42-using-gpu-acceleration-with-docker"><a class="header" href="#chapter-42-using-gpu-acceleration-with-docker">Chapter 4.2: Using GPU Acceleration with Docker</a></h3>
+<h3 id="chapter-42-conceptual-techniques"><a class="header" href="#chapter-42-conceptual-techniques">Chapter 4.2: Conceptual Techniques</a></h3>
 <ul>
-<li><strong>Goals</strong>: Learn how to enable GPU passthrough in Docker containers on Metis.</li>
-<li><strong>Problem</strong>: GPUs are not accessible in Docker by default, and additional steps are required to set up NVIDIA drivers and CUDA.</li>
-<li><strong>Solution</strong>: Configure Podman with specific flags and use NVIDIA's CUDA-enabled Docker images.</li>
-<li><strong>Outcome</strong>: You will be able to leverage GPU acceleration for your Dockerized applications, significantly boosting performance.</li>
-</ul>
-<h3 id="chapter-33-creating-your-own-docker-base-images-1"><a class="header" href="#chapter-33-creating-your-own-docker-base-images-1">Chapter 3.3: Creating Your Own Docker Base Images</a></h3>
-<ul>
-<li><strong>Goals</strong>: Gain the skills to create custom Docker images tailored to your project’s needs.</li>
-<li><strong>Problem</strong>: Pre-made Docker images may not always meet the specific requirements of your project.</li>
-<li><strong>Solution</strong>: Learn the basics of writing Dockerfiles, building custom images, and publishing them to public repositories.</li>
-<li><strong>Outcome</strong>: You will be able to create, customize, and share Docker images, enabling a flexible and reproducible environment for your work.</li>
+<li><strong>Goals</strong>: Learn how to further integrate Metis into your existing backend.</li>
+<li><strong>Problem</strong>: Metis does not allow web servers.</li>
+<li><strong>Solution</strong>: Use additional layers and API endpoints to proxy a backend.</li>
+<li><strong>Outcome</strong>: You will be able to completely integrate your solution with Metis.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="41-ssh-automation-with-metis"><a class="header" href="#41-ssh-automation-with-metis">4.1. SSH Automation with Metis</a></h1>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust/ssh-automation">in this book's repository</a>!</em></p>
@@ -1687,8 +1680,8 @@ bin  examples  hello_world.o18734  projects  rundir
 <p>You must purify your inputs, and ensure it is physically impossible for an attacker to exploit your backend in any way possible. To not do so would endanger the work of fellow NIU researchers, students and staff.</p>
 <p>However, as mentioned in the preface to this chapter, it's an incredibly effective method that can be further evolved into even more effecient and better integrated systems!</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="42-conceptual-techniques"><a class="header" href="#42-conceptual-techniques">4.2. Conceptual Techniques</a></h1>
-<p>Each of these techniques requires SSH automation to work; but can allow you to completetly integrate Metis as a backend, while maintaining safety and security!</p>
-<p>However, each is only described conceptually as implementation varies depending on your use-case.</p>
+<p>Each of these techniques requires SSH automation to work; but can allow you to completetly integrate Metis as a backend, all while maintaining safety and security!</p>
+<p>However, each is only described conceptually as implementation varies depending on your use case.</p>
 <h2 id="providing-files-to-metis-remotely"><a class="header" href="#providing-files-to-metis-remotely">Providing Files to Metis Remotely</a></h2>
 <p>By adding file IDs, download links, or using another way to communicate a download location, you can use the arguments on a job submission request to provide Metis with a way to download files for processing.</p>
 <p>This can be accomplished by reading the provided arguments in your PBS script, and using <code>wget</code>, <code>git</code>, <code>curl</code>, Git LFS, or another download tool to then download the files onto Metis and into the PBS job's working directory.</p>
@@ -1748,9 +1741,16 @@ cat hello_world.txt
 <p>This is more effective for jobs that may not have a 'final output', but rather, work in chunks. Two common examples are realtime audio encoding/decoding, or token-by-token output from a machine learning model.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="5-command-quick-reference"><a class="header" href="#5-command-quick-reference">5. Command Quick Reference</a></h1>
 <p>This chapter contains a quick reference to the most useful commands and their respective options for every example or topic mentioned thus far.</p>
-<p>Each section also links the documentation, manual, or other source it summarizes. Even if an option or command isn't included, you can still find more information easily in one convenient spot.</p>
+<p>Each section also links the documentation, manual, or other source it summarizes. Even if an option or command isn't included, you can still find more information easily - and in one convenient location.</p>
 <p>For example, let's say you forgot which flag you need to name a container with Podman. You would otherwise have to flip through a chapter which uses it in practice or read the Podman documentation - both of which are time consuming.</p>
 <p>Instead, you can simply find the most useful commands and options here!</p>
+<h2 id="covered-topics"><a class="header" href="#covered-topics">Covered Topics</a></h2>
+<ul>
+<li><strong>Chapter 5.1</strong> - Most Common Bash Commands</li>
+<li><strong>Chapter 5.2</strong> - Most Common Podman and Docker Commands</li>
+<li><strong>Chapter 5.3 and 5.3.1</strong> - Common Module Usage Commands and Creating Custom Modulefiles</li>
+<li><strong>Chapter 5.4 and 5.4.1</strong> - Common PBS Usage Commands and Writing PBS Files</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="51-bash"><a class="header" href="#51-bash">5.1. Bash</a></h1>
 <p>This section is a summary of the most common <a href="https://www.gnu.org/software/bash/">Bash</a> commands to serve as a general introduction or refresher to help newer Linux users, or those who have not used it in some time.</p>
 <p>Interested in learning even more about Bash? The <a href="https://www.gnu.org/software/bash/manual/bash.html">GNU Bash Reference</a> is an amazing resource!</p>
@@ -2478,6 +2478,22 @@ The ID of this job: '16386.cm'
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
