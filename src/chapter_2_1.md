@@ -81,7 +81,7 @@ $ g++ -o hello_world main.cpp
 $ ./hello_world
 ```
 
-The calculation should take 22 seconds, after which we should see our results!
+The calculation should take [23 seconds](https://github.com/hiibolt/niu-metis-documentation/blob/main/projects/cpp/cpp_on_metis/time_no_pbs), after which we should see our results! However, it will run faster on the compute nodes, and you can allocate more resources. It will run *exponentially faster* when employing CUDA or OpenMPI, which we will touch on in the next chapter!
 
 ## Getting Started with PBS
 We are not currently making full use of Metis with this current setup. What we just ran our code on is called the **login node**, which has nowhere near the amount of computational power that is available to the **compute nodes**, which are where computationally intensive or time-consuming programs should be run.
@@ -99,7 +99,7 @@ In order to make use of this program, we must describe to the system what we nee
 
 ...and more.
 
-To do so, we use a PBS script file. For those familiar with systems scripting, this is similar to a `.sh` file on Linux, or a `.bat` file on Windows.
+To do so, we use a PBS script file - a bash script with embedded PBS directives.
 
 Let's get started by creating a `run.pbs` file with the following contents:
 ```bash
@@ -120,8 +120,8 @@ Let's get started by creating a `run.pbs` file with the following contents:
 #                       special jobs can request up to 1024 GB of RAM (4 nodes)
 #
 # Below, we request two chunks;
-#  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
-#PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+#  each chunk needs 8 CPUs, 1 MPI processes, 1 GPU card, and 2 GB RAM
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
 #PBS -l walltime=00:15:00
 
 # When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
@@ -129,7 +129,7 @@ Let's get started by creating a `run.pbs` file with the following contents:
 #--#PBS -M account@niu.edu
 
 # Navigate to our working directory
-PROJECT_DIRECTORY=/home/<your_account_username>/projects/cpp/cpp_on_metis
+PROJECT_DIRECTORY=/lstr/sahara/<your_project>/<you>/cpp/cpp_on_metis
 echo "The job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -175,8 +175,8 @@ Before we move on, let's dissect what this does.
 15. #                       special jobs can request up to 1024 GB of RAM (4 nodes)
 16. #
 17. # Below, we request two chunks;
-18. #  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
-19. #PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+18. #  each chunk needs 8 CPUs, 1 MPI processes, 1 GPU card, and 2 GB RAM
+19. #PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
 20. #PBS -l walltime=00:15:00
 21. 
 22. # When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
@@ -192,15 +192,50 @@ The following lines are important to understand:
 - Line 1 is a [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) which specifies that the file's commands are to be interpreted by [bash](https://www.gnu.org/software/bash/manual/bash.html).
 - Line 3 specifies the name of our file.
 - Line 19 specifies the hardware requirements for our job
+
+    To learn more about specifying hardware requirements, see [Chapter 5.4.1](https://hiibolt.github.io/niu-metis-documentation/chapter_5_4_1.html#pbs-directives).
 - Line 20 specifies the estimated runtime of our job
 - Lines 23 and 24 specify options for recieveing emails regarding various events
+
+    Adding *a* sends mail on abort.
+    Adding *b* sends mail on start.
+    Adding *e* sends mail on end.
+
+    To learn more about recieving emails, see [Chapter 5.4.1](https://hiibolt.github.io/niu-metis-documentation/chapter_5_4_1.html#pbs-directives).
+
+
+
+
+
+* `#PBS -j <n | oe>` or `qsub -j <n | oe>`
+
+    Specifies whether the standard error stream should be merged with the standard output stream.
+
+    Specifying `oe` means that both `stderr` and `stdout` will be in the same output file.
+
+    Specifying `n`, or not specifying at all, means they will be in different files.
+
+    ```bash
+    $ qsub -j n run.pbs
+    20000.cm
+    $ ls
+    hello_world.o20000
+    hello_world.e20000
+    ```
+* `#PBS -m <n | a*b*e*>` or `qsub -m <n | a*b*e*>`
+
+    Specifies when mail about your job should be sent, with the following key:
+    * To send mail when it aborts, add `a`
+    * To send main when it begins, add `b`
+    * To send main when it ends, add 'e'
+    * To not send mail, specify `n` or do not use this directive.
 
 For this job, none of this needs to be modified. The next section, however, will need to be:
 ```bash
 ...
 
 26. # Navigate to our working directory
-27. PROJECT_DIRECTORY=/home/<your_account_username>/projects/cpp/cpp_on_metis
+27. PROJECT_DIRECTORY=/lstr/sahara/<your_project>/<you>/cpp/cpp_on_metis
 28. echo "The job's working directory is $PROJECT_DIRECTORY"
 29. cd $PROJECT_DIRECTORY
 

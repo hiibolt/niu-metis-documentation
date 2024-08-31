@@ -15,8 +15,8 @@
 #                       special jobs can request up to 1024 GB of RAM (4 nodes)
 #
 # Below, we request two chunks;
-#  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
-#PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+#  each chunk needs 8 CPUs, 1 MPI processes, 1 GPU card, and 2 GB RAM
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
 #PBS -l walltime=00:15:00
 
 # When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
@@ -24,7 +24,7 @@
 #--#PBS -M account@niu.edu
 
 # Navigate to our working directory
-PROJECT_DIRECTORY=/home/<your_account_username>/projects/cpp/cpp_on_metis
+PROJECT_DIRECTORY=/lstr/sahara/<your_project>/<you>/cpp/cpp_on_metis
 echo "The job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 

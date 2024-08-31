@@ -1,0 +1,15 @@
+Script started on 2024-08-31 12:00:31-05:00
+]0;z1994244@metis:/lstr/sahara/zwlab/jw/cuda/cuda_on_metis[z1994244@metis cuda_on_metis]$ time ./hello_world
+Hello, Metis!
+
+- Numbers divisible by two: 50000000
+- Numbers divisible by three: 33333333
+- Numbers divisible by five: 20000000
+
+real	0m0.977s
+user	0m0.026s
+sys	0m0.935s
+]0;z1994244@metis:/lstr/sahara/zwlab/jw/cuda/cuda_on_metis[z1994244@metis cuda_on_metis]$ exit
+exit
+
+Script done on 2024-08-31 12:00:38-05:00

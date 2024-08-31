@@ -20,10 +20,10 @@ There are many fantastic resources on how to write it, some of which are linked 
 ## CUDA Boilerplate
 If you did not in the previous section, start by creating a folder for our projects, then a folder for CUDA projects, and finally a folder for this project:
 ```bash
-$ mkdir ~/projects
-$ mkdir ~/projects/cuda
-$ mkdir ~/projects/cuda/cuda_on_metis
-$ cd ~/projects/cuda/cuda_on_metis
+$ mkdir /lstr/sahara/<your_project>/<you>
+$ mkdir /lstr/sahara/<your_project>/<you>/cuda
+$ mkdir /lstr/sahara/<your_project>/<you>/cuda/cuda_on_metis
+$ cd /lstr/sahara/<your_project>/<you>/cuda/cuda_on_metis
 ```
 
 Let's start by creating a `main.cu` file with the following contents:
@@ -138,10 +138,10 @@ In our program, we use the maximum number of dimensions, effectively creating a 
 
 If you would like to learn more about CUDA, the resources in the introductory section of this paragraph are greatly recommended.
 
-## Installing Modules on the Login Node
-However, unlike our previous project which used `g++`, the CUDA compiler, `nvcc`, is not pre-installed. 
+## Loading Modules on the Login Node
+However, unlike our previous project which used `g++`, the CUDA compiler, `nvcc`, is not pre-loaded. 
 
-To install it, we will use the `module` commands mentioned briefly in the previous section.
+To load it, we will use the `module` commands mentioned briefly in the previous section. The `module` system loads and unloads an evironment for specific application packages not part of the operating system.
 
 First, let's list the modules related to `cuda` with the following command:
 ```bash
@@ -152,7 +152,7 @@ cuda/cuda-7.5  cuda/cuda-8.0  cuda/cuda-11.5  cuda/cuda-11.8  cuda/cuda-11.8-roc
 
 We see a variety of versions. For the sake of this guide, we will be using `cuda/cuda-11.8`. 
 
-Next, let's clean up our modules, and install CUDA:
+Next, let's clean up our modules, and load CUDA:
 ```bash
 $ module purge
 $ module load cuda/cuda-11.8
@@ -172,7 +172,7 @@ Hello, Metis!
 - Numbers divisible by five: 20000000
 ```
 
-You will notice a nearly instantaneous completion time, versus the 20-30 seconds of the previous C version. 
+You will notice a nearly instantaneous completion time of [0.5 seconds]().
 
 Such is the power of graphical programming!
 

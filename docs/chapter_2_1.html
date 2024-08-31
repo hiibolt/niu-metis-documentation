@@ -246,7 +246,7 @@ int main () {
 <pre><code class="language-bash">$ g++ -o hello_world main.cpp
 $ ./hello_world
 </code></pre>
-<p>The calculation should take 22 seconds, after which we should see our results!</p>
+<p>The calculation should take <a href="https://github.com/hiibolt/niu-metis-documentation/blob/main/projects/cpp/cpp_on_metis/time_no_pbs">23 seconds</a>, after which we should see our results! However, it will run faster on the compute nodes, and you can allocate more resources. It will run <em>exponentially faster</em> when employing CUDA or OpenMPI, which we will touch on in the next chapter!</p>
 <h2 id="getting-started-with-pbs"><a class="header" href="#getting-started-with-pbs">Getting Started with PBS</a></h2>
 <p>We are not currently making full use of Metis with this current setup. What we just ran our code on is called the <strong>login node</strong>, which has nowhere near the amount of computational power that is available to the <strong>compute nodes</strong>, which are where computationally intensive or time-consuming programs should be run.</p>
 <p>But how do we do so?</p>
@@ -260,7 +260,7 @@ $ ./hello_world
 <li>Estimated runtime</li>
 </ul>
 <p>...and more.</p>
-<p>To do so, we use a PBS script file. For those familiar with systems scripting, this is similar to a <code>.sh</code> file on Linux, or a <code>.bat</code> file on Windows.</p>
+<p>To do so, we use a PBS script file - a bash script with embedded PBS directives.</p>
 <p>Let's get started by creating a <code>run.pbs</code> file with the following contents:</p>
 <pre><code class="language-bash">#!/bin/bash
 
@@ -279,8 +279,8 @@ $ ./hello_world
 #                       special jobs can request up to 1024 GB of RAM (4 nodes)
 #
 # Below, we request two chunks;
-#  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
-#PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+#  each chunk needs 8 CPUs, 1 MPI processes, 1 GPU card, and 2 GB RAM
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
 #PBS -l walltime=00:15:00
 
 # When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
@@ -288,7 +288,7 @@ $ ./hello_world
 #--#PBS -M account@niu.edu
 
 # Navigate to our working directory
-PROJECT_DIRECTORY=/home/&lt;your_account_username&gt;/projects/cpp/cpp_on_metis
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
 echo "The job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -332,8 +332,8 @@ rm ./hello_world
 15. #                       special jobs can request up to 1024 GB of RAM (4 nodes)
 16. #
 17. # Below, we request two chunks;
-18. #  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
-19. #PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+18. #  each chunk needs 8 CPUs, 1 MPI processes, 1 GPU card, and 2 GB RAM
+19. #PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
 20. #PBS -l walltime=00:15:00
 21. 
 22. # When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
@@ -345,17 +345,56 @@ rm ./hello_world
 <p><em>Lines starting with <code>#PBS</code> are not comments, rather, they are PBS-specific commands!</em></p>
 <p>The following lines are important to understand:</p>
 <ul>
-<li>Line 1 is a <a href="https://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a> which specifies that the file's commands are to be interpreted by <a href="https://www.gnu.org/software/bash/manual/bash.html">bash</a>.</li>
-<li>Line 3 specifies the name of our file.</li>
-<li>Line 19 specifies the hardware requirements for our job</li>
-<li>Line 20 specifies the estimated runtime of our job</li>
-<li>Lines 23 and 24 specify options for recieveing emails regarding various events</li>
+<li>
+<p>Line 1 is a <a href="https://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a> which specifies that the file's commands are to be interpreted by <a href="https://www.gnu.org/software/bash/manual/bash.html">bash</a>.</p>
+</li>
+<li>
+<p>Line 3 specifies the name of our file.</p>
+</li>
+<li>
+<p>Line 19 specifies the hardware requirements for our job</p>
+<p>To learn more about specifying hardware requirements, see <a href="https://hiibolt.github.io/niu-metis-documentation/chapter_5_4_1.html#pbs-directives">Chapter 5.4.1</a>.</p>
+</li>
+<li>
+<p>Line 20 specifies the estimated runtime of our job</p>
+</li>
+<li>
+<p>Lines 23 and 24 specify options for recieveing emails regarding various events</p>
+<p>Adding <em>a</em> sends mail on abort.
+Adding <em>b</em> sends mail on start.
+Adding <em>e</em> sends mail on end.</p>
+<p>To learn more about recieving emails, see <a href="https://hiibolt.github.io/niu-metis-documentation/chapter_5_4_1.html#pbs-directives">Chapter 5.4.1</a>.</p>
+</li>
+</ul>
+<ul>
+<li>
+<p><code>#PBS -j &lt;n | oe&gt;</code> or <code>qsub -j &lt;n | oe&gt;</code></p>
+<p>Specifies whether the standard error stream should be merged with the standard output stream.</p>
+<p>Specifying <code>oe</code> means that both <code>stderr</code> and <code>stdout</code> will be in the same output file.</p>
+<p>Specifying <code>n</code>, or not specifying at all, means they will be in different files.</p>
+<pre><code class="language-bash">$ qsub -j n run.pbs
+20000.cm
+$ ls
+hello_world.o20000
+hello_world.e20000
+</code></pre>
+</li>
+<li>
+<p><code>#PBS -m &lt;n | a*b*e*&gt;</code> or <code>qsub -m &lt;n | a*b*e*&gt;</code></p>
+<p>Specifies when mail about your job should be sent, with the following key:</p>
+<ul>
+<li>To send mail when it aborts, add <code>a</code></li>
+<li>To send main when it begins, add <code>b</code></li>
+<li>To send main when it ends, add 'e'</li>
+<li>To not send mail, specify <code>n</code> or do not use this directive.</li>
+</ul>
+</li>
 </ul>
 <p>For this job, none of this needs to be modified. The next section, however, will need to be:</p>
 <pre><code class="language-bash">...
 
 26. # Navigate to our working directory
-27. PROJECT_DIRECTORY=/home/&lt;your_account_username&gt;/projects/cpp/cpp_on_metis
+27. PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
 28. echo "The job's working directory is $PROJECT_DIRECTORY"
 29. cd $PROJECT_DIRECTORY
 

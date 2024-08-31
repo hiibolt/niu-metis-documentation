@@ -65,24 +65,27 @@ To comment out a PBS directive, replace `#PBS` with `#--PBS`.
 
     Specifies the resources that the job needs. You can find more about the types to specify in the [PBS User's Guide](https://www.utrgv.edu/hpcc/_files/documents/pbspro-user-guide.pdf), but the template that CRCD provides is very ideal.
     
+    **Note - on Metis**:
+    * **Nchunks<=32**, for GPU chunks
+    * **Nchunks<=4096/Ncpus** for CPU-only chunks
+
+        (run 'shownodes' command to find the number of free cpus)
+    * **Ncpus<=128**, the total number of CPUs per node is 128
+    * **NPmpi<=Ncpus**, the total number of CPUs allocated for MPI tasks,
+
+        request NPmpi=Ncpus for non-OPENMP jobs
+    * **Ngpus==1**,  the total number of GPUs per node is 1
+    * **X<=256**,  28 of 32 Metis modes have 256 GB of RAM
+
+        special jobs can request up to 1024 GB of RAM (4 nodes)
+
+    Below, we request two chunks; each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 251 GB RAM, and we expect the total job runtime (walltime) to be 15 minutes.
+
+    If you are requesting a GPU, you are reserving *an entire* node. Accordingly, you should use the entire capacity of RAM available to said node (251GB). Some nodes also have 1259GB available by special request.
 
     Example (`run.pbs` file):
     ```pbs
-    #Note - on Metis
-    #              Nchunks<=32, for GPU chunks
-    #              Nchunks<=4096/Ncpus for CPU-only chunks
-    #              (run 'shownodes' command to find the number of free cpus)
-    #              Ncpus<=128, the total number of CPUs per node is 128
-    #              NPmpi<=Ncpus, the total number of CPUs allocated for MPI tasks,
-    #                              request NPmpi=Ncpus for non-OPENMP jobs
-    #              Ngpus==1,  the total number of GPUs per node is 1
-    #              X<=256,  28 of 32 Metis modes have 256 GB of RAM
-    #                       special jobs can request up to 1024 GB of RAM (4 nodes)
-    #
-    # Below, we request two chunks;
-    #  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM,
-    #  and we expect the total job runtime (walltime) to be 15 minutes.
-    #PBS -l select=1:ncpus=8:mpiprocs=8:ngpus=16:mem=2gb
+    #PBS -l select=1:ncpus=8:mpiprocs=8:ngpus=1:mem=2gb
     #PBS -l walltime=00:15:00
     ```
 
@@ -106,8 +109,8 @@ To comment out a PBS directive, replace `#PBS` with `#--PBS`.
 
     Specifies when mail about your job should be sent, with the following key:
     * To send mail when it aborts, add `a`
-    * To send main when it begins, add `b`
-    * To send main when it ends, add 'e'
+    * To send mail when it begins, add `b`
+    * To send mail when it ends, add `e`
     * To not send mail, specify `n` or do not use this directive.
 * `#PBS -M <email>` or `qsub -M <email>`
 

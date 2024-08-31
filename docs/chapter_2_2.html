@@ -192,10 +192,10 @@
 </ul>
 <h2 id="cuda-boilerplate"><a class="header" href="#cuda-boilerplate">CUDA Boilerplate</a></h2>
 <p>If you did not in the previous section, start by creating a folder for our projects, then a folder for CUDA projects, and finally a folder for this project:</p>
-<pre><code class="language-bash">$ mkdir ~/projects
-$ mkdir ~/projects/cuda
-$ mkdir ~/projects/cuda/cuda_on_metis
-$ cd ~/projects/cuda/cuda_on_metis
+<pre><code class="language-bash">$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis
+$ cd /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis
 </code></pre>
 <p>Let's start by creating a <code>main.cu</code> file with the following contents:</p>
 <pre><code class="language-c++">#include &lt;iostream&gt;
@@ -305,16 +305,16 @@ int main() {
 </ul>
 <p>In our program, we use the maximum number of dimensions, effectively creating a 6D matrix. Because each each block is aware of its coordinates on the grid it lies on, and each thread the coordinates of the block it sits in, we can use sneaky math to calculate which number the old "counter" variable each of the <em>ten billion</em> threads translates to.</p>
 <p>If you would like to learn more about CUDA, the resources in the introductory section of this paragraph are greatly recommended.</p>
-<h2 id="installing-modules-on-the-login-node"><a class="header" href="#installing-modules-on-the-login-node">Installing Modules on the Login Node</a></h2>
-<p>However, unlike our previous project which used <code>g++</code>, the CUDA compiler, <code>nvcc</code>, is not pre-installed.</p>
-<p>To install it, we will use the <code>module</code> commands mentioned briefly in the previous section.</p>
+<h2 id="loading-modules-on-the-login-node"><a class="header" href="#loading-modules-on-the-login-node">Loading Modules on the Login Node</a></h2>
+<p>However, unlike our previous project which used <code>g++</code>, the CUDA compiler, <code>nvcc</code>, is not pre-loaded.</p>
+<p>To load it, we will use the <code>module</code> commands mentioned briefly in the previous section. The <code>module</code> system loads and unloads an evironment for specific application packages not part of the operating system.</p>
 <p>First, let's list the modules related to <code>cuda</code> with the following command:</p>
 <pre><code class="language-bash">$ module av cuda
 -------------------------------------------------- /etc/modulefiles --------------------------------------------------
 cuda/cuda-7.5  cuda/cuda-8.0  cuda/cuda-11.5  cuda/cuda-11.8  cuda/cuda-11.8-rocky8  cuda/cuda-12.2
 </code></pre>
 <p>We see a variety of versions. For the sake of this guide, we will be using <code>cuda/cuda-11.8</code>.</p>
-<p>Next, let's clean up our modules, and install CUDA:</p>
+<p>Next, let's clean up our modules, and load CUDA:</p>
 <pre><code class="language-bash">$ module purge
 $ module load cuda/cuda-11.8
 $ module list
@@ -330,7 +330,7 @@ Hello, Metis!
 - Numbers divisible by three: 33333333
 - Numbers divisible by five: 20000000
 </code></pre>
-<p>You will notice a nearly instantaneous completion time, versus the 20-30 seconds of the previous C version.</p>
+<p>You will notice a nearly instantaneous completion time of <a href="">0.5 seconds</a>.</p>
 <p>Such is the power of graphical programming!</p>
 <h2 id="launching-a-cuda-program-with-pbs"><a class="header" href="#launching-a-cuda-program-with-pbs">Launching a CUDA Program with PBS</a></h2>
 <p>For the most part, the <code>run.pbs</code> file will look similar to the version from the previous chapter.</p>

@@ -224,22 +224,34 @@ hello_world.o20000
 <li>
 <p><code>#PBS -l &lt;resource_1&gt;:...:&lt;resource_n&gt;</code> or <code>qsub -l &lt;resource_1&gt;,...,&lt;resource_n&gt;</code></p>
 <p>Specifies the resources that the job needs. You can find more about the types to specify in the <a href="https://www.utrgv.edu/hpcc/_files/documents/pbspro-user-guide.pdf">PBS User's Guide</a>, but the template that CRCD provides is very ideal.</p>
+<p><strong>Note - on Metis</strong>:</p>
+<ul>
+<li>
+<p><strong>Nchunks&lt;=32</strong>, for GPU chunks</p>
+</li>
+<li>
+<p><strong>Nchunks&lt;=4096/Ncpus</strong> for CPU-only chunks</p>
+<p>(run 'shownodes' command to find the number of free cpus)</p>
+</li>
+<li>
+<p><strong>Ncpus&lt;=128</strong>, the total number of CPUs per node is 128</p>
+</li>
+<li>
+<p><strong>NPmpi&lt;=Ncpus</strong>, the total number of CPUs allocated for MPI tasks,</p>
+<p>request NPmpi=Ncpus for non-OPENMP jobs</p>
+</li>
+<li>
+<p><strong>Ngpus==1</strong>,  the total number of GPUs per node is 1</p>
+</li>
+<li>
+<p><strong>X&lt;=256</strong>,  28 of 32 Metis modes have 256 GB of RAM</p>
+<p>special jobs can request up to 1024 GB of RAM (4 nodes)</p>
+</li>
+</ul>
+<p>Below, we request two chunks; each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 251 GB RAM, and we expect the total job runtime (walltime) to be 15 minutes.</p>
+<p>If you are requesting a GPU, you are reserving <em>an entire</em> node. Accordingly, you should use the entire capacity of RAM available to said node (251GB). Some nodes also have 1259GB available by special request.</p>
 <p>Example (<code>run.pbs</code> file):</p>
-<pre><code class="language-pbs">#Note - on Metis
-#              Nchunks&lt;=32, for GPU chunks
-#              Nchunks&lt;=4096/Ncpus for CPU-only chunks
-#              (run 'shownodes' command to find the number of free cpus)
-#              Ncpus&lt;=128, the total number of CPUs per node is 128
-#              NPmpi&lt;=Ncpus, the total number of CPUs allocated for MPI tasks,
-#                              request NPmpi=Ncpus for non-OPENMP jobs
-#              Ngpus==1,  the total number of GPUs per node is 1
-#              X&lt;=256,  28 of 32 Metis modes have 256 GB of RAM
-#                       special jobs can request up to 1024 GB of RAM (4 nodes)
-#
-# Below, we request two chunks;
-#  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM,
-#  and we expect the total job runtime (walltime) to be 15 minutes.
-#PBS -l select=1:ncpus=8:mpiprocs=8:ngpus=16:mem=2gb
+<pre><code class="language-pbs">#PBS -l select=1:ncpus=8:mpiprocs=8:ngpus=1:mem=2gb
 #PBS -l walltime=00:15:00
 </code></pre>
 <p>To learn how to optimize these values, see the <a href="https://www.niu.edu/crcd/current-users/getting-started/queue-commands-job-management.shtml#jobcontrol">official Metis protocol</a>.</p>
@@ -261,8 +273,8 @@ hello_world.e20000
 <p>Specifies when mail about your job should be sent, with the following key:</p>
 <ul>
 <li>To send mail when it aborts, add <code>a</code></li>
-<li>To send main when it begins, add <code>b</code></li>
-<li>To send main when it ends, add 'e'</li>
+<li>To send mail when it begins, add <code>b</code></li>
+<li>To send mail when it ends, add <code>e</code></li>
 <li>To not send mail, specify <code>n</code> or do not use this directive.</li>
 </ul>
 </li>

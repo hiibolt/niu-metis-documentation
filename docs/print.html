@@ -412,7 +412,7 @@ int main () {
 <pre><code class="language-bash">$ g++ -o hello_world main.cpp
 $ ./hello_world
 </code></pre>
-<p>The calculation should take 22 seconds, after which we should see our results!</p>
+<p>The calculation should take <a href="https://github.com/hiibolt/niu-metis-documentation/blob/main/projects/cpp/cpp_on_metis/time_no_pbs">23 seconds</a>, after which we should see our results! However, it will run faster on the compute nodes, and you can allocate more resources. It will run <em>exponentially faster</em> when employing CUDA or OpenMPI, which we will touch on in the next chapter!</p>
 <h2 id="getting-started-with-pbs"><a class="header" href="#getting-started-with-pbs">Getting Started with PBS</a></h2>
 <p>We are not currently making full use of Metis with this current setup. What we just ran our code on is called the <strong>login node</strong>, which has nowhere near the amount of computational power that is available to the <strong>compute nodes</strong>, which are where computationally intensive or time-consuming programs should be run.</p>
 <p>But how do we do so?</p>
@@ -426,7 +426,7 @@ $ ./hello_world
 <li>Estimated runtime</li>
 </ul>
 <p>...and more.</p>
-<p>To do so, we use a PBS script file. For those familiar with systems scripting, this is similar to a <code>.sh</code> file on Linux, or a <code>.bat</code> file on Windows.</p>
+<p>To do so, we use a PBS script file - a bash script with embedded PBS directives.</p>
 <p>Let's get started by creating a <code>run.pbs</code> file with the following contents:</p>
 <pre><code class="language-bash">#!/bin/bash
 
@@ -445,8 +445,8 @@ $ ./hello_world
 #                       special jobs can request up to 1024 GB of RAM (4 nodes)
 #
 # Below, we request two chunks;
-#  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
-#PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+#  each chunk needs 8 CPUs, 1 MPI processes, 1 GPU card, and 2 GB RAM
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
 #PBS -l walltime=00:15:00
 
 # When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
@@ -454,7 +454,7 @@ $ ./hello_world
 #--#PBS -M account@niu.edu
 
 # Navigate to our working directory
-PROJECT_DIRECTORY=/home/&lt;your_account_username&gt;/projects/cpp/cpp_on_metis
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
 echo "The job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -498,8 +498,8 @@ rm ./hello_world
 15. #                       special jobs can request up to 1024 GB of RAM (4 nodes)
 16. #
 17. # Below, we request two chunks;
-18. #  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
-19. #PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+18. #  each chunk needs 8 CPUs, 1 MPI processes, 1 GPU card, and 2 GB RAM
+19. #PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
 20. #PBS -l walltime=00:15:00
 21. 
 22. # When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
@@ -511,17 +511,56 @@ rm ./hello_world
 <p><em>Lines starting with <code>#PBS</code> are not comments, rather, they are PBS-specific commands!</em></p>
 <p>The following lines are important to understand:</p>
 <ul>
-<li>Line 1 is a <a href="https://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a> which specifies that the file's commands are to be interpreted by <a href="https://www.gnu.org/software/bash/manual/bash.html">bash</a>.</li>
-<li>Line 3 specifies the name of our file.</li>
-<li>Line 19 specifies the hardware requirements for our job</li>
-<li>Line 20 specifies the estimated runtime of our job</li>
-<li>Lines 23 and 24 specify options for recieveing emails regarding various events</li>
+<li>
+<p>Line 1 is a <a href="https://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a> which specifies that the file's commands are to be interpreted by <a href="https://www.gnu.org/software/bash/manual/bash.html">bash</a>.</p>
+</li>
+<li>
+<p>Line 3 specifies the name of our file.</p>
+</li>
+<li>
+<p>Line 19 specifies the hardware requirements for our job</p>
+<p>To learn more about specifying hardware requirements, see <a href="https://hiibolt.github.io/niu-metis-documentation/chapter_5_4_1.html#pbs-directives">Chapter 5.4.1</a>.</p>
+</li>
+<li>
+<p>Line 20 specifies the estimated runtime of our job</p>
+</li>
+<li>
+<p>Lines 23 and 24 specify options for recieveing emails regarding various events</p>
+<p>Adding <em>a</em> sends mail on abort.
+Adding <em>b</em> sends mail on start.
+Adding <em>e</em> sends mail on end.</p>
+<p>To learn more about recieving emails, see <a href="https://hiibolt.github.io/niu-metis-documentation/chapter_5_4_1.html#pbs-directives">Chapter 5.4.1</a>.</p>
+</li>
+</ul>
+<ul>
+<li>
+<p><code>#PBS -j &lt;n | oe&gt;</code> or <code>qsub -j &lt;n | oe&gt;</code></p>
+<p>Specifies whether the standard error stream should be merged with the standard output stream.</p>
+<p>Specifying <code>oe</code> means that both <code>stderr</code> and <code>stdout</code> will be in the same output file.</p>
+<p>Specifying <code>n</code>, or not specifying at all, means they will be in different files.</p>
+<pre><code class="language-bash">$ qsub -j n run.pbs
+20000.cm
+$ ls
+hello_world.o20000
+hello_world.e20000
+</code></pre>
+</li>
+<li>
+<p><code>#PBS -m &lt;n | a*b*e*&gt;</code> or <code>qsub -m &lt;n | a*b*e*&gt;</code></p>
+<p>Specifies when mail about your job should be sent, with the following key:</p>
+<ul>
+<li>To send mail when it aborts, add <code>a</code></li>
+<li>To send main when it begins, add <code>b</code></li>
+<li>To send main when it ends, add 'e'</li>
+<li>To not send mail, specify <code>n</code> or do not use this directive.</li>
+</ul>
+</li>
 </ul>
 <p>For this job, none of this needs to be modified. The next section, however, will need to be:</p>
 <pre><code class="language-bash">...
 
 26. # Navigate to our working directory
-27. PROJECT_DIRECTORY=/home/&lt;your_account_username&gt;/projects/cpp/cpp_on_metis
+27. PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
 28. echo "The job's working directory is $PROJECT_DIRECTORY"
 29. cd $PROJECT_DIRECTORY
 
@@ -623,10 +662,10 @@ Done!
 </ul>
 <h2 id="cuda-boilerplate"><a class="header" href="#cuda-boilerplate">CUDA Boilerplate</a></h2>
 <p>If you did not in the previous section, start by creating a folder for our projects, then a folder for CUDA projects, and finally a folder for this project:</p>
-<pre><code class="language-bash">$ mkdir ~/projects
-$ mkdir ~/projects/cuda
-$ mkdir ~/projects/cuda/cuda_on_metis
-$ cd ~/projects/cuda/cuda_on_metis
+<pre><code class="language-bash">$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis
+$ cd /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis
 </code></pre>
 <p>Let's start by creating a <code>main.cu</code> file with the following contents:</p>
 <pre><code class="language-c++">#include &lt;iostream&gt;
@@ -736,16 +775,16 @@ int main() {
 </ul>
 <p>In our program, we use the maximum number of dimensions, effectively creating a 6D matrix. Because each each block is aware of its coordinates on the grid it lies on, and each thread the coordinates of the block it sits in, we can use sneaky math to calculate which number the old "counter" variable each of the <em>ten billion</em> threads translates to.</p>
 <p>If you would like to learn more about CUDA, the resources in the introductory section of this paragraph are greatly recommended.</p>
-<h2 id="installing-modules-on-the-login-node"><a class="header" href="#installing-modules-on-the-login-node">Installing Modules on the Login Node</a></h2>
-<p>However, unlike our previous project which used <code>g++</code>, the CUDA compiler, <code>nvcc</code>, is not pre-installed.</p>
-<p>To install it, we will use the <code>module</code> commands mentioned briefly in the previous section.</p>
+<h2 id="loading-modules-on-the-login-node"><a class="header" href="#loading-modules-on-the-login-node">Loading Modules on the Login Node</a></h2>
+<p>However, unlike our previous project which used <code>g++</code>, the CUDA compiler, <code>nvcc</code>, is not pre-loaded.</p>
+<p>To load it, we will use the <code>module</code> commands mentioned briefly in the previous section. The <code>module</code> system loads and unloads an evironment for specific application packages not part of the operating system.</p>
 <p>First, let's list the modules related to <code>cuda</code> with the following command:</p>
 <pre><code class="language-bash">$ module av cuda
 -------------------------------------------------- /etc/modulefiles --------------------------------------------------
 cuda/cuda-7.5  cuda/cuda-8.0  cuda/cuda-11.5  cuda/cuda-11.8  cuda/cuda-11.8-rocky8  cuda/cuda-12.2
 </code></pre>
 <p>We see a variety of versions. For the sake of this guide, we will be using <code>cuda/cuda-11.8</code>.</p>
-<p>Next, let's clean up our modules, and install CUDA:</p>
+<p>Next, let's clean up our modules, and load CUDA:</p>
 <pre><code class="language-bash">$ module purge
 $ module load cuda/cuda-11.8
 $ module list
@@ -761,7 +800,7 @@ Hello, Metis!
 - Numbers divisible by three: 33333333
 - Numbers divisible by five: 20000000
 </code></pre>
-<p>You will notice a nearly instantaneous completion time, versus the 20-30 seconds of the previous C version.</p>
+<p>You will notice a nearly instantaneous completion time of <a href="">0.5 seconds</a>.</p>
 <p>Such is the power of graphical programming!</p>
 <h2 id="launching-a-cuda-program-with-pbs"><a class="header" href="#launching-a-cuda-program-with-pbs">Launching a CUDA Program with PBS</a></h2>
 <p>For the most part, the <code>run.pbs</code> file will look similar to the version from the previous chapter.</p>
@@ -2314,22 +2353,34 @@ hello_world.o20000
 <li>
 <p><code>#PBS -l &lt;resource_1&gt;:...:&lt;resource_n&gt;</code> or <code>qsub -l &lt;resource_1&gt;,...,&lt;resource_n&gt;</code></p>
 <p>Specifies the resources that the job needs. You can find more about the types to specify in the <a href="https://www.utrgv.edu/hpcc/_files/documents/pbspro-user-guide.pdf">PBS User's Guide</a>, but the template that CRCD provides is very ideal.</p>
+<p><strong>Note - on Metis</strong>:</p>
+<ul>
+<li>
+<p><strong>Nchunks&lt;=32</strong>, for GPU chunks</p>
+</li>
+<li>
+<p><strong>Nchunks&lt;=4096/Ncpus</strong> for CPU-only chunks</p>
+<p>(run 'shownodes' command to find the number of free cpus)</p>
+</li>
+<li>
+<p><strong>Ncpus&lt;=128</strong>, the total number of CPUs per node is 128</p>
+</li>
+<li>
+<p><strong>NPmpi&lt;=Ncpus</strong>, the total number of CPUs allocated for MPI tasks,</p>
+<p>request NPmpi=Ncpus for non-OPENMP jobs</p>
+</li>
+<li>
+<p><strong>Ngpus==1</strong>,  the total number of GPUs per node is 1</p>
+</li>
+<li>
+<p><strong>X&lt;=256</strong>,  28 of 32 Metis modes have 256 GB of RAM</p>
+<p>special jobs can request up to 1024 GB of RAM (4 nodes)</p>
+</li>
+</ul>
+<p>Below, we request two chunks; each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 251 GB RAM, and we expect the total job runtime (walltime) to be 15 minutes.</p>
+<p>If you are requesting a GPU, you are reserving <em>an entire</em> node. Accordingly, you should use the entire capacity of RAM available to said node (251GB). Some nodes also have 1259GB available by special request.</p>
 <p>Example (<code>run.pbs</code> file):</p>
-<pre><code class="language-pbs">#Note - on Metis
-#              Nchunks&lt;=32, for GPU chunks
-#              Nchunks&lt;=4096/Ncpus for CPU-only chunks
-#              (run 'shownodes' command to find the number of free cpus)
-#              Ncpus&lt;=128, the total number of CPUs per node is 128
-#              NPmpi&lt;=Ncpus, the total number of CPUs allocated for MPI tasks,
-#                              request NPmpi=Ncpus for non-OPENMP jobs
-#              Ngpus==1,  the total number of GPUs per node is 1
-#              X&lt;=256,  28 of 32 Metis modes have 256 GB of RAM
-#                       special jobs can request up to 1024 GB of RAM (4 nodes)
-#
-# Below, we request two chunks;
-#  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM,
-#  and we expect the total job runtime (walltime) to be 15 minutes.
-#PBS -l select=1:ncpus=8:mpiprocs=8:ngpus=16:mem=2gb
+<pre><code class="language-pbs">#PBS -l select=1:ncpus=8:mpiprocs=8:ngpus=1:mem=2gb
 #PBS -l walltime=00:15:00
 </code></pre>
 <p>To learn how to optimize these values, see the <a href="https://www.niu.edu/crcd/current-users/getting-started/queue-commands-job-management.shtml#jobcontrol">official Metis protocol</a>.</p>
@@ -2351,8 +2402,8 @@ hello_world.e20000
 <p>Specifies when mail about your job should be sent, with the following key:</p>
 <ul>
 <li>To send mail when it aborts, add <code>a</code></li>
-<li>To send main when it begins, add <code>b</code></li>
-<li>To send main when it ends, add 'e'</li>
+<li>To send mail when it begins, add <code>b</code></li>
+<li>To send mail when it ends, add <code>e</code></li>
 <li>To not send mail, specify <code>n</code> or do not use this directive.</li>
 </ul>
 </li>
