@@ -1,4 +1,6 @@
 # 3.3. Creating your Own Docker Base Images
+<small>*Associated CRCD Documentation: [PBS](https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml)*</small>
+
 *You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/custom_image)!*
 
 Unlike previous chapters, this will not have an example project, and will instead be more free-form to act as a basepoint for your own research!
@@ -133,3 +135,33 @@ GitHub Actions is significantly more ideal, but does build slower. Our team chos
 * [`igait-backend`](https://github.com/igait-niu/igait-backend) (runs on AWS)
 
 With this approach, you can containerize virtually any project with ease.
+
+## Our Team's Usage
+The [iGAIT research team](https://github.com/igait-niu) found great success using Metis to accelerate our workflow.
+
+The primary chokepoint of our workflow was [OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose), which we use to create pose mappings of a human.
+
+<img src="https://github.com/CMU-Perceptual-Computing-Lab/openpose/raw/master/.github/media/pose_face_hands.gif"></img>
+
+Previously, on AWS and tested locally, runtime was upwards of 3 hours - and occupied the entirety of the available resources.
+
+However, on Metis, on the login nodes - that time dropped down, but not as far as we wanted it.
+
+Original inference times (login node, with GPU, Docker with NVIDIA CDI):
+* Total: 1 hour+ total, job killed for long runtime
+* Video 1: **43 minutes**
+* Video 2: **17 minutes** (did not finish)
+
+New inference times (compute node, with GPU, Docker with NVIDIA CDI):
+* Total: <1 minute :D
+* Video 1: **18.689683 seconds**
+* Video 2: **24.962916 seconds**
+
+What is very interesting is that our job had very minimal hardware specifications - you don't always need heavy CPU core counts if the GPU can handle it.
+```
+#PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+```
+
+*Note: Although the 2GB is the most effecient amount we found, it is pointless as reserving a GPU also reserves the entire node*.
+
+You can find our Dockerfiles [here](https://github.com/igait-niu/igait-openpose/tree/main). There are multiple versions, the simplest being the CPU-only build.

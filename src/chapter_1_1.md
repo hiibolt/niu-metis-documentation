@@ -1,4 +1,5 @@
 # 1.1. Connecting to Metis
+<small>[*Associated CRCD Documentation*](https://crcd.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml)</small>
 
 The Metis cluster is easily accessible via the [SSH](https://en.wikipedia.org/wiki/Secure_Shell) protocol.
 

@@ -1,4 +1,6 @@
 # 3.2. Using GPU Acceleration With Docker
+<small>*Associated CRCD Documentation: [PBS](https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml)*</small>
+
 *You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image_gpu)!*
 
 Now we must address how to use GPU passthrough on Metis with Podman (Docker), which can quickly elevate our programs to higher performance with the power of GPU acceleration!
@@ -36,17 +38,17 @@ For the sake of demonstration, we'll use the binary we developed in **Chapter 2.
 ## Implementation
 First, let's create our project directory as we have in previous projects:
 ```bash
-$ mkdir ~/projects
-$ mkdir ~/projects/docker
-$ mkdir ~/projects/docker/premade_image_gpu
-$ cd ~/projects/docker/premade_image_gpu
+$ mkdir /lstr/sahara/<your_project>/<you>
+$ mkdir /lstr/sahara/<your_project>/<you>/docker
+$ mkdir /lstr/sahara/<your_project>/<you>/docker/premade_image_gpu
+$ cd /lstr/sahara/<your_project>/<you>/docker/premade_image_gpu
 ```
 
 Next, we need a binary that forces CUDA to load. We'll build the project from Chapter 2.1 and have it output here:
 ```bash
 $ module purge
 $ module load cuda/cuda-11.8
-$ nvcc -o initialize_cuda ~/projects/cuda/cuda_on_metis/main.cu
+$ nvcc -o initialize_cuda /lstr/sahara/<your_project>/<you>/cuda/cuda_on_metis/main.cu
 ```
 
 Finally, we'll implement everything mentioned above.
@@ -78,7 +80,7 @@ Create a `run.pbs` file with the following contents:
 #--PBS -m ae
 #--#PBS -M account@niu.edu
 
-PROJECT_DIRECTORY=/home/<your_account_username>/projects/docker/premade_image_gpu
+PROJECT_DIRECTORY=/lstr/sahara/<your_project>/<you>/docker/premade_image_gpu
 echo "This job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -166,7 +168,7 @@ echo "Removing the container..."
 echo "Done!"
 ```
 
-As always, don't forget to replace occurrences of `<your_account_username>` with your actual Metis username.
+As always, don't forget to replace occurrences of `<your_project>` and `<you>` with your actual Metis username.
 
 Now, let's discuss what's changed from Chapter 3.1.
 

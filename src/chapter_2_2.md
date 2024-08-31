@@ -1,4 +1,6 @@
 # 2.2. Building a CUDA Project from the Ground Up
+<small>*Associated CRCD Documentation: [Project Example](https://crcd.niu.edu/crcd/current-users/getting-started/build-run-example.shtml) and [PBS](https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml)*</small>
+
 *You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cuda/cuda_on_metis)!*
 
 The next part of this introductory chapter will teach you how to build, compile, and run a CUDA program from the ground up on Metis.
@@ -172,7 +174,7 @@ Hello, Metis!
 - Numbers divisible by five: 20000000
 ```
 
-You will notice a nearly instantaneous completion time of [0.5 seconds]().
+You will notice a nearly instantaneous completion time of [0.5 seconds](https://github.com/hiibolt/niu-metis-documentation/blob/main/projects/cuda/cuda_on_metis/time_no_pbs).
 
 Such is the power of graphical programming!
 
@@ -207,7 +209,7 @@ Create a `run.pbs` file with the following contents:
 #--#PBS -M account@niu.edu
 
 # Navigate to our working directory
-PROJECT_DIRECTORY=/home/<your_account_username>/projects/cuda/cuda_on_metis
+PROJECT_DIRECTORY=/lstr/sahara/<your_project>/<you>/cuda/cuda_on_metis
 echo "The job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -240,7 +242,7 @@ There are a few notable differences.
 - Instead of loading GCC, we loaded CUDA (`module load cuda/cuda-11.8`).
 - Instead of compiling with G++ (`g++ -o hello_world main.cpp`), we compiled with CUDA (`nvcc -o hello_world main.cu`).
 
-Be sure to replace any instances of `<your_account_username>` with your Metis username!
+Be sure to replace any instances of `<your_project>` and `<you>` with your Metis project and username!
 
 ## Launching our Job with PBS
 We're ready to go! All that's left is to start our job, which can be done easily with the following command:

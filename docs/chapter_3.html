@@ -176,6 +176,31 @@
                         <h1 id="3-intermediate-metis-usage-with-metis"><a class="header" href="#3-intermediate-metis-usage-with-metis">3. Intermediate Metis Usage with Metis</a></h1>
 <p>In this chapter, we will dive deep into Docker and PBS techniques, expanding on the foundational knowledge covered in Chapters 2.1 and 2.2.</p>
 <p>We'll explore how to combine these techniques to create a robust workflow for your projects on Metis, including handling custom Docker images, leveraging GPU acceleration, and managing complex dependencies.</p>
+<h2 id="podman--docker-vs-singularitysingularity--docker"><a class="header" href="#podman--docker-vs-singularitysingularity--docker">Podman + Docker vs Singularity/Singularity + Docker</a></h2>
+<p>Metis has both Podman <em>and</em> Singularity installed. Both are software designed to allow non-root users to run containers on systems like Metis, where this is the case.</p>
+<p>Podman is designed to effectively be a drop-in replacement for Docker on non-root systems, while Singularity is a tool specifically designed for HPC environments with performance, reproducibility, and security in mind.</p>
+<p>Although this documentation does not cover Singularity, it is a very powerful tool that should be considered if you are looking to squeeze the maximum performance out of Metis.</p>
+<p><strong>Pros</strong>:</p>
+<ul>
+<li>Native OpenMPI Support - Docker struggles with OpenMPI</li>
+<li>Improved Security - Other users cannot easily see your work</li>
+<li>HPC-first Design - Singularity is <em>very</em> well optimized for performance</li>
+</ul>
+<p><strong>Cons</strong>:</p>
+<ul>
+<li>Significantly Smaller Ecosystem + Image Repository - Singularity is HPC-first, meaning there are far less users, and accordingly far fewer help resources available</li>
+<li>Less Flexible - Singularity's focus on reproducibility can make creating images more tedious, and can even eliminate the possibility of creating certain applications</li>
+<li>Difficult to Test Locally - The process of getting started on a local system is more complex and less beginner-friendly</li>
+</ul>
+<p><strong>Comparison Chart</strong>:</p>
+<div class="table-wrapper"><table><thead><tr><th>Feature</th><th>Podman + Docker</th><th>Singularity</th></tr></thead><tbody>
+<tr><td><strong>Use Case</strong></td><td>General development, CI/CD, image availability</td><td>HPC environments, scientific computing</td></tr>
+<tr><td><strong>Image Repository</strong></td><td>Docker Hub (large and varied)</td><td>Focus on reproducibility, often specific images</td></tr>
+<tr><td><strong>Security</strong></td><td>Rootless operation (Podman)</td><td>High security in multi-user environments</td></tr>
+<tr><td><strong>Integration with HPC</strong></td><td>Limited</td><td>Optimized for HPC environments</td></tr>
+<tr><td><strong>Ease of Use in HPC</strong></td><td>Requires additional configuration</td><td>Seamless integration with HPC systems</td></tr>
+</tbody></table>
+</div>
 <h2 id="overview-of-the-chapters"><a class="header" href="#overview-of-the-chapters">Overview of the Chapters</a></h2>
 <h3 id="chapter-31-using-pre-made-docker-images"><a class="header" href="#chapter-31-using-pre-made-docker-images">Chapter 3.1: Using Pre-Made Docker Images</a></h3>
 <ul>
@@ -228,22 +253,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

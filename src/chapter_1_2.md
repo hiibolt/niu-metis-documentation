@@ -1,6 +1,7 @@
 # 1.2. Remote Workspaces in VSCode
+<small>[*Associated CRCD Documentation*](https://crcd.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml#editfiles)</small>
 
-<small>*If you encounter issues, see the [official documentation](https://code.visualstudio.com/docs/remote/ssh)!*</small>
+<small>*If you encounter issues, see the [official VSCode documentation](https://code.visualstudio.com/docs/remote/ssh)!*</small>
 
 This guide is primarily applicable to Windows users, as the graphical integrated development enviroment it provides can make development much easier.
 

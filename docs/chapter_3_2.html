@@ -174,6 +174,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="32-using-gpu-acceleration-with-docker"><a class="header" href="#32-using-gpu-acceleration-with-docker">3.2. Using GPU Acceleration With Docker</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">PBS</a></em></small></p>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image_gpu">in this book's repository</a>!</em></p>
 <p>Now we must address how to use GPU passthrough on Metis with Podman (Docker), which can quickly elevate our programs to higher performance with the power of GPU acceleration!</p>
 <h2 id="goals"><a class="header" href="#goals">Goals</a></h2>
@@ -205,15 +206,15 @@
 <p>For the sake of demonstration, we'll use the binary we developed in <strong>Chapter 2.2</strong>!</p>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
 <p>First, let's create our project directory as we have in previous projects:</p>
-<pre><code class="language-bash">$ mkdir ~/projects
-$ mkdir ~/projects/docker
-$ mkdir ~/projects/docker/premade_image_gpu
-$ cd ~/projects/docker/premade_image_gpu
+<pre><code class="language-bash">$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image_gpu
+$ cd /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image_gpu
 </code></pre>
 <p>Next, we need a binary that forces CUDA to load. We'll build the project from Chapter 2.1 and have it output here:</p>
 <pre><code class="language-bash">$ module purge
 $ module load cuda/cuda-11.8
-$ nvcc -o initialize_cuda ~/projects/cuda/cuda_on_metis/main.cu
+$ nvcc -o initialize_cuda /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis/main.cu
 </code></pre>
 <p>Finally, we'll implement everything mentioned above.</p>
 <p>Create a <code>run.pbs</code> file with the following contents:</p>
@@ -242,7 +243,7 @@ $ nvcc -o initialize_cuda ~/projects/cuda/cuda_on_metis/main.cu
 #--PBS -m ae
 #--#PBS -M account@niu.edu
 
-PROJECT_DIRECTORY=/home/&lt;your_account_username&gt;/projects/docker/premade_image_gpu
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image_gpu
 echo "This job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -329,7 +330,7 @@ echo "Removing the container..."
     &gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
 echo "Done!"
 </code></pre>
-<p>As always, don't forget to replace occurrences of <code>&lt;your_account_username&gt;</code> with your actual Metis username.</p>
+<p>As always, don't forget to replace occurrences of <code>&lt;your_project&gt;</code> and <code>&lt;you&gt;</code> with your actual Metis username.</p>
 <p>Now, let's discuss what's changed from Chapter 3.1.</p>
 <p>Firstly, we ensure CUDA <code>/dev</code> files are created:</p>
 <pre><code class="language-bash">...
@@ -467,22 +468,6 @@ Fri Aug 16 21:50:56 2024
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

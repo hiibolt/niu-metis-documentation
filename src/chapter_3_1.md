@@ -1,4 +1,6 @@
 # 3.1. Using Pre-Made Docker Images
+<small>*Associated CRCD Documentation: [PBS](https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml)*</small>
+
 *You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image)!*
 
 We will first begin by using a language which is *not* among the modules which Metis provides, Python 3.11.
@@ -47,10 +49,10 @@ We will be using an overlay on Docker called [Podman](https://podman.io/). It al
 
 If you haven't already, create your projects directory, a new directory for Docker projects, and finally a directory for this project:
 ```bash
-$ mkdir ~/projects
-$ mkdir ~/projects/docker
-$ mkdir ~/projects/docker/premade_image
-$ cd ~/projects/docker/premade_image
+$ mkdir /lstr/sahara/<your_project>/<you>
+$ mkdir /lstr/sahara/<your_project>/<you>/docker
+$ mkdir /lstr/sahara/<your_project>/<you>/docker/premade_image
+$ cd /lstr/sahara/<your_project>/<you>/docker/premade_image
 ```
 
 Next, let's create a `main.py` file with the following contents:
@@ -159,7 +161,7 @@ Create a `run.pbs` file with the following contents:
 #--PBS -m ae
 #--#PBS -M account@niu.edu
 
-PROJECT_DIRECTORY=/home/<your_account_name>/projects/docker/premade_image
+PROJECT_DIRECTORY=/lstr/sahara/<your_project>/<you>/docker/premade_image
 echo "This job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -237,10 +239,10 @@ echo "Done!"
 ```
 
 This is largly the same, and only two things need to be modified to fit your Metis account:
-```
+```bash
 ...
 
-PROJECT_DIRECTORY=/home/<your_account_name>/projects/docker/premade_image
+PROJECT_DIRECTORY=/lstr/sahara/<your_project>/<you>/docker/premade_image
 echo "This job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -252,14 +254,14 @@ echo "Done!"
 
 ...
 ```
-Be sure to replace the two `<your_account_name>` instances with your own account! The linger command is unique to Podman (Docker) jobs in PBS, and ensures it has the nessecary permissions to run your jobs.
+Be sure to replace `<your_account_name>`, `<your_project>`, and `<you>` instances with your own information! The linger command is unique to Podman (Docker) jobs in PBS, and ensures it has the nessecary permissions to run your jobs.
 
 With that, let's test our job!
 ```
 $ qsub run.pbs
 18712.cm
 $ cat premade_image.o18712
-This job's working directory is /home/<your_account_name>/projects/docker/premade_image
+This job's working directory is /lstr/sahara/<your_project>/<you>/docker/premade_image
 
 Enabling linger for the user...
 Done!

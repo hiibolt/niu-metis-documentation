@@ -1,7 +1,9 @@
 # 4.1. SSH Automation with Metis
 *You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust/ssh-automation)!*
 
-While Metis is an incredibly powerful tool, it does not provide native tooling to allow for automatic job submission.
+While Metis is an incredibly powerful tool, it does not provide an API to allow for automatic job submission from outside of Metis.
+
+For example - allowing your backend on AWS, Google Cloud Engine, or a local machine to submit a job automatically is not currently possible.
 
 One solution is to write our own software which submits the job on our behalf, using SSH-related libraries to open a connection and submit commands!
 

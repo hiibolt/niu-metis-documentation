@@ -1,4 +1,6 @@
 # 2.1. Building a C++ Project from the Ground Up
+<small>*Associated CRCD Documentation: [Project Example](https://crcd.niu.edu/crcd/current-users/getting-started/build-run-example.shtml) and [PBS](https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml)*</small>
+
 *You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cpp/cpp_on_metis)!*
 
 This introductory project will teach you the absolute minimal nessecary information to create a basic C++ project on the Metis supercomputer.
@@ -241,9 +243,9 @@ For this job, none of this needs to be modified. The next section, however, will
 
 ...
 ```
-It's important that we hard-code the exact path on line 27 by replacing `<your_account_username>` with your Metis account's username.
+Be sure to replace any instances on line 27 of `<your_project>` and `<you>` with your Metis project and username!
 
-The reason for this only becomes relevant if you have interest in creating non-C++ projects or automating your job submission, so it is worth noting that you can replace `/home/<your_account_username>/projects/cpp/cpp_on_metis` with `$PBS_O_WORKDIR` if you would like. This will be populated with where the job is run from.
+The reason for this only becomes relevant if you have interest in creating non-C++ projects or automating your job submission, so it is worth noting that you can replace `/lstr/sahara/<your_project>/<you>/cpp/cpp_on_metis` with `$PBS_O_WORKDIR` if you would like. This will be populated with where the job is run from.
 
 Next, we will familiarize ourselves with the `module` commands, which are used on lines 31-36:
 ```bash
@@ -310,7 +312,7 @@ hello_world.o18681 main.cpp run.pbs
 Reading the output from our job:
 ```
 $ cat hello_world.o18681
-The job's working directory is /home/<your_account_username>/projects/cpp/cpp_on_metis
+The job's working directory is /lstr/sahara/<your_project>/<you>/cpp/cpp_on_metis
 
 Loading GCC...
 Currently Loaded Modulefiles:

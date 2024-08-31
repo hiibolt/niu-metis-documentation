@@ -184,12 +184,11 @@
 <li>All 32 nodes are connected via a 200 Gbps Infiniband network</li>
 </ul>
 <p>To learn more about Metis, you can see the <a href="https://crcd.niu.edu/crcd/images/metislayoutandspecification.pdf">METIS layout and specification</a>.</p>
-<p>It aims to allow anyone from any discipline, regardless of Linux experience, to get started. As such, no knowledge of any language is required to follow any example, as the focus of the examples are instead to help you understand Metis.</p>
-<p>On top of this, should a step confuse you, the final product of every project example in this book can also be found in this book's <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects">repository</a>.</p>
 <h2 id="primary-purpose"><a class="header" href="#primary-purpose">Primary Purpose</a></h2>
 <p>The goal of this book is to allow faculty at NIU to hit the ground running with their research.</p>
 <p>We want you to focus on completing your work - not getting the hardware to work.</p>
 <p>This book will teach you the skills to help focus on writing your application from the ground up.</p>
+<p>Additionally, should a step confuse you, the final product of every project example in this book can also be found in this book's <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects">repository</a>.</p>
 <h3 id="explored-use-cases"><a class="header" href="#explored-use-cases">Explored Use Cases</a></h3>
 <p>There are six use cases covered here, with increasing levels of control over Metis:</p>
 <ul>
@@ -249,6 +248,7 @@
 <p>If you only need CPU-based computation, chapters <strong>2-3.1</strong> will teach you everything you need.</p>
 <p>If you need GPU passthrough or have a very complicated project, it is recommended to read this book in its entirety!</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="11-connecting-to-metis"><a class="header" href="#11-connecting-to-metis">1.1. Connecting to Metis</a></h1>
+<p><small><a href="https://crcd.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml"><em>Associated CRCD Documentation</em></a></small></p>
 <p>The Metis cluster is easily accessible via the <a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a> protocol.</p>
 <p>Each operating system has various possible SSH clients - we will be using the OpenSSH client, as it is pre-installed on most operating systems and very straightforward.</p>
 <h2 id="windows-10-and-11"><a class="header" href="#windows-10-and-11">Windows 10 and 11</a></h2>
@@ -278,7 +278,8 @@
 <pre><code class="language-bash">$ ssh you@metis.niu.edu
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="12-remote-workspaces-in-vscode"><a class="header" href="#12-remote-workspaces-in-vscode">1.2. Remote Workspaces in VSCode</a></h1>
-<p><small><em>If you encounter issues, see the <a href="https://code.visualstudio.com/docs/remote/ssh">official documentation</a>!</em></small></p>
+<p><small><a href="https://crcd.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml#editfiles"><em>Associated CRCD Documentation</em></a></small></p>
+<p><small><em>If you encounter issues, see the <a href="https://code.visualstudio.com/docs/remote/ssh">official VSCode documentation</a>!</em></small></p>
 <p>This guide is primarily applicable to Windows users, as the graphical integrated development enviroment it provides can make development much easier.</p>
 <p>However, development on Metis is also possible and easy, as the majority of popular terminal-based editors are preinstalled on the login nodes:</p>
 <ul>
@@ -340,6 +341,7 @@
 <li><strong>Outcome</strong>: You will be able to leverage CUDA for faster computation and understand the structure of both CUDA programs and PBS scripts.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="21-building-a-c-project-from-the-ground-up"><a class="header" href="#21-building-a-c-project-from-the-ground-up">2.1. Building a C++ Project from the Ground Up</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/build-run-example.shtml">Project Example</a> and <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">PBS</a></em></small></p>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cpp/cpp_on_metis">in this book's repository</a>!</em></p>
 <p>This introductory project will teach you the absolute minimal nessecary information to create a basic C++ project on the Metis supercomputer.</p>
 <p>Before we tackle more robust and complex technologies such as CUDA or OpenMPI, our goal is to familiarize ourselves with Metis before abstracting and building upon our understanding.</p>
@@ -566,8 +568,8 @@ hello_world.e20000
 
 ...
 </code></pre>
-<p>It's important that we hard-code the exact path on line 27 by replacing <code>&lt;your_account_username&gt;</code> with your Metis account's username.</p>
-<p>The reason for this only becomes relevant if you have interest in creating non-C++ projects or automating your job submission, so it is worth noting that you can replace <code>/home/&lt;your_account_username&gt;/projects/cpp/cpp_on_metis</code> with <code>$PBS_O_WORKDIR</code> if you would like. This will be populated with where the job is run from.</p>
+<p>Be sure to replace any instances on line 27 of <code>&lt;your_project&gt;</code> and <code>&lt;you&gt;</code> with your Metis project and username!</p>
+<p>The reason for this only becomes relevant if you have interest in creating non-C++ projects or automating your job submission, so it is worth noting that you can replace <code>/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis</code> with <code>$PBS_O_WORKDIR</code> if you would like. This will be populated with where the job is run from.</p>
 <p>Next, we will familiarize ourselves with the <code>module</code> commands, which are used on lines 31-36:</p>
 <pre><code class="language-bash">...
 
@@ -620,7 +622,7 @@ hello_world.o18681 main.cpp run.pbs
 </code></pre>
 <p>Reading the output from our job:</p>
 <pre><code>$ cat hello_world.o18681
-The job's working directory is /home/&lt;your_account_username&gt;/projects/cpp/cpp_on_metis
+The job's working directory is /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
 
 Loading GCC...
 Currently Loaded Modulefiles:
@@ -644,6 +646,7 @@ Done!
 <p>However, Metis is capable of much, much more.</p>
 <p>In the next chapter, we will discuss utilizing CUDA to weaponize the power of graphics card programming to drastically reduce the computation times of our programs, as well as learning more about the <code>module</code> and PBS-related commands.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="22-building-a-cuda-project-from-the-ground-up"><a class="header" href="#22-building-a-cuda-project-from-the-ground-up">2.2. Building a CUDA Project from the Ground Up</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/build-run-example.shtml">Project Example</a> and <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">PBS</a></em></small></p>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cuda/cuda_on_metis">in this book's repository</a>!</em></p>
 <p>The next part of this introductory chapter will teach you how to build, compile, and run a CUDA program from the ground up on Metis.</p>
 <p>CUDA stands for Compute Unified Device Architecture, and it is proprietary NVIDIA-distributed software that allows developers to perform matrice-based operations at unbelievable speeds using the heavily optimized CUDA cores found only on NVIDIA GPUs.</p>
@@ -800,7 +803,7 @@ Hello, Metis!
 - Numbers divisible by three: 33333333
 - Numbers divisible by five: 20000000
 </code></pre>
-<p>You will notice a nearly instantaneous completion time of <a href="">0.5 seconds</a>.</p>
+<p>You will notice a nearly instantaneous completion time of <a href="https://github.com/hiibolt/niu-metis-documentation/blob/main/projects/cuda/cuda_on_metis/time_no_pbs">0.5 seconds</a>.</p>
 <p>Such is the power of graphical programming!</p>
 <h2 id="launching-a-cuda-program-with-pbs"><a class="header" href="#launching-a-cuda-program-with-pbs">Launching a CUDA Program with PBS</a></h2>
 <p>For the most part, the <code>run.pbs</code> file will look similar to the version from the previous chapter.</p>
@@ -831,7 +834,7 @@ Hello, Metis!
 #--#PBS -M account@niu.edu
 
 # Navigate to our working directory
-PROJECT_DIRECTORY=/home/&lt;your_account_username&gt;/projects/cuda/cuda_on_metis
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis
 echo "The job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -864,7 +867,7 @@ rm ./hello_world
 <li>Instead of loading GCC, we loaded CUDA (<code>module load cuda/cuda-11.8</code>).</li>
 <li>Instead of compiling with G++ (<code>g++ -o hello_world main.cpp</code>), we compiled with CUDA (<code>nvcc -o hello_world main.cu</code>).</li>
 </ul>
-<p>Be sure to replace any instances of <code>&lt;your_account_username&gt;</code> with your Metis username!</p>
+<p>Be sure to replace any instances of <code>&lt;your_project&gt;</code> and <code>&lt;you&gt;</code> with your Metis project and username!</p>
 <h2 id="launching-our-job-with-pbs"><a class="header" href="#launching-our-job-with-pbs">Launching our Job with PBS</a></h2>
 <p>We're ready to go! All that's left is to start our job, which can be done easily with the following command:</p>
 <pre><code class="language-bash">$ qsub run.pbs
@@ -931,6 +934,31 @@ openmpi/openmpi-4.1.6-gcc-11.4.0-cuda-11.8
 <div style="break-before: page; page-break-before: always;"></div><h1 id="3-intermediate-metis-usage-with-metis"><a class="header" href="#3-intermediate-metis-usage-with-metis">3. Intermediate Metis Usage with Metis</a></h1>
 <p>In this chapter, we will dive deep into Docker and PBS techniques, expanding on the foundational knowledge covered in Chapters 2.1 and 2.2.</p>
 <p>We'll explore how to combine these techniques to create a robust workflow for your projects on Metis, including handling custom Docker images, leveraging GPU acceleration, and managing complex dependencies.</p>
+<h2 id="podman--docker-vs-singularitysingularity--docker"><a class="header" href="#podman--docker-vs-singularitysingularity--docker">Podman + Docker vs Singularity/Singularity + Docker</a></h2>
+<p>Metis has both Podman <em>and</em> Singularity installed. Both are software designed to allow non-root users to run containers on systems like Metis, where this is the case.</p>
+<p>Podman is designed to effectively be a drop-in replacement for Docker on non-root systems, while Singularity is a tool specifically designed for HPC environments with performance, reproducibility, and security in mind.</p>
+<p>Although this documentation does not cover Singularity, it is a very powerful tool that should be considered if you are looking to squeeze the maximum performance out of Metis.</p>
+<p><strong>Pros</strong>:</p>
+<ul>
+<li>Native OpenMPI Support - Docker struggles with OpenMPI</li>
+<li>Improved Security - Other users cannot easily see your work</li>
+<li>HPC-first Design - Singularity is <em>very</em> well optimized for performance</li>
+</ul>
+<p><strong>Cons</strong>:</p>
+<ul>
+<li>Significantly Smaller Ecosystem + Image Repository - Singularity is HPC-first, meaning there are far less users, and accordingly far fewer help resources available</li>
+<li>Less Flexible - Singularity's focus on reproducibility can make creating images more tedious, and can even eliminate the possibility of creating certain applications</li>
+<li>Difficult to Test Locally - The process of getting started on a local system is more complex and less beginner-friendly</li>
+</ul>
+<p><strong>Comparison Chart</strong>:</p>
+<div class="table-wrapper"><table><thead><tr><th>Feature</th><th>Podman + Docker</th><th>Singularity</th></tr></thead><tbody>
+<tr><td><strong>Use Case</strong></td><td>General development, CI/CD, image availability</td><td>HPC environments, scientific computing</td></tr>
+<tr><td><strong>Image Repository</strong></td><td>Docker Hub (large and varied)</td><td>Focus on reproducibility, often specific images</td></tr>
+<tr><td><strong>Security</strong></td><td>Rootless operation (Podman)</td><td>High security in multi-user environments</td></tr>
+<tr><td><strong>Integration with HPC</strong></td><td>Limited</td><td>Optimized for HPC environments</td></tr>
+<tr><td><strong>Ease of Use in HPC</strong></td><td>Requires additional configuration</td><td>Seamless integration with HPC systems</td></tr>
+</tbody></table>
+</div>
 <h2 id="overview-of-the-chapters-1"><a class="header" href="#overview-of-the-chapters-1">Overview of the Chapters</a></h2>
 <h3 id="chapter-31-using-pre-made-docker-images"><a class="header" href="#chapter-31-using-pre-made-docker-images">Chapter 3.1: Using Pre-Made Docker Images</a></h3>
 <ul>
@@ -954,6 +982,7 @@ openmpi/openmpi-4.1.6-gcc-11.4.0-cuda-11.8
 <li><strong>Outcome</strong>: You will be able to create, customize, and share Docker images, enabling a flexible and reproducible environment for your work.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="31-using-pre-made-docker-images"><a class="header" href="#31-using-pre-made-docker-images">3.1. Using Pre-Made Docker Images</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">PBS</a></em></small></p>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image">in this book's repository</a>!</em></p>
 <p>We will first begin by using a language which is <em>not</em> among the modules which Metis provides, Python 3.11.</p>
 <p>In actuality, Metis does offer Python, as seen below:</p>
@@ -990,10 +1019,10 @@ python/python-3.9.10  python/python-3.12.4
 <p><a href="https://www.docker.com/">Docker</a>, an extremely powerful containerization and encapsulation tool that allows developers to define virtual machines with a level of granularity rarely found in modern computing. Docker allows you to select an operation system as a base, install packages and libraries, and define run behaviour.</p>
 <p>We will be using an overlay on Docker called <a href="https://podman.io/">Podman</a>. It allows us to use Docker containers despite not having elevated permissions on Metis. Understanding of Podman isn't required - all Docker commands can have <code>docker</code> replaced with <code>podman</code> (or in our case, <code>/bin/podman</code>).</p>
 <p>If you haven't already, create your projects directory, a new directory for Docker projects, and finally a directory for this project:</p>
-<pre><code class="language-bash">$ mkdir ~/projects
-$ mkdir ~/projects/docker
-$ mkdir ~/projects/docker/premade_image
-$ cd ~/projects/docker/premade_image
+<pre><code class="language-bash">$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image
+$ cd /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image
 </code></pre>
 <p>Next, let's create a <code>main.py</code> file with the following contents:</p>
 <pre><code class="language-python">print( "Hello, Metis!" )
@@ -1075,7 +1104,7 @@ $ /bin/podman rm python_container
 #--PBS -m ae
 #--#PBS -M account@niu.edu
 
-PROJECT_DIRECTORY=/home/&lt;your_account_name&gt;/projects/docker/premade_image
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image
 echo "This job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -1152,9 +1181,9 @@ echo "Removing the container..."
 echo "Done!"
 </code></pre>
 <p>This is largly the same, and only two things need to be modified to fit your Metis account:</p>
-<pre><code>...
+<pre><code class="language-bash">...
 
-PROJECT_DIRECTORY=/home/&lt;your_account_name&gt;/projects/docker/premade_image
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image
 echo "This job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -1166,12 +1195,12 @@ echo "Done!"
 
 ...
 </code></pre>
-<p>Be sure to replace the two <code>&lt;your_account_name&gt;</code> instances with your own account! The linger command is unique to Podman (Docker) jobs in PBS, and ensures it has the nessecary permissions to run your jobs.</p>
+<p>Be sure to replace <code>&lt;your_account_name&gt;</code>, <code>&lt;your_project&gt;</code>, and <code>&lt;you&gt;</code> instances with your own information! The linger command is unique to Podman (Docker) jobs in PBS, and ensures it has the nessecary permissions to run your jobs.</p>
 <p>With that, let's test our job!</p>
 <pre><code>$ qsub run.pbs
 18712.cm
 $ cat premade_image.o18712
-This job's working directory is /home/&lt;your_account_name&gt;/projects/docker/premade_image
+This job's working directory is /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image
 
 Enabling linger for the user...
 Done!
@@ -1201,6 +1230,7 @@ Done!
 <p>If you'd like to learn more about the <code>run</code>, <code>exec</code>, <code>kill</code>, or <code>rm</code> commands, additional documentation can be found in the <strong>Conclusion and Helpful Resources</strong> chapter!</p>
 <p>If your application does not make use of the GPU, and you have no interest in automation or integration, you likely don't need to read any further. If you do, then feel free to continue onto <strong>Chapter 3.2 - Using GPU Acceleration with Docker</strong>!</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="32-using-gpu-acceleration-with-docker"><a class="header" href="#32-using-gpu-acceleration-with-docker">3.2. Using GPU Acceleration With Docker</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">PBS</a></em></small></p>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image_gpu">in this book's repository</a>!</em></p>
 <p>Now we must address how to use GPU passthrough on Metis with Podman (Docker), which can quickly elevate our programs to higher performance with the power of GPU acceleration!</p>
 <h2 id="goals-3"><a class="header" href="#goals-3">Goals</a></h2>
@@ -1232,15 +1262,15 @@ Done!
 <p>For the sake of demonstration, we'll use the binary we developed in <strong>Chapter 2.2</strong>!</p>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
 <p>First, let's create our project directory as we have in previous projects:</p>
-<pre><code class="language-bash">$ mkdir ~/projects
-$ mkdir ~/projects/docker
-$ mkdir ~/projects/docker/premade_image_gpu
-$ cd ~/projects/docker/premade_image_gpu
+<pre><code class="language-bash">$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image_gpu
+$ cd /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image_gpu
 </code></pre>
 <p>Next, we need a binary that forces CUDA to load. We'll build the project from Chapter 2.1 and have it output here:</p>
 <pre><code class="language-bash">$ module purge
 $ module load cuda/cuda-11.8
-$ nvcc -o initialize_cuda ~/projects/cuda/cuda_on_metis/main.cu
+$ nvcc -o initialize_cuda /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis/main.cu
 </code></pre>
 <p>Finally, we'll implement everything mentioned above.</p>
 <p>Create a <code>run.pbs</code> file with the following contents:</p>
@@ -1269,7 +1299,7 @@ $ nvcc -o initialize_cuda ~/projects/cuda/cuda_on_metis/main.cu
 #--PBS -m ae
 #--#PBS -M account@niu.edu
 
-PROJECT_DIRECTORY=/home/&lt;your_account_username&gt;/projects/docker/premade_image_gpu
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image_gpu
 echo "This job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -1356,7 +1386,7 @@ echo "Removing the container..."
     &gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
 echo "Done!"
 </code></pre>
-<p>As always, don't forget to replace occurrences of <code>&lt;your_account_username&gt;</code> with your actual Metis username.</p>
+<p>As always, don't forget to replace occurrences of <code>&lt;your_project&gt;</code> and <code>&lt;you&gt;</code> with your actual Metis username.</p>
 <p>Now, let's discuss what's changed from Chapter 3.1.</p>
 <p>Firstly, we ensure CUDA <code>/dev</code> files are created:</p>
 <pre><code class="language-bash">...
@@ -1465,6 +1495,7 @@ Fri Aug 16 21:50:56 2024
 <p>For those whos' projects are complete using this tactic, you can safely stop reading here, if you would like. If SSH automation (<strong>Chapter 4.1</strong>) interests you, you can also safely skip to that chapter.</p>
 <p>The next chapter, <strong>Chapter 3.3</strong>, will provide insight into writing your own base images from the ground up, and some tactics for optimizing base images for build-time and size.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="33-creating-your-own-docker-base-images"><a class="header" href="#33-creating-your-own-docker-base-images">3.3. Creating your Own Docker Base Images</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">PBS</a></em></small></p>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/custom_image">in this book's repository</a>!</em></p>
 <p>Unlike previous chapters, this will not have an example project, and will instead be more free-form to act as a basepoint for your own research!</p>
 <p>We will discuss some possible venues from where to learn Dockerfile syntax, building images, and running them on Metis to create a solution that fits your quota.</p>
@@ -1583,6 +1614,29 @@ CMD .venv/bin/python3 main.py
 <li><a href="https://github.com/igait-niu/igait-backend"><code>igait-backend</code></a> (runs on AWS)</li>
 </ul>
 <p>With this approach, you can containerize virtually any project with ease.</p>
+<h2 id="our-teams-usage"><a class="header" href="#our-teams-usage">Our Team's Usage</a></h2>
+<p>The <a href="https://github.com/igait-niu">iGAIT research team</a> found great success using Metis to accelerate our workflow.</p>
+<p>The primary chokepoint of our workflow was <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose">OpenPose</a>, which we use to create pose mappings of a human.</p>
+<p><img src="https://github.com/CMU-Perceptual-Computing-Lab/openpose/raw/master/.github/media/pose_face_hands.gif"></img></p>
+<p>Previously, on AWS and tested locally, runtime was upwards of 3 hours - and occupied the entirety of the available resources.</p>
+<p>However, on Metis, on the login nodes - that time dropped down, but not as far as we wanted it.</p>
+<p>Original inference times (login node, with GPU, Docker with NVIDIA CDI):</p>
+<ul>
+<li>Total: 1 hour+ total, job killed for long runtime</li>
+<li>Video 1: <strong>43 minutes</strong></li>
+<li>Video 2: <strong>17 minutes</strong> (did not finish)</li>
+</ul>
+<p>New inference times (compute node, with GPU, Docker with NVIDIA CDI):</p>
+<ul>
+<li>Total: &lt;1 minute :D</li>
+<li>Video 1: <strong>18.689683 seconds</strong></li>
+<li>Video 2: <strong>24.962916 seconds</strong></li>
+</ul>
+<p>What is very interesting is that our job had very minimal hardware specifications - you don't always need heavy CPU core counts if the GPU can handle it.</p>
+<pre><code>#PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+</code></pre>
+<p><em>Note: Although the 2GB is the most effecient amount we found, it is pointless as reserving a GPU also reserves the entire node</em>.</p>
+<p>You can find our Dockerfiles <a href="https://github.com/igait-niu/igait-openpose/tree/main">here</a>. There are multiple versions, the simplest being the CPU-only build.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="4-advanced-metis-usage-techniques"><a class="header" href="#4-advanced-metis-usage-techniques">4. Advanced Metis Usage Techniques</a></h1>
 <p>One of the most powerful tricks on Metis is SSH automation.</p>
 <p>This allows a Metis user to automate what would otherwise be:</p>
@@ -1610,7 +1664,8 @@ CMD .venv/bin/python3 main.py
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="41-ssh-automation-with-metis"><a class="header" href="#41-ssh-automation-with-metis">4.1. SSH Automation with Metis</a></h1>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust/ssh-automation">in this book's repository</a>!</em></p>
-<p>While Metis is an incredibly powerful tool, it does not provide native tooling to allow for automatic job submission.</p>
+<p>While Metis is an incredibly powerful tool, it does not provide an API to allow for automatic job submission from outside of Metis.</p>
+<p>For example - allowing your backend on AWS, Google Cloud Engine, or a local machine to submit a job automatically is not currently possible.</p>
 <p>One solution is to write our own software which submits the job on our behalf, using SSH-related libraries to open a connection and submit commands!</p>
 <h2 id="goals-5"><a class="header" href="#goals-5">Goals</a></h2>
 <ul>
@@ -2031,6 +2086,7 @@ $ mkdir ~/.local/share/containers/storage/overlay
 <pre><code class="language-bash">$ /bin/podman system reset
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="53-modules"><a class="header" href="#53-modules">5.3. Modules</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/crnt-users-software.shtml">Modules</a></em></small></p>
 <p>A module is a set of one or more packages used to extend the functionality of Metis with applications, libraries, or dependencies.</p>
 <p>On Metis, <code>module</code> is effectively the package management system.</p>
 <h2 id="primary-commands-1"><a class="header" href="#primary-commands-1">Primary Commands</a></h2>
@@ -2097,6 +2153,7 @@ This module loads GCC gcc/gcc-9.5.0
 -----------------------------------------------------------------
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="531-creating-modulefiles"><a class="header" href="#531-creating-modulefiles">5.3.1. Creating Modulefiles</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/crnt-users-software.shtml">Modules</a></em></small></p>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/modulefile/hello_metis">in this book's repository</a>!</em></p>
 <p>This guide will give you a minimally reproducible example of how to create your own modules which can be loaded via the <code>module</code> command.</p>
 <h2 id="creating-the-modulefile"><a class="header" href="#creating-the-modulefile">Creating the <code>modulefile</code></a></h2>
@@ -2140,6 +2197,7 @@ Hello, Metis!
 <p>Congratulations! This is a fully functional <code>module</code> setup, but you would ideally want to improve upon this greatly.</p>
 <p>To learn more about writing <code>modulefiles</code>, see the <a href="https://modules.readthedocs.io/en/v5.4.0/modulefile.html#description">official Modules documentation</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="54-pbs-professional"><a class="header" href="#54-pbs-professional">5.4. PBS Professional</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">Modules</a></em></small></p>
 <p>A summarization of the <a href="https://2021.help.altair.com/2021.1.2/PBS%20Professional/PBSUserGuide2021.1.2.pdf">PBS Professional user's guide by Altair</a> for the <a href="https://altair.com/pbs-professional/">PBS Professional</a> system.</p>
 <h2 id="primary-commands-2"><a class="header" href="#primary-commands-2">Primary Commands</a></h2>
 <h3 id="-qsub-script_path"><a class="header" href="#-qsub-script_path"><code>$ qsub &lt;script_path&gt;</code></a></h3>
@@ -2303,7 +2361,8 @@ Job ID          Username Queue    Jobname    SessID NDS TSK Memory Time  S Time
 <p><em>Appears to be entirely broken. Use the <code>qhist</code> with <code>grep</code> or <code>awk</code> to filter output instead.</em></p>
 <p><small><em><a href="https://www.jlab.org/hpc/PBS/qselect.html">Command Manual</a></em></small></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="541-pbs-files"><a class="header" href="#541-pbs-files">5.4.1. PBS Files</a></h1>
-<p>This chapter is a summary of the <a href="https://www.utrgv.edu/hpcc/_files/documents/pbspro-user-guide.pdf">PBS Professional User Guide</a> and the <a href="https://www.jlab.org/hpc/PBS/qsub.html"><code>qsub</code> manual</a>, which are fantastic resources if you want to learn more about PBS Professional or <code>.pbs</code> files.</p>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">Modules</a></em></small></p>
+<p>This chapter is a summary of the <a href="https://www.utrgv.edu/hpcc/_files/documents/pbspro-user-guide.pdf">PBS Professional User Guide</a>, <a href="https://www.jlab.org/hpc/PBS/qsub.html"><code>qsub</code> manual</a>, and the <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">CRCD Documentation</a> which are fantastic resources if you want to learn more about PBS Professional or <code>.pbs</code> files.</p>
 <p>Metis has many users, and each user could have a myriad of reqiurements for their application. In order to accommodate each user fairly, and to optimize the execution of jobs, CRCD uses <a href="https://altair.com/pbs-professional/">PBS Professional</a> by Altair.</p>
 <p>Job scripts written for PBS Professional are effectively script files, but alsoe define the parameters and requirements for job execution. These scripts are then run on the batch server, also known as the <strong>compute nodes</strong>.</p>
 <h4 id="what-does-a-pbs-file-look-like"><a class="header" href="#what-does-a-pbs-file-look-like">What Does a <code>.pbs</code> File Look Like?</a></h4>
@@ -2317,7 +2376,7 @@ Job ID          Username Queue    Jobname    SessID NDS TSK Memory Time  S Time
 #--PBS -M account@niu.edu
 
 # Navigate to our working directory
-PROJECT_DIRECTORY=/home/&lt;your_account_username&gt;/projects/cpp/cpp_on_metis
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
 echo "The job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -2551,22 +2610,6 @@ The ID of this job: '16386.cm'
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

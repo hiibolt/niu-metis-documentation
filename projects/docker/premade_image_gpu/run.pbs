@@ -23,7 +23,7 @@
 #--PBS -m ae
 #--#PBS -M account@niu.edu
 
-PROJECT_DIRECTORY=/home/<your_account_username>/projects/docker/premade_image_gpu
+PROJECT_DIRECTORY=/lstr/sahara/<your_project>/<you>/docker/premade_image_gpu
 echo "This job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 

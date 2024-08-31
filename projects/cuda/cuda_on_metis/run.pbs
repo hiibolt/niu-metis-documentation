@@ -24,7 +24,7 @@
 #--#PBS -M account@niu.edu
 
 # Navigate to our working directory
-PROJECT_DIRECTORY=/home/<your_account_username>/projects/cuda/cuda_on_metis
+PROJECT_DIRECTORY=/lstr/sahara/<your_project>/<you>/cuda/cuda_on_metis
 echo "The job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 

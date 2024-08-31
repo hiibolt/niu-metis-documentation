@@ -174,7 +174,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="541-pbs-files"><a class="header" href="#541-pbs-files">5.4.1. PBS Files</a></h1>
-<p>This chapter is a summary of the <a href="https://www.utrgv.edu/hpcc/_files/documents/pbspro-user-guide.pdf">PBS Professional User Guide</a> and the <a href="https://www.jlab.org/hpc/PBS/qsub.html"><code>qsub</code> manual</a>, which are fantastic resources if you want to learn more about PBS Professional or <code>.pbs</code> files.</p>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">Modules</a></em></small></p>
+<p>This chapter is a summary of the <a href="https://www.utrgv.edu/hpcc/_files/documents/pbspro-user-guide.pdf">PBS Professional User Guide</a>, <a href="https://www.jlab.org/hpc/PBS/qsub.html"><code>qsub</code> manual</a>, and the <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">CRCD Documentation</a> which are fantastic resources if you want to learn more about PBS Professional or <code>.pbs</code> files.</p>
 <p>Metis has many users, and each user could have a myriad of reqiurements for their application. In order to accommodate each user fairly, and to optimize the execution of jobs, CRCD uses <a href="https://altair.com/pbs-professional/">PBS Professional</a> by Altair.</p>
 <p>Job scripts written for PBS Professional are effectively script files, but alsoe define the parameters and requirements for job execution. These scripts are then run on the batch server, also known as the <strong>compute nodes</strong>.</p>
 <h4 id="what-does-a-pbs-file-look-like"><a class="header" href="#what-does-a-pbs-file-look-like">What Does a <code>.pbs</code> File Look Like?</a></h4>
@@ -188,7 +189,7 @@
 #--PBS -M account@niu.edu
 
 # Navigate to our working directory
-PROJECT_DIRECTORY=/home/&lt;your_account_username&gt;/projects/cpp/cpp_on_metis
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
 echo "The job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 
@@ -389,22 +390,6 @@ The ID of this job: '16386.cm'
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

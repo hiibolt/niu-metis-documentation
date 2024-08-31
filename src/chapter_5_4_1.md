@@ -1,6 +1,7 @@
 # 5.4.1. PBS Files
+<small>*Associated CRCD Documentation: [Modules](https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml)*</small>
 
-This chapter is a summary of the [PBS Professional User Guide](https://www.utrgv.edu/hpcc/_files/documents/pbspro-user-guide.pdf) and the [`qsub` manual](https://www.jlab.org/hpc/PBS/qsub.html), which are fantastic resources if you want to learn more about PBS Professional or `.pbs` files.
+This chapter is a summary of the [PBS Professional User Guide](https://www.utrgv.edu/hpcc/_files/documents/pbspro-user-guide.pdf), [`qsub` manual](https://www.jlab.org/hpc/PBS/qsub.html), and the [CRCD Documentation](https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml) which are fantastic resources if you want to learn more about PBS Professional or `.pbs` files.
 
 Metis has many users, and each user could have a myriad of reqiurements for their application. In order to accommodate each user fairly, and to optimize the execution of jobs, CRCD uses [PBS Professional](https://altair.com/pbs-professional/) by Altair.
 
@@ -18,7 +19,7 @@ Job scripts written for PBS Professional are effectively script files, but alsoe
 #--PBS -M account@niu.edu
 
 # Navigate to our working directory
-PROJECT_DIRECTORY=/home/<your_account_username>/projects/cpp/cpp_on_metis
+PROJECT_DIRECTORY=/lstr/sahara/<your_project>/<you>/cpp/cpp_on_metis
 echo "The job's working directory is $PROJECT_DIRECTORY"
 cd $PROJECT_DIRECTORY
 

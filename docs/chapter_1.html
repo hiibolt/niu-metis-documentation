@@ -183,12 +183,11 @@
 <li>All 32 nodes are connected via a 200 Gbps Infiniband network</li>
 </ul>
 <p>To learn more about Metis, you can see the <a href="https://crcd.niu.edu/crcd/images/metislayoutandspecification.pdf">METIS layout and specification</a>.</p>
-<p>It aims to allow anyone from any discipline, regardless of Linux experience, to get started. As such, no knowledge of any language is required to follow any example, as the focus of the examples are instead to help you understand Metis.</p>
-<p>On top of this, should a step confuse you, the final product of every project example in this book can also be found in this book's <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects">repository</a>.</p>
 <h2 id="primary-purpose"><a class="header" href="#primary-purpose">Primary Purpose</a></h2>
 <p>The goal of this book is to allow faculty at NIU to hit the ground running with their research.</p>
 <p>We want you to focus on completing your work - not getting the hardware to work.</p>
 <p>This book will teach you the skills to help focus on writing your application from the ground up.</p>
+<p>Additionally, should a step confuse you, the final product of every project example in this book can also be found in this book's <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects">repository</a>.</p>
 <h3 id="explored-use-cases"><a class="header" href="#explored-use-cases">Explored Use Cases</a></h3>
 <p>There are six use cases covered here, with increasing levels of control over Metis:</p>
 <ul>
@@ -271,22 +270,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

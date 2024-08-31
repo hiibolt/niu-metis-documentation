@@ -1,4 +1,6 @@
 # 5.3.1. Creating Modulefiles
+<small>*Associated CRCD Documentation: [Modules](https://crcd.niu.edu/crcd/current-users/crnt-users-software.shtml)*</small>
+
 *You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/modulefile/hello_metis)!*
 
 This guide will give you a minimally reproducible example of how to create your own modules which can be loaded via the `module` command.

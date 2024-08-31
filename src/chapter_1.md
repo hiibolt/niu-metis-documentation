@@ -9,16 +9,14 @@ Metis (commissioned in September 2023) is a 32-node CPU/GPU hybrid cluster runni
 
 To learn more about Metis, you can see the [METIS layout and specification](https://crcd.niu.edu/crcd/images/metislayoutandspecification.pdf).
 
-It aims to allow anyone from any discipline, regardless of Linux experience, to get started. As such, no knowledge of any language is required to follow any example, as the focus of the examples are instead to help you understand Metis.
-
-On top of this, should a step confuse you, the final product of every project example in this book can also be found in this book's [repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects).
-
 ## Primary Purpose
 The goal of this book is to allow faculty at NIU to hit the ground running with their research. 
 
 We want you to focus on completing your work - not getting the hardware to work.
 
 This book will teach you the skills to help focus on writing your application from the ground up.
+
+Additionally, should a step confuse you, the final product of every project example in this book can also be found in this book's [repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects).
 
 ### Explored Use Cases
 There are six use cases covered here, with increasing levels of control over Metis:
