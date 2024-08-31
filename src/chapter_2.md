@@ -1,7 +1,10 @@
 # 2. Basic Metis Usage
 This first chapter will provide two into-the-fire projects that will teach you the core systems of Metis. This will be done through a simple C++ project, followed by an optimized version written with CUDA.
 
-Reminder - you don't need to know Bash (Linux Commands), C++, or CUDA to follow along! This being said, it may help your understanding to know some basic Bash commands, so feel free to quickly glance over **Chapter 5.1 - Bash**.
+It's recommended to have a minimal knowledge of C++, CUDA, and Linux / Bash. If you haven't used any of these three before, or if it's been a while, linked below are some introductory resources:
+* [Linux / Bash](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview)
+* [C++](https://www.w3schools.com/cpp/cpp_intro.asp)
+* [CUDA](https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/)
 
 These next two chapters lay the foundational skills needed to use the advanced techniques in the following chapters, and it is highly recommended that you read them before proceeding!
 

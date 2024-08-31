@@ -16,10 +16,10 @@ We'll instead opt to start with the most basic of programs - "Hello, World" (wit
 ## C++ Boilerplate
 First, let's start by creating a folder for our projects, then a folder for C++, and finally a folder for this project:
 ```bash
-$ mkdir ~/projects
-$ mkdir ~/projects/cpp
-$ mkdir ~/projects/cpp/cpp_on_metis
-$ cd ~/projects/cpp/cpp_on_metis
+$ mkdir /lstr/sahara/<your_project>/<you>
+$ mkdir /lstr/sahara/<your_project>/<you>/cpp
+$ mkdir /lstr/sahara/<your_project>/<you>/cpp/cpp_on_metis
+$ cd /lstr/sahara/<your_project>/<you>/cpp/cpp_on_metis
 ```
 Let's start by creating a `main.cpp` file with the following contents:
 ```c++
@@ -81,7 +81,7 @@ $ g++ -o hello_world main.cpp
 $ ./hello_world
 ```
 
-After ten to twenty seconds, we should see our results!
+The calculation should take 22 seconds, after which we should see our results!
 
 ## Getting Started with PBS
 We are not currently making full use of Metis with this current setup. What we just ran our code on is called the **login node**, which has nowhere near the amount of computational power that is available to the **compute nodes**, which are where computationally intensive or time-consuming programs should be run.

@@ -1,0 +1,15 @@
+Script started on 2024-08-31 11:05:19-05:00
+]0;z1994244@metis:/lstr/sahara/zwlab/jw/cpp/cpp_on_metis[z1994244@metis cpp_on_metis]$ time ./hello_world
+Hello, Metis!
+
+- Numbers divisible by two: 5000000000
+- Numbers divisible by three: 3333333333
+- Numbers divisible by five: 2000000000
+
+real	0m22.448s
+user	0m22.383s
+sys	0m0.001s
+]0;z1994244@metis:/lstr/sahara/zwlab/jw/cpp/cpp_on_metis[z1994244@metis cpp_on_metis]$ exit
+exit
+
+Script done on 2024-08-31 11:09:12-05:00

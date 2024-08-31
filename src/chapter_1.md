@@ -1,6 +1,14 @@
 # 1. Introduction
 Welcome! This book serves as an all-in-one crash course in utilizing Metis.
 
+Metis (commissioned in September 2023) is a 32-node CPU/GPU hybrid cluster running Red Hat Enterprise Linux 8.x operating system. 1PB of shared disk is provided by a Cray ClusterStor E1000 storage server. Each compute node is an HPE DL 385 Gen 10+ V2 server equipped with:
+* 2x AMD EPYC 7713 CPUs 2.0 GHz 64-core processors
+* 251-1259 GB RAM, 1 x 4TB SSD scratch disk drives
+* 1 x NVIDIA A100 GPU, Amper™ architecture, 40 GB RAM each card
+* All 32 nodes are connected via a 200 Gbps Infiniband network
+
+To learn more about Metis, you can see the [METIS layout and specification](https://crcd.niu.edu/crcd/images/metislayoutandspecification.pdf).
+
 It aims to allow anyone from any discipline, regardless of Linux experience, to get started. As such, no knowledge of any language is required to follow any example, as the focus of the examples are instead to help you understand Metis.
 
 On top of this, should a step confuse you, the final product of every project example in this book can also be found in this book's [repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects).
@@ -45,10 +53,8 @@ If it's one of those two, chapters **2.1** and **2.2** will be of great use!
 The following chapters may not be as useful, as they touch primarily on Docker.
 ### Cases Where Docker Is Needed
 If your application is any of the following, it's highly recommended to use Docker: 
-- Applications with a language not listed above
-- Applications with dependencies Metis does not have encapsulated in its modulefiles
-- Applications with complex or circular dependencies
 - Applications which require a different operating system
+- Applications that are not pre-installed and easier to setup using docker than natively (consult with [crcdhelpdesk@niu.edu](mailto:crcdhelpdesk@niu.edu))
 
 If you only need CPU-based computation, chapters **2-3.1** will teach you everything you need.
 

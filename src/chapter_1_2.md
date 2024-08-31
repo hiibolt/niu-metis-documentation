@@ -2,7 +2,16 @@
 
 <small>*If you encounter issues, see the [official documentation](https://code.visualstudio.com/docs/remote/ssh)!*</small>
 
-There are many text editors which support using a remote machine, but one of the easiest is with Microsoft's Visual Studio Code.
+This guide is primarily applicable to Windows users, as the graphical integrated development enviroment it provides can make development much easier.
+
+However, development on Metis is also possible and easy, as the majority of popular terminal-based editors are preinstalled on the login nodes:
+* [Vi and Vim](https://www.vim.org/)
+* [GNU Emacs](https://www.gnu.org/software/emacs/)
+* [GNU nano](https://www.nano-editor.org/)
+
+Similarly, the two most popular build tools are also installed:
+* [GNU Make](https://www.gnu.org/software/make/)
+* [CMake](https://cmake.org/)
 
 ## Installing VSCode and Remote Explorer
 If you haven't already, first install [Visual Studio Code](https://code.visualstudio.com/). Note that Visual Studio Code and Visual Studio are *not* the same thing.

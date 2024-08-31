@@ -175,6 +175,14 @@
                     <main>
                         <h1 id="1-introduction"><a class="header" href="#1-introduction">1. Introduction</a></h1>
 <p>Welcome! This book serves as an all-in-one crash course in utilizing Metis.</p>
+<p>Metis (commissioned in September 2023) is a 32-node CPU/GPU hybrid cluster running Red Hat Enterprise Linux 8.x operating system. 1PB of shared disk is provided by a Cray ClusterStor E1000 storage server. Each compute node is an HPE DL 385 Gen 10+ V2 server equipped with:</p>
+<ul>
+<li>2x AMD EPYC 7713 CPUs 2.0 GHz 64-core processors</li>
+<li>251-1259 GB RAM, 1 x 4TB SSD scratch disk drives</li>
+<li>1 x NVIDIA A100 GPU, Amper™ architecture, 40 GB RAM each card</li>
+<li>All 32 nodes are connected via a 200 Gbps Infiniband network</li>
+</ul>
+<p>To learn more about Metis, you can see the <a href="https://crcd.niu.edu/crcd/images/metislayoutandspecification.pdf">METIS layout and specification</a>.</p>
 <p>It aims to allow anyone from any discipline, regardless of Linux experience, to get started. As such, no knowledge of any language is required to follow any example, as the focus of the examples are instead to help you understand Metis.</p>
 <p>On top of this, should a step confuse you, the final product of every project example in this book can also be found in this book's <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects">repository</a>.</p>
 <h2 id="primary-purpose"><a class="header" href="#primary-purpose">Primary Purpose</a></h2>
@@ -234,10 +242,8 @@
 <h3 id="cases-where-docker-is-needed"><a class="header" href="#cases-where-docker-is-needed">Cases Where Docker Is Needed</a></h3>
 <p>If your application is any of the following, it's highly recommended to use Docker:</p>
 <ul>
-<li>Applications with a language not listed above</li>
-<li>Applications with dependencies Metis does not have encapsulated in its modulefiles</li>
-<li>Applications with complex or circular dependencies</li>
 <li>Applications which require a different operating system</li>
+<li>Applications that are not pre-installed and easier to setup using docker than natively (consult with <a href="mailto:crcdhelpdesk@niu.edu">crcdhelpdesk@niu.edu</a>)</li>
 </ul>
 <p>If you only need CPU-based computation, chapters <strong>2-3.1</strong> will teach you everything you need.</p>
 <p>If you need GPU passthrough or have a very complicated project, it is recommended to read this book in its entirety!</p>
@@ -265,6 +271,22 @@
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

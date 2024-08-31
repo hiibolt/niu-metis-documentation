@@ -187,10 +187,10 @@
 </ul>
 <h2 id="c-boilerplate"><a class="header" href="#c-boilerplate">C++ Boilerplate</a></h2>
 <p>First, let's start by creating a folder for our projects, then a folder for C++, and finally a folder for this project:</p>
-<pre><code class="language-bash">$ mkdir ~/projects
-$ mkdir ~/projects/cpp
-$ mkdir ~/projects/cpp/cpp_on_metis
-$ cd ~/projects/cpp/cpp_on_metis
+<pre><code class="language-bash">$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
+$ cd /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
 </code></pre>
 <p>Let's start by creating a <code>main.cpp</code> file with the following contents:</p>
 <pre><code class="language-c++">#include &lt;iostream&gt;
@@ -246,7 +246,7 @@ int main () {
 <pre><code class="language-bash">$ g++ -o hello_world main.cpp
 $ ./hello_world
 </code></pre>
-<p>After ten to twenty seconds, we should see our results!</p>
+<p>The calculation should take 22 seconds, after which we should see our results!</p>
 <h2 id="getting-started-with-pbs"><a class="header" href="#getting-started-with-pbs">Getting Started with PBS</a></h2>
 <p>We are not currently making full use of Metis with this current setup. What we just ran our code on is called the <strong>login node</strong>, which has nowhere near the amount of computational power that is available to the <strong>compute nodes</strong>, which are where computationally intensive or time-consuming programs should be run.</p>
 <p>But how do we do so?</p>
@@ -468,6 +468,22 @@ Done!
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
