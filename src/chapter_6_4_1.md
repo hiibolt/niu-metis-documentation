@@ -1,4 +1,4 @@
-# 5.4.1. PBS Files
+# 6.4.1. PBS Files
 <small>*Associated CRCD Documentation: [Modules](https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml)*</small>
 
 This chapter is a summary of the [PBS Professional User Guide](https://www.utrgv.edu/hpcc/_files/documents/pbspro-user-guide.pdf), [`qsub` manual](https://www.jlab.org/hpc/PBS/qsub.html), and the [CRCD Documentation](https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml) which are fantastic resources if you want to learn more about PBS Professional or `.pbs` files.
@@ -13,7 +13,7 @@ Job scripts written for PBS Professional are effectively script files, but alsoe
 
 #PBS -N hello_world
 #PBS -j oe
-#PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
 #PBS -l walltime=00:15:00
 #--PBS -m ae
 #--PBS -M account@niu.edu
@@ -86,7 +86,7 @@ To comment out a PBS directive, replace `#PBS` with `#--PBS`.
 
     Example (`run.pbs` file):
     ```pbs
-    #PBS -l select=1:ncpus=8:mpiprocs=8:ngpus=1:mem=2gb
+    #PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
     #PBS -l walltime=00:15:00
     ```
 

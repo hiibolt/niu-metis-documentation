@@ -1,163 +1,166 @@
-# 5.1. Bash
+# 5.1. SSH Automation with Metis
+*You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust/ssh-automation)!*
 
-This section is a summary of the most common [Bash](https://www.gnu.org/software/bash/) commands to serve as a general introduction or refresher to help newer Linux users, or those who have not used it in some time.
+While Metis is an incredibly powerful tool, it does not provide an API to allow for automatic job submission from outside of Metis.
 
-Interested in learning even more about Bash? The [GNU Bash Reference](https://www.gnu.org/software/bash/manual/bash.html) is an amazing resource!
+For example - allowing your backend on AWS, Google Cloud Engine, or a local machine to submit a job automatically is not currently possible.
 
-## Common Commands
-### `$ ls`
-
-Lists the contents in the current directory.
-
-Example:
-```
-[you@metis.niu.edu ~]$ ls
-bin examples 
-```
-
-Common Arguments:
-* `-a`
-
-    Prints everything, including hidden files.
-
-    Example:
-    ```
-    [you@metis ~]$ ls -a
-    .              .dbus           .kde
-    ..             .dotnet         .kshrc   
-    .bash_history  .emacs          .local           
-    .bash_logout   .esd_auth       .mozilla       
-    .bash_profile  examples        .ssh       
-    .bashrc        .gitconfig      .wget-hsts      
-    bin            .nv             .Xauthority
-    .cache         .python_history .xemacs
-    .config        .jupyter        .zshrc
-    ```
-
-<small>*[Command Manual](https://www.man7.org/linux/man-pages/man1/ls.1.html)*</small>
+One solution is to write our own software which submits the job on our behalf, using SSH-related libraries to open a connection and submit commands!
 
 
-### `$ cd <path>`
+## Goals
+* Learn how to automate an SSH session and commands
+* Learn how to add your system as a known host
+* Understand the importance of hardening your code
 
-Changes the current directory to the specified path.
+## The Problem(s)
+First, let's talk about what Metis can and can't do.
 
-There are a few types of paths in a Unix-based filesystem, mainly being:
-* Absolute Path
+There are a few problems with automation on Metis that make it more difficult than a standard server:
+* **You cannot host a webserver on Metis**
+* **Ports cannot be forwarded**
 
-    Absolute paths always lead to the same location, no matter the context they are interpreted from.
+This means that one cannot simply host a webserver, which could otherwise recieve requests to start jobs automatically.
 
-    They typically start with `/`, which is the root (base level) of the filesystem, but they can also start with `~`, which is your home directory.
+So, what can we do?
 
-    For example, your home directory (akin to a desktop in a graphical OS) is at `/home/you` or `~`.
-* Relative Path
+## The Solution
+When asking why you can't automate something, one of the first questions is to ask *"Well, how am I able to do it manually?"*.
 
-    Relative paths are dependent on where they are run from, and are specified by *not* starting with a `/`.
+In this case, we are using SSH to connect, and we are then running `qsub` to submit our jobs.
 
-    For example, if you are in your home directory, the `bin` directory can be referenced by `./bin`. 
+Well, can that be done programmatically? 
 
-    The `.` signifies "current directory", but you can also use "..", which would represent "up one directory".
+Yes, but it's a little more complicated than doing it by hand.
 
-Here is an example of changing to your `bin` directory based on an absolute path:
-```bash
-[you@metis ~]$ cd /home/you/bin
-[you@metis bin]$
-```
+## Implementation
+For the sake of this guide, I will be using the [Rust programming language](https://www.rust-lang.org/). This is a programming language that best illustrates potential failure points in a program, forcing you to cover error cases in advance.
 
-*(`cd ~/bin` would be equivalent!)*
+SSH has many potential points of failure, so using it can help you to think ahead to cover your bases!
 
-Changing directory to your `bin` directory relative to your current directory (that being `~`):
-```bash
-[you@metis ~]$ cd bin
-[you@metis bin]$
-```
+However, you don't need to use Rust, you can just as easily write your connection code in Python, C, or any language that suits your need - as long as you write code that can handle and communicate failure well.
 
-*(`cd ./bin` would be equivalent!)*
+For instance, here is example Rust code to submit a `qsub` job (if you would like to follow along, please see the repository [here](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust)!):
+```rust
+use openssh::{Session, KnownHosts};
 
-Going up a directory, then into the examples directory:
-```bash
-[you@metis bin]$ cd ../examples
-[you@metis examples]$
-```
+async fn submit_pbs_job (
+    username: &str,
+    path: &str,
+    arguments: Vec<(&str, &str)>
+) -> Result<String, String> {
+    // Open a multiplexed SSH session
+    let session = Session::connect_mux(&format!("{username}@metis.niu.edu"), KnownHosts::Strict).await
+        .map_err(|err| format!("Couldn't connect to METIS! Are your credentials correct? Raw error:\n{err}"))?;
 
-<small>*[Command Manual](https://man7.org/linux/man-pages/man1/cd.1p.html)*</small>
+    // Build and run the `qsub`` command
+    let mut submit_job_command_output = session
+        .command("qsub");
 
-### `$ touch <file_name | file_name>`
+    // Build the arguments string
+    let stringified_arguments = arguments
+        .iter()
+        .map(|(key, value)| format!("{key}={value}"))
+        .collect::<Vec<String>>()
+        .join(",");
 
-Creates a new file with empty contents.
+    // Append the arguments string to the command, if there are any arguments
+    let submit_job_command_output = if stringified_arguments.len() > 0 {
+        submit_job_command_output
+            .arg("-v")
+            .arg(stringified_arguments)
+    } else {
+        &mut submit_job_command_output
+    };
 
-Example:
-```bash
-[you@metis ~]$ touch hello.txt
-[you@metis ~]$ ls
-bin projects hello.txt
-```
+    // Append the job script path to the command
+    let submit_job_command_output = submit_job_command_output
+        .arg(path)
+        .output().await
+        .map_err(|err| format!("Failed to run qsub command! Raw error:\n{err}"))?;
 
-<small>*[Command Manual](https://man7.org/linux/man-pages/man1/touch.1.html)*</small>
+    // Check if the command was successful
+    if !submit_job_command_output.status.success() {
+        let err = String::from_utf8(submit_job_command_output.stderr)
+            .map_err(|err| format!("Failed to decode the error message! Raw error:\n{err}"))?;
 
-### `$ nano <file_name | file_path/file_name>`
+        return Err(format!("When running the qsub command, the following error occurred:\n{err}"));
+    } 
 
-A simplistic terminal file editor, useful for quick edits.
+    // Otherwise, return the output (as a string)
+    let successful_output = String::from_utf8(submit_job_command_output.stdout)
+        .map_err(|err| format!("Failed to decode the output message! Raw error:\n{err}"))?;
 
-Shouldn't be used for large files; instead, you should use `emacs`, `vim`, or ideally, an editor on *your* machine with remote SSH capability. See **Chapter 1.1** for more information on setting up Visual Studio Code, a popular option.
+    Ok(successful_output)
+}
 
-Example:
-```bash
-[you@metis ~]$ touch hello.txt
-[you@metis ~]$ nano hello.txt
-```
+#[tokio::main]
+async fn main() {
+    // Submit a job to the METIS cluster
+    let job_id = submit_pbs_job("z1994244", "/home/z1994244/projects/cpp/hello_world/run.pbs", vec![
+        ("ARGUMENT_1", "VALUE_1"),
+        ("ARGUMENT_2", "VALUE_2"),
+        ("ARGUMENT_3", "VALUE_3"),
+    ]).await;
 
-<small>*[Command Manual](https://www.nano-editor.org/dist/v2.1/nano.html)*</small>
-
-### `$ mkdir <dir_name | dir_path/dir_name>`
-
-Creates a new and empty directory.
-
-Example:
-```
-[you@metis.niu.edu ~]$ mkdir hello
-[you@metis.niu.edu ~]$ ls
-bin examples hello
+    // Check if the job was submitted successfully
+    match job_id {
+        Ok(job_id) => println!("Job submitted successfully! Job ID: {job_id}"),
+        Err(err) => eprintln!("Failed to submit the job! Error message:\n{err}"),
+    }
+}
 ```
 
-<small>*[Command Manual](https://www.man7.org/linux/man-pages/man1/mkdir.1.html)*</small>
+Our first step is to use an SSH library - in this case, the crate `openssh` - to open a [multiplexed](https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing) SSH connection. 
 
-### `$ export <var>=<string | expression>`
+Many other libraries exist for other languages, such as `ssh-python` for Python and `ssh` for Go.
 
-Sets an environment variable. Unless somehow preserved, these will be cleared when you close the session!
+However, it's worth noting just how many potential points of failure there are:
+* The SSH can fail to open because Metis wasn't a known host
+* The command can fail to send over SSH
+* The `qsub` command can fail (on Metis' end), and return an error
+* The `stderr` from reading the failure reason from Metis can provide invalid UTF-8 (unlikely, but possible!)
+* The output from `stdout` of the `qsub` command can provide invalid UTF-8 (unlikely, but possible!)
 
-Example:
+The first failure will likely happen - unless you've aleady made Metis a known host on the system you will be automating SSH from.
+
+So, how do we add Metis as a known host? We need to create an SSH key, and copy it over to Metis. This allows us to bypass password-based authentication!
+
+You can hit enter through all of the prompts in the `ssh-keygen` command, but run the following **on your local machine, not Metis**:
 ```
-[you@metis.niu.edu ~]$ export FOO="bar"
+$ ssh-keygen
+$ ssh-copy-id <your_account_username>@metis.niu.edu
+```
+ 
+Now that Metis is a known host, we can test our program.
+
+If you are following along with this tutorial in Rust, you can find the codebase [here](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust), as you'll need to have the `openssh` and `tokio` crates installed and configured.
+
+Testing our program:
+```
+$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.04s
+     Running `target/debug/igait-ssh-testing`
+Job submitted successfully! Job ID: 18734.cm
 ```
 
-<small>*[Command Manual](https://www.man7.org/linux/man-pages/man1/export.1p.html)*</small>
+Congratulations! It worked, and you've just submitted a PBS job automatically!
 
-### `$ echo <string | expression>`
+## Important Notes
+Many `openssh` implementations, including in Rust, only run commands from the home directory. In some implementations, you can change this, but in many, you cannot. This is why, throughout our projects, we've been providing absolute paths. Otherwise, the `$PBS_O_WORKDIR` for our SSH automation would resolve to `~/.`, which would cause unexpected failures.
 
-Outputs the specified string or expression to stdout (the terminal).
+By writing our paths in absolute, we guarantee proper execution.
 
-You can output environment variables by prefacing a variable name with `$`.
-
-Example:
+Now, where is our output? Well, as previously mentioned, often, commands are run from the `~/.` (home) directory. Sure enough, after manually logging into Metis:
 ```
-[you@metis.niu.edu ~]$ echo "Hello, Metis!"
-Hello, Metis!
-[you@metis.niu.edu ~]$ export FOO="Hello, Metis!"
-[you@metis.niu.edu ~]$ echo "$FOO"
-Hello, Metis!
+$ ls
+bin  examples  hello_world.o18734  projects  rundir
 ```
 
-<small>*[Command Manual](https://www.man7.org/linux/man-pages/man1/echo.1.html)*</small>
+While not shown here, it is possible to automatically read the contents of this output folder, using a `cat` command or the likes after the expected run time is over.
 
-## Help Commands
+It cannot be understated how important it is that you are extremely careful whenever automating your workflow!
 
-Should you feel confused on the usage of any command, you can print additional helpful information on many commands!
+You must purify your inputs, and ensure it is physically impossible for an attacker to exploit your backend in any way possible. To not do so would endanger the work of fellow NIU researchers, students and staff.
 
-The 5 common ways to print help on a command, in order of the density of information output:
-* `$ info <command>`
-* `$ man <command>`
-* `$ <command> --help`
-* `$ <command> -h`
-* `$ <command> -?`
-
-Generally, first try `$ <command> --help`, and if you're still confused, try `$ man <command>`.
+However, as mentioned in the preface to this chapter, it's an incredibly effective method that can be further evolved into even more effecient and better integrated systems!

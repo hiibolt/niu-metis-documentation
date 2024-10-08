@@ -26,18 +26,18 @@ There are six use cases covered here, with increasing levels of control over Met
 * **Chapter 2.2 - Running a CUDA project**
     - Loading CUDA via the `module` command
     - PBS only
-* **Chapter 3.1 - Running a language not installed on Metis, such as Python 3.11**
+* **Chapter 4.1 - Running a language not installed on Metis, such as Python 3.11**
     - Downloading a pre-built Docker Image with `python` version 3.11 installed
     - PBS with Docker via Podman
-* **Chapter 3.2 - Running packages not installed on Metis with GPU passthrough**
+* **Chapter 4.2 - Running packages not installed on Metis with GPU passthrough**
     - Downloading a pre-built Docker Image with the requirements for CUDA
     - Passing through GPUs to Docker
     - PBS with Docker and NVIDIA Container Toolkit via Podman
-* **Chapter 3.3 - Running virtually any project using custom Docker Images**
+* **Chapter 4.3 - Running virtually any project using custom Docker Images**
     - Writing, building, and publishing your own Docker Image
     - Passing through GPUs to Docker
     - PBS with Docker and NVIDIA Container Toolkit via Podman
-* **Chapter 4.1 - SSH Automation**
+* **Chapter 5.1 - SSH Automation**
     - Demonstrates programmatic submission of PBS jobs via SSH for the purpose of fitting Metis into existing systems.
 
 ## Where Should I Read to?
@@ -54,6 +54,6 @@ If your application is any of the following, it's highly recommended to use Dock
 - Applications which require a different operating system
 - Applications that are not pre-installed and easier to setup using docker than natively (consult with [crcdhelpdesk@niu.edu](mailto:crcdhelpdesk@niu.edu))
 
-If you only need CPU-based computation, chapters **2-3.1** will teach you everything you need.
+If you only need CPU-based computation, chapters **2-2.2 and 4.1** will teach you everything you need.
 
 If you need GPU passthrough or have a very complicated project, it is recommended to read this book in its entirety!

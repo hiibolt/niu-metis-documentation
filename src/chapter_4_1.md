@@ -1,166 +1,300 @@
-# 4.1. SSH Automation with Metis
-*You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust/ssh-automation)!*
+# 4.1. Using Pre-Made Docker Images
+<small>*Associated CRCD Documentation: [PBS](https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml)*</small>
 
-While Metis is an incredibly powerful tool, it does not provide an API to allow for automatic job submission from outside of Metis.
+*You can find the code mentioned in this chapter [in this book's repository](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image)!*
 
-For example - allowing your backend on AWS, Google Cloud Engine, or a local machine to submit a job automatically is not currently possible.
+We will first begin by using a language which is *not* among the modules which Metis provides, Python 3.11.
 
-One solution is to write our own software which submits the job on our behalf, using SSH-related libraries to open a connection and submit commands!
+In actuality, Metis does offer Python, as seen below:
+```
+$ module av python
+-------------------- /etc/modulefiles ---------------------
+python/python-3.9.10  python/python-3.12.4
+```
 
+...but, at the time of writing this, it does not have Python 3.11, which is among the most commonly used versions.
+
+So, how do we fix this?
+
+Well, we ourselves can't fix the global modulefiles on Metis, which means under normal circumstances, we would have to reach out to Metis staff to have the module fixed - something that takes away from both your own time and the time of the Metis staff.
+
+You are able to define your own modulefiles, but this is a time consuming task, and it can't solve everything.
 
 ## Goals
-* Learn how to automate an SSH session and commands
-* Learn how to add your system as a known host
-* Understand the importance of hardening your code
+- Learn how to use Podman and Docker
+- Learn how to install dependencies via Podman's CLI
+- Learn how to use Podman in a PBS script file
+- Learn how to kill Podman to avoid uptime emails and alerts
 
-## The Problem(s)
-First, let's talk about what Metis can and can't do.
+## The Problem
+Modulefiles struggle or are outright impossible to create with any of the following cases:
+* Packages which can only run on certain operating systems, and specific versions of those operating systems
+* Packages which have dense dependency trees
+* Packages which have circular dependencies
+* Packages which need elevated permissions
+* Packages with long build times, where a distributed binary may be preferred
+* Closed-source or unfree packages (which are very common in machine learning!)
+* Huge numbers of dependencies
 
-There are a few problems with automation on Metis that make it more difficult than a standard server:
-* **You cannot host a webserver on Metis**
-* **Ports cannot be forwarded**
+This isn't to say it's impossible to manually build every single dependency for your project, and also include them manually.
 
-This means that one cannot simply host a webserver, which could otherwise recieve requests to start jobs automatically.
+However, this is an **extremely** time-consuming process, and time spent doing this will only take away from your core work.
 
-So, what can we do?
+Dependency installation should be a matter of lines, not weeks.
 
 ## The Solution
-When asking why you can't automate something, one of the first questions is to ask *"Well, how am I able to do it manually?"*.
+[Docker](https://www.docker.com/), an extremely powerful containerization and encapsulation tool that allows developers to define virtual machines with a level of granularity rarely found in modern computing. Docker allows you to select an operation system as a base, install packages and libraries, and define run behaviour.
 
-In this case, we are using SSH to connect, and we are then running `qsub` to submit our jobs.
+We will be using an overlay on Docker called [Podman](https://podman.io/). It allows us to use Docker containers despite not having elevated permissions on Metis. Understanding of Podman isn't required - all Docker commands can have `docker` replaced with `podman` (or in our case, `/bin/podman`).
 
-Well, can that be done programmatically? 
-
-Yes, but it's a little more complicated than doing it by hand.
-
-## Implementation
-For the sake of this guide, I will be using the [Rust programming language](https://www.rust-lang.org/). This is a programming language that best illustrates potential failure points in a program, forcing you to cover error cases in advance.
-
-SSH has many potential points of failure, so using it can help you to think ahead to cover your bases!
-
-However, you don't need to use Rust, you can just as easily write your connection code in Python, C, or any language that suits your need - as long as you write code that can handle and communicate failure well.
-
-For instance, here is example Rust code to submit a `qsub` job (if you would like to follow along, please see the repository [here](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust)!):
-```rust
-use openssh::{Session, KnownHosts};
-
-async fn submit_pbs_job (
-    username: &str,
-    path: &str,
-    arguments: Vec<(&str, &str)>
-) -> Result<String, String> {
-    // Open a multiplexed SSH session
-    let session = Session::connect_mux(&format!("{username}@metis.niu.edu"), KnownHosts::Strict).await
-        .map_err(|err| format!("Couldn't connect to METIS! Are your credentials correct? Raw error:\n{err}"))?;
-
-    // Build and run the `qsub`` command
-    let mut submit_job_command_output = session
-        .command("qsub");
-
-    // Build the arguments string
-    let stringified_arguments = arguments
-        .iter()
-        .map(|(key, value)| format!("{key}={value}"))
-        .collect::<Vec<String>>()
-        .join(",");
-
-    // Append the arguments string to the command, if there are any arguments
-    let submit_job_command_output = if stringified_arguments.len() > 0 {
-        submit_job_command_output
-            .arg("-v")
-            .arg(stringified_arguments)
-    } else {
-        &mut submit_job_command_output
-    };
-
-    // Append the job script path to the command
-    let submit_job_command_output = submit_job_command_output
-        .arg(path)
-        .output().await
-        .map_err(|err| format!("Failed to run qsub command! Raw error:\n{err}"))?;
-
-    // Check if the command was successful
-    if !submit_job_command_output.status.success() {
-        let err = String::from_utf8(submit_job_command_output.stderr)
-            .map_err(|err| format!("Failed to decode the error message! Raw error:\n{err}"))?;
-
-        return Err(format!("When running the qsub command, the following error occurred:\n{err}"));
-    } 
-
-    // Otherwise, return the output (as a string)
-    let successful_output = String::from_utf8(submit_job_command_output.stdout)
-        .map_err(|err| format!("Failed to decode the output message! Raw error:\n{err}"))?;
-
-    Ok(successful_output)
-}
-
-#[tokio::main]
-async fn main() {
-    // Submit a job to the METIS cluster
-    let job_id = submit_pbs_job("z1994244", "/home/z1994244/projects/cpp/hello_world/run.pbs", vec![
-        ("ARGUMENT_1", "VALUE_1"),
-        ("ARGUMENT_2", "VALUE_2"),
-        ("ARGUMENT_3", "VALUE_3"),
-    ]).await;
-
-    // Check if the job was submitted successfully
-    match job_id {
-        Ok(job_id) => println!("Job submitted successfully! Job ID: {job_id}"),
-        Err(err) => eprintln!("Failed to submit the job! Error message:\n{err}"),
-    }
-}
+If you haven't already, create your projects directory, a new directory for Docker projects, and finally a directory for this project:
+```bash
+$ mkdir /lstr/sahara/<your_project>/<you>
+$ mkdir /lstr/sahara/<your_project>/<you>/docker
+$ mkdir /lstr/sahara/<your_project>/<you>/docker/premade_image
+$ cd /lstr/sahara/<your_project>/<you>/docker/premade_image
 ```
 
-Our first step is to use an SSH library - in this case, the crate `openssh` - to open a [multiplexed](https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing) SSH connection. 
-
-Many other libraries exist for other languages, such as `ssh-python` for Python and `ssh` for Go.
-
-However, it's worth noting just how many potential points of failure there are:
-* The SSH can fail to open because Metis wasn't a known host
-* The command can fail to send over SSH
-* The `qsub` command can fail (on Metis' end), and return an error
-* The `stderr` from reading the failure reason from Metis can provide invalid UTF-8 (unlikely, but possible!)
-* The output from `stdout` of the `qsub` command can provide invalid UTF-8 (unlikely, but possible!)
-
-The first failure will likely happen - unless you've aleady made Metis a known host on the system you will be automating SSH from.
-
-So, how do we add Metis as a known host? We need to create an SSH key, and copy it over to Metis. This allows us to bypass password-based authentication!
-
-You can hit enter through all of the prompts in the `ssh-keygen` command, but run the following **on your local machine, not Metis**:
-```
-$ ssh-keygen
-$ ssh-copy-id <your_account_username>@metis.niu.edu
-```
- 
-Now that Metis is a known host, we can test our program.
-
-If you are following along with this tutorial in Rust, you can find the codebase [here](https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust), as you'll need to have the `openssh` and `tokio` crates installed and configured.
-
-Testing our program:
-```
-$ cargo run
-    Finished dev [unoptimized + debuginfo] target(s) in 0.04s
-     Running `target/debug/igait-ssh-testing`
-Job submitted successfully! Job ID: 18734.cm
+Next, let's create a `main.py` file with the following contents:
+```python
+print( "Hello, Metis!" )
 ```
 
-Congratulations! It worked, and you've just submitted a PBS job automatically!
+Now, how do we get Docker to run this file?
 
-## Important Notes
-Many `openssh` implementations, including in Rust, only run commands from the home directory. In some implementations, you can change this, but in many, you cannot. This is why, throughout our projects, we've been providing absolute paths. Otherwise, the `$PBS_O_WORKDIR` for our SSH automation would resolve to `~/.`, which would cause unexpected failures.
+For your own projects, you can search the [Docker Hub](https://hub.docker.com/) for programming languages, software, and more. You can also use a base image like `ubuntu:22.04` or `debian:bookworm`, which contain nothing but the operating system with no additional packages or programming languages.
 
-By writing our paths in absolute, we guarantee proper execution.
+From there, you can use the `exec` command to install the languages or packages with that operating system's respective package manager. We will go over the usage of the `exec` command with examples shortly!
 
-Now, where is our output? Well, as previously mentioned, often, commands are run from the `~/.` (home) directory. Sure enough, after manually logging into Metis:
+We'll start by downloading and running a [Docker Image](https://docs.docker.com/guides/docker-concepts/the-basics/what-is-an-image/), which will be built on the Debian operating system version 12.6 "Bookworm", and include Python 3.11.9.
+
+***Note**: If you see something like `ERRO[0000] cannot find UID/GID for user z1994244: no subuid ranges found for user "z1994244" in /etc/subuid - check rootless mode in man pages.`, it's okay! This error sometimes occurs the first time you run a command, and if it does, simply wait a few seconds and run it again.*
+
+Downloading and starting our container:
 ```
-$ ls
-bin  examples  hello_world.o18734  projects  rundir
+$ /bin/podman run             \
+    -v ./.:/home            \
+    -w /home                \
+    --name python_container \
+    -t -d                   \
+    python:3.12.5-bookworm
+WARN[0000] Network file system detected as backing store.  Enforcing overlay option `force_mask="700"`.  Add it to storage.conf to silence this warning 
+f258979e09d0923ebb815b0b0baae9ae9cb2de18ace02a4aa282920c673073d9
 ```
 
-While not shown here, it is possible to automatically read the contents of this output folder, using a `cat` command or the likes after the expected run time is over.
+The first line with the warning can be safely ignored. It's likely that by the time you are reading this, it's been silenced.
 
-It cannot be understated how important it is that you are extremely careful whenever automating your workflow!
+Next, let's run our Python script!
+```
+$ /bin/podman exec python_container python3 main.py
+...
+Hello, World!
+```
 
-You must purify your inputs, and ensure it is physically impossible for an attacker to exploit your backend in any way possible. To not do so would endanger the work of fellow NIU researchers, students and staff.
+Congratulations! You've just run a version of Python that's not installed on Metis at all. But, what if our Python script needed some dependencies?
 
-However, as mentioned in the preface to this chapter, it's an incredibly effective method that can be further evolved into even more effecient and better integrated systems!
+Overwrite the `main.py` file with the following contents:
+```python
+import numpy as np
+
+print( "Hello, Metis!" )
+```
+
+If we try to run our script again, we get an error:
+```
+$ /bin/podman exec python_container python3 main.py
+...
+Traceback (most recent call last):
+  File "/home/main.py", line 1, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+```
+
+Let's create our [Python virtual environment](https://docs.python.org/3/library/venv.html), and install `numpy` using the `exec` command! Run the following:
+```bash
+$ /bin/podman exec python_container python -m venv .venv
+$ /bin/podman exec python_container .venv/bin/pip install numpy
+```
+
+Running our script again:
+```
+$ /bin/podman exec python_container .venv/bin/python3 main.py
+...
+Hello, Metis!
+```
+
+Nicely done! Lastly, let's kill and remove our container:
+```bash
+$ /bin/podman kill python_container
+$ /bin/podman rm python_container
+```
+
+Again, congratulations! You've successfully downloaded a Docker Image, installed some dependancies, and run them on the login node!
+
+## Docker in PBS
+Now, we just ran that Docker image on the *login node*, not the compute nodes. So how do we write a PBS file to automate what we just did?
+
+Create a `run.pbs` file with the following contents:
+```bash
+#!/bin/bash
+
+#PBS -N premade_image
+#PBS -j oe
+
+#Note - on Metis   
+#              Nchunks<=32, for GPU chunks
+#              Nchunks<=4096/Ncpus for CPU-only chunks
+#              (run 'shownodes' command to find the number of free cpus) 
+#              Ncpus<=128, the total number of CPUs per node is 128 
+#              NPmpi<=Ncpus, the total number of CPUs allocated for MPI tasks, 
+#                              request NPmpi=Ncpus for non-OPENMP jobs                           
+#              Ngpus==1,  the total number of GPUs per node is 1    
+#              X<=256,  28 of 32 Metis modes have 256 GB of RAM                       
+#                       special jobs can request up to 1024 GB of RAM (4 nodes)
+#
+# Below, we request two chunks;
+#  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
+#PBS -l walltime=00:15:00
+
+# When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
+#--PBS -m ae
+#--#PBS -M account@niu.edu
+
+PROJECT_DIRECTORY=/lstr/sahara/<your_project>/<you>/docker/premade_image
+echo "This job's working directory is $PROJECT_DIRECTORY"
+cd $PROJECT_DIRECTORY
+
+# Enable linger for the user
+echo ""
+echo "Enabling linger for the user..."
+loginctl enable-linger <your_account_name>
+echo "Done!"
+
+# Start the container
+# 
+# There are five flags, most of which will never change:
+# - `-v $PROJECT_DIRECTORY:/home` mounts the project directory to the `/home` 
+#    directory in the container.
+# - `-w /home` sets the working directory in the container to `/home`.
+# - `-t` allocates a pseudo-TTY. This is useful for running the container in
+#    the background.
+# - `-d` runs the container in the background.
+#
+# The last argument is the image name. This is the only thing that will change
+#  between projects, this is the name of the image we want to run.
+# 
+# For instance, in this case, we are running the `python:3.12.5-bookworm` image:
+# - `python` is the name of the image.
+# - `3.12.5-bookworm` is the tag of the image, which specifies the version of the
+#    image we want to run.
+#
+# Millions of pre-built images are available on Docker Hub, and will likely 
+#  already have an image that suits your needs! You can search for images here:
+#  https://hub.docker.com/
+#
+# Note: There may be many logs that are printed to the console when the container
+#  is started. Despite being error-level, this is normal, and you can ignore them.
+echo ""
+echo "Starting the container..."
+/bin/podman run                  \
+    -v $PROJECT_DIRECTORY:/home  \
+    -w /home                     \
+    --name python_container      \
+    -t -d                        \
+    python:3.12.5-bookworm       \
+    > /dev/null 2>&1 # You can remove this line if you want to see the logs!
+echo "Done!"
+
+# Run our python script
+#
+# The `exec` command runs a command in a running container. In this case, we are
+#  running the `python3 main.py` command in the `python_container` container.
+# 
+# There is a generic error message, which can be ignored.
+echo ""
+echo "Running the python script..."
+/bin/podman exec python_container .venv/bin/python3 main.py
+echo "Done!"
+
+# Kill the container
+#
+# The `kill` command stops a running container. In this case, we are stopping the
+#  `python_container` container.
+echo ""
+echo "Stopping the container..."
+/bin/podman kill python_container \
+    > /dev/null 2>&1 # You can remove this line if you want to see the logs!
+echo "Done!"
+
+# Remove the container
+#
+# The `rm` command removes a container. In this case, we are removing the
+#  `python_container` container.
+echo ""
+echo "Removing the container..."
+/bin/podman rm python_container \
+    > /dev/null 2>&1 # You can remove this line if you want to see the logs!
+echo "Done!"
+```
+
+This is largly the same, and only two things need to be modified to fit your Metis account:
+```bash
+...
+
+PROJECT_DIRECTORY=/lstr/sahara/<your_project>/<you>/docker/premade_image
+echo "This job's working directory is $PROJECT_DIRECTORY"
+cd $PROJECT_DIRECTORY
+
+# Enable linger for the user
+echo ""
+echo "Enabling linger for the user..."
+loginctl enable-linger <your_account_name>
+echo "Done!"
+
+...
+```
+Be sure to replace `<your_account_name>`, `<your_project>`, and `<you>` instances with your own information! The linger command is unique to Podman (Docker) jobs in PBS, and ensures it has the nessecary permissions to run your jobs.
+
+With that, let's test our job!
+```
+$ qsub run.pbs
+18712.cm
+$ cat premade_image.o18712
+This job's working directory is /lstr/sahara/<your_project>/<you>/docker/premade_image
+
+Enabling linger for the user...
+Done!
+
+Starting the container...
+Done!
+
+Running the python script...
+time="2024-08-16T14:57:08-05:00" level=warning msg="Network file system detected as backing store.  Enforcing overlay option `force_mask=\"700\"`.  Add it to storage.conf to silence this warning"
+Error: can only create exec sessions on running containers: container state improper
+Done!
+
+Stopping the container...
+Done!
+
+Removing the container...
+Done!
+```
+
+Lastly, we must kill off our Podman processes on the login node, or else we'll recieve emails about extended uptime. 
+
+There are many, so it's easier to kill instead everything under your username. This will close your shell connection, so please save any unfinished work before doing so. 
+
+This will cause additional load times next time you login to Metis (10-20 seconds), but is important to do.
+```bash
+pkill -U <your_account_username>
+```
+
+## Closing Thoughts
+Congratulations! You now have the skills needed to tackle most CPU-only applications.
+
+You can modify the base image to fit the operating system, languages, and software you need! You can also add or modify `exec` commands to install more languages, libraries, or software to be able to load anything else your software might need.
+
+If you'd like to learn more about the `run`, `exec`, `kill`, or `rm` commands, additional documentation can be found in the **Conclusion and Helpful Resources** chapter!
+
+If your application does not make use of the GPU, and you have no interest in automation or integration, you likely don't need to read any further. If you do, then feel free to continue onto **Chapter 3.2 - Using GPU Acceleration with Docker**!

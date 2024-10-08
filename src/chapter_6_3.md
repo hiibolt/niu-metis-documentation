@@ -1,4 +1,4 @@
-# 5.3. Modules
+# 6.3. Modules
 <small>*Associated CRCD Documentation: [Modules](https://crcd.niu.edu/crcd/current-users/crnt-users-software.shtml)*</small>
 
 A module is a set of one or more packages used to extend the functionality of Metis with applications, libraries, or dependencies.

@@ -1,15 +1,25 @@
-# 5. Command Quick Reference
+# 5. Advanced Metis Usage Techniques
+One of the most powerful tricks on Metis is SSH automation.
 
-This chapter contains a quick reference to the most useful commands and their respective options for every example or topic mentioned thus far.
+This allows a Metis user to automate what would otherwise be:
+* **1** - Logging into Metis over SSH
+* **2** - Running job submission commands
+* **3** - Retrieving a job ID
 
-Each section also links the documentation, manual, or other source it summarizes. Even if an option or command isn't included, you can still find more information easily - and in one convenient location. 
+By doing this, we can intergrate Metis into the workflow of any existing web server!
 
-For example, let's say you forgot which flag you need to name a container with Podman. You would otherwise have to flip through a chapter which uses it in practice or read the Podman documentation - both of which are time consuming.
+This technique also opens the door to other techniques, three of which will be briefly mentioned in **Chapter 4.2 - Conceptual Techniques**. As the title states, because of the varied and complex nature of implementation they will only be described conceptually.
 
-Instead, you can simply find the most useful commands and options here!
+## Overview of the Chapters
 
-## Covered Topics
-* **Chapter 5.1** - Most Common Bash Commands
-* **Chapter 5.2** - Most Common Podman and Docker Commands
-* **Chapter 5.3 and 5.3.1** - Common Module Usage Commands and Creating Custom Modulefiles
-* **Chapter 5.4 and 5.4.1** - Common PBS Usage Commands and Writing PBS Files
+### Chapter 5.1: SSH Automation with Metis
+* **Goals**: Learn how to automate commands over SSH with Metis.
+* **Problem**: Metis does not allow web servers, making automation difficult.
+* **Solution**: Use an SSH library to open a multiplexed connection for execution.
+* **Outcome**: You will be able to run any command on Metis programmatically.
+
+### Chapter 5.2: Conceptual Techniques
+* **Goals**: Learn how to further integrate Metis into your existing backend.
+* **Problem**: Metis does not allow web servers.
+* **Solution**: Use additional layers and API endpoints to proxy a backend.
+* **Outcome**: You will be able to completely integrate your solution with Metis.

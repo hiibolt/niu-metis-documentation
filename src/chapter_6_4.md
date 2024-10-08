@@ -1,4 +1,4 @@
-# 5.4. PBS Professional
+# 6.4. PBS Professional
 <small>*Associated CRCD Documentation: [Modules](https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml)*</small>
 
 A summarization of the [PBS Professional user's guide by Altair](https://2021.help.altair.com/2021.1.2/PBS%20Professional/PBSUserGuide2021.1.2.pdf) for the [PBS Professional](https://altair.com/pbs-professional/) system.

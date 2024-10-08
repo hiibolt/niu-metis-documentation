@@ -201,7 +201,7 @@ Create a `run.pbs` file with the following contents:
 #
 # Below, we request two chunks;
 #  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
-#PBS -l select=1:ncpus=1:mpiprocs=1:ngpus=1:mem=2gb
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
 #PBS -l walltime=00:15:00
 
 # When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)

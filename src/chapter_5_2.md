@@ -1,125 +1,72 @@
-# 5.2. Podman and Docker Quick Reference
+# 5.2. Conceptual Techniques
 
-This section summarizes the most important commands Podman and Docker offer.
+Each of these techniques requires SSH automation to work; but can allow you to completetly integrate Metis as a backend, all while maintaining safety and security! 
 
-It's worth noting that there are many, many more commands both offer, so check out their respective references if you're looking for more!
-* [Docker's Documentation](https://docs.docker.com/)
-* [Podman's Documentation](https://docs.podman.io/)
+However, each is only described conceptually as implementation varies depending on your use case.
 
-*Podman is a proxy layer on Docker, which means all commands (listed in this reference) are the same regardless of whether you use them on your machine with `docker` or on Metis with `/bin/podman`.*
+## Providing Files to Metis Remotely
+By adding file IDs, download links, or using another way to communicate a download location, you can use the arguments on a job submission request to provide Metis with a way to download files for processing.
 
-**Notes**:
-* Staying Tidy
+This can be accomplished by reading the provided arguments in your PBS script, and using `wget`, `git`, `curl`, Git LFS, or another download tool to then download the files onto Metis and into the PBS job's working directory.
 
-    It's very important that you routinely run `/bin/podman system prune`. The reason for this is because Podman *can't run cleanup commands* if you don't have any remaining disk quota!
+**Psuedocode Example**:
 
-    Because Metis users (without special request) have a maximum home (`~/*`) directory size of ~25GB, it's critical to stay under this limit while developing with Podman.
-
-    *If you run into this issue, either contact CRCD to have your quota temporarily increased, or see **Addendum - Force Cleaning Podman**!*
-* Errors Which Can be Ignored
-
-    * ```ERRO[0000] cannot find UID/GID for user z1994244: no subuid ranges found for user "z1994244" in /etc/subuid - check rootless mode in man pages.```
-
-        This error sometimes occurs the first time you run a command.
-
-        If it does, simply wait a few seconds and run it again.
-
-    * ```WARN[0000] Network file system detected as backing store.  Enforcing overlay option `force_mask="700"`.  Add it to storage.conf to silence this warning```
-
-        At the time of writing this, you will see this quite often. It can be safely ignored.
-
-        It's an artifact of using Podman, and will hopefully be fixed in the future.
-
-## Primary Commands
-### `$ /bin/podman run image:tag`
-Starts a container, pulling the image if needed.
-
-If you don't specify a name, it will output the newly allocated container ID.
-
-```bash
-[you@metis.niu ~]$ /bin/podman run --name python_container python:3.12.5-bookworm
-...
-b647edca4b32eb02d15dc8cb70dc2a3da8edcf9e767c1f3ff2d7a58133ce407c
-```
-
-Common Arguments:
-* `--name <container_name>`
-
-    Gives the container a name, which can be used conveniently in place of the container's ID.
-* `-t`
-
-    Allocates a psuedo-TTY (helps support console-based applications)
-* `-d`
-
-    Runs the container in detached mode.
-
-    Without this option, standard input, output, and error are linked to yours.
-* `-v <host_path>:<container_path>`
-
-    Mounts a path from your host machine to the container as a Docker Volume.
-
-    Very useful for easily importing your project directory.
-* `-w <container_path>`
-
-    Changes the working directory inside the container to the specified path.
-
-<small>*[Command Manual](https://docs.podman.io/en/latest/markdown/podman-run.1.html)*</small>
-
-### `$ /bin/podman exec <container_id | container_name> <command>`
-Executes a command in a container.
-
-Example:
-```bash
-$ /bin/podman exec python_container python3 main.py
-```
-
-### `$ /bin/podman kill <container_id | container_name>`
-Attempts to stop a container by sending the `SIGKILL` signal.
-
-Example:
-```bash
-$ /bin/podman kill python_container
-```
-
-<small>*[Command Manual](https://docs.podman.io/en/latest/markdown/podman-kill.1.html)*</small>
-
-### `$ /bin/podman rm <container_id | container_name>`
-Removes a container, very useful for reclaiming the name of a container.
-
-For instance, even if you were to kill `python_container` with `/bin/podman kill`, you still would not be able to create a new container with the name `python_container`. You must also remove the original.
-
-Example:
-```bash
-$ /bin/podman rm python_container
-```
-
-<small>*[Command Manual](https://docs.podman.io/en/latest/markdown/podman-rm.1.html)*</small>
-
-## Addendum
-### Force Cleaning Podman
-If you're not careful and don't routinely clean Podman, you might reach a stalemate where you can't do anything on Metis because you have no disk quota, but you also can't use Podman's cleaning utilities!
-
-Example:
-```
-$ /bin/podman inspect
+`main.py`:
+```python
 ...
 
-Error: close /home/<your_metis_username>/.local/share/containers/storage/overlay/.has_mount_program: disk quota exceeded
+file_download_link = "https://s3.amazon.com/.../hello_world.txt";
+
+submit_metis_command([
+    "qsub",
+    "-v",
+    f"DOWNLOAD_LINK={file_download_link}"
+    "run.pbs"
+]);
+
+...
 ```
 
-First, confirm it's Podman using most of your storage:
+`run.pbs`:
 ```bash
-du -sh ~/.local/share/containers/storage/overlay
-26GB
+...
+
+# Downloads the target file
+wget -O hello_world.txt $DOWNLOAD_LINK
+
+# Outputs the content of the file
+cat hello_world.txt
+
+...
 ```
 
-Then, we will manually delete the `overlay` directory. It's currently unclear what side effects manually performing this action does, so it may be better to have your quota increased instead. The commands will be listed below, nonetheless:
-```bash
-$ rm -rf ~/.local/share/containers/storage/overlay
-$ mkdir ~/.local/share/containers/storage/overlay
-```
+## Web Server Completion Reporting
+Since PBS jobs on Metis have the ability to connect to the internet, it's possible to then ping your webserver to let it know it's finished, instead of guessing.
 
-Then, you'll need to "reset" Podman:
-```bash
-$ /bin/podman system reset
-```
+The process can look like:
+- Create a database to track jobs on your webserver
+- Create a route that allows updating each job entry via HTTP
+- Create a new job data structure in your database with a unique ID for a job
+- Pass the unique ID to the SSH automation as an argument when submitting a new job
+- Recieve and note that argument in your PBS script file
+- When work in your PBS script file is done, at the very end, send an HTTP request to the updating route
+- Update the database entry via the route, and handle any interpretation logic for the results of your job
+
+This means your server can be aware of the moment your job is complete, and accomplish interpretation results immediately.
+
+Due to the complex and implementation-specific nature of this process, I have not included an example. However, this technique was implemented in our backend for the iGait project, the link to which can be found [here](https://github.com/igait-niu/igait-backend)!
+
+## Event Reporting Websocket
+This technique only applies to jobs which are short enough to be tracked throughout the lifecycle of a single websocket connection, but can provide real-time results nonetheless.
+
+The steps are mildly similar to the previous technique:
+- Create an (asynchronus and thread-safe) websocket-compatible route, that when opened, first broadcasts a 'starting' event
+- Create a route that allows updating each job entry via HTTP
+- Create a new job data structure in your database with a unique ID for a job
+- Pass the unique ID to the SSH automation as an argument when submitting a new job
+- Recieve and note that argument in your PBS script file
+- At each step, send an HTTP request to the webserver with any events you would like to broadcast
+- At each invocation on the HTTP route, grab a handle to the websocket the ID corresponds to, and broadcast the information from the HTTP request
+- When the job provides a completion signal, or when you send a fatal error event from your PBS script, close the websocket
+
+This is more effective for jobs that may not have a 'final output', but rather, work in chunks. Two common examples are realtime audio encoding/decoding, or token-by-token output from a machine learning model.
