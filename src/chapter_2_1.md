@@ -195,7 +195,7 @@ The following lines are important to understand:
 - Line 3 specifies the name of our file.
 - Line 19 specifies the hardware requirements for our job
 
-    To learn more about specifying hardware requirements, see [Chapter 5.4.1](https://hiibolt.github.io/niu-metis-documentation/chapter_5_4_1.html#pbs-directives).
+    To learn more about specifying hardware requirements, see [Chapter 6.4.1](https://hiibolt.github.io/niu-metis-documentation/chapter_6_4_1.html#pbs-directives).
 - Line 20 specifies the estimated runtime of our job
 - Lines 23 and 24 specify options for recieveing emails regarding various events
 
@@ -203,7 +203,7 @@ The following lines are important to understand:
     Adding *b* sends mail on start.
     Adding *e* sends mail on end.
 
-    To learn more about recieving emails, see [Chapter 5.4.1](https://hiibolt.github.io/niu-metis-documentation/chapter_5_4_1.html#pbs-directives).
+    To learn more about recieving emails, see [Chapter 6.4.1](https://hiibolt.github.io/niu-metis-documentation/chapter_6_4_1.html#pbs-directives).
 
 
 
