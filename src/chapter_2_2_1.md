@@ -55,7 +55,7 @@ $ cargo init .
 $ cargo run
 ```
 
-You'll be met with a kind `Hello, world!`. Nice work, you're basically a Rust developer now.
+You'll be met with a kind `Hello, World!`. Nice work, you're basically a Rust developer now.
 
 All Rust source code is in the `src` directory, with the entrypoint being `main.rs`. Let's rewrite this to start strong with a program that generates a whole bunch of random floats!
 
@@ -124,7 +124,7 @@ fn add ( num_1: f64, num_2: f64 ) -> f64 {
 So to write our average function, we're going to take advantage of Rust's absolutely phenomenal [`Iterator`](https://doc.rust-lang.org/std/iter/trait.Iterator.html) type, which has an outrageous number of useful methods. We'll write a function which uses two for our average:
 ```rust
 fn sequential_average ( nums: &[f64] ) -> f64 {
-    nums.into_iter().sum() / (nums.len() as f64)
+    nums.into_iter().sum::<f64>() / (nums.len() as f64)
 }
 ```
 
@@ -231,12 +231,10 @@ fn sequential_average ( nums: &[f64] ) -> f64 {
 fn parallel_average ( nums: &[f64] ) -> f64 {
     let sum: f64 = nums
         .par_chunks(nums.len() / 100)
-        .map(|ind| {
-            let mut local_sum: f64 = 0.0;
-            for &num in ind {
-                local_sum += num;
-            }
-            local_sum
+        .map(|chunk| {
+            chunk.into_iter()
+                .map(|&n| n)
+                .sum::<f64>()
         })
         .sum();
 

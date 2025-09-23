@@ -8,6 +8,7 @@
         - [Building a CUDA Project from the Ground Up](./chapter_2_1_2.md)
     - [Rust on Metis](./chapter_2_2.md)
         - [A Parallel Rust Project, from the Ground Up](./chapter_2_2_1.md)
+        - [Cross-Node Computation with MPI and Rust](./chapter_2_2_2.md)
 - [User Environment Customization/Virtualization on Metis](./chapter_3.md)
     - [Pros/Cons: Podman + Docker and Singularity/Apptainer + Docker](./chapter_3_1.md)
     - [Pros/Cons: Conda](./chapter_3_2.md)
