@@ -20,10 +20,10 @@ Additionally, should a step confuse you, the final product of every project exam
 
 ### Explored Use Cases
 There are six use cases covered here, with increasing levels of control over Metis:
-* **Chapter 2.1 - Running a C++ project**
+* **Chapter 2.1.1 - Running a C++ project**
     - No additional configuration
     - PBS only
-* **Chapter 2.2 - Running a CUDA project**
+* **Chapter 2.1.2 - Running a CUDA project**
     - Loading CUDA via the `module` command
     - PBS only
 * **Chapter 4.1 - Running a language not installed on Metis, such as Python 3.11**
@@ -46,7 +46,7 @@ If your application is either of the following, you shouldn't use Docker.
 - Native C, Go, or Python applications *with pre-installed or no dependencies*
 - OpenMPI-based applications
 
-If it's one of those two, chapters **2.1** and **2.2** will be of great use!
+If it's one of those two, chapter **2** will be of great use!
 
 The following chapters may not be as useful, as they touch primarily on Docker.
 ### Cases Where Docker Is Needed
@@ -54,6 +54,6 @@ If your application is any of the following, it's highly recommended to use Dock
 - Applications which require a different operating system
 - Applications that are not pre-installed and easier to setup using docker than natively (consult with [crcdhelpdesk@niu.edu](mailto:crcdhelpdesk@niu.edu))
 
-If you only need CPU-based computation, chapters **2-2.2 and 4.1** will teach you everything you need.
+If you only need CPU-based computation, chapters **2-2.1 and 4.1** will teach you everything you need.
 
 If you need GPU passthrough or have a very complicated project, it is recommended to read this book in its entirety!

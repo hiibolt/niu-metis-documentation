@@ -1,0 +1,360 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>SSH Automation with Metis - NIU Metis Documentation</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">1.1.</strong> Connecting to Metis</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">1.2.</strong> Remote Workspaces in VSCode</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> C/C++ on Metis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1_1.html"><strong aria-hidden="true">2.1.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_1_2.html"><strong aria-hidden="true">2.1.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Rust on Metis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_2_1.html"><strong aria-hidden="true">2.2.1.</strong> A Parallel Rust Project, from the Ground Up</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> User Environment Customization/Virtualization on Metis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Pros/Cons: Podman + Docker and Singularity/Apptainer + Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Pros/Cons: Conda</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Pros/Cons: Modulefiles</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Using Podman + Docker at Metis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_4_2.html"><strong aria-hidden="true">4.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_4_3.html"><strong aria-hidden="true">4.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html" class="active"><strong aria-hidden="true">5.1.</strong> SSH Automation with Metis</a></li><li class="chapter-item expanded "><a href="chapter_5_2.html"><strong aria-hidden="true">5.2.</strong> Conceptual Techniques</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_6_1.html"><strong aria-hidden="true">6.1.</strong> Bash</a></li><li class="chapter-item expanded "><a href="chapter_6_2.html"><strong aria-hidden="true">6.2.</strong> Podman and Docker</a></li><li class="chapter-item expanded "><a href="chapter_6_3.html"><strong aria-hidden="true">6.3.</strong> Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_6_3_1.html"><strong aria-hidden="true">6.3.1.</strong> Creating Modulefiles</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6_4.html"><strong aria-hidden="true">6.4.</strong> PBS Professional</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_6_4_1.html"><strong aria-hidden="true">6.4.1.</strong> PBS Files</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Conclusion, Citations, and Contact</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">NIU Metis Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="51-ssh-automation-with-metis"><a class="header" href="#51-ssh-automation-with-metis">5.1. SSH Automation with Metis</a></h1>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust/ssh-automation">in this book's repository</a>!</em></p>
+<p>While Metis is an incredibly powerful tool, it does not provide an API to allow for automatic job submission from outside of Metis.</p>
+<p>For example - allowing your backend on AWS, Google Cloud Engine, or a local machine to submit a job automatically is not currently possible.</p>
+<p>One solution is to write our own software which submits the job on our behalf, using SSH-related libraries to open a connection and submit commands!</p>
+<h2 id="goals"><a class="header" href="#goals">Goals</a></h2>
+<ul>
+<li>Learn how to automate an SSH session and commands</li>
+<li>Learn how to add your system as a known host</li>
+<li>Understand the importance of hardening your code</li>
+</ul>
+<h2 id="the-problems"><a class="header" href="#the-problems">The Problem(s)</a></h2>
+<p>First, let's talk about what Metis can and can't do.</p>
+<p>There are a few problems with automation on Metis that make it more difficult than a standard server:</p>
+<ul>
+<li><strong>You cannot host a webserver on Metis</strong></li>
+<li><strong>Ports cannot be forwarded</strong></li>
+</ul>
+<p>This means that one cannot simply host a webserver, which could otherwise recieve requests to start jobs automatically.</p>
+<p>So, what can we do?</p>
+<h2 id="the-solution"><a class="header" href="#the-solution">The Solution</a></h2>
+<p>When asking why you can't automate something, one of the first questions is to ask <em>"Well, how am I able to do it manually?"</em>.</p>
+<p>In this case, we are using SSH to connect, and we are then running <code>qsub</code> to submit our jobs.</p>
+<p>Well, can that be done programmatically?</p>
+<p>Yes, but it's a little more complicated than doing it by hand.</p>
+<h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
+<p>For the sake of this guide, I will be using the <a href="https://www.rust-lang.org/">Rust programming language</a>. This is a programming language that best illustrates potential failure points in a program, forcing you to cover error cases in advance.</p>
+<p>SSH has many potential points of failure, so using it can help you to think ahead to cover your bases!</p>
+<p>However, you don't need to use Rust, you can just as easily write your connection code in Python, C, or any language that suits your need - as long as you write code that can handle and communicate failure well.</p>
+<p>For instance, here is example Rust code to submit a <code>qsub</code> job (if you would like to follow along, please see the repository <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust">here</a>!):</p>
+<pre><pre class="playground"><code class="language-rust">use openssh::{Session, KnownHosts};
+
+async fn submit_pbs_job (
+    username: &amp;str,
+    path: &amp;str,
+    arguments: Vec&lt;(&amp;str, &amp;str)&gt;
+) -&gt; Result&lt;String, String&gt; {
+    // Open a multiplexed SSH session
+    let session = Session::connect_mux(&amp;format!("{username}@metis.niu.edu"), KnownHosts::Strict).await
+        .map_err(|err| format!("Couldn't connect to METIS! Are your credentials correct? Raw error:\n{err}"))?;
+
+    // Build and run the `qsub`` command
+    let mut submit_job_command_output = session
+        .command("qsub");
+
+    // Build the arguments string
+    let stringified_arguments = arguments
+        .iter()
+        .map(|(key, value)| format!("{key}={value}"))
+        .collect::&lt;Vec&lt;String&gt;&gt;()
+        .join(",");
+
+    // Append the arguments string to the command, if there are any arguments
+    let submit_job_command_output = if stringified_arguments.len() &gt; 0 {
+        submit_job_command_output
+            .arg("-v")
+            .arg(stringified_arguments)
+    } else {
+        &amp;mut submit_job_command_output
+    };
+
+    // Append the job script path to the command
+    let submit_job_command_output = submit_job_command_output
+        .arg(path)
+        .output().await
+        .map_err(|err| format!("Failed to run qsub command! Raw error:\n{err}"))?;
+
+    // Check if the command was successful
+    if !submit_job_command_output.status.success() {
+        let err = String::from_utf8(submit_job_command_output.stderr)
+            .map_err(|err| format!("Failed to decode the error message! Raw error:\n{err}"))?;
+
+        return Err(format!("When running the qsub command, the following error occurred:\n{err}"));
+    } 
+
+    // Otherwise, return the output (as a string)
+    let successful_output = String::from_utf8(submit_job_command_output.stdout)
+        .map_err(|err| format!("Failed to decode the output message! Raw error:\n{err}"))?;
+
+    Ok(successful_output)
+}
+
+#[tokio::main]
+async fn main() {
+    // Submit a job to the METIS cluster
+    let job_id = submit_pbs_job("z1994244", "/home/z1994244/projects/cpp/hello_world/run.pbs", vec![
+        ("ARGUMENT_1", "VALUE_1"),
+        ("ARGUMENT_2", "VALUE_2"),
+        ("ARGUMENT_3", "VALUE_3"),
+    ]).await;
+
+    // Check if the job was submitted successfully
+    match job_id {
+        Ok(job_id) =&gt; println!("Job submitted successfully! Job ID: {job_id}"),
+        Err(err) =&gt; eprintln!("Failed to submit the job! Error message:\n{err}"),
+    }
+}</code></pre></pre>
+<p>Our first step is to use an SSH library - in this case, the crate <code>openssh</code> - to open a <a href="https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing">multiplexed</a> SSH connection.</p>
+<p>Many other libraries exist for other languages, such as <code>ssh-python</code> for Python and <code>ssh</code> for Go.</p>
+<p>However, it's worth noting just how many potential points of failure there are:</p>
+<ul>
+<li>The SSH can fail to open because Metis wasn't a known host</li>
+<li>The command can fail to send over SSH</li>
+<li>The <code>qsub</code> command can fail (on Metis' end), and return an error</li>
+<li>The <code>stderr</code> from reading the failure reason from Metis can provide invalid UTF-8 (unlikely, but possible!)</li>
+<li>The output from <code>stdout</code> of the <code>qsub</code> command can provide invalid UTF-8 (unlikely, but possible!)</li>
+</ul>
+<p>The first failure will likely happen - unless you've aleady made Metis a known host on the system you will be automating SSH from.</p>
+<p>So, how do we add Metis as a known host? We need to create an SSH key, and copy it over to Metis. This allows us to bypass password-based authentication!</p>
+<p>You can hit enter through all of the prompts in the <code>ssh-keygen</code> command, but run the following <strong>on your local machine, not Metis</strong>:</p>
+<pre><code>$ ssh-keygen
+$ ssh-copy-id &lt;your_account_username&gt;@metis.niu.edu
+</code></pre>
+<p>Now that Metis is a known host, we can test our program.</p>
+<p>If you are following along with this tutorial in Rust, you can find the codebase <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust">here</a>, as you'll need to have the <code>openssh</code> and <code>tokio</code> crates installed and configured.</p>
+<p>Testing our program:</p>
+<pre><code>$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.04s
+     Running `target/debug/igait-ssh-testing`
+Job submitted successfully! Job ID: 18734.cm
+</code></pre>
+<p>Congratulations! It worked, and you've just submitted a PBS job automatically!</p>
+<h2 id="important-notes"><a class="header" href="#important-notes">Important Notes</a></h2>
+<p>Many <code>openssh</code> implementations, including in Rust, only run commands from the home directory. In some implementations, you can change this, but in many, you cannot. This is why, throughout our projects, we've been providing absolute paths. Otherwise, the <code>$PBS_O_WORKDIR</code> for our SSH automation would resolve to <code>~/.</code>, which would cause unexpected failures.</p>
+<p>By writing our paths in absolute, we guarantee proper execution.</p>
+<p>Now, where is our output? Well, as previously mentioned, often, commands are run from the <code>~/.</code> (home) directory. Sure enough, after manually logging into Metis:</p>
+<pre><code>$ ls
+bin  examples  hello_world.o18734  projects  rundir
+</code></pre>
+<p>While not shown here, it is possible to automatically read the contents of this output folder, using a <code>cat</code> command or the likes after the expected run time is over.</p>
+<p>It cannot be understated how important it is that you are extremely careful whenever automating your workflow!</p>
+<p>You must purify your inputs, and ensure it is physically impossible for an attacker to exploit your backend in any way possible. To not do so would endanger the work of fellow NIU researchers, students and staff.</p>
+<p>However, as mentioned in the preface to this chapter, it's an incredibly effective method that can be further evolved into even more effecient and better integrated systems!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chapter_5.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="chapter_5_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chapter_5.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="chapter_5_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,2931 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>NIU Metis Documentation</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">1.1.</strong> Connecting to Metis</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">1.2.</strong> Remote Workspaces in VSCode</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> C/C++ on Metis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1_1.html"><strong aria-hidden="true">2.1.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_1_2.html"><strong aria-hidden="true">2.1.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Rust on Metis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_2_1.html"><strong aria-hidden="true">2.2.1.</strong> A Parallel Rust Project, from the Ground Up</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> User Environment Customization/Virtualization on Metis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Pros/Cons: Podman + Docker and Singularity/Apptainer + Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Pros/Cons: Conda</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Pros/Cons: Modulefiles</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Using Podman + Docker at Metis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_4_2.html"><strong aria-hidden="true">4.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_4_3.html"><strong aria-hidden="true">4.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html"><strong aria-hidden="true">5.1.</strong> SSH Automation with Metis</a></li><li class="chapter-item expanded "><a href="chapter_5_2.html"><strong aria-hidden="true">5.2.</strong> Conceptual Techniques</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_6_1.html"><strong aria-hidden="true">6.1.</strong> Bash</a></li><li class="chapter-item expanded "><a href="chapter_6_2.html"><strong aria-hidden="true">6.2.</strong> Podman and Docker</a></li><li class="chapter-item expanded "><a href="chapter_6_3.html"><strong aria-hidden="true">6.3.</strong> Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_6_3_1.html"><strong aria-hidden="true">6.3.1.</strong> Creating Modulefiles</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6_4.html"><strong aria-hidden="true">6.4.</strong> PBS Professional</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_6_4_1.html"><strong aria-hidden="true">6.4.1.</strong> PBS Files</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Conclusion, Citations, and Contact</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">NIU Metis Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="1-introduction"><a class="header" href="#1-introduction">1. Introduction</a></h1>
+<p>Welcome! This book serves as an all-in-one crash course in utilizing Metis.</p>
+<p>Metis (commissioned in September 2023) is a 32-node CPU/GPU hybrid cluster running Red Hat Enterprise Linux 8.x operating system. 1PB of shared disk is provided by a Cray ClusterStor E1000 storage server. Each compute node is an HPE DL 385 Gen 10+ V2 server equipped with:</p>
+<ul>
+<li>2x AMD EPYC 7713 CPUs 2.0 GHz 64-core processors</li>
+<li>251-1259 GB RAM, 1 x 4TB SSD scratch disk drives</li>
+<li>1 x NVIDIA A100 GPU, Amper™ architecture, 40 GB RAM each card</li>
+<li>All 32 nodes are connected via a 200 Gbps Infiniband network</li>
+</ul>
+<p>To learn more about Metis, you can see the <a href="https://crcd.niu.edu/crcd/images/metislayoutandspecification.pdf">METIS layout and specification</a>.</p>
+<h2 id="primary-purpose"><a class="header" href="#primary-purpose">Primary Purpose</a></h2>
+<p>The goal of this book is to allow faculty at NIU to hit the ground running with their research.</p>
+<p>We want you to focus on completing your work - not getting the hardware to work.</p>
+<p>This book will teach you the skills to help focus on writing your application from the ground up.</p>
+<p>Additionally, should a step confuse you, the final product of every project example in this book can also be found in this book's <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects">repository</a>.</p>
+<h3 id="explored-use-cases"><a class="header" href="#explored-use-cases">Explored Use Cases</a></h3>
+<p>There are six use cases covered here, with increasing levels of control over Metis:</p>
+<ul>
+<li><strong>Chapter 2.1.1 - Running a C++ project</strong>
+<ul>
+<li>No additional configuration</li>
+<li>PBS only</li>
+</ul>
+</li>
+<li><strong>Chapter 2.1.2 - Running a CUDA project</strong>
+<ul>
+<li>Loading CUDA via the <code>module</code> command</li>
+<li>PBS only</li>
+</ul>
+</li>
+<li><strong>Chapter 4.1 - Running a language not installed on Metis, such as Python 3.11</strong>
+<ul>
+<li>Downloading a pre-built Docker Image with <code>python</code> version 3.11 installed</li>
+<li>PBS with Docker via Podman</li>
+</ul>
+</li>
+<li><strong>Chapter 4.2 - Running packages not installed on Metis with GPU passthrough</strong>
+<ul>
+<li>Downloading a pre-built Docker Image with the requirements for CUDA</li>
+<li>Passing through GPUs to Docker</li>
+<li>PBS with Docker and NVIDIA Container Toolkit via Podman</li>
+</ul>
+</li>
+<li><strong>Chapter 4.3 - Running virtually any project using custom Docker Images</strong>
+<ul>
+<li>Writing, building, and publishing your own Docker Image</li>
+<li>Passing through GPUs to Docker</li>
+<li>PBS with Docker and NVIDIA Container Toolkit via Podman</li>
+</ul>
+</li>
+<li><strong>Chapter 5.1 - SSH Automation</strong>
+<ul>
+<li>Demonstrates programmatic submission of PBS jobs via SSH for the purpose of fitting Metis into existing systems.</li>
+</ul>
+</li>
+</ul>
+<h2 id="where-should-i-read-to"><a class="header" href="#where-should-i-read-to">Where Should I Read to?</a></h2>
+<h3 id="cases-where-docker-may-not-be-needed"><a class="header" href="#cases-where-docker-may-not-be-needed">Cases Where Docker May Not Be Needed</a></h3>
+<p>If your application is either of the following, you shouldn't use Docker.</p>
+<ul>
+<li>Native C, Go, or Python applications <em>with pre-installed or no dependencies</em></li>
+<li>OpenMPI-based applications</li>
+</ul>
+<p>If it's one of those two, chapter <strong>2</strong> will be of great use!</p>
+<p>The following chapters may not be as useful, as they touch primarily on Docker.</p>
+<h3 id="cases-where-docker-is-needed"><a class="header" href="#cases-where-docker-is-needed">Cases Where Docker Is Needed</a></h3>
+<p>If your application is any of the following, it's highly recommended to use Docker:</p>
+<ul>
+<li>Applications which require a different operating system</li>
+<li>Applications that are not pre-installed and easier to setup using docker than natively (consult with <a href="mailto:crcdhelpdesk@niu.edu">crcdhelpdesk@niu.edu</a>)</li>
+</ul>
+<p>If you only need CPU-based computation, chapters <strong>2-2.1 and 4.1</strong> will teach you everything you need.</p>
+<p>If you need GPU passthrough or have a very complicated project, it is recommended to read this book in its entirety!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="11-connecting-to-metis"><a class="header" href="#11-connecting-to-metis">1.1. Connecting to Metis</a></h1>
+<p><small><a href="https://crcd.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml"><em>Associated CRCD Documentation</em></a></small></p>
+<p>The Metis cluster is easily accessible via the <a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a> protocol.</p>
+<p>Each operating system has various possible SSH clients - we will be using the OpenSSH client, as it is pre-installed on most operating systems and very straightforward.</p>
+<h2 id="windows-10-and-11"><a class="header" href="#windows-10-and-11">Windows 10 and 11</a></h2>
+<p>As of 2024, both Windows 10 and Windows 11 have the OpenSSH client pre-installed. If you don't have it installed, update your operating system using the Windows Updater.</p>
+<p>To connect, open either <strong>Windows PowerShell</strong> or <strong>Command Prompt</strong>, and run the following:</p>
+<pre><code class="language-ps">PS C:\...\&gt; ssh you@metis.niu.edu
+</code></pre>
+<p>When prompted, enter your temporary password.</p>
+<p>On your first login, you will be prompted to create a new password. Ensure that it's something memorable, but very secure!</p>
+<p>Then, close your session:</p>
+<pre><code class="language-bash">[you@metis ~]$ exit
+</code></pre>
+<p>And re-login to test your new password:</p>
+<pre><code class="language-ps">PS C:\...\&gt; ssh you@metis.niu.edu
+</code></pre>
+<h2 id="linux-and-macos"><a class="header" href="#linux-and-macos">Linux and MacOS</a></h2>
+<p>Most major distributions and the latest versions of MacOS have the OpenSSH client installed.</p>
+<p>Run the following:</p>
+<pre><code class="language-bash">$ ssh you@metis.niu.edu
+</code></pre>
+<p>When prompted, enter your temporary password.</p>
+<p>On your first login, you will be prompted to create a new password. Ensure that it's something memorable, but secure!</p>
+<p>Then, close your session:</p>
+<pre><code class="language-bash">[you@metis ~]$ exit
+</code></pre>
+<p>And re-login to test your new password:</p>
+<pre><code class="language-bash">$ ssh you@metis.niu.edu
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="12-remote-workspaces-in-vscode"><a class="header" href="#12-remote-workspaces-in-vscode">1.2. Remote Workspaces in VSCode</a></h1>
+<p><small><a href="https://crcd.niu.edu/crcd/current-users/getting-started/login-to-metis.shtml#editfiles"><em>Associated CRCD Documentation</em></a></small></p>
+<p><small><em>If you encounter issues, see the <a href="https://code.visualstudio.com/docs/remote/ssh">official VSCode documentation</a>!</em></small></p>
+<p>This guide is primarily applicable to Windows users, as the graphical integrated development enviroment it provides can make development much easier.</p>
+<p>However, development on Metis is also possible and easy, as the majority of popular terminal-based editors are preinstalled on the login nodes:</p>
+<ul>
+<li><a href="https://www.vim.org/">Vi and Vim</a></li>
+<li><a href="https://www.gnu.org/software/emacs/">GNU Emacs</a></li>
+<li><a href="https://www.nano-editor.org/">GNU nano</a></li>
+</ul>
+<p>Similarly, the two most popular build tools are also installed:</p>
+<ul>
+<li><a href="https://www.gnu.org/software/make/">GNU Make</a></li>
+<li><a href="https://cmake.org/">CMake</a></li>
+</ul>
+<h2 id="installing-vscode-and-remote-explorer"><a class="header" href="#installing-vscode-and-remote-explorer">Installing VSCode and Remote Explorer</a></h2>
+<p>If you haven't already, first install <a href="https://code.visualstudio.com/">Visual Studio Code</a>. Note that Visual Studio Code and Visual Studio are <em>not</em> the same thing.</p>
+<p>Next, navigate to the <strong>Extensions</strong> tab, and install the <strong>Remote Development</strong> extension by Microsoft. Then, restart VSCode.</p>
+<h2 id="adding-metis-as-a-remote-host"><a class="header" href="#adding-metis-as-a-remote-host">Adding Metis as a Remote Host</a></h2>
+<p>On the left panel, click on <strong>Remote Explorer</strong>:</p>
+<p><img src="images/vscode_icon.png" alt="Remote Explorer Icon" /></p>
+<p>Then, make sure you are in the <strong>Remotes (Tunnel/SSH)</strong> section:</p>
+<p><img src="images/remote_explorer_options.png" alt="Remote Explorer Sections" /></p>
+<p>Next, create a new SSH host:</p>
+<p><img src="images/create_remote.png" alt="Creating a New SSH Host" /></p>
+<p>This will prompt you for your SSH command. It is slightly easier to add the <code>-y</code> flag, as seen below:</p>
+<p><img src="images/adding_command.png" alt="Example SSH Command" /></p>
+<p>It will then as you where to save your SSH configuration. It doesn't really matter which you pick, but the option in your <code>Users</code> folder is ideal.</p>
+<p>After choosing a location, you'll see a prompt in the bottom right, on which you should click <strong>Connect</strong>:</p>
+<p><img src="images/click_connect.png" alt="Click Connect" /></p>
+<p>This will open a new VSCode window, where you are now connected to Metis graphically!</p>
+<h2 id="adding-a-folder"><a class="header" href="#adding-a-folder">Adding a Folder</a></h2>
+<p>When this new window opens, you can click the <strong>Open Folder</strong> option to choose your first folder:</p>
+<p><img src="images/open_new_folder.png" alt="Opening a New Folder" /></p>
+<p>It's recommended you start with <code>/home/you</code>.</p>
+<p>If you've been allocated a project, you may also want to open <code>/lstr/sahara/your_project</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="2-basic-metis-usage"><a class="header" href="#2-basic-metis-usage">2. Basic Metis Usage</a></h1>
+<p>This first chapter will provide two into-the-fire projects that will teach you the core systems of Metis. This will be done through a simple C++ project, followed by an optimized version written with CUDA.</p>
+<p>It's recommended to have a minimal knowledge of C++, CUDA, and Linux / Bash. If you haven't used any of these three before, or if it's been a while, linked below are some introductory resources:</p>
+<ul>
+<li><a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">Linux / Bash</a></li>
+<li><a href="https://www.w3schools.com/cpp/cpp_intro.asp">C++</a></li>
+<li><a href="https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/">CUDA</a></li>
+</ul>
+<p>These next two chapters lay the foundational skills needed to use the advanced techniques in the following chapters, and it is highly recommended that you read them before proceeding!</p>
+<h2 id="overview-of-the-chapters"><a class="header" href="#overview-of-the-chapters">Overview of the Chapters</a></h2>
+<h3 id="chapter-21---cc-on-metis"><a class="header" href="#chapter-21---cc-on-metis">Chapter 2.1 - C/C++ on Metis</a></h3>
+<p>A general overview of how to get started with HPC distributed computing tactics on Metis in C++/C/CUDA.</p>
+<h3 id="chapter-22---rust-on-metis"><a class="header" href="#chapter-22---rust-on-metis">Chapter 2.2 - Rust on Metis</a></h3>
+<p>A advanced look at the various types of hardware acceleration available through the Rust Programming Language.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="21-cc-on-metis"><a class="header" href="#21-cc-on-metis">2.1. C/C++ on Metis</a></h1>
+<h2 id="chapter-211-building-a-c-project-from-the-ground-up"><a class="header" href="#chapter-211-building-a-c-project-from-the-ground-up">Chapter 2.1.1: Building a C++ Project from the Ground Up</a></h2>
+<ul>
+<li><strong>Goals</strong>: Familiarize with basic commands and job submission on Metis.</li>
+<li><strong>C++ Boilerplate</strong>: Create and run a basic "Hello, World" C++ program with computational loops.</li>
+<li><strong>PBS Basics</strong>: Write a PBS job script to run your C++ program on compute nodes.</li>
+<li><strong>Execution</strong>: Compile and run the C++ program locally and via PBS.</li>
+<li><strong>Outcome</strong>: You will be able to understand job submission, the PBS script structure, and basic module commands.</li>
+</ul>
+<h2 id="chapter-212-building-a-cuda-project-from-the-ground-up"><a class="header" href="#chapter-212-building-a-cuda-project-from-the-ground-up">Chapter 2.1.2: Building a CUDA Project from the Ground Up</a></h2>
+<ul>
+<li><strong>Goals</strong>: Learn to use CUDA for GPU programming on Metis.</li>
+<li><strong>CUDA Boilerplate</strong>: Write a CUDA program to achieve the same task as in Chapter 1.1 but using GPU acceleration.</li>
+<li><strong>CUDA Modules</strong>: Install and use the CUDA compiler (nvcc) with module commands.</li>
+<li><strong>Execution</strong>: Compile and run your CUDA program, observing performance improvements.</li>
+<li><strong>PBS for CUDA</strong>: Adapt the PBS script to load CUDA modules and compile with nvcc.</li>
+<li><strong>Outcome</strong>: You will be able to leverage CUDA for faster computation and understand the structure of both CUDA programs and PBS scripts.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="211-building-a-c-project-from-the-ground-up"><a class="header" href="#211-building-a-c-project-from-the-ground-up">2.1.1. Building a C++ Project from the Ground Up</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/build-run-example.shtml">Project Example</a> and <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">PBS</a></em></small></p>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cpp/cpp_on_metis">in this book's repository</a>!</em></p>
+<p>This introductory project will teach you the absolute minimal nessecary information to create a basic C++ project on the Metis supercomputer.</p>
+<p>Before we tackle more robust and complex technologies such as CUDA or OpenMPI, our goal is to familiarize ourselves with Metis before abstracting and building upon our understanding.</p>
+<p>We'll instead opt to start with the most basic of programs - "Hello, World" (with, of course, a computationally intensive task) - to get started!</p>
+<h2 id="goals"><a class="header" href="#goals">Goals</a></h2>
+<ul>
+<li>Get a feel for the <code>module</code> commands</li>
+<li>Get a feel for the <a href="https://altair.com/pbs-professional">PBS Professional</a> job submission system</li>
+<li>Understand the layout of a <code>.pbs</code> job script file</li>
+<li>Get a feel for the <code>qsub</code> command</li>
+</ul>
+<h2 id="c-boilerplate"><a class="header" href="#c-boilerplate">C++ Boilerplate</a></h2>
+<p>First, let's start by creating a folder for our projects, then a folder for C++, and finally a folder for this project:</p>
+<pre><code class="language-bash">$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
+$ cd /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
+</code></pre>
+<p>Let's start by creating a <code>main.cpp</code> file with the following contents:</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+
+int main () {
+    // Say hello to the user
+    std::cout &lt;&lt; "Hello, Metis!" &lt;&lt; std::endl;
+
+    // Initialize our counter variables
+    unsigned long long int counter = 0;
+    unsigned long long int number_of_divisible_by_two = 0;
+    unsigned long long int number_of_divisible_by_three = 0;
+    unsigned long long int number_of_divisible_by_five = 0;
+
+    // First, iterate through a 3D grid to get to our block
+    for ( int grid_z = 0; grid_z &lt; 1000; grid_z++ ) {
+        for ( int grid_y = 0; grid_y &lt; 100; grid_y++ ) {
+            for ( int grid_x = 0; grid_x &lt; 100; grid_x++ ) {
+
+                // Second, iterate through the 3D block
+                for ( int block_z = 0; block_z &lt; 10; block_z++ ) {
+                    for ( int block_y = 0; block_y &lt; 10; block_y++ ) {
+                        for ( int block_x = 0; block_x &lt; 10; block_x++ ) {
+                            counter += 1;
+
+                            if ( counter % 2 == 0 )
+                                number_of_divisible_by_two += 1;
+                            if ( counter % 3 == 0 )
+                                number_of_divisible_by_three += 1;
+                            if ( counter % 5 == 0 )
+                                number_of_divisible_by_five += 1;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    // Provide our results to the user
+    std::cout &lt;&lt; std::endl
+              &lt;&lt; "- Numbers divisible by two: "       &lt;&lt; number_of_divisible_by_two       &lt;&lt; std::endl
+              &lt;&lt; "- Numbers divisible by three: "     &lt;&lt; number_of_divisible_by_three     &lt;&lt; std::endl
+              &lt;&lt; "- Numbers divisible by five: "      &lt;&lt; number_of_divisible_by_five      &lt;&lt; std::endl;
+
+    return 0;
+}
+</code></pre>
+<p>This program does two things - it says hello to the user, and then takes count of the numbers divisible by 2, 3, and 5 from 0 up to 10 billion.</p>
+<p>This is done with multiple nested loops - the reason for which will be explained, and the code optimized, in the following chapter on CUDA.</p>
+<p>For now, what's apparent and important is that this is a computationally intensive task!</p>
+<p>Next, let's build and run this code. By default, Metis users have GCC and G++ (version 11.3.0) preinstalled, which we will now use:</p>
+<pre><code class="language-bash">$ g++ -o hello_world main.cpp
+$ ./hello_world
+</code></pre>
+<p>The calculation should take <a href="https://github.com/hiibolt/niu-metis-documentation/blob/main/projects/cpp/cpp_on_metis/time_no_pbs">23 seconds</a>, after which we should see our results! However, it will run faster on the compute nodes, and you can allocate more resources. It will run <em>exponentially faster</em> when employing CUDA or OpenMPI, which we will touch on in the next chapter!</p>
+<h2 id="getting-started-with-pbs"><a class="header" href="#getting-started-with-pbs">Getting Started with PBS</a></h2>
+<p>We are not currently making full use of Metis with this current setup. What we just ran our code on is called the <strong>login node</strong>, which has nowhere near the amount of computational power that is available to the <strong>compute nodes</strong>, which are where computationally intensive or time-consuming programs should be run.</p>
+<p>But how do we do so?</p>
+<p>Metis has many users, and each user may have various types of programs, each program with varying hardware requirements. As such, Metis uses a resource manager and job scheduling system by Altair, called <a href="https://altair.com/pbs-professional">PBS Professional</a>.</p>
+<p>In order to make use of this program, we must describe to the system what we need from it, which could be things such as:</p>
+<ul>
+<li>CPU cores</li>
+<li>CPU count</li>
+<li>RAM size</li>
+<li>GPU chunks</li>
+<li>Estimated runtime</li>
+</ul>
+<p>...and more.</p>
+<p>To do so, we use a PBS script file - a bash script with embedded PBS directives.</p>
+<p>Let's get started by creating a <code>run.pbs</code> file with the following contents:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+#PBS -N hello_world
+#PBS -j oe
+
+#Note - on Metis
+#              Nchunks&lt;=32, for GPU chunks
+#              Nchunks&lt;=4096/Ncpus for CPU-only chunks
+#              (run 'shownodes' command to find the number of free cpus)
+#              Ncpus&lt;=128, the total number of CPUs per node is 128
+#              NPmpi&lt;=Ncpus, the total number of CPUs allocated for MPI tasks,
+#                              request NPmpi=Ncpus for non-OPENMP jobs
+#              Ngpus==1,  the total number of GPUs per node is 1
+#              X&lt;=256,  28 of 32 Metis modes have 256 GB of RAM
+#                       special jobs can request up to 1024 GB of RAM (4 nodes)
+#
+# Below, we request two chunks;
+#  each chunk needs 8 CPUs, 1 MPI processes, 1 GPU card, and 2 GB RAM
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
+#PBS -l walltime=00:15:00
+
+# When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
+#--PBS -m ae
+#--#PBS -M account@niu.edu
+
+# Navigate to our working directory
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
+echo "The job's working directory is $PROJECT_DIRECTORY"
+cd $PROJECT_DIRECTORY
+
+# Install GCC
+echo ""
+echo "Loading GCC..."
+module purge; module load gcc/gcc-12.3.0
+module list
+echo "Done!"
+
+# Compile our code
+echo ""
+echo "Compiling code..."
+g++ main.cpp -o hello_world
+echo "Done!"
+
+# Run our binary
+echo ""
+echo "Executing binary..."
+./hello_world
+echo "Done!"
+
+# Clean up our binary
+rm ./hello_world
+</code></pre>
+<p>Before we move on, let's dissect what this does.</p>
+<pre><code class="language-bash">1.  #!/bin/bash
+2.
+3.  #PBS -N hello_world
+4.  #PBS -j oe
+5.  
+6.  #Note - on Metis
+7.  #              Nchunks&lt;=32, for GPU chunks
+8.  #              Nchunks&lt;=4096/Ncpus for CPU-only chunks
+9.  #              (run 'shownodes' command to find the number of free cpus)
+10. #              Ncpus&lt;=128, the total number of CPUs per node is 128
+11. #              NPmpi&lt;=Ncpus, the total number of CPUs allocated for MPI tasks,
+12. #                              request NPmpi=Ncpus for non-OPENMP jobs
+13. #              Ngpus==1,  the total number of GPUs per node is 1
+14. #              X&lt;=256,  28 of 32 Metis modes have 256 GB of RAM
+15. #                       special jobs can request up to 1024 GB of RAM (4 nodes)
+16. #
+17. # Below, we request two chunks;
+18. #  each chunk needs 8 CPUs, 1 MPI processes, 1 GPU card, and 2 GB RAM
+19. #PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
+20. #PBS -l walltime=00:15:00
+21. 
+22. # When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
+23. #--PBS -m ae
+24. #--#PBS -M account@niu.edu
+
+...
+</code></pre>
+<p><em>Lines starting with <code>#PBS</code> are not comments, rather, they are PBS-specific commands!</em></p>
+<p>The following lines are important to understand:</p>
+<ul>
+<li>
+<p>Line 1 is a <a href="https://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a> which specifies that the file's commands are to be interpreted by <a href="https://www.gnu.org/software/bash/manual/bash.html">bash</a>.</p>
+</li>
+<li>
+<p>Line 3 specifies the name of our file.</p>
+</li>
+<li>
+<p>Line 19 specifies the hardware requirements for our job</p>
+<p>To learn more about specifying hardware requirements, see <a href="https://hiibolt.github.io/niu-metis-documentation/chapter_6_4_1.html#pbs-directives">Chapter 6.4.1</a>.</p>
+</li>
+<li>
+<p>Line 20 specifies the estimated runtime of our job</p>
+</li>
+<li>
+<p>Lines 23 and 24 specify options for recieveing emails regarding various events</p>
+<p>Adding <em>a</em> sends mail on abort.
+Adding <em>b</em> sends mail on start.
+Adding <em>e</em> sends mail on end.</p>
+<p>To learn more about recieving emails, see <a href="https://hiibolt.github.io/niu-metis-documentation/chapter_6_4_1.html#pbs-directives">Chapter 6.4.1</a>.</p>
+</li>
+</ul>
+<ul>
+<li>
+<p><code>#PBS -j &lt;n | oe&gt;</code> or <code>qsub -j &lt;n | oe&gt;</code></p>
+<p>Specifies whether the standard error stream should be merged with the standard output stream.</p>
+<p>Specifying <code>oe</code> means that both <code>stderr</code> and <code>stdout</code> will be in the same output file.</p>
+<p>Specifying <code>n</code>, or not specifying at all, means they will be in different files.</p>
+<pre><code class="language-bash">$ qsub -j n run.pbs
+20000.cm
+$ ls
+hello_world.o20000
+hello_world.e20000
+</code></pre>
+</li>
+<li>
+<p><code>#PBS -m &lt;n | a*b*e*&gt;</code> or <code>qsub -m &lt;n | a*b*e*&gt;</code></p>
+<p>Specifies when mail about your job should be sent, with the following key:</p>
+<ul>
+<li>To send mail when it aborts, add <code>a</code></li>
+<li>To send main when it begins, add <code>b</code></li>
+<li>To send main when it ends, add 'e'</li>
+<li>To not send mail, specify <code>n</code> or do not use this directive.</li>
+</ul>
+</li>
+</ul>
+<p>For this job, none of this needs to be modified. The next section, however, will need to be:</p>
+<pre><code class="language-bash">...
+
+26. # Navigate to our working directory
+27. PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
+28. echo "The job's working directory is $PROJECT_DIRECTORY"
+29. cd $PROJECT_DIRECTORY
+
+...
+</code></pre>
+<p>Be sure to replace any instances on line 27 of <code>&lt;your_project&gt;</code> and <code>&lt;you&gt;</code> with your Metis project and username!</p>
+<p>The reason for this only becomes relevant if you have interest in creating non-C++ projects or automating your job submission, so it is worth noting that you can replace <code>/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis</code> with <code>$PBS_O_WORKDIR</code> if you would like. This will be populated with where the job is run from.</p>
+<p>Next, we will familiarize ourselves with the <code>module</code> commands, which are used on lines 31-36:</p>
+<pre><code class="language-bash">...
+
+31. # Install GCC
+32. echo ""
+33. echo "Loading GCC..."
+34. module purge; module load gcc/gcc-12.3.0
+35. module list
+36. echo "Done!"
+
+...
+</code></pre>
+<p>The <code>module</code> commands are somewhat akin to a package manager, allowing you to load packages ("modulefiles") into your environment.</p>
+<p>Unlike you, the compute node does not have <code>gcc</code> pre-installed. So to make it available to the compute node, we must install it, done in the following fashion:</p>
+<ul>
+<li>Line 34 clears all packages with <code>module purge</code>, then installs GCC with <code>module load gcc/gcc-12.3.0</code>.</li>
+<li>Line 35 lets you see what's currently installed with <code>module list</code>.</li>
+</ul>
+<p>This process for installing a package is the same on both the login and compute nodes. To see what packages are available to you, you can run <code>module av</code>. To narrow your search by a specific key word, use <code>module av &lt;keyword&gt;</code>.</p>
+<pre><code class="language-bash">...
+
+38. # Compile our code
+39. echo ""
+40. echo "Compiling code..."
+41. g++ main.cpp -o hello_world
+42. echo "Done!"
+43. 
+44. # Run our binary
+45. echo ""
+46. echo "Executing binary..."
+47. ./hello_world
+48. echo "Done!"
+49. 
+50. # Clean up our binary
+51. rm ./hello_world
+
+...
+</code></pre>
+<p>The remaining lines are what you are accustomed to, they use the same build command from before, then run the binary, and finally clean up any artifacts.</p>
+<h2 id="launching-a-job-with-pbs"><a class="header" href="#launching-a-job-with-pbs">Launching a Job with PBS</a></h2>
+<p>We're ready to go! All that's left is to start our job, which can be done easily with the following command:</p>
+<pre><code class="language-bash">$ qsub run.pbs
+</code></pre>
+<p>The output will look something like this:</p>
+<pre><code class="language-bash">18681.cm
+</code></pre>
+<p>This tells us the ID number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!</p>
+<pre><code class="language-bash">$ ls
+hello_world.o18681 main.cpp run.pbs
+</code></pre>
+<p>Reading the output from our job:</p>
+<pre><code>$ cat hello_world.o18681
+The job's working directory is /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
+
+Loading GCC...
+Currently Loaded Modulefiles:
+ 1) gcc/gcc-12.3.0  
+Done!
+
+Compiling code...
+Done!
+
+Executing binary...
+Hello, Metis!
+
+- Numbers divisible by two: 5000000000
+- Numbers divisible by three: 3333333333
+- Numbers divisible by five: 2000000000
+Done!
+</code></pre>
+<h2 id="closing-thoughts"><a class="header" href="#closing-thoughts">Closing Thoughts</a></h2>
+<p>Congratulations! You've successfully launched your first job on the Metis supercomputer.</p>
+<p>This is an impressive achievement. Those who are satisfied with the performance of their programs and are comfortable with only using the C family may even be able to stop here.</p>
+<p>However, Metis is capable of much, much more.</p>
+<p>In the next chapter, we will discuss utilizing CUDA to weaponize the power of graphics card programming to drastically reduce the computation times of our programs, as well as learning more about the <code>module</code> and PBS-related commands.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="212-building-a-cuda-project-from-the-ground-up"><a class="header" href="#212-building-a-cuda-project-from-the-ground-up">2.1.2. Building a CUDA Project from the Ground Up</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/build-run-example.shtml">Project Example</a> and <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">PBS</a></em></small></p>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cuda/cuda_on_metis">in this book's repository</a>!</em></p>
+<p>The next part of this introductory chapter will teach you how to build, compile, and run a CUDA program from the ground up on Metis.</p>
+<p>CUDA stands for Compute Unified Device Architecture, and it is proprietary NVIDIA-distributed software that allows developers to perform matrice-based operations at unbelievable speeds using the heavily optimized CUDA cores found only on NVIDIA GPUs.</p>
+<p>This chapter will teach you how to run CUDA code on Metis, but it will not teach you how to write it!</p>
+<p>There are many fantastic resources on how to write it, some of which are linked below:</p>
+<ul>
+<li><a href="https://developer.nvidia.com/blog/even-easier-introduction-cuda/">(NVIDIA) An Even Easier Introduction to CUDA</a></li>
+<li><a href="https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/">(cuda-tutorial) Introduction to CUDA</a></li>
+<li><a href="https://docs.nvidia.com/cuda/cuda-runtime-api/index.html">(NVIDIA) CUDA Runtime API Reference</a></li>
+<li><a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">(NVIDIA) CUDA Driver API Reference</a></li>
+</ul>
+<h2 id="goals-1"><a class="header" href="#goals-1">Goals</a></h2>
+<ul>
+<li>Learn how to use the <code>module</code> commands on the login node</li>
+<li>Learn how to use the <code>qstat</code> command to view a running or completed job</li>
+</ul>
+<h2 id="cuda-boilerplate"><a class="header" href="#cuda-boilerplate">CUDA Boilerplate</a></h2>
+<p>If you did not in the previous section, start by creating a folder for our projects, then a folder for CUDA projects, and finally a folder for this project:</p>
+<pre><code class="language-bash">$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis
+$ cd /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis
+</code></pre>
+<p>Let's start by creating a <code>main.cu</code> file with the following contents:</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+
+/// A kernel function designed to calculate the number of
+///  numbers divisible by two, three, and five
+///
+/// # Arguments
+/// * `d_number_of_divisible_by_two` - The number of numbers divisible by two
+/// * `d_number_of_divisible_by_three` - The number of numbers divisible by three
+/// * `d_number_of_divisible_by_five` - The number of numbers divisible by five
+__global__ void calculate(
+    unsigned long long int * d_number_of_divisible_by_two,
+    unsigned long long int * d_number_of_divisible_by_three,
+    unsigned long long int * d_number_of_divisible_by_five
+) {
+    int grid_x = blockIdx.x;
+    int grid_y = blockIdx.y;
+    int grid_z = blockIdx.z;
+
+    int block_x = threadIdx.x;
+    int block_y = threadIdx.y;
+    int block_z = threadIdx.z;
+
+    unsigned long long local_counter = 
+        (grid_z * 100 * 100 * 10 * 10 * 10) + 
+        (grid_y * 100 * 10 * 10) + 
+        (grid_x * 10 * 10) +
+        (block_z * 10 * 10) +
+        (block_y * 10) +
+        block_x + 1;
+
+    unsigned long one = 1;
+
+    if (local_counter % 2 == 0) {
+        atomicAdd(d_number_of_divisible_by_two, one);
+    }
+    if (local_counter % 3 == 0) {
+        atomicAdd(d_number_of_divisible_by_three, one);
+    }
+    if (local_counter % 5 == 0) {
+        atomicAdd(d_number_of_divisible_by_five, one);
+    }
+}
+
+int main() {
+    // Say hello to the user
+    std::cout &lt;&lt; "Hello, Metis!" &lt;&lt; std::endl;
+
+    // Host variables
+    unsigned long long int h_number_of_divisible_by_two   = 0;
+    unsigned long long int h_number_of_divisible_by_three = 0;
+    unsigned long long int h_number_of_divisible_by_five  = 0;
+
+    // Device variables
+    unsigned long long int * d_number_of_divisible_by_two;
+    unsigned long long int * d_number_of_divisible_by_three;
+    unsigned long long int * d_number_of_divisible_by_five;
+
+    // Allocate memory on the device with the correct sizing
+    cudaMalloc( &amp;d_number_of_divisible_by_two,   sizeof(unsigned long long int) );
+    cudaMalloc( &amp;d_number_of_divisible_by_three, sizeof(unsigned long long int) );
+    cudaMalloc( &amp;d_number_of_divisible_by_five,  sizeof(unsigned long long int) );
+
+    // Copy the memory from the host to the device
+    cudaMemcpy( d_number_of_divisible_by_two,   &amp;h_number_of_divisible_by_two,   
+        sizeof(unsigned long long int), cudaMemcpyHostToDevice );
+    cudaMemcpy( d_number_of_divisible_by_three, &amp;h_number_of_divisible_by_three,
+        sizeof(unsigned long long int), cudaMemcpyHostToDevice );
+    cudaMemcpy( d_number_of_divisible_by_five,  &amp;h_number_of_divisible_by_five,
+        sizeof(unsigned long long int), cudaMemcpyHostToDevice );
+
+    // Define our grid's dimensions
+    dim3 gridDim(100, 100, 10);
+
+    // Define each block's dimensions
+    dim3 blockDim(10, 10, 10);
+
+    // Run our calculation
+    calculate&lt;&lt;&lt;gridDim, blockDim&gt;&gt;&gt;(d_number_of_divisible_by_two, d_number_of_divisible_by_three, d_number_of_divisible_by_five);
+    cudaDeviceSynchronize();
+
+    // Copy the memory back to our machine
+    cudaMemcpy(&amp;h_number_of_divisible_by_two, d_number_of_divisible_by_two, sizeof(unsigned long long int), cudaMemcpyDeviceToHost);
+    cudaMemcpy(&amp;h_number_of_divisible_by_three, d_number_of_divisible_by_three, sizeof(unsigned long long int), cudaMemcpyDeviceToHost);
+    cudaMemcpy(&amp;h_number_of_divisible_by_five, d_number_of_divisible_by_five, sizeof(unsigned long long int), cudaMemcpyDeviceToHost);
+
+    // Provide our results to the user
+    std::cout &lt;&lt; std::endl
+              &lt;&lt; "- Numbers divisible by two: "       &lt;&lt; h_number_of_divisible_by_two       &lt;&lt; std::endl
+              &lt;&lt; "- Numbers divisible by three: "     &lt;&lt; h_number_of_divisible_by_three     &lt;&lt; std::endl
+              &lt;&lt; "- Numbers divisible by five: "      &lt;&lt; h_number_of_divisible_by_five      &lt;&lt; std::endl;
+
+    // Free the memory
+    cudaFree(d_number_of_divisible_by_two);
+    cudaFree(d_number_of_divisible_by_three);
+    cudaFree(d_number_of_divisible_by_five);
+
+    return 0;
+}
+</code></pre>
+<p>This program does the exact same thing as the previous section, with one key difference - it makes use of the CUDA runtime.</p>
+<p>Instead of using indicied loops, we run our program using the compute systems of CUDA.</p>
+<ul>
+<li>Our outer loop's dimensions are replaced by the CUDA (thread) block grid, 1-3D grid containing (thread) block.</li>
+<li>Our inner loop's dimensions are replaced by the CUDA thread block, which are a 1-3D block containing the threads our kernel function will be executed on.</li>
+</ul>
+<p>In our program, we use the maximum number of dimensions, effectively creating a 6D matrix. Because each each block is aware of its coordinates on the grid it lies on, and each thread the coordinates of the block it sits in, we can use sneaky math to calculate which number the old "counter" variable each of the <em>ten billion</em> threads translates to.</p>
+<p>If you would like to learn more about CUDA, the resources in the introductory section of this paragraph are greatly recommended.</p>
+<h2 id="loading-modules-on-the-login-node"><a class="header" href="#loading-modules-on-the-login-node">Loading Modules on the Login Node</a></h2>
+<p>However, unlike our previous project which used <code>g++</code>, the CUDA compiler, <code>nvcc</code>, is not pre-loaded.</p>
+<p>To load it, we will use the <code>module</code> commands mentioned briefly in the previous section. The <code>module</code> system loads and unloads an evironment for specific application packages not part of the operating system.</p>
+<p>First, let's list the modules related to <code>cuda</code> with the following command:</p>
+<pre><code class="language-bash">$ module av cuda
+-------------------------------------------------- /etc/modulefiles --------------------------------------------------
+cuda/cuda-7.5  cuda/cuda-8.0  cuda/cuda-11.5  cuda/cuda-11.8  cuda/cuda-11.8-rocky8  cuda/cuda-12.2
+</code></pre>
+<p>We see a variety of versions. For the sake of this guide, we will be using <code>cuda/cuda-11.8</code>.</p>
+<p>Next, let's clean up our modules, and load CUDA:</p>
+<pre><code class="language-bash">$ module purge
+$ module load cuda/cuda-11.8
+$ module list
+Currently Loaded Modulefiles:
+ 1) cuda/cuda-11.8
+</code></pre>
+<p>Finally, we're ready to go! Let's compile and run our program:</p>
+<pre><code class="language-bash">$ nvcc -o hello_world main.cu
+$ ./hello_world
+Hello, Metis!
+
+- Numbers divisible by two: 50000000
+- Numbers divisible by three: 33333333
+- Numbers divisible by five: 20000000
+</code></pre>
+<p>You will notice a nearly instantaneous completion time of <a href="https://github.com/hiibolt/niu-metis-documentation/blob/main/projects/cuda/cuda_on_metis/time_no_pbs">0.5 seconds</a>.</p>
+<p>Such is the power of graphical programming!</p>
+<h2 id="launching-a-cuda-program-with-pbs"><a class="header" href="#launching-a-cuda-program-with-pbs">Launching a CUDA Program with PBS</a></h2>
+<p>For the most part, the <code>run.pbs</code> file will look similar to the version from the previous chapter.</p>
+<p>Create a <code>run.pbs</code> file with the following contents:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+#PBS -N hello_world_cuda
+#PBS -j oe
+
+#Note - on Metis
+#              Nchunks&lt;=32, for GPU chunks
+#              Nchunks&lt;=4096/Ncpus for CPU-only chunks
+#              (run 'shownodes' command to find the number of free cpus)
+#              Ncpus&lt;=128, the total number of CPUs per node is 128
+#              NPmpi&lt;=Ncpus, the total number of CPUs allocated for MPI tasks,
+#                              request NPmpi=Ncpus for non-OPENMP jobs
+#              Ngpus==1,  the total number of GPUs per node is 1
+#              X&lt;=256,  28 of 32 Metis modes have 256 GB of RAM
+#                       special jobs can request up to 1024 GB of RAM (4 nodes)
+#
+# Below, we request two chunks;
+#  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
+#PBS -l walltime=00:15:00
+
+# When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
+#--PBS -m ae
+#--#PBS -M account@niu.edu
+
+# Navigate to our working directory
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis
+echo "The job's working directory is $PROJECT_DIRECTORY"
+cd $PROJECT_DIRECTORY
+
+# Install GCC
+echo ""
+echo "Loading CUDA"
+module purge; module load cuda/cuda-11.8; module load gcc/gcc-11.3.0
+module list
+echo "Done!"
+
+# Compile our code
+echo ""
+echo "Compiling code..."
+nvcc -o hello_world main.cu
+echo "Done!"
+
+# Run our binary
+echo ""
+echo "Executing binary..."
+./hello_world
+echo "Done!"
+
+# Clean up our binary
+rm ./hello_world
+</code></pre>
+<p>There are a few notable differences.</p>
+<ul>
+<li>Our project name is <code>hello_world_cuda</code> instead of <code>hello_world</code>.</li>
+<li>Our project directory is <code>.../hello_world_cuda</code> instead of <code>.../hello_world</code>.</li>
+<li>Instead of loading GCC, we loaded CUDA (<code>module load cuda/cuda-11.8</code>).</li>
+<li>Instead of compiling with G++ (<code>g++ -o hello_world main.cpp</code>), we compiled with CUDA (<code>nvcc -o hello_world main.cu</code>).</li>
+</ul>
+<p>Be sure to replace any instances of <code>&lt;your_project&gt;</code> and <code>&lt;you&gt;</code> with your Metis project and username!</p>
+<h2 id="launching-our-job-with-pbs"><a class="header" href="#launching-our-job-with-pbs">Launching our Job with PBS</a></h2>
+<p>We're ready to go! All that's left is to start our job, which can be done easily with the following command:</p>
+<pre><code class="language-bash">$ qsub run.pbs
+</code></pre>
+<p>The output will look something like this:</p>
+<pre><code class="language-bash">18681.cm
+</code></pre>
+<p>This tells us the ID number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!</p>
+<pre><code class="language-bash">$ ls
+hello_world_cuda.o18681 main.cu run.pbs
+</code></pre>
+<p>Reading the output from our job:</p>
+<pre><code>$ cat hello_world.o18681
+The job's working directory is /home/&lt;your_account_username&gt;/projects/cuda/cuda_on_metis
+
+Loading GCC...
+Currently Loaded Modulefiles:
+ 1) gcc/gcc-12.3.0  
+Done!
+
+Compiling code...
+Done!
+
+Executing binary...
+Hello, Metis!
+
+- Numbers divisible by two: 5000000000
+- Numbers divisible by three: 3333333333
+- Numbers divisible by five: 2000000000
+Done!
+</code></pre>
+<p>It's also worth noting that you can use the <code>qstat</code> command to view the status of a job:</p>
+<pre><code>$ qstat -x 18681
+Job id            Name             User              Time Use S Queue
+----------------  ---------------- ----------------  -------- - -----
+18681.cm          hello_world      z1994244          00:00:02 F short 
+</code></pre>
+<p>The <code>-x</code> flag means you will recieve output even if the job has concluded.</p>
+<p>The documentation for this command, as well as <code>qsub</code>, can be found below:</p>
+<ul>
+<li><a href="https://www.jlab.org/hpc/PBS/qsub.html">(jlab) Documetation: <code>qsub</code></a></li>
+<li><a href="https://www.jlab.org/hpc/PBS/qstat.html">(jlab) Documetation: <code>qstat</code></a></li>
+</ul>
+<p>There are also other useful commands such as <code>qdel</code> (terminates a job):</p>
+<ul>
+<li><a href="https://www.jlab.org/hpc/PBS/qdel.html">(jlab) Documentation: <code>qdel</code></a></li>
+</ul>
+<h2 id="closing-thoughts-1"><a class="header" href="#closing-thoughts-1">Closing Thoughts</a></h2>
+<p>Once again, congratulations! You have just harnessed the power of the NVIDIA hardware on Metis.</p>
+<p>The boilerplate from this project will be enough to get almost any CUDA project up and running. For those who recieve enough of a performance improvement to satisfy your needs, you may be able to stop here.</p>
+<p>For tasks that require even further optimization, Metis supports <a href="https://www.open-mpi.org/">OpenMPI</a>, a message passing interface which allows for massively parallel computation across multiple CPUs/Metis nodes.</p>
+<p>Metis has modules containing GCC, CUDA, and OpenMPI for your convenience:</p>
+<pre><code class="language-bash">$ module av openmpi
+-------------------- /etc/modulefiles ---------------------
+openmpi/openmpi-1.8.8-gcc-11.4.0            
+openmpi/openmpi-4.0.7-gcc-9.5.0-cuda-11.8   
+openmpi/openmpi-4.1.1-gcc-11.3.0-cuda-11.8  
+openmpi/openmpi-4.1.5-gcc-8.5.0-cuda-11.8   
+openmpi/openmpi-4.1.5-gcc-11.4.0-cuda-11.8  
+openmpi/openmpi-4.1.5-gcc-12.3.0-cuda-12.2  
+openmpi/openmpi-4.1.6-gcc-11.4.0-cuda-11.8
+</code></pre>
+<p>Using a combination of both OpenMPI for coordinating large-scale tasks across many processors and CUDA for handling tasks best accelerated by GPU programming will allow you to fully harness the hardware of Metis.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="22-rust-on-metis"><a class="header" href="#22-rust-on-metis">2.2. Rust on Metis</a></h1>
+<p>Rust is a highly unique language that has C-level performance without C-esque memory issues.</p>
+<p>No segfaults, no race conditions, no risk of another Therac-25.</p>
+<p>Rust has multiple features positioning it as an ideal language for HPC:</p>
+<ul>
+<li><strong>Rich ecosystem</strong>: Libaries for CUDA, parallelism, and distributed computing</li>
+<li><strong>Memory safety</strong>: No leaking memory, no unexpected crashes at the end of your workload</li>
+<li><strong>Blistering performance</strong>: With compiler optimizations, Rust can outperform C</li>
+<li><strong>Revealing type system</strong>: Understand your data and its output before and after it's processed</li>
+</ul>
+<h2 id="chapter-221-a-parallel-rust-project-from-the-ground-up"><a class="header" href="#chapter-221-a-parallel-rust-project-from-the-ground-up">Chapter 2.2.1: A Parallel Rust Project, from the Ground Up</a></h2>
+<p>This chapter will teach you:</p>
+<ul>
+<li>The basics of Rust, tailored for HPC</li>
+<li>How to compile and execute Rust code with Cargo</li>
+<li>How to launch a Rust program with PBS</li>
+<li>Trivially writing parallel code with the <code>rayon</code> crate</li>
+</ul>
+<h2 id="chapter-222-cross-node-computation-with-mpi-and-rust"><a class="header" href="#chapter-222-cross-node-computation-with-mpi-and-rust">Chapter 2.2.2: Cross-Node Computation with MPI and Rust</a></h2>
+<p>This chapter will teach you:</p>
+<ul>
+<li>How to prepare your environment for MPI development</li>
+<li>The basics of MPI with openMPI as a backend</li>
+<li>How to use the <code>mpi</code> crate in Rust for cross-node computation and communication</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="221-a-parallel-rust-project-from-the-ground-up"><a class="header" href="#221-a-parallel-rust-project-from-the-ground-up">2.2.1. A Parallel Rust Project, from the Ground Up</a></h1>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust/basic-rayon">in this book's repository</a>!</em></p>
+<p>Rust is a massive language with many intricate types that can be used to facilitate the representation of almost anything imagineable.</p>
+<p>However, we'll be focusing on only a few, namely due to limitations imposed by the MPI standard - we can't trivially pass data that isn't supported by their API.</p>
+<p>These types are laid out in the documentation for the <code>mpi</code> crate <a href="https://docs.rs/mpi/latest/mpi/datatype/trait.Equivalence.html">here</a>, but to summarize:</p>
+<ul>
+<li><strong>Signed Integers</strong>: <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>isize</code></li>
+<li><strong>Unsigned Integers</strong>: <code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>usize</code></li>
+<li><strong>Floating-Point Numbers</strong>: <code>f32</code>, <code>f64</code></li>
+<li><strong>Booleans</strong>: <code>bool</code></li>
+</ul>
+<p>Don't overthink it - you probably want <code>f64</code> or <code>i32</code>/<code>i64</code> in nearly every case. Use <code>usize</code> for indexing. If you come from C++, you can find a nice guide <a href="https://cel.cs.brown.edu/crp/idioms/type_equivalents.html">here</a> that shows what's what!</p>
+<p>I'll run you through the basics, but I won't keep you long - there are plenty of <a href="https://www.rust-lang.org/learn">great guides</a> that do a better job teaching it than I ever could.</p>
+<p>First, variables are declared with the following syntax:</p>
+<pre><code>let [mut] var: &lt;type&gt; = &lt;expression&gt;;
+</code></pre>
+<p>Variables are <strong>immutable</strong> by default. Here's an example where we create a (mutable) vector of <code>f64</code>s:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut nums: Vec&lt;f64&gt; = Vec::new();
+<span class="boring">}</span></code></pre></pre>
+<p>Rust also has arguably the best macro support out of any language, one such example being the <code>vec!(&lt;num&gt;; &lt;len&gt;)</code> macro that fills an array out:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut nums: Vec&lt;f64&gt; = vec!(0.0f64; 100_000_000);
+<span class="boring">}</span></code></pre></pre>
+<p>Rereading above, you can see that the declaration expects an <strong>expression</strong>. Almost everything is an expression, including <strong>block expressions</strong>, meaning the following is completely valid Rust code:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut nums: Vec&lt;f64&gt; = {
+    let mut inner_nums = Vec::new();
+    for _ in 0..100_000_000 {
+        inner_nums.push(0);
+    }
+    inner_nums
+};
+<span class="boring">}</span></code></pre></pre>
+<p>...where <code>_</code> is a wildcard "forget-about-it" operator, since we don't care about the index here.</p>
+<p>Notice the implied return at the end of the block - we could equivalently write <code>return inner_nums;</code>, but it's more "Rust-y" to do it this way!</p>
+<h3 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h3>
+<p>Let's get started with an example. Metis comes with <code>cargo</code> installed, which is the everything-bagel for development in Rust.</p>
+<p>First, create a new project:</p>
+<pre><code class="language-bash">$ mkdir -p ~/projects/rust/basic-rayon
+$ cd ~/projects/rust/basic-rayon
+$ cargo init .
+$ cargo run
+</code></pre>
+<p>You'll be met with a kind <code>Hello, world!</code>. Nice work, you're basically a Rust developer now.</p>
+<p>All Rust source code is in the <code>src</code> directory, with the entrypoint being <code>main.rs</code>. Let's rewrite this to start strong with a program that generates a whole bunch of random floats!</p>
+<h3 id="creating-a-vec-of-random-numbers"><a class="header" href="#creating-a-vec-of-random-numbers">Creating a <code>Vec</code> of Random Numbers</a></h3>
+<p>First, we'll need the <code>rand</code> crate (a Rust library) to make random numbers. We'll also go ahead and add the <code>rayon</code> crate for later:</p>
+<pre><code class="language-bash">$ cargo add rand
+$ cargo add rayon
+</code></pre>
+<p>Let's now write our main function!</p>
+<pre><pre class="playground"><code class="language-rust">use rand::prelude::*;
+
+fn main() {
+    let mut nums: Vec&lt;f64&gt; = vec!(0.0; 1_000_000);
+    rand::rng().fill(&amp;mut nums[..]);
+    
+    println!("{nums:?}");
+}</code></pre></pre>
+<p>Run with <code>cargo run</code>, and you'll be met with a slew of output. Nice work! We'll sorta black box what exactly is happening with <code>rand</code>, but to summarize:</p>
+<pre><pre class="playground"><code class="language-rust">use rand::prelude::*;                              // Import `rand`
+
+fn main() {                                        
+    let mut nums: Vec&lt;f64&gt; = vec!(0.0; 1_000_000); // Make a zero vector
+    rand::rng().fill(&amp;mut nums[..]);               // Fill it with random floats
+
+    println!("{nums:?}");                          
+}</code></pre></pre>
+<p>Notice that we're using the <code>println!</code> macro - we know it's a macro because of the bang (<code>!</code>) - to format the <code>nums</code> vector into its debugging representation with <code>:?</code>.</p>
+<p>This is required because unlike a primitive type like <code>f64</code>, there's no standard string representation of a vector:</p>
+<pre><code>[0, 1, 2, 3] // like this?
+0, 1, 2, 3   // maybe this?
+0 1 2 3      // what about this?
+</code></pre>
+<h3 id="sequentially-calculating-the-average"><a class="header" href="#sequentially-calculating-the-average">Sequentially Calculating the Average</a></h3>
+<p>Well, alright, we've gone ahead and created our vector of random <code>f64</code>s. How do we calculate the average?</p>
+<p>Functions in Rust use the following syntax:</p>
+<pre><code>fn &lt;name&gt; ( [arg1: &lt;type&gt;], [arg2: &lt;type&gt;], ... ) [-&gt; &lt;type&gt;] {
+    ...
+}
+</code></pre>
+<p>Arguments are optional, but must have specified types. The return type for a function is assumed to be <code>()</code>, an empty tuple.</p>
+<p>This can somewhat be thought of as <code>void</code> from C++, but it's not the same - <code>()</code> is a Zero-Sized Type that occupies absolutely no memory. If that sounds insane, I thought so too, but it's legit - the <a href="https://doc.rust-lang.org/nomicon/exotic-sizes.html">docs on it</a> are pretty interesting.</p>
+<p>Jumping back to function syntax, here's a rudimentary example of an <code>add</code> function:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn add ( num_1: f64, num_2: f64 ) -&gt; f64 {
+    num_1 + num_2
+}
+<span class="boring">}</span></code></pre></pre>
+<p>...notice again the implicit return, Rust's neat like that!</p>
+<p>So to write our average function, we're going to take advantage of Rust's absolutely phenomenal <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html"><code>Iterator</code></a> type, which has an outrageous number of useful methods. We'll write a function which uses two for our average:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn sequential_average ( nums: &amp;[f64] ) -&gt; f64 {
+    nums.into_iter().sum() / (nums.len() as f64)
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Let's break this down.</p>
+<ul>
+<li>1.) <code>&amp;[f64]</code> is a reference to an array of <code>f64</code>s</li>
+<li>2.) <code>.into_iter()</code> converts our array reference into an <code>Iterator&lt;f64&gt;</code></li>
+<li>3.) <code>.sum()</code> summates our <code>Iterator&lt;f64&gt;</code> into one <code>f64</code></li>
+<li>4.) <code>.len()</code> returns a <code>usize</code>, which we can cast to an f64</li>
+</ul>
+<p>And this works! If we append it to our main function (consider removing the <code>println!(...)</code>):</p>
+<pre><pre class="playground"><code class="language-rust">fn main ( ) {
+    ...
+
+    // Test the sequential average
+    let start = Instant::now();
+    let avg = sequential_average(&amp;nums);
+    let duration = start.elapsed();
+    println!("Average: {} in {:?}", avg, duration);
+
+    ...
+}</code></pre></pre>
+<p>When testing with a much larger number, it's actually pretty quick, it gets the job done for 100,000,000 elements in about ~900ms on Metis!</p>
+<p>Very quick - Rust is fast - but we can be faster. Let's talk about <code>rayon</code>.</p>
+<h3 id="parallel-computation-with-rayon"><a class="header" href="#parallel-computation-with-rayon">Parallel Computation with <code>rayon</code></a></h3>
+<p>To get started with <code>rayon</code>, let's import its prelude and something to help us measure:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rayon::prelude::*;
+use std::time::Instant;
+<span class="boring">}</span></code></pre></pre>
+<p>Now, what's unique about <code>rayon</code> in our case is the <a href="https://docs.rs/rayon/latest/rayon/slice/trait.ParallelSlice.html"><code>ParallelSlice</code></a> that it offers. It allows you to effectively convert our regular slice into a slice that can be easily operated on in parallel.</p>
+<p>I'm gonna throw this at you all at once, but I'll break it down after, I promise!</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn parallel_average ( nums: &amp;[f64] ) -&gt; f64 {
+    let sum: f64 = nums
+        .par_chunks(nums.len() / 100)
+        .map(|chunk| {
+            chunk.into_iter()
+                .map(|&amp;n| n)
+                .sum::&lt;f64&gt;()
+        })
+        .sum();
+
+    sum / (nums.len() as f64)
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Our function has the same inputs and outputs as its sequential equivalent. Similarly, we want to start by creating an iterator.</p>
+<p>Instead of using <code>.into_iter()</code>, which creates an iterator of elements); we'll use <code>.par_chunks(&lt;n&gt;)</code>, which creates an iterator of chunks which are <code>n</code> length big.</p>
+<p>Next, we use <code>.map(&lt;closure&gt;)</code>, which takes a closure that should accept a chunk and return its sum. For the sake of brevity, assume that a closure is a lambda function from C++, they're pretty similar here.</p>
+<p>Just like the previous sequential implementation, we create an iterator and summate it. The sole difference is that since <code>.par_chunks</code> creates chunks that are <code>&amp;[&amp;f64]</code> instead of <code>&amp;[f64]</code>, we dereference them to their actual values with <code>.map(|&amp;n| n)</code>.</p>
+<p>Lastly, we divide the sum by the length to create our average. Let's add testing code to our <code>main</code> function:</p>
+<pre><pre class="playground"><code class="language-rust">fn main ( ) {
+    ...
+
+    // Test the sequential average
+    let start = Instant::now();
+    let avg = sequential_average(&amp;nums);
+    let duration = start.elapsed();
+    println!("Average: {} in {:?}", avg, duration);
+
+    ...
+}</code></pre></pre>
+<p>All together, our program should come out as the following:</p>
+<pre><pre class="playground"><code class="language-rust">use rand::prelude::*;
+use rayon::prelude::*;
+use std::time::Instant;
+
+fn main() {
+    // Create a vector of n random integers
+    let mut nums: Vec&lt;f64&gt; = vec!(0.0; 100_000_000);
+    rand::rng().fill(&amp;mut nums[..]);
+
+    // Test the parallel average
+    let start = Instant::now();
+    let avg = parallel_average(&amp;nums);
+    let duration = start.elapsed();
+    println!("Average: {} in {:?}", avg, duration);
+
+    // Test the sequential average
+    let start = Instant::now();
+    let avg = sequential_average(&amp;nums);
+    let duration = start.elapsed();
+    println!("Average: {} in {:?}", avg, duration);
+}
+
+fn sequential_average ( nums: &amp;[f64] ) -&gt; f64 {
+    nums.into_iter().sum::&lt;f64&gt;() / nums.len() as f64
+}
+fn parallel_average ( nums: &amp;[f64] ) -&gt; f64 {
+    let sum: f64 = nums
+        .par_chunks(nums.len() / 100)
+        .map(|ind| {
+            let mut local_sum: f64 = 0.0;
+            for &amp;num in ind {
+                local_sum += num;
+            }
+            local_sum
+        })
+        .sum();
+
+    sum / (nums.len() as f64)
+}</code></pre></pre>
+<p>Lastly, let's compile and not in the debug profile, as <code>cargo run</code> does, but in release mode:</p>
+<pre><code class="language-bash">$ cargo build --release
+   Compiling rayon-test v0.1.0 (/nfs/ihfs/home_metis/z1994244/projects/rust/rayon-test)
+    Finished `release` profile [optimized] target(s) in 0.34s
+$ ./target/release/rayon-test
+Average: 0.5000479638601427 in 21.319388ms
+Average: 0.5000479638602693 in 126.604707ms
+</code></pre>
+<p>Nicely done! And wow - sure makes a difference, doesn't it?</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="3-user-environment-customizationvirtualization-on-metis"><a class="header" href="#3-user-environment-customizationvirtualization-on-metis">3. User Environment Customization/Virtualization on Metis</a></h1>
+<h2 id="podman--docker-vs-singularityapptainer--docker-vs-conda-vs-modulefiles"><a class="header" href="#podman--docker-vs-singularityapptainer--docker-vs-conda-vs-modulefiles">Podman + Docker vs Singularity/Apptainer + Docker vs Conda vs Modulefiles</a></h2>
+<p>Metis provides several technologies to encapsulate environments and manage software dependencies. Each of these tools—Podman, Docker, Singularity/Apptainer, Conda, and Modulefiles—has different strengths and weaknesses, depending on your use case.</p>
+<p>Any technology marked with a "⭐" is a strong candidate in its given feature.</p>
+<h2 id="comparison-chart"><a class="header" href="#comparison-chart">Comparison Chart</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Feature</th><th>Podman + Docker</th><th>Singularity/Apptainer</th><th>Conda</th><th>Modulefiles</th></tr></thead><tbody>
+<tr><td><strong>Use Case</strong></td><td>⭐ General development, CI/CD, image availability</td><td>⭐ HPC environments, scientific computing</td><td>Managing isolated software environments</td><td>Dynamic loading of software on HPC clusters</td></tr>
+<tr><td><strong>Image/Package Repository</strong></td><td>⭐ Docker Hub (extremely large and varied)</td><td>Smaller ecosystem, focus on reproducibility</td><td>Anaconda repository <br> <em>(⭐ only if using Python or R)</em></td><td>Pre-installed software for the HPC cluster</td></tr>
+<tr><td><strong>Security</strong></td><td>Rootless operation (Podman)</td><td>⭐ High security in multi-user environments</td><td>No OS-level isolation</td><td>⭐ Tied to user permissions on HPC</td></tr>
+<tr><td><strong>Integration with HPC</strong></td><td>Limited, requires config</td><td>Optimized for HPC environments</td><td>Limited, not designed for HPC</td><td>Native integration with HPC systems</td></tr>
+<tr><td><strong>Ease of Use in HPC</strong></td><td>Very easy, but requires some minimal configuration</td><td>Tedious but straightforward to work with</td><td>Simple for general use (but not HPC-optimized)</td><td>⭐ Extremely easy to use, but requires cluster-specific knowledge</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="31-proscons-podman--docker-and-singularityapptainer--docker"><a class="header" href="#31-proscons-podman--docker-and-singularityapptainer--docker">3.1 Pros/Cons: Podman + Docker and Singularity/Apptainer + Docker</a></h1>
+<p><small><em>To learn more about Podman, see the <a href="https://podman.io/docs">official Podman Documentation</a>, or a great <a href="https://devopscube.com/podman-tutorial-beginners/">beginner's tutorial</a>!</em></small></p>
+<p><small><em>To learn more about Apptainer, see the <a href="https://apptainer.org/">official Apptainer Documentation</a>, or a comprehensive <a href="https://hsf-training.github.io/hsf-training-singularity-webpage/">tutorial</a>!</em></small></p>
+<p>Metis has both Podman <em>and</em> Singularity installed. Both are software designed to allow non-root users to run containers on systems like Metis, where this is the case.</p>
+<p>Podman is designed to effectively be a drop-in replacement for Docker on non-root systems, while Singularity is a tool specifically designed for HPC environments with performance, reproducibility, and security in mind.</p>
+<p>Although this documentation does not cover Singularity, it is a very powerful tool that should be considered if you are looking to squeeze the maximum performance out of Metis.</p>
+<h3 id="podman--docker"><a class="header" href="#podman--docker">Podman + Docker</a></h3>
+<p>Podman and Docker are containerization platforms that allow users to run and manage containers in isolated environments.</p>
+<p><strong>Pros</strong>:</p>
+<ul>
+<li><strong>Large Ecosystem</strong>: Docker has an extensive library of images on Docker Hub.</li>
+<li><strong>Rootless Operation (Podman)</strong>: Podman is rootless by default, improving security without compromising functionality.</li>
+<li><strong>Versatile</strong>: Ideal for general development, CI/CD pipelines, and application isolation.</li>
+</ul>
+<p><strong>Cons</strong>:</p>
+<ul>
+<li><strong>Limited HPC Integration</strong>: Requires extra configuration to integrate with HPC systems, especially regarding MPI.</li>
+<li><strong>Overhead</strong>: Containerization can add overhead compared to native execution, especially for complex MPI-based workflows.</li>
+</ul>
+<h3 id="singularityapptainer"><a class="header" href="#singularityapptainer">Singularity/Apptainer</a></h3>
+<p>Singularity, now rebranded as <strong>Apptainer</strong>, is a containerization technology specifically designed for HPC environments. Apptainer allows users to encapsulate applications and their dependencies in containers that are highly portable and optimized for performance in multi-user systems.</p>
+<p><strong>Pros</strong>:</p>
+<ul>
+<li><strong>Native OpenMPI Support</strong>: Singularity/Apptainer handles MPI seamlessly, outperforming Docker in HPC scenarios.</li>
+<li><strong>Reproducibility</strong>: Ensures consistent performance and results, vital in scientific computing.</li>
+<li><strong>Security</strong>: Designed for multi-user environments, ensuring other users can't interfere with your containers.</li>
+</ul>
+<p><strong>Cons</strong>:</p>
+<ul>
+<li><strong>Smaller Ecosystem</strong>: Fewer available container images and less community support compared to Docker.</li>
+<li><strong>Less Flexibility</strong>: Its focus on reproducibility can make certain application deployments more challenging.</li>
+<li><strong>Complex Local Setup</strong>: Initial setup on local machines can be tricky, especially compared to Docker/Podman.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="32-proscons-conda"><a class="header" href="#32-proscons-conda">3.2. Pros/Cons: Conda</a></h1>
+<p><small><em>To learn more about Conda, see <a href="https://www.niu.edu/crcd/current-users/crnt-users-software.shtml#conda">CRCD's documentation</a>!</em></small></p>
+<p><strong>Conda</strong> is a popular package and environment management tool, widely used in scientific computing for managing Python and R environments. It allows users to install multiple versions of software and switch between them without affecting the system’s main environment.</p>
+<p><strong>Pros</strong>:</p>
+<ul>
+<li><strong>Package Management</strong>: Supports a wide array of libraries, including Python, R, and C/C++ packages.</li>
+<li><strong>Cross-platform</strong>: Works on most operating systems and is widely adopted in data science and machine learning communities.</li>
+<li><strong>Virtual Environment Management</strong>: Allows easy creation of isolated virtual environments.</li>
+</ul>
+<p><strong>Cons</strong>:</p>
+<ul>
+<li><strong>Not Containerized</strong>: Unlike Docker and Singularity, Conda environments are not isolated at the OS level, leading to potential conflicts with system libraries.</li>
+<li><strong>Not HPC-optimized</strong>: While it works in HPC environments, it's not specifically designed for them. It lacks the strong security and performance optimizations of container-based solutions.</li>
+<li><strong>Heavy on Disk</strong>: Conda environments can become quite large, consuming significant disk space.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="33-proscons-modulefiles"><a class="header" href="#33-proscons-modulefiles">3.3. Pros/Cons: Modulefiles</a></h1>
+<p><small><em>To learn more about Modulefiles or to find links to CRCD's documentation, see <strong>Chapter 6.3</strong>!</em></small></p>
+<p><strong>Environment Modules</strong> (or <strong>Modulefiles</strong>) are a system for dynamically modifying user environments via modulefiles. They are heavily used in HPC environments to load software environments on-demand without needing root privileges.</p>
+<p><strong>Pros</strong>:</p>
+<ul>
+<li><strong>Lightweight</strong>: No overhead from containerization.</li>
+<li><strong>HPC Optimized</strong>: Designed specifically for HPC environments, often with pre-built software optimized for the specific cluster. Easily the most optimized technology.</li>
+<li><strong>Flexible</strong>: Allows for loading different software versions, easy to use and understand in HPC.</li>
+</ul>
+<p><strong>Cons</strong>:</p>
+<ul>
+<li><strong>Not Portable</strong>: Modules are often tightly coupled to the cluster’s software stack, making them difficult to reproduce elsewhere.</li>
+<li><strong>Manual Management</strong>: Requires explicit loading/unloading, making it less automated compared to container technologies.</li>
+<li><strong>Complex and Administrator Dependent</strong>: You may need administrator intervention to add or modify system modules.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="using-podman--docker-on-metis"><a class="header" href="#using-podman--docker-on-metis">Using Podman + Docker on Metis</a></h1>
+<p>In this chapter, we will dive deep into Docker and PBS techniques, expanding on the foundational knowledge covered in Chapters 2.1 and 2.2.</p>
+<p>We'll explore how to combine these techniques to create a robust workflow for your projects on Metis, including handling custom Docker images, leveraging GPU acceleration, and managing complex dependencies.</p>
+<h2 id="overview-of-the-chapters-1"><a class="header" href="#overview-of-the-chapters-1">Overview of the Chapters</a></h2>
+<h3 id="chapter-41-using-pre-made-docker-images"><a class="header" href="#chapter-41-using-pre-made-docker-images">Chapter 4.1: Using Pre-Made Docker Images</a></h3>
+<ul>
+<li><strong>Goals</strong>: Understand the limitations of Metis modulefiles and learn how to circumvent them using Docker.</li>
+<li><strong>Problem</strong>: Some software isn't available on Metis, creating modulefiles can be time-consuming or impossible due to custom dependencies</li>
+<li><strong>Solution</strong>: Use Docker (via Podman) to run custom applications.</li>
+<li><strong>Outcome</strong>: You will be able to run custom software avoiding the limitations of the Metis environment</li>
+</ul>
+<h3 id="chapter-42-using-gpu-acceleration-with-docker"><a class="header" href="#chapter-42-using-gpu-acceleration-with-docker">Chapter 4.2: Using GPU Acceleration with Docker</a></h3>
+<ul>
+<li><strong>Goals</strong>: Learn how to enable GPU passthrough in Docker containers on Metis.</li>
+<li><strong>Problem</strong>: GPUs are not accessible in Docker by default, and additional steps are required to set up NVIDIA drivers and CUDA.</li>
+<li><strong>Solution</strong>: Configure Podman with specific flags and use NVIDIA's CUDA-enabled Docker images.</li>
+<li><strong>Outcome</strong>: You will be able to leverage GPU acceleration for your Dockerized applications, significantly boosting performance.</li>
+</ul>
+<h3 id="chapter-43-creating-your-own-docker-base-images"><a class="header" href="#chapter-43-creating-your-own-docker-base-images">Chapter 4.3: Creating Your Own Docker Base Images</a></h3>
+<ul>
+<li><strong>Goals</strong>: Gain the skills to create custom Docker images tailored to your project’s needs.</li>
+<li><strong>Problem</strong>: Pre-made Docker images may not always meet the specific requirements of your project.</li>
+<li><strong>Solution</strong>: Learn the basics of writing Dockerfiles, building custom images, and publishing them to public repositories.</li>
+<li><strong>Outcome</strong>: You will be able to create, customize, and share Docker images, enabling a flexible and reproducible environment for your work.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="41-using-pre-made-docker-images"><a class="header" href="#41-using-pre-made-docker-images">4.1. Using Pre-Made Docker Images</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">PBS</a></em></small></p>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image">in this book's repository</a>!</em></p>
+<p>We will first begin by using a language which is <em>not</em> among the modules which Metis provides, Python 3.11.</p>
+<p>In actuality, Metis does offer Python, as seen below:</p>
+<pre><code>$ module av python
+-------------------- /etc/modulefiles ---------------------
+python/python-3.9.10  python/python-3.12.4
+</code></pre>
+<p>...but, at the time of writing this, it does not have Python 3.11, which is among the most commonly used versions.</p>
+<p>So, how do we fix this?</p>
+<p>Well, we ourselves can't fix the global modulefiles on Metis, which means under normal circumstances, we would have to reach out to Metis staff to have the module fixed - something that takes away from both your own time and the time of the Metis staff.</p>
+<p>You are able to define your own modulefiles, but this is a time consuming task, and it can't solve everything.</p>
+<h2 id="goals-2"><a class="header" href="#goals-2">Goals</a></h2>
+<ul>
+<li>Learn how to use Podman and Docker</li>
+<li>Learn how to install dependencies via Podman's CLI</li>
+<li>Learn how to use Podman in a PBS script file</li>
+<li>Learn how to kill Podman to avoid uptime emails and alerts</li>
+</ul>
+<h2 id="the-problem"><a class="header" href="#the-problem">The Problem</a></h2>
+<p>Modulefiles struggle or are outright impossible to create with any of the following cases:</p>
+<ul>
+<li>Packages which can only run on certain operating systems, and specific versions of those operating systems</li>
+<li>Packages which have dense dependency trees</li>
+<li>Packages which have circular dependencies</li>
+<li>Packages which need elevated permissions</li>
+<li>Packages with long build times, where a distributed binary may be preferred</li>
+<li>Closed-source or unfree packages (which are very common in machine learning!)</li>
+<li>Huge numbers of dependencies</li>
+</ul>
+<p>This isn't to say it's impossible to manually build every single dependency for your project, and also include them manually.</p>
+<p>However, this is an <strong>extremely</strong> time-consuming process, and time spent doing this will only take away from your core work.</p>
+<p>Dependency installation should be a matter of lines, not weeks.</p>
+<h2 id="the-solution"><a class="header" href="#the-solution">The Solution</a></h2>
+<p><a href="https://www.docker.com/">Docker</a>, an extremely powerful containerization and encapsulation tool that allows developers to define virtual machines with a level of granularity rarely found in modern computing. Docker allows you to select an operation system as a base, install packages and libraries, and define run behaviour.</p>
+<p>We will be using an overlay on Docker called <a href="https://podman.io/">Podman</a>. It allows us to use Docker containers despite not having elevated permissions on Metis. Understanding of Podman isn't required - all Docker commands can have <code>docker</code> replaced with <code>podman</code> (or in our case, <code>/bin/podman</code>).</p>
+<p>If you haven't already, create your projects directory, a new directory for Docker projects, and finally a directory for this project:</p>
+<pre><code class="language-bash">$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image
+$ cd /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image
+</code></pre>
+<p>Next, let's create a <code>main.py</code> file with the following contents:</p>
+<pre><code class="language-python">print( "Hello, Metis!" )
+</code></pre>
+<p>Now, how do we get Docker to run this file?</p>
+<p>For your own projects, you can search the <a href="https://hub.docker.com/">Docker Hub</a> for programming languages, software, and more. You can also use a base image like <code>ubuntu:22.04</code> or <code>debian:bookworm</code>, which contain nothing but the operating system with no additional packages or programming languages.</p>
+<p>From there, you can use the <code>exec</code> command to install the languages or packages with that operating system's respective package manager. We will go over the usage of the <code>exec</code> command with examples shortly!</p>
+<p>We'll start by downloading and running a <a href="https://docs.docker.com/guides/docker-concepts/the-basics/what-is-an-image/">Docker Image</a>, which will be built on the Debian operating system version 12.6 "Bookworm", and include Python 3.11.9.</p>
+<p><em><strong>Note</strong>: If you see something like <code>ERRO[0000] cannot find UID/GID for user z1994244: no subuid ranges found for user "z1994244" in /etc/subuid - check rootless mode in man pages.</code>, it's okay! This error sometimes occurs the first time you run a command, and if it does, simply wait a few seconds and run it again.</em></p>
+<p>Downloading and starting our container:</p>
+<pre><code>$ /bin/podman run             \
+    -v ./.:/home            \
+    -w /home                \
+    --name python_container \
+    -t -d                   \
+    python:3.12.5-bookworm
+WARN[0000] Network file system detected as backing store.  Enforcing overlay option `force_mask="700"`.  Add it to storage.conf to silence this warning 
+f258979e09d0923ebb815b0b0baae9ae9cb2de18ace02a4aa282920c673073d9
+</code></pre>
+<p>The first line with the warning can be safely ignored. It's likely that by the time you are reading this, it's been silenced.</p>
+<p>Next, let's run our Python script!</p>
+<pre><code>$ /bin/podman exec python_container python3 main.py
+...
+Hello, World!
+</code></pre>
+<p>Congratulations! You've just run a version of Python that's not installed on Metis at all. But, what if our Python script needed some dependencies?</p>
+<p>Overwrite the <code>main.py</code> file with the following contents:</p>
+<pre><code class="language-python">import numpy as np
+
+print( "Hello, Metis!" )
+</code></pre>
+<p>If we try to run our script again, we get an error:</p>
+<pre><code>$ /bin/podman exec python_container python3 main.py
+...
+Traceback (most recent call last):
+  File "/home/main.py", line 1, in &lt;module&gt;
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+</code></pre>
+<p>Let's create our <a href="https://docs.python.org/3/library/venv.html">Python virtual environment</a>, and install <code>numpy</code> using the <code>exec</code> command! Run the following:</p>
+<pre><code class="language-bash">$ /bin/podman exec python_container python -m venv .venv
+$ /bin/podman exec python_container .venv/bin/pip install numpy
+</code></pre>
+<p>Running our script again:</p>
+<pre><code>$ /bin/podman exec python_container .venv/bin/python3 main.py
+...
+Hello, Metis!
+</code></pre>
+<p>Nicely done! Lastly, let's kill and remove our container:</p>
+<pre><code class="language-bash">$ /bin/podman kill python_container
+$ /bin/podman rm python_container
+</code></pre>
+<p>Again, congratulations! You've successfully downloaded a Docker Image, installed some dependancies, and run them on the login node!</p>
+<h2 id="docker-in-pbs"><a class="header" href="#docker-in-pbs">Docker in PBS</a></h2>
+<p>Now, we just ran that Docker image on the <em>login node</em>, not the compute nodes. So how do we write a PBS file to automate what we just did?</p>
+<p>Create a <code>run.pbs</code> file with the following contents:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+#PBS -N premade_image
+#PBS -j oe
+
+#Note - on Metis   
+#              Nchunks&lt;=32, for GPU chunks
+#              Nchunks&lt;=4096/Ncpus for CPU-only chunks
+#              (run 'shownodes' command to find the number of free cpus) 
+#              Ncpus&lt;=128, the total number of CPUs per node is 128 
+#              NPmpi&lt;=Ncpus, the total number of CPUs allocated for MPI tasks, 
+#                              request NPmpi=Ncpus for non-OPENMP jobs                           
+#              Ngpus==1,  the total number of GPUs per node is 1    
+#              X&lt;=256,  28 of 32 Metis modes have 256 GB of RAM                       
+#                       special jobs can request up to 1024 GB of RAM (4 nodes)
+#
+# Below, we request two chunks;
+#  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
+#PBS -l walltime=00:15:00
+
+# When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
+#--PBS -m ae
+#--#PBS -M account@niu.edu
+
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image
+echo "This job's working directory is $PROJECT_DIRECTORY"
+cd $PROJECT_DIRECTORY
+
+# Enable linger for the user
+echo ""
+echo "Enabling linger for the user..."
+loginctl enable-linger &lt;your_account_name&gt;
+echo "Done!"
+
+# Start the container
+# 
+# There are five flags, most of which will never change:
+# - `-v $PROJECT_DIRECTORY:/home` mounts the project directory to the `/home` 
+#    directory in the container.
+# - `-w /home` sets the working directory in the container to `/home`.
+# - `-t` allocates a pseudo-TTY. This is useful for running the container in
+#    the background.
+# - `-d` runs the container in the background.
+#
+# The last argument is the image name. This is the only thing that will change
+#  between projects, this is the name of the image we want to run.
+# 
+# For instance, in this case, we are running the `python:3.12.5-bookworm` image:
+# - `python` is the name of the image.
+# - `3.12.5-bookworm` is the tag of the image, which specifies the version of the
+#    image we want to run.
+#
+# Millions of pre-built images are available on Docker Hub, and will likely 
+#  already have an image that suits your needs! You can search for images here:
+#  https://hub.docker.com/
+#
+# Note: There may be many logs that are printed to the console when the container
+#  is started. Despite being error-level, this is normal, and you can ignore them.
+echo ""
+echo "Starting the container..."
+/bin/podman run                  \
+    -v $PROJECT_DIRECTORY:/home  \
+    -w /home                     \
+    --name python_container      \
+    -t -d                        \
+    python:3.12.5-bookworm       \
+    &gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
+echo "Done!"
+
+# Run our python script
+#
+# The `exec` command runs a command in a running container. In this case, we are
+#  running the `python3 main.py` command in the `python_container` container.
+# 
+# There is a generic error message, which can be ignored.
+echo ""
+echo "Running the python script..."
+/bin/podman exec python_container .venv/bin/python3 main.py
+echo "Done!"
+
+# Kill the container
+#
+# The `kill` command stops a running container. In this case, we are stopping the
+#  `python_container` container.
+echo ""
+echo "Stopping the container..."
+/bin/podman kill python_container \
+    &gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
+echo "Done!"
+
+# Remove the container
+#
+# The `rm` command removes a container. In this case, we are removing the
+#  `python_container` container.
+echo ""
+echo "Removing the container..."
+/bin/podman rm python_container \
+    &gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
+echo "Done!"
+</code></pre>
+<p>This is largly the same, and only two things need to be modified to fit your Metis account:</p>
+<pre><code class="language-bash">...
+
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image
+echo "This job's working directory is $PROJECT_DIRECTORY"
+cd $PROJECT_DIRECTORY
+
+# Enable linger for the user
+echo ""
+echo "Enabling linger for the user..."
+loginctl enable-linger &lt;your_account_name&gt;
+echo "Done!"
+
+...
+</code></pre>
+<p>Be sure to replace <code>&lt;your_account_name&gt;</code>, <code>&lt;your_project&gt;</code>, and <code>&lt;you&gt;</code> instances with your own information! The linger command is unique to Podman (Docker) jobs in PBS, and ensures it has the nessecary permissions to run your jobs.</p>
+<p>With that, let's test our job!</p>
+<pre><code>$ qsub run.pbs
+18712.cm
+$ cat premade_image.o18712
+This job's working directory is /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image
+
+Enabling linger for the user...
+Done!
+
+Starting the container...
+Done!
+
+Running the python script...
+time="2024-08-16T14:57:08-05:00" level=warning msg="Network file system detected as backing store.  Enforcing overlay option `force_mask=\"700\"`.  Add it to storage.conf to silence this warning"
+Error: can only create exec sessions on running containers: container state improper
+Done!
+
+Stopping the container...
+Done!
+
+Removing the container...
+Done!
+</code></pre>
+<p>Lastly, we must kill off our Podman processes on the login node, or else we'll recieve emails about extended uptime.</p>
+<p>There are many, so it's easier to kill instead everything under your username. This will close your shell connection, so please save any unfinished work before doing so.</p>
+<p>This will cause additional load times next time you login to Metis (10-20 seconds), but is important to do.</p>
+<pre><code class="language-bash">pkill -U &lt;your_account_username&gt;
+</code></pre>
+<h2 id="closing-thoughts-2"><a class="header" href="#closing-thoughts-2">Closing Thoughts</a></h2>
+<p>Congratulations! You now have the skills needed to tackle most CPU-only applications.</p>
+<p>You can modify the base image to fit the operating system, languages, and software you need! You can also add or modify <code>exec</code> commands to install more languages, libraries, or software to be able to load anything else your software might need.</p>
+<p>If you'd like to learn more about the <code>run</code>, <code>exec</code>, <code>kill</code>, or <code>rm</code> commands, additional documentation can be found in the <strong>Conclusion and Helpful Resources</strong> chapter!</p>
+<p>If your application does not make use of the GPU, and you have no interest in automation or integration, you likely don't need to read any further. If you do, then feel free to continue onto <strong>Chapter 3.2 - Using GPU Acceleration with Docker</strong>!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="42-using-gpu-acceleration-with-docker"><a class="header" href="#42-using-gpu-acceleration-with-docker">4.2. Using GPU Acceleration With Docker</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">PBS</a></em></small></p>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/premade_image_gpu">in this book's repository</a>!</em></p>
+<p>Now we must address how to use GPU passthrough on Metis with Podman (Docker), which can quickly elevate our programs to higher performance with the power of GPU acceleration!</p>
+<h2 id="goals-3"><a class="header" href="#goals-3">Goals</a></h2>
+<ul>
+<li>Pass through a GPU to Podman</li>
+</ul>
+<h2 id="the-problems"><a class="header" href="#the-problems">The Problem(s)</a></h2>
+<p>In order to do so, we must solve the following problems:</p>
+<ul>
+<li><strong>1</strong> - Our GPUs are not passed through to Podman (Docker) by default</li>
+<li><strong>2</strong> - NVIDIA drivers and the CUDA runtime are not installed on most Docker Images</li>
+<li><strong>3</strong> - NVIDIA device files aren't always loaded on the compute node</li>
+</ul>
+<h2 id="the-solutions"><a class="header" href="#the-solutions">The Solution(s)</a></h2>
+<h3 id="1---our-gpus-are-not-passed-through-to-podman-docker-by-default"><a class="header" href="#1---our-gpus-are-not-passed-through-to-podman-docker-by-default">1 - Our GPUs are not passed through to Podman (Docker) by default</a></h3>
+<p>To solve this, we add two flags to our <code>/bin/podman</code> command:</p>
+<pre><code class="language-bash">$ /bin/podman run ...               \
+    --device nvidia.com/gpu=all   \
+    --security-opt=label=disable  \
+    some/image
+</code></pre>
+<p>This will ensure that the GPU is passed through to our Docker Container.</p>
+<h3 id="2---nvidia-drivers-and-the-cuda-runtime-are-not-installed-on-most-docker-images"><a class="header" href="#2---nvidia-drivers-and-the-cuda-runtime-are-not-installed-on-most-docker-images">2 - NVIDIA drivers and the CUDA runtime are not installed on most Docker Images</a></h3>
+<p>CUDA drivers are notoriously difficult to install, so it's highly recommended to use a base image that already has them pre-installed.</p>
+<p>For the purpose of this example, we will be using NVIDIA's <a href="https://hub.docker.com/r/nvidia/cuda/">base image</a>, which has CUDA pre-installed.</p>
+<h3 id="3---nvidia-device-files-arent-always-loaded-on-the-compute-node"><a class="header" href="#3---nvidia-device-files-arent-always-loaded-on-the-compute-node">3 - NVIDIA device files aren't always loaded on the compute node</a></h3>
+<p>Occasionally, the <code>/dev</code> files for the NVIDIA GPUs disappear on compute nodes.</p>
+<p>To solve this, we use a relatively hacky but functional solution - running a CUDA-based binary to force them to load.</p>
+<p>For the sake of demonstration, we'll use the binary we developed in <strong>Chapter 2.2</strong>!</p>
+<h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
+<p>First, let's create our project directory as we have in previous projects:</p>
+<pre><code class="language-bash">$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image_gpu
+$ cd /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image_gpu
+</code></pre>
+<p>Next, we need a binary that forces CUDA to load. We'll build the project from Chapter 2.1 and have it output here:</p>
+<pre><code class="language-bash">$ module purge
+$ module load cuda/cuda-11.8
+$ nvcc -o initialize_cuda /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis/main.cu
+</code></pre>
+<p>Finally, we'll implement everything mentioned above.</p>
+<p>Create a <code>run.pbs</code> file with the following contents:</p>
+<pre><code class="language-sh">#!/bin/bash
+
+#PBS -N premade_image_gpu
+#PBS -j oe
+
+#Note - on Metis   
+#              Nchunks&lt;=32, for GPU chunks
+#              Nchunks&lt;=4096/Ncpus for CPU-only chunks
+#              (run 'shownodes' command to find the number of free cpus) 
+#              Ncpus&lt;=128, the total number of CPUs per node is 128 
+#              NPmpi&lt;=Ncpus, the total number of CPUs allocated for MPI tasks, 
+#                              request NPmpi=Ncpus for non-OPENMP jobs                           
+#              Ngpus==1,  the total number of GPUs per node is 1    
+#              X&lt;=256,  28 of 32 Metis modes have 256 GB of RAM                       
+#                       special jobs can request up to 1024 GB of RAM (4 nodes)
+#
+# Below, we request two chunks;
+#  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
+#PBS -l walltime=00:15:00
+
+# When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
+#--PBS -m ae
+#--#PBS -M account@niu.edu
+
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/docker/premade_image_gpu
+echo "This job's working directory is $PROJECT_DIRECTORY"
+cd $PROJECT_DIRECTORY
+
+# Enable linger for the user
+echo ""
+echo "Enabling linger for the user..."
+loginctl enable-linger &lt;your_account_username&gt;
+echo "Done!"
+
+# Initialize GPU device files by running our script with CUDA
+echo ""
+echo "Running a quick CUDA program..."
+module purge; module load cuda/cuda-11.8
+./initialize_cuda \
+    &gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
+echo "Done!"
+
+# Start the container
+# 
+# There are five flags, most of which will never change:
+# - `-v $PROJECT_DIRECTORY:/home` mounts the project directory to the `/home` 
+#    directory in the container.
+# - `-w /home` sets the working directory in the container to `/home`.
+# - `-t` allocates a pseudo-TTY. This is useful for running the container in
+#    the background.
+# - `-d` runs the container in the background.
+#
+# The last argument is the image name. This is the only thing that will change
+#  between projects, this is the name of the image we want to run.
+# 
+# For instance, in this case, `cuda:12.6.0-cudnn-runtime-ubuntu22.04`:
+# - `cuda` is the name of the image.
+# - `12.6.0-cudnn-runtime-ubuntu22.04` is the tag of the image, which specifies
+#    the version of the image, the base operating system, and any additional
+#    software that is included in the image.
+#
+# Millions of pre-built images are available on Docker Hub, and will likely 
+#  already have an image that suits your needs! You can search for images here:
+#  https://hub.docker.com/
+#
+# Note: There may be many logs that are printed to the console when the container
+#  is started. Despite being error-level, this is normal, and you can ignore them.
+echo ""
+echo "Starting the container..."
+/bin/podman run                                 \
+    -v $PROJECT_DIRECTORY:/home                 \
+    -w /home                                    \
+    --name cuda_container                       \
+    --device nvidia.com/gpu=all                 \
+    --security-opt=label=disable                \
+    -t -d                                       \
+    nvidia/cuda:12.6.0-cudnn-devel-ubuntu20.04  \
+    #&gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
+echo "Done!"
+
+# Run our `nvidia-smi` command
+#
+# The `exec` command runs a command in a running container. In this case, we are
+#  running the `nvidia-smi` command in the `cuda_container` container.
+# 
+# There is a generic error message, which can be ignored.
+echo ""
+echo "Running the \`nvidia-smi\` command..."
+/bin/podman exec cuda_container nvidia-smi
+echo "Done!"
+
+# Kill the container
+#
+# The `kill` command stops a running container. In this case, we are stopping the
+#  `cuda_container` container.
+echo ""
+echo "Stopping the container..."
+/bin/podman kill cuda_container \
+    &gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
+echo "Done!"
+
+# Remove the container
+#
+# The `rm` command removes a container. In this case, we are removing the
+#  `cuda_container` container.
+echo ""
+echo "Removing the container..."
+/bin/podman rm cuda_container \
+    &gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
+echo "Done!"
+</code></pre>
+<p>As always, don't forget to replace occurrences of <code>&lt;your_project&gt;</code> and <code>&lt;you&gt;</code> with your actual Metis username.</p>
+<p>Now, let's discuss what's changed from Chapter 3.1.</p>
+<p>Firstly, we ensure CUDA <code>/dev</code> files are created:</p>
+<pre><code class="language-bash">...
+
+# Initialize GPU device files by running our script with CUDA
+echo ""
+echo "Running a quick CUDA program..."
+module purge; module load cuda/cuda-11.8
+./initialize_cuda \
+    &gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
+echo "Done!"
+
+...
+</code></pre>
+<p>Secondly, we add the flags which make our GPU visible to Podman (Docker), and we use NVIDIA's CUDA base image:</p>
+<pre><code class="language-bash">...
+
+# Start the container
+# 
+# There are five flags, most of which will never change:
+# - `-v $PROJECT_DIRECTORY:/home` mounts the project directory to the `/home` 
+#    directory in the container.
+# - `-w /home` sets the working directory in the container to `/home`.
+# - `-t` allocates a pseudo-TTY. This is useful for running the container in
+#    the background.
+# - `-d` runs the container in the background.
+#
+# The last argument is the image name. This is the only thing that will change
+#  between projects, this is the name of the image we want to run.
+# 
+# For instance, in this case, `cuda:12.6.0-cudnn-runtime-ubuntu22.04`:
+# - `cuda` is the name of the image.
+# - `12.6.0-cudnn-runtime-ubuntu22.04` is the tag of the image, which specifies
+#    the version of the image, the base operating system, and any additional
+#    software that is included in the image.
+#
+# Millions of pre-built images are available on Docker Hub, and will likely 
+#  already have an image that suits your needs! You can search for images here:
+#  https://hub.docker.com/
+#
+# Note: There may be many logs that are printed to the console when the container
+#  is started. Despite being error-level, this is normal, and you can ignore them.
+/bin/podman run                                 \
+    -v $PROJECT_DIRECTORY:/home                 \
+    -w /home                                    \
+    --name cuda_container                       \
+    --device nvidia.com/gpu=all                 \
+    --security-opt=label=disable                \
+    -t -d                                       \
+    nvidia/cuda:12.6.0-cudnn-devel-ubuntu20.04  \
+    #&gt; /dev/null 2&gt;&amp;1 # You can remove this line if you want to see the logs!
+
+...
+</code></pre>
+<p>Third and finally, to test, we run <code>nvidia-smi</code>, which details available NVIDIA GPUS:</p>
+<pre><code class="language-bash">...
+
+# Run our `nvidia-smi` command
+#
+# The `exec` command runs a command in a running container. In this case, we are
+#  running the `nvidia-smi` command in the `cuda_container` container.
+# 
+# There is a generic error message, which can be ignored.
+echo ""
+echo "Running the \`nvidia-smi\` command..."
+/bin/podman exec cuda_container nvidia-smi
+echo "Done!"
+
+...
+</code></pre>
+<p>Finally, it's worth noting that the first execution will take some time - the NVIDIA CUDA image is quite large at ~5GB. To test our PBS job:</p>
+<pre><code class="language-bash">$ qsub run.pbs
+18731.cm
+</code></pre>
+<p>After some time (remember, you can check the status of a job with <code>qstat -x &lt;job_id&gt;</code>!):</p>
+<pre><code>$ cat premade_image_gpu.o18731
+...
+
+Fri Aug 16 21:50:56 2024       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 530.30.02              Driver Version: 530.30.02    CUDA Version: 12.1     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                  Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf            Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA A100-PCIE-40GB           On | 00000000:27:00.0 Off |                    0 |
+| N/A   38C    P0               40W / 250W|      0MiB / 40960MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+
+...
+</code></pre>
+<h2 id="closing-thoughts-3"><a class="header" href="#closing-thoughts-3">Closing Thoughts</a></h2>
+<p>Congratulations! You've officially achieved full GPU passthrough to Podman (Docker) through the PBS job scheduling system!</p>
+<p>This is quite the technical feat, and displays some of the most impressive containerization and supercomputing technologies available.</p>
+<p>Almost every conceivable project can be run on Metis using this technique, from CUDA-based quantum simulations, to machine learning models, to facial recognition software.</p>
+<p>For those whos' projects are complete using this tactic, you can safely stop reading here, if you would like. If SSH automation (<strong>Chapter 4.1</strong>) interests you, you can also safely skip to that chapter.</p>
+<p>The next chapter, <strong>Chapter 3.3</strong>, will provide insight into writing your own base images from the ground up, and some tactics for optimizing base images for build-time and size.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="43-creating-your-own-docker-images"><a class="header" href="#43-creating-your-own-docker-images">4.3. Creating your Own Docker Images</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">PBS</a></em></small></p>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/docker/custom_image">in this book's repository</a>!</em></p>
+<p>Unlike previous chapters, this will not have an example project, and will instead be more free-form to act as a basepoint for your own research!</p>
+<p>We will discuss some possible venues from where to learn Dockerfile syntax, building images, and running them on Metis to create a solution that fits your quota.</p>
+<h2 id="goals-4"><a class="header" href="#goals-4">Goals</a></h2>
+<ul>
+<li>Look at some examples of a <code>Dockerfile</code></li>
+<li>Get a rough idea for how to write your own <code>Dockerfile</code></li>
+<li>Get a rough idea on resources about publishing your own custom Docker Images</li>
+</ul>
+<h2 id="what-actually-is-a-docker-image"><a class="header" href="#what-actually-is-a-docker-image">What Actually Is a Docker Image?</a></h2>
+<p>In the past, we've only used images from the <a href="https://hub.docker.com">Docker Hub</a>. But how are those images created?</p>
+<p>Docker Images are defined and built from a <a href="https://docs.docker.com/reference/dockerfile/"><code>Dockerfile</code></a>.</p>
+<p>They are somewhat similar in nature to PBS files, but they define a lot more, and allow elevated permissions plus more granular control.</p>
+<p>Defined below is a <code>Dockerfile</code> for a Python project, which is thoroughly documented:</p>
+<pre><code class="language-bash"># syntax=docker/dockerfile:1
+
+# This specifies the base image to base FROM for the image that will be built.
+# 
+# In this case, we are using the official Python image from Docker Hub.
+#
+# The tag `3.12.5-bookworm` specifies the version of the Python image to use.
+# The tag `bookworm` is a codename for the version of Debian that the image is based on.
+# The tag `3.12.5` is the version of Python that the image has preloaded.
+# 
+# To find more base images, visit `https://hub.docker.com/`!
+FROM python:3.12.5-bookworm
+
+# Create a directory at /app to store the application code inside the image.
+WORKDIR /app
+
+# RUN instructions are executed during the build process of the image.
+# 
+# This means, once the image is built, the following commands will be executed,
+#  but not when the container is run. For instance, the following commands will
+#  be executed when the image is built, but not when the container is run:
+#  - `apt update` (updates the package manager)
+#  - `apt install -y cmake build-essential`
+#  - `python -m venv .venv` (creates a virtual environment)
+#  - `.venv/bin/pip install numpy` (installs the numpy package)
+#
+# These RUN commands are extremely useful for setting up the environment, particularly
+#  for packages like `numpy` that require compilation with `cmake` and `build-essential`.
+#
+# It's worth noting that the Docker build process is not interactive, so you can't
+#  interact with the terminal during the build process. This is why the `-y` flag is
+#  used in the `apt install` command to automatically answer "yes" to the prompt!
+RUN apt update
+RUN apt install -y cmake build-essential
+
+RUN python -m venv .venv
+RUN .venv/bin/pip install numpy
+
+# COPY the source code from
+#  the host machine (`.`, where the Dockerfile is located)
+#  to the image     (`.`, or the working directory).
+#
+# As specified in the `WORKDIR` instruction above, the working
+#  directory is `/app`.
+#
+# For example, running `docker build ...` from the directory of this project
+#  will copy from `/home/user/projects/docker/premade_image/main.py` to `/app/main.py`
+#  in the image!
+COPY . .
+
+# When the application is built, the container will run the following CMD.
+#
+# The CMD instruction specifies the command that will be executed when the container
+#  is run, but not when the image is built. For instance, the following command will
+#  be executed when the container is run:
+#  - `.venv/bin/python3 main.py` (runs the `main.py` script)
+#
+# In this case, the command is `.vent/bin/python3 main.py`, which will run the `main.py` script.
+CMD .venv/bin/python3 main.py
+</code></pre>
+<p><code>Dockerfiles</code> live in the root of a project. An example Python project layout:</p>
+<pre><code>src/
+- main.py
+- Dockerfile
+</code></pre>
+<p>The reason why <code>Dockerfiles</code> are useful becomes more apparent the more complex and dependency-heavy your project is. Each command in a <code>Dockerfile</code> is cached step-by-step, which means, after the first time the above <code>Dockerfile</code> is built, steps such as dependency installation with <code>apt</code> are not performed again.</p>
+<p>This means that builds with <code>Dockerfile</code> are exceptionally fast, if properly optimized!</p>
+<p>Linked <a href="https://www.digitalocean.com/community/tutorials/how-to-optimize-docker-images-for-production">here</a> is a fan-favorite crash course in optimizing <code>Dockerfiles</code>.</p>
+<h2 id="how-do-i-write-a-dockerfile-from-the-ground-up"><a class="header" href="#how-do-i-write-a-dockerfile-from-the-ground-up">How Do I Write a <code>Dockerfile</code> From the Ground Up?</a></h2>
+<p>This varies from project-to-project based on decisions such as:</p>
+<ul>
+<li>Base operating system</li>
+<li>Programming Language</li>
+<li>Dependencies</li>
+<li>Whether you plan to use CUDA or CUDNN</li>
+</ul>
+<p>From the get-go, if you plan to use CUDA and/or CUDNN, you should use <a href="https://hub.docker.com/r/nvidia/cuda/">NVIDIA's base images</a> in your <code>FROM</code> instructions. This will save you a ton of time with configuration, as it's much simpler to install a programming language than to install CUDNN or CUDA.</p>
+<p>Depending on your project, Docker has wonderful guides linked <a href="https://docs.docker.com/language/">here</a>. These include:</p>
+<ul>
+<li>Go</li>
+<li>Python</li>
+<li>R</li>
+<li>Rust</li>
+</ul>
+<p>...and many more.</p>
+<p>Once you have written and built your image, you should test it locally on your own machine. In fact, all Docker development is best done on your local machine.</p>
+<h2 id="publishing-your-image-to-a-public-registry"><a class="header" href="#publishing-your-image-to-a-public-registry">Publishing your Image to a Public Registry</a></h2>
+<p>Now, unfortunately, I have not found a way to build Docker Images on a login node on Metis in a way that allows you to copy the image over to the desired compute node.</p>
+<p>The workaround is to build them locally, publish our images, and then pull them onto the compute node.</p>
+<h2 id="how-do-i-choose-where-to-publish"><a class="header" href="#how-do-i-choose-where-to-publish">How Do I Choose Where to Publish?</a></h2>
+<p>There are two good options for public registries:</p>
+<ul>
+<li>Docker Hub</li>
+<li>GitHub Container Repository (GHCR)</li>
+</ul>
+<p>If you are not tracking your project with GitHub already, I suggest that you follow <a href="https://www.geeksforgeeks.org/docker-publishing-images-to-docker-hub/">this guide</a> to publish to Docker Hub (what we have used in past chapters).</p>
+<p>If you are tracking with GitHub, it may be more convenient to instead use GitHub Actions to automatically build and publish your image with each commit.</p>
+<p>GitHub Actions is significantly more ideal, but does build slower. Our team chose to use this route, since our entire codebase is on GitHub! Linked below is documentation on how to do so, and the two repositories we have automatic builds enabled on.</p>
+<ul>
+<li><a href="https://docs.docker.com/build/ci/github-actions/">GitHub's Documentation</a></li>
+<li><a href="https://github.com/igait-niu/igait-openpose"><code>igait-openpose</code></a> (runs on Metis)</li>
+<li><a href="https://github.com/igait-niu/igait-backend"><code>igait-backend</code></a> (runs on AWS)</li>
+</ul>
+<p>With this approach, you can containerize virtually any project with ease.</p>
+<h2 id="our-teams-usage"><a class="header" href="#our-teams-usage">Our Team's Usage</a></h2>
+<p>The <a href="https://github.com/igait-niu">iGAIT research team</a> found great success using Metis to accelerate our workflow.</p>
+<p>The primary chokepoint of our workflow was <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose">OpenPose</a>, which we use to create pose mappings of a human.</p>
+<p><img src="https://github.com/CMU-Perceptual-Computing-Lab/openpose/raw/master/.github/media/pose_face_hands.gif"></img></p>
+<p>Previously, on AWS and tested locally, runtime was upwards of 3 hours - and occupied the entirety of the available resources.</p>
+<p>However, on Metis, on the login nodes - that time dropped down, but not as far as we wanted it.</p>
+<p>Original inference times (login node, with GPU, Docker with NVIDIA CDI):</p>
+<ul>
+<li>Total: 1 hour+ total, job killed for long runtime</li>
+<li>Video 1: <strong>43 minutes</strong></li>
+<li>Video 2: <strong>17 minutes</strong> (did not finish)</li>
+</ul>
+<p>New inference times (compute node, with GPU, Docker with NVIDIA CDI):</p>
+<ul>
+<li>Total: &lt;1 minute :D</li>
+<li>Video 1: <strong>18.689683 seconds</strong></li>
+<li>Video 2: <strong>24.962916 seconds</strong></li>
+</ul>
+<p>What is very interesting is that our job had very minimal hardware specifications - you don't always need heavy CPU core counts if the GPU can handle it.</p>
+<pre><code>#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
+</code></pre>
+<p><em>Note: Although the 2GB is the most effecient amount we found, it is pointless as reserving a GPU also reserves the entire node</em>.</p>
+<p>You can find our Dockerfiles <a href="https://github.com/igait-niu/igait-openpose/tree/main">here</a>. There are multiple versions, the simplest being the CPU-only build.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="5-advanced-metis-usage-techniques"><a class="header" href="#5-advanced-metis-usage-techniques">5. Advanced Metis Usage Techniques</a></h1>
+<p>One of the most powerful tricks on Metis is SSH automation.</p>
+<p>This allows a Metis user to automate what would otherwise be:</p>
+<ul>
+<li><strong>1</strong> - Logging into Metis over SSH</li>
+<li><strong>2</strong> - Running job submission commands</li>
+<li><strong>3</strong> - Retrieving a job ID</li>
+</ul>
+<p>By doing this, we can intergrate Metis into the workflow of any existing web server!</p>
+<p>This technique also opens the door to other techniques, three of which will be briefly mentioned in <strong>Chapter 4.2 - Conceptual Techniques</strong>. As the title states, because of the varied and complex nature of implementation they will only be described conceptually.</p>
+<h2 id="overview-of-the-chapters-2"><a class="header" href="#overview-of-the-chapters-2">Overview of the Chapters</a></h2>
+<h3 id="chapter-51-ssh-automation-with-metis"><a class="header" href="#chapter-51-ssh-automation-with-metis">Chapter 5.1: SSH Automation with Metis</a></h3>
+<ul>
+<li><strong>Goals</strong>: Learn how to automate commands over SSH with Metis.</li>
+<li><strong>Problem</strong>: Metis does not allow web servers, making automation difficult.</li>
+<li><strong>Solution</strong>: Use an SSH library to open a multiplexed connection for execution.</li>
+<li><strong>Outcome</strong>: You will be able to run any command on Metis programmatically.</li>
+</ul>
+<h3 id="chapter-52-conceptual-techniques"><a class="header" href="#chapter-52-conceptual-techniques">Chapter 5.2: Conceptual Techniques</a></h3>
+<ul>
+<li><strong>Goals</strong>: Learn how to further integrate Metis into your existing backend.</li>
+<li><strong>Problem</strong>: Metis does not allow web servers.</li>
+<li><strong>Solution</strong>: Use additional layers and API endpoints to proxy a backend.</li>
+<li><strong>Outcome</strong>: You will be able to completely integrate your solution with Metis.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="51-ssh-automation-with-metis"><a class="header" href="#51-ssh-automation-with-metis">5.1. SSH Automation with Metis</a></h1>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust/ssh-automation">in this book's repository</a>!</em></p>
+<p>While Metis is an incredibly powerful tool, it does not provide an API to allow for automatic job submission from outside of Metis.</p>
+<p>For example - allowing your backend on AWS, Google Cloud Engine, or a local machine to submit a job automatically is not currently possible.</p>
+<p>One solution is to write our own software which submits the job on our behalf, using SSH-related libraries to open a connection and submit commands!</p>
+<h2 id="goals-5"><a class="header" href="#goals-5">Goals</a></h2>
+<ul>
+<li>Learn how to automate an SSH session and commands</li>
+<li>Learn how to add your system as a known host</li>
+<li>Understand the importance of hardening your code</li>
+</ul>
+<h2 id="the-problems-1"><a class="header" href="#the-problems-1">The Problem(s)</a></h2>
+<p>First, let's talk about what Metis can and can't do.</p>
+<p>There are a few problems with automation on Metis that make it more difficult than a standard server:</p>
+<ul>
+<li><strong>You cannot host a webserver on Metis</strong></li>
+<li><strong>Ports cannot be forwarded</strong></li>
+</ul>
+<p>This means that one cannot simply host a webserver, which could otherwise recieve requests to start jobs automatically.</p>
+<p>So, what can we do?</p>
+<h2 id="the-solution-1"><a class="header" href="#the-solution-1">The Solution</a></h2>
+<p>When asking why you can't automate something, one of the first questions is to ask <em>"Well, how am I able to do it manually?"</em>.</p>
+<p>In this case, we are using SSH to connect, and we are then running <code>qsub</code> to submit our jobs.</p>
+<p>Well, can that be done programmatically?</p>
+<p>Yes, but it's a little more complicated than doing it by hand.</p>
+<h2 id="implementation-1"><a class="header" href="#implementation-1">Implementation</a></h2>
+<p>For the sake of this guide, I will be using the <a href="https://www.rust-lang.org/">Rust programming language</a>. This is a programming language that best illustrates potential failure points in a program, forcing you to cover error cases in advance.</p>
+<p>SSH has many potential points of failure, so using it can help you to think ahead to cover your bases!</p>
+<p>However, you don't need to use Rust, you can just as easily write your connection code in Python, C, or any language that suits your need - as long as you write code that can handle and communicate failure well.</p>
+<p>For instance, here is example Rust code to submit a <code>qsub</code> job (if you would like to follow along, please see the repository <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust">here</a>!):</p>
+<pre><pre class="playground"><code class="language-rust">use openssh::{Session, KnownHosts};
+
+async fn submit_pbs_job (
+    username: &amp;str,
+    path: &amp;str,
+    arguments: Vec&lt;(&amp;str, &amp;str)&gt;
+) -&gt; Result&lt;String, String&gt; {
+    // Open a multiplexed SSH session
+    let session = Session::connect_mux(&amp;format!("{username}@metis.niu.edu"), KnownHosts::Strict).await
+        .map_err(|err| format!("Couldn't connect to METIS! Are your credentials correct? Raw error:\n{err}"))?;
+
+    // Build and run the `qsub`` command
+    let mut submit_job_command_output = session
+        .command("qsub");
+
+    // Build the arguments string
+    let stringified_arguments = arguments
+        .iter()
+        .map(|(key, value)| format!("{key}={value}"))
+        .collect::&lt;Vec&lt;String&gt;&gt;()
+        .join(",");
+
+    // Append the arguments string to the command, if there are any arguments
+    let submit_job_command_output = if stringified_arguments.len() &gt; 0 {
+        submit_job_command_output
+            .arg("-v")
+            .arg(stringified_arguments)
+    } else {
+        &amp;mut submit_job_command_output
+    };
+
+    // Append the job script path to the command
+    let submit_job_command_output = submit_job_command_output
+        .arg(path)
+        .output().await
+        .map_err(|err| format!("Failed to run qsub command! Raw error:\n{err}"))?;
+
+    // Check if the command was successful
+    if !submit_job_command_output.status.success() {
+        let err = String::from_utf8(submit_job_command_output.stderr)
+            .map_err(|err| format!("Failed to decode the error message! Raw error:\n{err}"))?;
+
+        return Err(format!("When running the qsub command, the following error occurred:\n{err}"));
+    } 
+
+    // Otherwise, return the output (as a string)
+    let successful_output = String::from_utf8(submit_job_command_output.stdout)
+        .map_err(|err| format!("Failed to decode the output message! Raw error:\n{err}"))?;
+
+    Ok(successful_output)
+}
+
+#[tokio::main]
+async fn main() {
+    // Submit a job to the METIS cluster
+    let job_id = submit_pbs_job("z1994244", "/home/z1994244/projects/cpp/hello_world/run.pbs", vec![
+        ("ARGUMENT_1", "VALUE_1"),
+        ("ARGUMENT_2", "VALUE_2"),
+        ("ARGUMENT_3", "VALUE_3"),
+    ]).await;
+
+    // Check if the job was submitted successfully
+    match job_id {
+        Ok(job_id) =&gt; println!("Job submitted successfully! Job ID: {job_id}"),
+        Err(err) =&gt; eprintln!("Failed to submit the job! Error message:\n{err}"),
+    }
+}</code></pre></pre>
+<p>Our first step is to use an SSH library - in this case, the crate <code>openssh</code> - to open a <a href="https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing">multiplexed</a> SSH connection.</p>
+<p>Many other libraries exist for other languages, such as <code>ssh-python</code> for Python and <code>ssh</code> for Go.</p>
+<p>However, it's worth noting just how many potential points of failure there are:</p>
+<ul>
+<li>The SSH can fail to open because Metis wasn't a known host</li>
+<li>The command can fail to send over SSH</li>
+<li>The <code>qsub</code> command can fail (on Metis' end), and return an error</li>
+<li>The <code>stderr</code> from reading the failure reason from Metis can provide invalid UTF-8 (unlikely, but possible!)</li>
+<li>The output from <code>stdout</code> of the <code>qsub</code> command can provide invalid UTF-8 (unlikely, but possible!)</li>
+</ul>
+<p>The first failure will likely happen - unless you've aleady made Metis a known host on the system you will be automating SSH from.</p>
+<p>So, how do we add Metis as a known host? We need to create an SSH key, and copy it over to Metis. This allows us to bypass password-based authentication!</p>
+<p>You can hit enter through all of the prompts in the <code>ssh-keygen</code> command, but run the following <strong>on your local machine, not Metis</strong>:</p>
+<pre><code>$ ssh-keygen
+$ ssh-copy-id &lt;your_account_username&gt;@metis.niu.edu
+</code></pre>
+<p>Now that Metis is a known host, we can test our program.</p>
+<p>If you are following along with this tutorial in Rust, you can find the codebase <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust">here</a>, as you'll need to have the <code>openssh</code> and <code>tokio</code> crates installed and configured.</p>
+<p>Testing our program:</p>
+<pre><code>$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.04s
+     Running `target/debug/igait-ssh-testing`
+Job submitted successfully! Job ID: 18734.cm
+</code></pre>
+<p>Congratulations! It worked, and you've just submitted a PBS job automatically!</p>
+<h2 id="important-notes"><a class="header" href="#important-notes">Important Notes</a></h2>
+<p>Many <code>openssh</code> implementations, including in Rust, only run commands from the home directory. In some implementations, you can change this, but in many, you cannot. This is why, throughout our projects, we've been providing absolute paths. Otherwise, the <code>$PBS_O_WORKDIR</code> for our SSH automation would resolve to <code>~/.</code>, which would cause unexpected failures.</p>
+<p>By writing our paths in absolute, we guarantee proper execution.</p>
+<p>Now, where is our output? Well, as previously mentioned, often, commands are run from the <code>~/.</code> (home) directory. Sure enough, after manually logging into Metis:</p>
+<pre><code>$ ls
+bin  examples  hello_world.o18734  projects  rundir
+</code></pre>
+<p>While not shown here, it is possible to automatically read the contents of this output folder, using a <code>cat</code> command or the likes after the expected run time is over.</p>
+<p>It cannot be understated how important it is that you are extremely careful whenever automating your workflow!</p>
+<p>You must purify your inputs, and ensure it is physically impossible for an attacker to exploit your backend in any way possible. To not do so would endanger the work of fellow NIU researchers, students and staff.</p>
+<p>However, as mentioned in the preface to this chapter, it's an incredibly effective method that can be further evolved into even more effecient and better integrated systems!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="52-conceptual-techniques"><a class="header" href="#52-conceptual-techniques">5.2. Conceptual Techniques</a></h1>
+<p>Each of these techniques requires SSH automation to work; but can allow you to completetly integrate Metis as a backend, all while maintaining safety and security!</p>
+<p>However, each is only described conceptually as implementation varies depending on your use case.</p>
+<h2 id="providing-files-to-metis-remotely"><a class="header" href="#providing-files-to-metis-remotely">Providing Files to Metis Remotely</a></h2>
+<p>By adding file IDs, download links, or using another way to communicate a download location, you can use the arguments on a job submission request to provide Metis with a way to download files for processing.</p>
+<p>This can be accomplished by reading the provided arguments in your PBS script, and using <code>wget</code>, <code>git</code>, <code>curl</code>, Git LFS, or another download tool to then download the files onto Metis and into the PBS job's working directory.</p>
+<p><strong>Psuedocode Example</strong>:</p>
+<p><code>main.py</code>:</p>
+<pre><code class="language-python">...
+
+file_download_link = "https://s3.amazon.com/.../hello_world.txt";
+
+submit_metis_command([
+    "qsub",
+    "-v",
+    f"DOWNLOAD_LINK={file_download_link}"
+    "run.pbs"
+]);
+
+...
+</code></pre>
+<p><code>run.pbs</code>:</p>
+<pre><code class="language-bash">...
+
+# Downloads the target file
+wget -O hello_world.txt $DOWNLOAD_LINK
+
+# Outputs the content of the file
+cat hello_world.txt
+
+...
+</code></pre>
+<h2 id="web-server-completion-reporting"><a class="header" href="#web-server-completion-reporting">Web Server Completion Reporting</a></h2>
+<p>Since PBS jobs on Metis have the ability to connect to the internet, it's possible to then ping your webserver to let it know it's finished, instead of guessing.</p>
+<p>The process can look like:</p>
+<ul>
+<li>Create a database to track jobs on your webserver</li>
+<li>Create a route that allows updating each job entry via HTTP</li>
+<li>Create a new job data structure in your database with a unique ID for a job</li>
+<li>Pass the unique ID to the SSH automation as an argument when submitting a new job</li>
+<li>Recieve and note that argument in your PBS script file</li>
+<li>When work in your PBS script file is done, at the very end, send an HTTP request to the updating route</li>
+<li>Update the database entry via the route, and handle any interpretation logic for the results of your job</li>
+</ul>
+<p>This means your server can be aware of the moment your job is complete, and accomplish interpretation results immediately.</p>
+<p>Due to the complex and implementation-specific nature of this process, I have not included an example. However, this technique was implemented in our backend for the iGait project, the link to which can be found <a href="https://github.com/igait-niu/igait-backend">here</a>!</p>
+<h2 id="event-reporting-websocket"><a class="header" href="#event-reporting-websocket">Event Reporting Websocket</a></h2>
+<p>This technique only applies to jobs which are short enough to be tracked throughout the lifecycle of a single websocket connection, but can provide real-time results nonetheless.</p>
+<p>The steps are mildly similar to the previous technique:</p>
+<ul>
+<li>Create an (asynchronus and thread-safe) websocket-compatible route, that when opened, first broadcasts a 'starting' event</li>
+<li>Create a route that allows updating each job entry via HTTP</li>
+<li>Create a new job data structure in your database with a unique ID for a job</li>
+<li>Pass the unique ID to the SSH automation as an argument when submitting a new job</li>
+<li>Recieve and note that argument in your PBS script file</li>
+<li>At each step, send an HTTP request to the webserver with any events you would like to broadcast</li>
+<li>At each invocation on the HTTP route, grab a handle to the websocket the ID corresponds to, and broadcast the information from the HTTP request</li>
+<li>When the job provides a completion signal, or when you send a fatal error event from your PBS script, close the websocket</li>
+</ul>
+<p>This is more effective for jobs that may not have a 'final output', but rather, work in chunks. Two common examples are realtime audio encoding/decoding, or token-by-token output from a machine learning model.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="6-command-quick-reference"><a class="header" href="#6-command-quick-reference">6. Command Quick Reference</a></h1>
+<p>This chapter contains a quick reference to the most useful commands and their respective options for every example or topic mentioned thus far.</p>
+<p>Each section also links the documentation, manual, or other source it summarizes. Even if an option or command isn't included, you can still find more information easily - and in one convenient location.</p>
+<p>For example, let's say you forgot which flag you need to name a container with Podman. You would otherwise have to flip through a chapter which uses it in practice or read the Podman documentation - both of which are time consuming.</p>
+<p>Instead, you can simply find the most useful commands and options here!</p>
+<h2 id="covered-topics"><a class="header" href="#covered-topics">Covered Topics</a></h2>
+<ul>
+<li><strong>Chapter 6.1</strong> - Most Common Bash Commands</li>
+<li><strong>Chapter 6.2</strong> - Most Common Podman and Docker Commands</li>
+<li><strong>Chapter 6.3 and 6.3.1</strong> - Common Module Usage Commands and Creating Custom Modulefiles</li>
+<li><strong>Chapter 6.4 and 6.4.1</strong> - Common PBS Usage Commands and Writing PBS Files</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="61-bash"><a class="header" href="#61-bash">6.1. Bash</a></h1>
+<p>This section is a summary of the most common <a href="https://www.gnu.org/software/bash/">Bash</a> commands to serve as a general introduction or refresher to help newer Linux users, or those who have not used it in some time.</p>
+<p>Interested in learning even more about Bash? The <a href="https://www.gnu.org/software/bash/manual/bash.html">GNU Bash Reference</a> is an amazing resource!</p>
+<h2 id="common-commands"><a class="header" href="#common-commands">Common Commands</a></h2>
+<h3 id="-ls"><a class="header" href="#-ls"><code>$ ls</code></a></h3>
+<p>Lists the contents in the current directory.</p>
+<p>Example:</p>
+<pre><code>[you@metis.niu.edu ~]$ ls
+bin examples 
+</code></pre>
+<p>Common Arguments:</p>
+<ul>
+<li>
+<p><code>-a</code></p>
+<p>Prints everything, including hidden files.</p>
+<p>Example:</p>
+<pre><code>[you@metis ~]$ ls -a
+.              .dbus           .kde
+..             .dotnet         .kshrc   
+.bash_history  .emacs          .local           
+.bash_logout   .esd_auth       .mozilla       
+.bash_profile  examples        .ssh       
+.bashrc        .gitconfig      .wget-hsts      
+bin            .nv             .Xauthority
+.cache         .python_history .xemacs
+.config        .jupyter        .zshrc
+</code></pre>
+</li>
+</ul>
+<p><small><em><a href="https://www.man7.org/linux/man-pages/man1/ls.1.html">Command Manual</a></em></small></p>
+<h3 id="-cd-path"><a class="header" href="#-cd-path"><code>$ cd &lt;path&gt;</code></a></h3>
+<p>Changes the current directory to the specified path.</p>
+<p>There are a few types of paths in a Unix-based filesystem, mainly being:</p>
+<ul>
+<li>
+<p>Absolute Path</p>
+<p>Absolute paths always lead to the same location, no matter the context they are interpreted from.</p>
+<p>They typically start with <code>/</code>, which is the root (base level) of the filesystem, but they can also start with <code>~</code>, which is your home directory.</p>
+<p>For example, your home directory (akin to a desktop in a graphical OS) is at <code>/home/you</code> or <code>~</code>.</p>
+</li>
+<li>
+<p>Relative Path</p>
+<p>Relative paths are dependent on where they are run from, and are specified by <em>not</em> starting with a <code>/</code>.</p>
+<p>For example, if you are in your home directory, the <code>bin</code> directory can be referenced by <code>./bin</code>.</p>
+<p>The <code>.</code> signifies "current directory", but you can also use "..", which would represent "up one directory".</p>
+</li>
+</ul>
+<p>Here is an example of changing to your <code>bin</code> directory based on an absolute path:</p>
+<pre><code class="language-bash">[you@metis ~]$ cd /home/you/bin
+[you@metis bin]$
+</code></pre>
+<p><em>(<code>cd ~/bin</code> would be equivalent!)</em></p>
+<p>Changing directory to your <code>bin</code> directory relative to your current directory (that being <code>~</code>):</p>
+<pre><code class="language-bash">[you@metis ~]$ cd bin
+[you@metis bin]$
+</code></pre>
+<p><em>(<code>cd ./bin</code> would be equivalent!)</em></p>
+<p>Going up a directory, then into the examples directory:</p>
+<pre><code class="language-bash">[you@metis bin]$ cd ../examples
+[you@metis examples]$
+</code></pre>
+<p><small><em><a href="https://man7.org/linux/man-pages/man1/cd.1p.html">Command Manual</a></em></small></p>
+<h3 id="-touch-file_name--file_name"><a class="header" href="#-touch-file_name--file_name"><code>$ touch &lt;file_name | file_name&gt;</code></a></h3>
+<p>Creates a new file with empty contents.</p>
+<p>Example:</p>
+<pre><code class="language-bash">[you@metis ~]$ touch hello.txt
+[you@metis ~]$ ls
+bin projects hello.txt
+</code></pre>
+<p><small><em><a href="https://man7.org/linux/man-pages/man1/touch.1.html">Command Manual</a></em></small></p>
+<h3 id="-nano-file_name--file_pathfile_name"><a class="header" href="#-nano-file_name--file_pathfile_name"><code>$ nano &lt;file_name | file_path/file_name&gt;</code></a></h3>
+<p>A simplistic terminal file editor, useful for quick edits.</p>
+<p>Shouldn't be used for large files; instead, you should use <code>emacs</code>, <code>vim</code>, or ideally, an editor on <em>your</em> machine with remote SSH capability. See <strong>Chapter 1.1</strong> for more information on setting up Visual Studio Code, a popular option.</p>
+<p>Example:</p>
+<pre><code class="language-bash">[you@metis ~]$ touch hello.txt
+[you@metis ~]$ nano hello.txt
+</code></pre>
+<p><small><em><a href="https://www.nano-editor.org/dist/v2.1/nano.html">Command Manual</a></em></small></p>
+<h3 id="-mkdir-dir_name--dir_pathdir_name"><a class="header" href="#-mkdir-dir_name--dir_pathdir_name"><code>$ mkdir &lt;dir_name | dir_path/dir_name&gt;</code></a></h3>
+<p>Creates a new and empty directory.</p>
+<p>Example:</p>
+<pre><code>[you@metis.niu.edu ~]$ mkdir hello
+[you@metis.niu.edu ~]$ ls
+bin examples hello
+</code></pre>
+<p><small><em><a href="https://www.man7.org/linux/man-pages/man1/mkdir.1.html">Command Manual</a></em></small></p>
+<h3 id="-export-varstring--expression"><a class="header" href="#-export-varstring--expression"><code>$ export &lt;var&gt;=&lt;string | expression&gt;</code></a></h3>
+<p>Sets an environment variable. Unless somehow preserved, these will be cleared when you close the session!</p>
+<p>Example:</p>
+<pre><code>[you@metis.niu.edu ~]$ export FOO="bar"
+</code></pre>
+<p><small><em><a href="https://www.man7.org/linux/man-pages/man1/export.1p.html">Command Manual</a></em></small></p>
+<h3 id="-echo-string--expression"><a class="header" href="#-echo-string--expression"><code>$ echo &lt;string | expression&gt;</code></a></h3>
+<p>Outputs the specified string or expression to stdout (the terminal).</p>
+<p>You can output environment variables by prefacing a variable name with <code>$</code>.</p>
+<p>Example:</p>
+<pre><code>[you@metis.niu.edu ~]$ echo "Hello, Metis!"
+Hello, Metis!
+[you@metis.niu.edu ~]$ export FOO="Hello, Metis!"
+[you@metis.niu.edu ~]$ echo "$FOO"
+Hello, Metis!
+</code></pre>
+<p><small><em><a href="https://www.man7.org/linux/man-pages/man1/echo.1.html">Command Manual</a></em></small></p>
+<h2 id="help-commands"><a class="header" href="#help-commands">Help Commands</a></h2>
+<p>Should you feel confused on the usage of any command, you can print additional helpful information on many commands!</p>
+<p>The 5 common ways to print help on a command, in order of the density of information output:</p>
+<ul>
+<li><code>$ info &lt;command&gt;</code></li>
+<li><code>$ man &lt;command&gt;</code></li>
+<li><code>$ &lt;command&gt; --help</code></li>
+<li><code>$ &lt;command&gt; -h</code></li>
+<li><code>$ &lt;command&gt; -?</code></li>
+</ul>
+<p>Generally, first try <code>$ &lt;command&gt; --help</code>, and if you're still confused, try <code>$ man &lt;command&gt;</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="62-podman-and-docker-quick-reference"><a class="header" href="#62-podman-and-docker-quick-reference">6.2. Podman and Docker Quick Reference</a></h1>
+<p>This section summarizes the most important commands Podman and Docker offer.</p>
+<p>It's worth noting that there are many, many more commands both offer, so check out their respective references if you're looking for more!</p>
+<ul>
+<li><a href="https://docs.docker.com/">Docker's Documentation</a></li>
+<li><a href="https://docs.podman.io/">Podman's Documentation</a></li>
+</ul>
+<p><em>Podman is a proxy layer on Docker, which means all commands (listed in this reference) are the same regardless of whether you use them on your machine with <code>docker</code> or on Metis with <code>/bin/podman</code>.</em></p>
+<p><strong>Notes</strong>:</p>
+<ul>
+<li>
+<p>Staying Tidy</p>
+<p>It's very important that you routinely run <code>/bin/podman system prune</code>. The reason for this is because Podman <em>can't run cleanup commands</em> if you don't have any remaining disk quota!</p>
+<p>Because Metis users (without special request) have a maximum home (<code>~/*</code>) directory size of ~25GB, it's critical to stay under this limit while developing with Podman.</p>
+<p><em>If you run into this issue, either contact CRCD to have your quota temporarily increased, or see <strong>Addendum - Force Cleaning Podman</strong>!</em></p>
+</li>
+<li>
+<p>Errors Which Can be Ignored</p>
+<ul>
+<li>
+<p><code>ERRO[0000] cannot find UID/GID for user z1994244: no subuid ranges found for user "z1994244" in /etc/subuid - check rootless mode in man pages.</code></p>
+<p>This error sometimes occurs the first time you run a command.</p>
+<p>If it does, simply wait a few seconds and run it again.</p>
+</li>
+<li>
+<p><code>WARN[0000] Network file system detected as backing store.  Enforcing overlay option `force_mask="700"`.  Add it to storage.conf to silence this warning</code></p>
+<p>At the time of writing this, you will see this quite often. It can be safely ignored.</p>
+<p>It's an artifact of using Podman, and will hopefully be fixed in the future.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="primary-commands"><a class="header" href="#primary-commands">Primary Commands</a></h2>
+<h3 id="-binpodman-run-imagetag"><a class="header" href="#-binpodman-run-imagetag"><code>$ /bin/podman run image:tag</code></a></h3>
+<p>Starts a container, pulling the image if needed.</p>
+<p>If you don't specify a name, it will output the newly allocated container ID.</p>
+<pre><code class="language-bash">[you@metis.niu ~]$ /bin/podman run --name python_container python:3.12.5-bookworm
+...
+b647edca4b32eb02d15dc8cb70dc2a3da8edcf9e767c1f3ff2d7a58133ce407c
+</code></pre>
+<p>Common Arguments:</p>
+<ul>
+<li>
+<p><code>--name &lt;container_name&gt;</code></p>
+<p>Gives the container a name, which can be used conveniently in place of the container's ID.</p>
+</li>
+<li>
+<p><code>-t</code></p>
+<p>Allocates a psuedo-TTY (helps support console-based applications)</p>
+</li>
+<li>
+<p><code>-d</code></p>
+<p>Runs the container in detached mode.</p>
+<p>Without this option, standard input, output, and error are linked to yours.</p>
+</li>
+<li>
+<p><code>-v &lt;host_path&gt;:&lt;container_path&gt;</code></p>
+<p>Mounts a path from your host machine to the container as a Docker Volume.</p>
+<p>Very useful for easily importing your project directory.</p>
+</li>
+<li>
+<p><code>-w &lt;container_path&gt;</code></p>
+<p>Changes the working directory inside the container to the specified path.</p>
+</li>
+</ul>
+<p><small><em><a href="https://docs.podman.io/en/latest/markdown/podman-run.1.html">Command Manual</a></em></small></p>
+<h3 id="-binpodman-exec-container_id--container_name-command"><a class="header" href="#-binpodman-exec-container_id--container_name-command"><code>$ /bin/podman exec &lt;container_id | container_name&gt; &lt;command&gt;</code></a></h3>
+<p>Executes a command in a container.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ /bin/podman exec python_container python3 main.py
+</code></pre>
+<h3 id="-binpodman-kill-container_id--container_name"><a class="header" href="#-binpodman-kill-container_id--container_name"><code>$ /bin/podman kill &lt;container_id | container_name&gt;</code></a></h3>
+<p>Attempts to stop a container by sending the <code>SIGKILL</code> signal.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ /bin/podman kill python_container
+</code></pre>
+<p><small><em><a href="https://docs.podman.io/en/latest/markdown/podman-kill.1.html">Command Manual</a></em></small></p>
+<h3 id="-binpodman-rm-container_id--container_name"><a class="header" href="#-binpodman-rm-container_id--container_name"><code>$ /bin/podman rm &lt;container_id | container_name&gt;</code></a></h3>
+<p>Removes a container, very useful for reclaiming the name of a container.</p>
+<p>For instance, even if you were to kill <code>python_container</code> with <code>/bin/podman kill</code>, you still would not be able to create a new container with the name <code>python_container</code>. You must also remove the original.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ /bin/podman rm python_container
+</code></pre>
+<p><small><em><a href="https://docs.podman.io/en/latest/markdown/podman-rm.1.html">Command Manual</a></em></small></p>
+<h2 id="addendum"><a class="header" href="#addendum">Addendum</a></h2>
+<h3 id="force-cleaning-podman"><a class="header" href="#force-cleaning-podman">Force Cleaning Podman</a></h3>
+<p>If you're not careful and don't routinely clean Podman, you might reach a stalemate where you can't do anything on Metis because you have no disk quota, but you also can't use Podman's cleaning utilities!</p>
+<p>Example:</p>
+<pre><code>$ /bin/podman inspect
+...
+
+Error: close /home/&lt;your_metis_username&gt;/.local/share/containers/storage/overlay/.has_mount_program: disk quota exceeded
+</code></pre>
+<p>First, confirm it's Podman using most of your storage:</p>
+<pre><code class="language-bash">du -sh ~/.local/share/containers/storage/overlay
+26GB
+</code></pre>
+<p>Then, we will manually delete the <code>overlay</code> directory. It's currently unclear what side effects manually performing this action does, so it may be better to have your quota increased instead. The commands will be listed below, nonetheless:</p>
+<pre><code class="language-bash">$ rm -rf ~/.local/share/containers/storage/overlay
+$ mkdir ~/.local/share/containers/storage/overlay
+</code></pre>
+<p>Then, you'll need to "reset" Podman:</p>
+<pre><code class="language-bash">$ /bin/podman system reset
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="63-modules"><a class="header" href="#63-modules">6.3. Modules</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/crnt-users-software.shtml">Modules</a></em></small></p>
+<p>A module is a set of one or more packages used to extend the functionality of Metis with applications, libraries, or dependencies.</p>
+<p>On Metis, <code>module</code> is effectively the package management system.</p>
+<h2 id="primary-commands-1"><a class="header" href="#primary-commands-1">Primary Commands</a></h2>
+<h3 id="-module-av"><a class="header" href="#-module-av"><code>$ module av</code></a></h3>
+<p>Lists all available packages, sorted by each available source.</p>
+<p>Common Options:</p>
+<ul>
+<li>
+<p><code>&lt;keyword&gt;</code></p>
+<p>This will filter output by packages of which the keyword is in the name of.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ module av python
+----------------------- /etc/modulefiles ------------------------
+python/python-3.9.10  python/python-3.12.4
+</code></pre>
+</li>
+</ul>
+<h3 id="-module-load-module_name"><a class="header" href="#-module-load-module_name"><code>$ module load &lt;module_name&gt;</code></a></h3>
+<p>Loads a package by name from the available sources.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ module load gcc/gcc-5.5.0
+</code></pre>
+<p><em>To list or add to available sources, see <code>module use</code>.</em></p>
+<h3 id="-module-unload-module_name"><a class="header" href="#-module-unload-module_name"><code>$ module unload &lt;module_name&gt;</code></a></h3>
+<p>Unloads a package by name from the currently loaded modules.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ module load gcc/gcc-5.5.0
+$ module unload gcc/gcc-5.5.0
+</code></pre>
+<h3 id="-module-purge"><a class="header" href="#-module-purge"><code>$ module purge</code></a></h3>
+<p>Unloads all currently loaded packages</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ module purge
+</code></pre>
+<h2 id="other-commands"><a class="header" href="#other-commands">Other Commands</a></h2>
+<h3 id="-module-use-path_to_source"><a class="header" href="#-module-use-path_to_source"><code>$ module use &lt;path_to_source&gt;</code></a></h3>
+<p>Ephemerally adds a source to the <code>module</code> commands. This means you can add your own modules to the <code>&lt;path_to_source&gt;</code>, and be able to load and unload them.</p>
+<p>Omitting the path will instead print a list of currently linked sources.</p>
+<p>Example (see <strong>Chapter 6.4.1</strong> for an in-depth example):</p>
+<pre><code class="language-bash">$ module use ~/modules
+$ module load my_package/my_package-0.0.1
+</code></pre>
+<h3 id="-module-list"><a class="header" href="#-module-list"><code>$ module list</code></a></h3>
+<p>Lists the loaded modulefiles.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ module list
+Currently Loaded Modulefiles:
+ 1) hello_metis/hello_metis-0.0.1
+</code></pre>
+<h3 id="-module-switch-module_1-module_2"><a class="header" href="#-module-switch-module_1-module_2"><code>$ module switch &lt;module_1&gt; &lt;module_2&gt;</code></a></h3>
+<p>Unloads <code>&lt;module_1&gt;</code> and instead loads <code>&lt;module_2&gt;</code>.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ module load gcc/gcc-9.5.0
+$ module switch gcc/gcc-9.5.0 gcc/gcc-4.9.3
+</code></pre>
+<h3 id="-module-help-module_name"><a class="header" href="#-module-help-module_name"><code>$ module help &lt;module_name&gt;</code></a></h3>
+<p>Prints the help information on a module, if it exists.</p>
+<p>Example:</p>
+<pre><code>$ module help gcc/gcc-9.5.0
+-----------------------------------------------------------------
+Module Specific Help for /etc/modulefiles/gcc/gcc-9.5.0:
+
+This module loads GCC gcc/gcc-9.5.0
+-----------------------------------------------------------------
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="631-creating-modulefiles"><a class="header" href="#631-creating-modulefiles">6.3.1. Creating Modulefiles</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/crnt-users-software.shtml">Modules</a></em></small></p>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/modulefile/hello_metis">in this book's repository</a>!</em></p>
+<p>This guide will give you a minimally reproducible example of how to create your own modules which can be loaded via the <code>module</code> command.</p>
+<h2 id="creating-the-modulefile"><a class="header" href="#creating-the-modulefile">Creating the <code>modulefile</code></a></h2>
+<p>First, we will start by creating a directory to house our personal modules, and another for our "Hello, Metis!" project:</p>
+<pre><code class="language-bash">$ mkdir ~/modules
+$ mkdir ~/modules/hello_metis
+$ mkdir ~/modules/hello_metis/bin
+$ cd ~/modules/hello_metis
+</code></pre>
+<p>Next, let's create our binary from a C++ source:</p>
+<pre><code class="language-bash">$ touch main.cpp
+</code></pre>
+<p>In the <code>main.cpp</code> file, write the following contents:</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+
+int main () {
+    std::cout &lt;&lt; "Hello, Metis!" &lt;&lt; std::endl;
+}
+</code></pre>
+<p>Now, let's compile it, and place it in our <code>bin</code> folder:</p>
+<pre><code class="language-bash">$ g++ -o bin/hello_metis main.cpp
+</code></pre>
+<p>The final step is creating our <code>modulefile</code>, which we will name <code>hello_metis-0.0.1</code>:</p>
+<pre><code class="language-bash">$ touch hello_metis-0.0.1
+</code></pre>
+<p>Creating a modulefile is a surprisingly difficult task, but the minimal reproducible example is the following contents:</p>
+<pre><code class="language-bash">#%Module
+
+# Add the bin folder from the `~/modules/hello_metis/bin` directory to the PATH
+prepend-path PATH $env(HOME)/modules/hello_metis/bin
+</code></pre>
+<h2 id="loading-a-custom-source"><a class="header" href="#loading-a-custom-source">Loading a custom source</a></h2>
+<p>Before we can use it, we need to add our custom <code>~/modules</code> folder as a source that <code>module</code> can then understand. It's worth noting that you will need to redo this each time you wish to load your custom modules! Using our <code>modules</code> directory:</p>
+<pre><code>$ module use ~/modules
+</code></pre>
+<p>Then, we can load our custom <code>modulefile</code>, and test it out:</p>
+<pre><code>$ module load hello_metis/hello_metis-0.0.1
+$ hello_metis
+Hello, Metis!
+</code></pre>
+<p>Congratulations! This is a fully functional <code>module</code> setup, but you would ideally want to improve upon this greatly.</p>
+<p>To learn more about writing <code>modulefiles</code>, see the <a href="https://modules.readthedocs.io/en/v5.4.0/modulefile.html#description">official Modules documentation</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="64-pbs-professional"><a class="header" href="#64-pbs-professional">6.4. PBS Professional</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">Modules</a></em></small></p>
+<p>A summarization of the <a href="https://2021.help.altair.com/2021.1.2/PBS%20Professional/PBSUserGuide2021.1.2.pdf">PBS Professional user's guide by Altair</a> for the <a href="https://altair.com/pbs-professional/">PBS Professional</a> system.</p>
+<h2 id="primary-commands-2"><a class="header" href="#primary-commands-2">Primary Commands</a></h2>
+<h3 id="-qsub-script_path"><a class="header" href="#-qsub-script_path"><code>$ qsub &lt;script_path&gt;</code></a></h3>
+<p>Submits an executable PBS script to a batch server, outputting the ID of the newly created job.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qsub ./run.pbs
+20000.cm
+</code></pre>
+<p>Common Options:</p>
+<ul>
+<li>
+<p><code>-v variable_list</code></p>
+<p>Adds additional environment variables to the context of the PBS script.</p>
+<p>Multiple variables can be seperated by a comma, and an environment variable can be extracted from the context where <code>qsub</code> is invoked by <em>not</em> providing a value with an <code>=</code> sign.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qsub -v foo=bar,lorem ./run.pbs
+20000.cm
+</code></pre>
+</li>
+<li>
+<p><code>-V</code></p>
+<p>Exports all environment variables in the context where <code>qsub</code> is invoked to the context of the PBS script.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qsub -V ./run.pbs
+20000.cm
+</code></pre>
+</li>
+<li>
+<p><code>-I</code></p>
+<p>Makes your job psuedo-interactive, connecting standard input, output, and error streams to the context where <code>qsub</code> is executed from.</p>
+<p>This can be useful for creating programs where input is required and would otherwise time out.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qsub -I ./mult_by_two.pbs
+Enter the number you want to multiply by 2: 4
+Now enter the number you want to divide by: 4
+...
+</code></pre>
+</li>
+</ul>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qsub.html">Command Manual</a></em></small></p>
+<h3 id="-qstat-job_id"><a class="header" href="#-qstat-job_id"><code>$ qstat &lt;job_id&gt;</code></a></h3>
+<p>Displays the human-readable status of a job.</p>
+<p>It can be more convenient to always use the <code>-H</code> flag.</p>
+<p>Common Job States:</p>
+<ul>
+<li><code>Q</code> |	Queued</li>
+<li><code>R</code> |	Running</li>
+<li><code>E</code> |	Exiting</li>
+<li><code>F</code> | Finished</li>
+</ul>
+<p>Uncommon Job States:</p>
+<ul>
+<li><code>H</code> |	 Held</li>
+<li><code>T</code> |	 Being transported to a different location (unlikely)</li>
+<li><code>W</code> |	 Waiting for its execution time (if you specified a set start datetime)</li>
+</ul>
+<p><em>If in an uncommon state (unintentionally) for substantial time, consider reaching out to CRCD.</em></p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qstat -H 18769
+
+cm:
+                                                            Req'd  Req'd   Elap
+Job ID          Username Queue    Jobname    SessID NDS TSK Memory Time  S Time
+--------------- -------- -------- ---------- ------ --- --- ------ ----- - -----
+18769.cm        z1994244 short    ml_retrai* 35427*   1  16   64gb 00:15 F 00:04
+</code></pre>
+<p>Common Options:</p>
+<ul>
+<li><code>-f</code> | Prints all available data on a job.</li>
+<li><code>-x</code> | Prints even if the job is historical.</li>
+<li><code>-H</code> | Prints even if the job is historical (with a little bit more data).</li>
+</ul>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qstat.html">Command Manual</a></em></small></p>
+<h3 id="-qdel-job_id"><a class="header" href="#-qdel-job_id"><code>$ qdel &lt;job_id&gt;</code></a></h3>
+<p>Deletes a job by either cancelling or killing it.</p>
+<p>Notes:</p>
+<ul>
+<li>This effect is achieved by sending a <code>SIGTERM</code> signal to your program, followed by a <code>SIGKILL</code> signal. If you want to plan ahead for graceful shutdowns, write your program to intercept these.</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-bash">$ qdel 18769
+</code></pre>
+<p>Common Options:</p>
+<ul>
+<li>
+<p><code>-W &lt;seconds&gt;</code></p>
+<p>The number of seconds between the <code>SIGTERM</code> and <code>SIGKILL</code> signals.</p>
+<p>For example, if you have a program which can handle graceful shutdown in about ~5 seconds, but also want to eventually force kill it after 10:</p>
+<pre><code class="language-bash">$ qdel -W 10 18769
+</code></pre>
+</li>
+</ul>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qdel.html">Command Manual</a></em></small></p>
+<h3 id="-qhist"><a class="header" href="#-qhist"><code>$ qhist</code></a></h3>
+<p>Prints the history of all batch jobs.</p>
+<pre><code class="language-bash">$ qhist
+9646  person_1   project_1       short           1     1    1.0     127  2024/04/05 14:43:20       0:03  2024/04/05 14:43:23       30:01
+9648  person_2   project_2       short           2    16    8.0       0  2024/04/05 14:43:44       0:07  2024/04/05 14:43:51       15:00
+...
+</code></pre>
+<p>Notes:</p>
+<ul>
+<li>
+<p>Not very useful by itself due to the slew of output, but when paired with <code>grep</code> or <code>awk</code>, you can filter output by user, project, date, etc to only list what you're looking for.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qhist | grep z1994244
+9699  z1994244   zwlab       short           1     1    1.0     127  2024/04/05 14:43:20       0:03  2024/04/05 14:43:23       30:01
+9733  z1994244   zwlab       short           2    16    8.0       0  2024/04/05 14:43:44       0:07  2024/04/05 14:43:51       15:00
+...
+</code></pre>
+</li>
+</ul>
+<p>Common Options:</p>
+<ul>
+<li>
+<p><code>-D|--dates &lt;mm/dd/yyyy[-mm/dd/yyyy] | today | week | month | quarter | year&gt;</code></p>
+<p>Filters by a time range.</p>
+<p>Example:</p>
+<pre><code class="language-bash">$ qhist -D year
+18768  person_1   project_1       short        1    16   16.0       0  2024/08/19 16:42:41       5:54  2024/08/19 16:48:35       15:00
+18769  person_2   project_2       short        1    16   16.0       0  2024/08/19 17:06:59       4:38  2024/08/19 17:11:37       15:00
+...
+</code></pre>
+</li>
+</ul>
+<p><small><em>Command Manual: <code>$ qhist --help</code></em></small></p>
+<h2 id="other-commands-1"><a class="header" href="#other-commands-1">Other Commands</a></h2>
+<p>These are commands which aren't as useful as the above four, but do exist and have potential applications, so they are here.</p>
+<p>Commands tagged with "❗" are potentially pointless or ineffective on Metis.</p>
+<h3 id="-qsig-job_id"><a class="header" href="#-qsig-job_id"><code>$ qsig &lt;job_id&gt;</code></a></h3>
+<p>Sends a signal to a job. By default, this is the <code>SIGTERM</code> signal.</p>
+<p>Common Options:</p>
+<ul>
+<li>
+<p><code>-s signal</code></p>
+<p>Specifies the signal.</p>
+<p>Supports integer representation (such as <code>9</code>), or the string name with/without <code>SIG</code> (<code>SIGKILL</code> or <code>KILL</code>)</p>
+</li>
+</ul>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qsig.html">Command Manual</a></em></small></p>
+<h3 id="-qmsg-job_id"><a class="header" href="#-qmsg-job_id"><code>$ qmsg &lt;job_id&gt;</code></a></h3>
+<p>Writes a message to one or more output files of a job for the purpose of leaving informative comments.</p>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qmsg.html">Command Manual</a></em></small></p>
+<h3 id="-qalter-job_id"><a class="header" href="#-qalter-job_id"><code>$ qalter &lt;job_id&gt;</code></a></h3>
+<p>Alters an attribute of a job.</p>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qalter.html">Command Manual</a></em></small></p>
+<h3 id="-qmove-destination-job_id"><a class="header" href="#-qmove-destination-job_id"><code>$ qmove &lt;destination&gt; &lt;job_id&gt;</code></a></h3>
+<p>❗ Moves a job from its queue to another destination.</p>
+<p><em>The potential destinations on Metis are unclear.</em></p>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qmove.html">Command Manual</a></em></small></p>
+<h3 id="-qhold-job_id"><a class="header" href="#-qhold-job_id"><code>$ qhold &lt;job_id&gt;</code></a></h3>
+<p>❗ Places a request to 'hold' a job.</p>
+<p><em>It's unclear if Metis supports checkpointing. If you believe this command would be helpful, contact CRCD for additional information.</em></p>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qhold.html">Command Manual</a></em></small></p>
+<h3 id="-qrls-job_id"><a class="header" href="#-qrls-job_id"><code>$ qrls &lt;job_id&gt;</code></a></h3>
+<p>❗ Releases the hold on a job.</p>
+<p><em>It's unclear if Metis supports checkpointing. If you believe this command would be helpful, contact CRCD for additional information.</em></p>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qrls.html">Command Manual</a></em></small></p>
+<h3 id="-qselect"><a class="header" href="#-qselect"><code>$ qselect</code></a></h3>
+<p>❗ Lists job IDs matching a certain criteria.</p>
+<p><em>Appears to be entirely broken. Use the <code>qhist</code> with <code>grep</code> or <code>awk</code> to filter output instead.</em></p>
+<p><small><em><a href="https://www.jlab.org/hpc/PBS/qselect.html">Command Manual</a></em></small></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="641-pbs-files"><a class="header" href="#641-pbs-files">6.4.1. PBS Files</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">Modules</a></em></small></p>
+<p>This chapter is a summary of the <a href="https://www.utrgv.edu/hpcc/_files/documents/pbspro-user-guide.pdf">PBS Professional User Guide</a>, <a href="https://www.jlab.org/hpc/PBS/qsub.html"><code>qsub</code> manual</a>, and the <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">CRCD Documentation</a> which are fantastic resources if you want to learn more about PBS Professional or <code>.pbs</code> files.</p>
+<p>Metis has many users, and each user could have a myriad of reqiurements for their application. In order to accommodate each user fairly, and to optimize the execution of jobs, CRCD uses <a href="https://altair.com/pbs-professional/">PBS Professional</a> by Altair.</p>
+<p>Job scripts written for PBS Professional are effectively script files, but alsoe define the parameters and requirements for job execution. These scripts are then run on the batch server, also known as the <strong>compute nodes</strong>.</p>
+<h4 id="what-does-a-pbs-file-look-like"><a class="header" href="#what-does-a-pbs-file-look-like">What Does a <code>.pbs</code> File Look Like?</a></h4>
+<pre><code>#!/bin/bash
+
+#PBS -N hello_world
+#PBS -j oe
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
+#PBS -l walltime=00:15:00
+#--PBS -m ae
+#--PBS -M account@niu.edu
+
+# Navigate to our working directory
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cpp/cpp_on_metis
+echo "The job's working directory is $PROJECT_DIRECTORY"
+cd $PROJECT_DIRECTORY
+
+# Run our script
+./my_binary
+</code></pre>
+<p>There are three special properties of a <code>.pbs</code> file we should understand!</p>
+<h2 id="pbs-directives"><a class="header" href="#pbs-directives">PBS Directives</a></h2>
+<p>PBS directives are prefaced by <code>#PBS</code>, and specify PBS-specific job flags.</p>
+<p>These are actually the exact flags that are effectively passed to the <code>qsub</code> command!</p>
+<p>For instance, you could specify your email in two different ways:</p>
+<pre><code class="language-pbs">...
+
+#PBS -M you@niu.edu
+
+...
+</code></pre>
+<p>...or, with the command flag: <code>qsub -M you@niu.edu</code>.</p>
+<p>To comment out a PBS directive, replace <code>#PBS</code> with <code>#--PBS</code>.</p>
+<p><em>It's worth noting that providing a flag by CLI will override the directives in the PBS file, which can be helpful if you want default values that can (optionally!) be specified differently at time of submission.</em></p>
+<p><strong>Common Directives</strong>:</p>
+<ul>
+<li>
+<p><code>#PBS -N &lt;name&gt;</code> or <code>qsub -N &lt;name&gt;</code></p>
+<p>This will specify the name of the job in the PBS system, emails, and file output.</p>
+<p>Example Usage:</p>
+<pre><code class="language-bash">$ qsub -N hello_world run.pbs
+20000.cm
+$ ls
+hello_world.o20000
+</code></pre>
+</li>
+<li>
+<p><code>#PBS -l &lt;resource_1&gt;:...:&lt;resource_n&gt;</code> or <code>qsub -l &lt;resource_1&gt;,...,&lt;resource_n&gt;</code></p>
+<p>Specifies the resources that the job needs. You can find more about the types to specify in the <a href="https://www.utrgv.edu/hpcc/_files/documents/pbspro-user-guide.pdf">PBS User's Guide</a>, but the template that CRCD provides is very ideal.</p>
+<p><strong>Note - on Metis</strong>:</p>
+<ul>
+<li>
+<p><strong>Nchunks&lt;=32</strong>, for GPU chunks</p>
+</li>
+<li>
+<p><strong>Nchunks&lt;=4096/Ncpus</strong> for CPU-only chunks</p>
+<p>(run 'shownodes' command to find the number of free cpus)</p>
+</li>
+<li>
+<p><strong>Ncpus&lt;=128</strong>, the total number of CPUs per node is 128</p>
+</li>
+<li>
+<p><strong>NPmpi&lt;=Ncpus</strong>, the total number of CPUs allocated for MPI tasks,</p>
+<p>request NPmpi=Ncpus for non-OPENMP jobs</p>
+</li>
+<li>
+<p><strong>Ngpus==1</strong>,  the total number of GPUs per node is 1</p>
+</li>
+<li>
+<p><strong>X&lt;=256</strong>,  28 of 32 Metis modes have 256 GB of RAM</p>
+<p>special jobs can request up to 1024 GB of RAM (4 nodes)</p>
+</li>
+</ul>
+<p>Below, we request two chunks; each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 251 GB RAM, and we expect the total job runtime (walltime) to be 15 minutes.</p>
+<p>If you are requesting a GPU, you are reserving <em>an entire</em> node. Accordingly, you should use the entire capacity of RAM available to said node (251GB). Some nodes also have 1259GB available by special request.</p>
+<p>Example (<code>run.pbs</code> file):</p>
+<pre><code class="language-pbs">#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
+#PBS -l walltime=00:15:00
+</code></pre>
+<p>To learn how to optimize these values, see the <a href="https://www.niu.edu/crcd/current-users/getting-started/queue-commands-job-management.shtml#jobcontrol">official Metis protocol</a>.</p>
+</li>
+<li>
+<p><code>#PBS -j &lt;n | oe&gt;</code> or <code>qsub -j &lt;n | oe&gt;</code></p>
+<p>Specifies whether the standard error stream should be merged with the standard output stream.</p>
+<p>Specifying <code>oe</code> means that both <code>stderr</code> and <code>stdout</code> will be in the same output file.</p>
+<p>Specifying <code>n</code>, or not specifying at all, means they will be in different files.</p>
+<pre><code class="language-bash">$ qsub -j n run.pbs
+20000.cm
+$ ls
+hello_world.o20000
+hello_world.e20000
+</code></pre>
+</li>
+<li>
+<p><code>#PBS -m &lt;n | a*b*e*&gt;</code> or <code>qsub -m &lt;n | a*b*e*&gt;</code></p>
+<p>Specifies when mail about your job should be sent, with the following key:</p>
+<ul>
+<li>To send mail when it aborts, add <code>a</code></li>
+<li>To send mail when it begins, add <code>b</code></li>
+<li>To send mail when it ends, add <code>e</code></li>
+<li>To not send mail, specify <code>n</code> or do not use this directive.</li>
+</ul>
+</li>
+<li>
+<p><code>#PBS -M &lt;email&gt;</code> or <code>qsub -M &lt;email&gt;</code></p>
+<p>Specifies the email any job alert emails should be sent to.</p>
+<p>Email should only ever be sent to NIU-based emails for additional security.</p>
+</li>
+</ul>
+<h2 id="pbs-environment-variables"><a class="header" href="#pbs-environment-variables">PBS Environment Variables</a></h2>
+<p>There are two types of environment variables. Those which are prefaced by <code>PBS_O_</code> are influenced by the job's originating environment (the user environment!). Those which are prefaced by <code>PBS_</code> are provided by PBS.</p>
+<p>All examples are from a <code>.pbs</code> file, as these environment variables are only populated inside a batch job.</p>
+<p><strong>Common Environment Variables</strong>:</p>
+<ul>
+<li>
+<p><code>TMPDIR</code></p>
+<p>This is one of the most important directories, as it's deleted when the job finishes.</p>
+<p>Any build artifacts, unimportant files, or other ephemeral content should be stored in this directory - this will make your job much cleaner!</p>
+<p>Example PBS Usage and Output:</p>
+<pre><code class="language-pbs">echo "This job's temporary directory is: '$TMPDIR'"
+This job's temporary directory is '/scratch/pbs.20000.cm'
+</code></pre>
+</li>
+<li>
+<p><code>PBS_O_HOME</code></p>
+<p>The home folder of the user running the command.</p>
+<p>Example PBS Usage and Output:</p>
+<pre><code class="language-pbs">echo "My home directory is: '$PBS_O_HOME'"
+My home directory is: '/home/you'
+</code></pre>
+</li>
+<li>
+<p><code>PBS_O_LOGNAME</code></p>
+<p>The username of the invoking user.</p>
+<p>Example PBS Usage and Output:</p>
+<pre><code class="language-pbs">echo "My login username is: '$PBS_O_LOGNAME'"
+My login username is 'you'
+</code></pre>
+</li>
+<li>
+<p><code>PBS_O_PATH</code></p>
+<p>The PATH environment variable from the invoking user.</p>
+<p>Example PBS Usage and Output:</p>
+<pre><code class="language-pbs">echo "My path is: '$PBS_O_PATH'"
+My path is: '/urs/new/bin:/usr/local/bin:/bin'
+</code></pre>
+</li>
+<li>
+<p><code>PBS_O_SHELL</code></p>
+<p>The shell of the invoking user.</p>
+<p>Example PBS Usage and Output:</p>
+<pre><code class="language-pbs">echo "My shell path is: '$PBS_O_SHELL'"
+My shell path is: '/sbin/csh'
+</code></pre>
+</li>
+<li>
+<p><code>PBS_O_HOST</code></p>
+<p>The machine hostname of the server.</p>
+<p>Example PBS and Output:</p>
+<pre><code class="language-pbs">echo "The machine hostname: '$PBS_O_HOST'"
+The machine hostname: 'metis'
+</code></pre>
+</li>
+<li>
+<p><code>PBS_O_WORKDIR</code></p>
+<p>The user's working directory (at time of invocation).</p>
+<p>Example PBS and Output:</p>
+<pre><code class="language-pbs">echo "My current working directory: '$PBS_O_WORKDIR'"
+My current working directory: '/home/you'
+</code></pre>
+</li>
+<li>
+<p><code>PBS_JOBID</code></p>
+<p>The ID of the batch job.</p>
+<p>Example PBS Usage and Output:</p>
+<pre><code class="language-pbs">echo "The ID of this job: '$PBS_JOBID'"
+The ID of this job: '16386.cm'
+</code></pre>
+</li>
+</ul>
+<h3 id="the-shebang"><a class="header" href="#the-shebang">The Shebang</a></h3>
+<p>At the top of the script, we can see the <a href="https://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a>.</p>
+<p>A shebang specifier which interpreter PBS should use. In almost every case, it's best to use <a href="https://www.gnu.org/software/bash/">Bash</a>, which is located at <code>/bin/bash</code>.</p>
+<p><em>This line is reqiured, but likely doesn't need to be modified!</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="7-conclusion-citations-and-contact"><a class="header" href="#7-conclusion-citations-and-contact">7. Conclusion, Citations, and Contact</a></h1>
+<p>This concludes my documentation for the NIU Metis supercomputing systems.</p>
+<p>I hope this helps you achieve your goals on Metis, and streamlined the process of getting started!</p>
+<h2 id="works-cited"><a class="header" href="#works-cited">Works Cited</a></h2>
+<h3 id="docker-podman-and-nvidia-container-toolkit"><a class="header" href="#docker-podman-and-nvidia-container-toolkit">Docker, Podman, and NVIDIA Container Toolkit</a></h3>
+<ul>
+<li><a href="https://docs.docker.com/">Docker's Documentation</a></li>
+<li><a href="https://docs.podman.io/">Podman's Documentation</a></li>
+<li><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/index.html">NVIDIA Container Toolkit Documentation</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-optimize-docker-images-for-production">DigitalOcean's Docker Optimization Guide</a></li>
+<li><a href="https://www.geeksforgeeks.org/docker-publishing-images-to-docker-hub/">G4G's Docker Hub Publishing Guide</a></li>
+</ul>
+<h3 id="cuda-and-openmpi"><a class="header" href="#cuda-and-openmpi">CUDA and OpenMPI</a></h3>
+<ul>
+<li><a href="https://developer.nvidia.com/blog/even-easier-introduction-cuda/">NVIDIA's Amazing Introduction to CUDA</a></li>
+<li><a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#features-and-technical-specifications">NVIDIA CUDA Feature Availability</a></li>
+<li><a href="https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf">NVIDIA A100 Technical Documentation</a></li>
+<li><a href="https://www.openmp.org/wp-content/uploads/omp-hands-on-SC08.pdf">OpenMPI Into-The-Fire Introduction</a></li>
+<li><a href="https://docs.open-mpi.org/en/v5.0.x/index.html">OpenMPI Documentation</a></li>
+</ul>
+<h3 id="pbs-professional"><a class="header" href="#pbs-professional">PBS Professional</a></h3>
+<ul>
+<li><a href="https://help.altair.com/2024.1.0/PBS%20Professional/PBSProgramGuide2024.1.pdf">PBS Professional Documentation</a></li>
+<li><a href="https://www.nas.nasa.gov/hecc/support/kb/Commonly-Used-PBS-Commands_174.html">NASA's PBS Quick Reference</a></li>
+<li><a href="https://www.jlab.org/hpc/PBS/qsub.html">JLab's PBS Documentation</a></li>
+</ul>
+<h3 id="metis"><a class="header" href="#metis">Metis</a></h3>
+<ul>
+<li><a href="https://www.niu.edu/crcd/current-users/getting-started/index.shtml">NIU's Official Metis Documentation</a></li>
+</ul>
+<h3 id="openssh-and-vscode"><a class="header" href="#openssh-and-vscode">OpenSSH and VSCode</a></h3>
+<ul>
+<li><a href="https://www.openssh.com/manual.html">OpenSSH Manual</a></li>
+<li><a href="https://code.visualstudio.com/docs/remote/ssh">VSCode Remote Explorer Documentation</a></li>
+</ul>
+<h3 id="modules-and-modulefiles"><a class="header" href="#modules-and-modulefiles">Modules and Modulefiles</a></h3>
+<ul>
+<li><a href="https://modules.readthedocs.io/en/v5.4.0/modulefile.html#description">Official Modules Documentation</a></li>
+<li><a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/installing_managing_and_removing_user-space_components/introduction-to-modules_using-appstream">RHEL Modules Documentation</a></li>
+</ul>
+<h2 id="final-notes"><a class="header" href="#final-notes">Final Notes</a></h2>
+<p>I am an undergraduate student at NIU, and my GitHub is <a href="https://github.com/hiibolt">@hiibolt</a>. If you find errors or want additional clarification, feel free to open an issue on <a href="https://github.com/hiibolt/niu-metis-documentation">this book's repository</a>, or email me at <code>me@hiibolt.com</code>.</p>
+<p>You can find more of my computation writing on my <a href="https://blog.hiibolt.com">blog</a>, on which I have an article about my time with the iGait development team, which I greatly enjoyed.</p>
+<p>Thank you so much for reading my work, I wish you the best of luck in your academic endeavors.</p>
+<p><em>Stay cozy, this is @hiibolt, signing out :3</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>

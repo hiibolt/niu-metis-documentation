@@ -1,0 +1,20 @@
+#!/bin/bash
+#PBS -N basic-rayon
+#PBS -l select=1:ncpus=32:mpiprocs=1
+#PBS -l walltime=00:10:00
+#PBS -j oe
+#PBS -o basic-raion.out
+
+# Change to the directory from which the job was submitted
+cd $PBS_O_WORKDIR
+
+# Path to your compiled Rust binary
+echo ""
+echo "[ Building Program ]"
+cargo build --release
+BIN=./target/release/basic-rayon
+
+# Run the binary
+echo ""
+echo "[ Starting Program ]"
+./$BIN

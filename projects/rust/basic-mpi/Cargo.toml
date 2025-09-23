@@ -1,0 +1,9 @@
+[package]
+name = "rsmpi-test"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+mpi = "0.8"
+rand = "0.9"

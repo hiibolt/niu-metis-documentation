@@ -54,7 +54,7 @@ Ephemerally adds a source to the `module` commands. This means you can add your 
 
 Omitting the path will instead print a list of currently linked sources.
 
-Example (see **Chapter 5.4.1** for an in-depth example):
+Example (see **Chapter 6.4.1** for an in-depth example):
 ```bash
 $ module use ~/modules
 $ module load my_package/my_package-0.0.1
