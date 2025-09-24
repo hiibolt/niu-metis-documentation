@@ -14,7 +14,6 @@ echo "[ Loading Modules ]"
 module purge
 module use /home/z1994244/modules
 module load clang_llvm/clang_llvm-0.0.1
-module load clang_llvm/clang_llvm-0.0.1
 module load openmpi/openmpi-5.0.7-gcc-14.2.0-cuda-12.8
 
 # Path to your compiled Rust binary
