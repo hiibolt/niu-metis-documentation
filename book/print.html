@@ -1173,6 +1173,160 @@ Average: 0.5000479638602693 in 126.604707ms
 <p>Nicely done! And wow - sure makes a difference, doesn't it?</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="222-cross-node-computation-with-mpi-and-rust"><a class="header" href="#222-cross-node-computation-with-mpi-and-rust">2.2.2. Cross-Node Computation with MPI and Rust</a></h1>
 <p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/rust/basic-mpi">in this book's repository</a>!</em></p>
+<h2 id="what-is-openmpi-and-how-does-it-differ-from-openmp"><a class="header" href="#what-is-openmpi-and-how-does-it-differ-from-openmp">What is OpenMPI, and How Does it Differ from OpenMP?</a></h2>
+<p>I'll start by loosely contrasting the functionality of the two:</p>
+<ul>
+<li>OpenMP is for <strong>shared memory</strong> across multiple <strong>processors/threads</strong></li>
+<li>OpenMPI is for <strong>distributed memory</strong> across <strong>multiple systems</strong></li>
+</ul>
+<p>OpenMP is something that's semi-comparable to our approach multithreading. It's a lot beefier, but the author of this documentation generally discourages the use of it.</p>
+<p>We recommends instead either using language parallelism features for simplicity or OpenMPI for drastically improved performance.</p>
+<h2 id="how-openmpi-works"><a class="header" href="#how-openmpi-works">How OpenMPI Works</a></h2>
+<p>MPI is a protocol for a (M)essage-(P)assing (I)nterface.</p>
+<p>There's four concepts core to MPI:</p>
+<ul>
+<li><strong>Universe</strong> - The collection of all nodes. On Metis, this is abstracted away by PBS Professional, so don't think too hard about it.</li>
+<li><strong>World</strong> - The collection of all MPI processes and their intercommunication layers. You can think of this as the "meeting room", where each process has a headset and microphone.</li>
+<li><strong>Size</strong> - The number of MPI processes in the <strong>World</strong>.</li>
+<li><strong>Rank</strong> - The index representing an MPI process in a <strong>World</strong>.</li>
+</ul>
+<p>When you launch an MPI program, all programs with the same binary and memory. In fact, if you didn't use the rank indicator anywhere in the program, they'd be identical in most cases, simply duplicating output <code>size</code> times.</p>
+<p>Here's an example in Rust that does just that:</p>
+<pre><pre class="playground"><code class="language-rust">use mpi::traits::*;
+use anyhow::{Context, Result};
+
+fn main ( ) -&gt; Result&lt;()&gt; {
+    let universe = mpi::initialize()
+        .context("Failed to initialize MPI.")?;
+    let world = universe.world();
+    let size: i32 = world.size();
+
+    println!("Size: {size}");
+
+    Ok(())
+}</code></pre></pre>
+<p>To get this to run, you'll need to do the following:</p>
+<pre><code class="language-bash">$ mkdir -p ~/projects/rust/basic-mpi
+$ cd ~/projects/rust/basic-mpi
+$ cargo init .
+$ cargo add anyhow
+$ cargo add mpi
+$ module purge
+$ module load openmpi/openmpi-5.0.7-gcc-14.2.0-cuda-12.8
+$ cargo run
+</code></pre>
+<p>For an MPI run with size 3, you'd get:</p>
+<pre><code>Size: 3
+Size: 3
+Size: 3
+</code></pre>
+<p>Neat, but why run the same thing in multiple places?</p>
+<h3 id="rank-based-inter-process-logic-and-communication"><a class="header" href="#rank-based-inter-process-logic-and-communication">Rank-Based Inter-process Logic and Communication</a></h3>
+<p>Things start to get interesting quick when you consider the <code>rank</code>:</p>
+<pre><pre class="playground"><code class="language-rust">use mpi::traits::*;
+use anyhow::{Context, Result};
+
+fn main ( ) -&gt; Result&lt;()&gt; {
+    let universe = mpi::initialize()
+        .context("Failed to initialize MPI.")?;
+    let world = universe.world();
+    let size: i32 = world.size();
+    let rank: i32 = world.rank();
+
+    println!("Size: {size} - Rank: {rank}");
+
+    Ok(())
+}</code></pre></pre>
+<p>Running this, we get a different result:</p>
+<pre><code>Size: 3 - Rank: 0
+Size: 3 - Rank: 1
+Size: 3 - Rank: 2
+</code></pre>
+<p>If you've been paying close attention, it probably just clicked why this is big - you can diverge in logic based on this rank.</p>
+<p>Here's a full example for this logic at work:</p>
+<pre><pre class="playground"><code class="language-rust">use mpi::traits::*;
+use rand::prelude::*;
+use anyhow::{Context, Result};
+
+const NUM_ELEMENTS: usize = 1_000_000;
+
+fn calculate_random_avg ( n: usize ) -&gt; f64 {
+    let mut arr = vec!(0.0; n);
+    rand::rng().fill(&amp;mut arr[..]);
+
+    arr.into_iter().sum::&lt;f64&gt;() / (n as f64)
+}
+fn main ( ) -&gt; Result&lt;()&gt; {
+    let universe = mpi::initialize()
+        .context("Failed to initialize MPI.")?;
+    let world = universe.world();
+    let size: i32 = world.size();
+    let rank: i32 = world.rank();
+
+    let local_elements  = NUM_ELEMENTS / (size as usize)
+        + (rank == 0)
+            .then_some(NUM_ELEMENTS % (size as usize))
+            .unwrap_or(0);
+    let local_avg = calculate_random_avg(local_elements);
+    world.process_at_rank(0).send(&amp;local_avg);
+
+    if rank == 0 { 
+        let global_avg = (0..size)
+            .fold(0f64, |acc, _| {
+                acc + world.any_process().receive::&lt;f64&gt;().0
+            }) / (size as f64);
+
+        println!("Global average of {global_avg} over {NUM_ELEMENTS} elements");
+        println!("Computed on {size} MPI processes");
+    }
+
+    Ok(())
+}</code></pre></pre>
+<p>Lots of things just got added, so let's break it down.</p>
+<ul>
+<li>Main can fail. That's why it returns a <code>Result&lt;()&gt;</code> and why the <code>universe</code> has a <code>.context(...)?</code> snippet - that wraps the error with additional information and early returns if it is indeed an error.</li>
+<li>Each and every node calculates the average of <code>(NUM_ELEMENT / size)</code> elements, and then sends their result to the node with rank 0.</li>
+<li>The node with rank 0, and <em>only</em> that one, receives the results from each node, including itself - and prints the result.</li>
+<li>Since our <code>main</code> function returns a <code>Result&lt;()&gt;</code>, we need to finish the function by returning the <code>Result::Ok&lt;()&gt;</code> variant, which can be shortened to <code>Ok&lt;()&gt;</code> (since we declared we'd be returning an <code>Result</code>)</li>
+</ul>
+<h3 id="building-and-executing-a-rust-mpi-binary"><a class="header" href="#building-and-executing-a-rust-mpi-binary">Building and Executing a Rust MPI binary</a></h3>
+<p>Now, the above steps still work - but what's the point of running this on one process?</p>
+<p>Let's get started with a basic 2-process PBS batchfile:</p>
+<pre><code class="language-bash">#!/bin/bash
+#PBS -N rsmpi-test
+#PBS -l select=2:ncpus=1:mpiprocs=1
+#PBS -l walltime=00:10:00
+#PBS -j oe
+#PBS -o rsmpi-test.out
+
+# Change to the directory from which the job was submitted
+cd $PBS_O_WORKDIR
+
+# Load MPI module (adjust to your cluster's modules)
+echo ""
+echo "[ Loading Modules ]"
+module purge
+module load openmpi/openmpi-5.0.7-gcc-14.2.0-cuda-12.8
+
+# Path to your compiled Rust binary
+echo ""
+echo "[ Building Program ]"
+cargo build --release
+BIN=./target/release/rsmpi-test
+
+# Run with 2 processes (1 per node)
+echo ""
+echo "[ Starting Program ]"
+mpirun -np 2 -hostfile $PBS_NODEFILE $BIN
+</code></pre>
+<p>Let's note two things. Firstly, we aren't using <code>cargo run</code> here, we're actually building a binary with the release profile. This is important because not only is a binary required by <code>mpirun</code>, but a binary built this way is significantly better optimised.</p>
+<p>Secondly, we must coordinate that we're asking for 2 MPI processes in <strong>two</strong> places:</p>
+<ul>
+<li>The PBS directive (<code>select=2</code>)</li>
+<li><code>mpirun</code> (<code>-np 2</code>)</li>
+</ul>
+<p>But, with this, we've successfully run a multi-node Rust program with distributed memory.</p>
+<p>This approach is hyper-modern - you're getting the low-level performance of C and OpenMPI with the safety and opinionated predictability of Rust.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="3-user-environment-customizationvirtualization-on-metis"><a class="header" href="#3-user-environment-customizationvirtualization-on-metis">3. User Environment Customization/Virtualization on Metis</a></h1>
 <h2 id="podman--docker-vs-singularityapptainer--docker-vs-conda-vs-modulefiles"><a class="header" href="#podman--docker-vs-singularityapptainer--docker-vs-conda-vs-modulefiles">Podman + Docker vs Singularity/Apptainer + Docker vs Conda vs Modulefiles</a></h2>
 <p>Metis provides several technologies to encapsulate environments and manage software dependencies. Each of these tools—Podman, Docker, Singularity/Apptainer, Conda, and Modulefiles—has different strengths and weaknesses, depending on your use case.</p>
