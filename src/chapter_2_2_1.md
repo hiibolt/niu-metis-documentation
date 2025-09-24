@@ -245,9 +245,9 @@ fn parallel_average ( nums: &[f64] ) -> f64 {
 Lastly, let's compile and not in the debug profile, as `cargo run` does, but in release mode:
 ```bash
 $ cargo build --release
-   Compiling rayon-test v0.1.0 (/nfs/ihfs/home_metis/z1994244/projects/rust/rayon-test)
+   Compiling basic-rayon v0.1.0 (/nfs/ihfs/home_metis/z1994244/projects/rust/basic-rayon)
     Finished `release` profile [optimized] target(s) in 0.34s
-$ ./target/release/rayon-test
+$ ./target/release/basic-rayon
 Average: 0.5000479638601427 in 21.319388ms
 Average: 0.5000479638602693 in 126.604707ms
 ```
