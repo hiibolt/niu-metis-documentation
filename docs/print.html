@@ -1179,16 +1179,15 @@ Average: 0.5000479638602693 in 126.604707ms
 <li>OpenMP is for <strong>shared memory</strong> across multiple <strong>processors/threads</strong></li>
 <li>OpenMPI is for <strong>distributed memory</strong> across <strong>multiple systems</strong></li>
 </ul>
-<p>OpenMP is something that's semi-comparable to our approach multithreading. It's a lot beefier, but the author of this documentation generally discourages the use of it.</p>
-<p>We recommends instead either using language parallelism features for simplicity or OpenMPI for drastically improved performance.</p>
+<p>OpenMP is something that's semi-comparable to our previous approach to multithreading. It's a lot beefier, but the author of this documentation generally discourages the use of it - recommending to instead use either language parallelism features (for simplicity) or OpenMPI (for drastically improved performance).</p>
 <h2 id="how-openmpi-works"><a class="header" href="#how-openmpi-works">How OpenMPI Works</a></h2>
 <p>MPI is a protocol for a (M)essage-(P)assing (I)nterface.</p>
 <p>There's four concepts core to MPI:</p>
 <ul>
 <li><strong>Universe</strong> - The collection of all nodes. On Metis, this is abstracted away by PBS Professional, so don't think too hard about it.</li>
-<li><strong>World</strong> - The collection of all MPI processes and their intercommunication layers. You can think of this as the "meeting room", where each process has a headset and microphone.</li>
+<li><strong>World</strong> - The collection of all MPI processes and their intercommunication layers. You can think of this as the "meeting room", where each process has a headset and microphone to talk to oneanother.</li>
 <li><strong>Size</strong> - The number of MPI processes in the <strong>World</strong>.</li>
-<li><strong>Rank</strong> - The index representing an MPI process in a <strong>World</strong>.</li>
+<li><strong>Rank</strong> - The index representing <em>this</em> MPI process in the <strong>World</strong>.</li>
 </ul>
 <p>When you launch an MPI program, all programs with the same binary and memory. In fact, if you didn't use the rank indicator anywhere in the program, they'd be identical in most cases, simply duplicating output <code>size</code> times.</p>
 <p>Here's an example in Rust that does just that:</p>
@@ -1284,10 +1283,10 @@ fn main ( ) -&gt; Result&lt;()&gt; {
 }</code></pre></pre>
 <p>Lots of things just got added, so let's break it down.</p>
 <ul>
-<li>Main can fail. That's why it returns a <code>Result&lt;()&gt;</code> and why the <code>universe</code> has a <code>.context(...)?</code> snippet - that wraps the error with additional information and early returns if it is indeed an error.</li>
+<li>Main can fail. That's why it returns a <code>Result&lt;()&gt;</code>, and also why the <code>universe</code> has a <code>.context(...)?</code> snippet - that wraps the error with additional information and early returns if it indeed contains an error.</li>
 <li>Each and every node calculates the average of <code>(NUM_ELEMENT / size)</code> elements, and then sends their result to the node with rank 0.</li>
-<li>The node with rank 0, and <em>only</em> that one, receives the results from each node, including itself - and prints the result.</li>
-<li>Since our <code>main</code> function returns a <code>Result&lt;()&gt;</code>, we need to finish the function by returning the <code>Result::Ok&lt;()&gt;</code> variant, which can be shortened to <code>Ok&lt;()&gt;</code> (since we declared we'd be returning an <code>Result</code>)</li>
+<li>The node with rank 0, and <em>only</em> that node, receives the results from each node (including itself) and prints the result.</li>
+<li>Since our <code>main</code> function returns a <code>Result&lt;()&gt;</code>, we need to finish the function by returning the <code>Result::Ok&lt;()&gt;</code> variant, which can be shortened to <code>Ok&lt;()&gt;</code> since we declared we'd be returning an <code>Result</code> in the function definition</li>
 </ul>
 <h3 id="building-and-executing-a-rust-mpi-binary"><a class="header" href="#building-and-executing-a-rust-mpi-binary">Building and Executing a Rust MPI binary</a></h3>
 <p>Now, the above steps still work - but what's the point of running this on one process?</p>
@@ -1319,11 +1318,11 @@ echo ""
 echo "[ Starting Program ]"
 mpirun -np 2 -hostfile $PBS_NODEFILE $BIN
 </code></pre>
-<p>Let's note two things. Firstly, we aren't using <code>cargo run</code> here, we're actually building a binary with the release profile. This is important because not only is a binary required by <code>mpirun</code>, but a binary built this way is significantly better optimised.</p>
+<p>Let's note two things. Firstly, we aren't using <code>cargo run</code> here, we're actually building a binary with the release profile. This is important because not only is a binary required by <code>mpirun</code>, but a binary built this way is significantly better optimized.</p>
 <p>Secondly, we must coordinate that we're asking for 2 MPI processes in <strong>two</strong> places:</p>
 <ul>
 <li>The PBS directive (<code>select=2</code>)</li>
-<li><code>mpirun</code> (<code>-np 2</code>)</li>
+<li><code>mpirun</code> with (<code>-np 2</code>)</li>
 </ul>
 <h3 id="final-results"><a class="header" href="#final-results">Final Results</a></h3>
 <p>Testing this, we get a successful output:</p>
@@ -1344,7 +1343,8 @@ Global average of 0.4995294844859745 over 1000000 elements
 Computed on 2 MPI processes
 </code></pre>
 <p>With this, we've successfully run a multi-node Rust program with distributed memory!</p>
-<p>This approach is hyper-modern - you're getting the low-level performance of C and OpenMPI with the safety and opinionated predictability of Rust. Very interesting stuff - Rust uniquely positions itself as a potential competitor in the HPC space with the aforementioned benefits.</p>
+<p>This approach is hyper-modern - you're getting the low-level performance of C and OpenMPI with the safety and opinionated predictability of Rust.</p>
+<p>Very interesting stuff - Rust uniquely positions itself as a potential competitor in the HPC space with the aforementioned benefits.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="3-user-environment-customizationvirtualization-on-metis"><a class="header" href="#3-user-environment-customizationvirtualization-on-metis">3. User Environment Customization/Virtualization on Metis</a></h1>
 <h2 id="podman--docker-vs-singularityapptainer--docker-vs-conda-vs-modulefiles"><a class="header" href="#podman--docker-vs-singularityapptainer--docker-vs-conda-vs-modulefiles">Podman + Docker vs Singularity/Apptainer + Docker vs Conda vs Modulefiles</a></h2>
 <p>Metis provides several technologies to encapsulate environments and manage software dependencies. Each of these tools—Podman, Docker, Singularity/Apptainer, Conda, and Modulefiles—has different strengths and weaknesses, depending on your use case.</p>

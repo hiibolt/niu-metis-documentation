@@ -6,18 +6,16 @@ I'll start by loosely contrasting the functionality of the two:
 - OpenMP is for **shared memory** across multiple **processors/threads**
 - OpenMPI is for **distributed memory** across **multiple systems**
 
-OpenMP is something that's semi-comparable to our approach multithreading. It's a lot beefier, but the author of this documentation generally discourages the use of it.
-
-We recommends instead either using language parallelism features for simplicity or OpenMPI for drastically improved performance.
+OpenMP is something that's semi-comparable to our previous approach to multithreading. It's a lot beefier, but the author of this documentation generally discourages the use of it - recommending to instead use either language parallelism features (for simplicity) or OpenMPI (for drastically improved performance).
 
 ## How OpenMPI Works
 MPI is a protocol for a (M)essage-(P)assing (I)nterface.
 
 There's four concepts core to MPI:
 * **Universe** - The collection of all nodes. On Metis, this is abstracted away by PBS Professional, so don't think too hard about it.
-* **World** - The collection of all MPI processes and their intercommunication layers. You can think of this as the "meeting room", where each process has a headset and microphone.
+* **World** - The collection of all MPI processes and their intercommunication layers. You can think of this as the "meeting room", where each process has a headset and microphone to talk to oneanother.
 * **Size** - The number of MPI processes in the **World**.
-* **Rank** - The index representing an MPI process in a **World**.
+* **Rank** - The index representing *this* MPI process in the **World**.
 
 When you launch an MPI program, all programs with the same binary and memory. In fact, if you didn't use the rank indicator anywhere in the program, they'd be identical in most cases, simply duplicating output `size` times.
 
@@ -130,10 +128,10 @@ fn main ( ) -> Result<()> {
 ```
 
 Lots of things just got added, so let's break it down.
-* Main can fail. That's why it returns a `Result<()>` and why the `universe` has a `.context(...)?` snippet - that wraps the error with additional information and early returns if it is indeed an error.
+* Main can fail. That's why it returns a `Result<()>`, and also why the `universe` has a `.context(...)?` snippet - that wraps the error with additional information and early returns if it indeed contains an error.
 * Each and every node calculates the average of `(NUM_ELEMENT / size)` elements, and then sends their result to the node with rank 0.
-* The node with rank 0, and *only* that one, receives the results from each node, including itself - and prints the result.
-* Since our `main` function returns a `Result<()>`, we need to finish the function by returning the `Result::Ok<()>` variant, which can be shortened to `Ok<()>` (since we declared we'd be returning an `Result`)
+* The node with rank 0, and *only* that node, receives the results from each node (including itself) and prints the result.
+* Since our `main` function returns a `Result<()>`, we need to finish the function by returning the `Result::Ok<()>` variant, which can be shortened to `Ok<()>` since we declared we'd be returning an `Result` in the function definition
 
 ### Building and Executing a Rust MPI binary
 Now, the above steps still work - but what's the point of running this on one process?
@@ -168,11 +166,11 @@ echo "[ Starting Program ]"
 mpirun -np 2 -hostfile $PBS_NODEFILE $BIN
 ```
 
-Let's note two things. Firstly, we aren't using `cargo run` here, we're actually building a binary with the release profile. This is important because not only is a binary required by `mpirun`, but a binary built this way is significantly better optimised.
+Let's note two things. Firstly, we aren't using `cargo run` here, we're actually building a binary with the release profile. This is important because not only is a binary required by `mpirun`, but a binary built this way is significantly better optimized.
 
 Secondly, we must coordinate that we're asking for 2 MPI processes in **two** places: 
 - The PBS directive (`select=2`)
-- `mpirun` (`-np 2`)
+- `mpirun` with (`-np 2`)
 
 
 ### Final Results
@@ -197,4 +195,6 @@ Computed on 2 MPI processes
 
 With this, we've successfully run a multi-node Rust program with distributed memory!
 
-This approach is hyper-modern - you're getting the low-level performance of C and OpenMPI with the safety and opinionated predictability of Rust. Very interesting stuff - Rust uniquely positions itself as a potential competitor in the HPC space with the aforementioned benefits.
+This approach is hyper-modern - you're getting the low-level performance of C and OpenMPI with the safety and opinionated predictability of Rust. 
+
+Very interesting stuff - Rust uniquely positions itself as a potential competitor in the HPC space with the aforementioned benefits.
