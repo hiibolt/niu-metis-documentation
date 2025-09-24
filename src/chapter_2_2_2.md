@@ -141,11 +141,11 @@ Now, the above steps still work - but what's the point of running this on one pr
 Let's get started with a basic 2-process PBS batchfile:
 ```bash
 #!/bin/bash
-#PBS -N rsmpi-test
+#PBS -N basic-mpi
 #PBS -l select=2:ncpus=1:mpiprocs=1
 #PBS -l walltime=00:10:00
 #PBS -j oe
-#PBS -o rsmpi-test.out
+#PBS -o basic-mpi.out
 
 # Change to the directory from which the job was submitted
 cd $PBS_O_WORKDIR
@@ -160,7 +160,7 @@ module load openmpi/openmpi-5.0.7-gcc-14.2.0-cuda-12.8
 echo ""
 echo "[ Building Program ]"
 cargo build --release
-BIN=./target/release/rsmpi-test
+BIN=./target/release/basic-mpi
 
 # Run with 2 processes (1 per node)
 echo ""
@@ -174,6 +174,27 @@ Secondly, we must coordinate that we're asking for 2 MPI processes in **two** pl
 - The PBS directive (`select=2`)
 - `mpirun` (`-np 2`)
 
-But, with this, we've successfully run a multi-node Rust program with distributed memory. 
 
-This approach is hyper-modern - you're getting the low-level performance of C and OpenMPI with the safety and opinionated predictability of Rust.
+### Final Results
+Testing this, we get a successful output:
+```
+$ qsub run.pbs
+69937.cm
+$ cat basic-mpi.out
+
+[ Loading Modules ]
+Loading openmpi/openmpi-4.1.8-gcc-11.4.0-cuda-11.8
+  Loading requirement: gcc/gcc-11.4.0 cuda/cuda-11.8
+
+[ Building Program ]
+   Compiling basic-mpi v0.1.0 (/nfs/ihfs/home_metis/z1994244/projects/rust/basic-mpi)
+    Finished `release` profile [optimized] target(s) in 0.42s
+
+[ Starting Program ]
+Global average of 0.4995294844859745 over 1000000 elements
+Computed on 2 MPI processes
+```
+
+With this, we've successfully run a multi-node Rust program with distributed memory!
+
+This approach is hyper-modern - you're getting the low-level performance of C and OpenMPI with the safety and opinionated predictability of Rust. Very interesting stuff - Rust uniquely positions itself as a potential competitor in the HPC space with the aforementioned benefits.

@@ -8,6 +8,11 @@ My goal with this book is to eliminate the frustration of getting started on Met
 
 You can find the link to the book in the top right of this page, or click [here](https://hiibolt.github.io/niu-metis-documentation/)!
 
+To build this documentation:
+```bash
+$ mdbook build -d docs
+```
+
 ## ❤️ Acknowledgments
 While my work was sponsored by the [NIU Student Engagement Fund](https://www.niu.edu/engaged-learning/funding/undergrad-research-funding.shtml) and [Illinois Innovation Network](https://iin.uillinois.edu/), it was a massive goal, and I wouldn't have been able to complete it without the help of the amazing members of the NIU iGait Research Team!
 

@@ -1,5 +1,5 @@
 [package]
-name = "rsmpi-test"
+name = "basic-mpi"
 version = "0.1.0"
 edition = "2021"
 
