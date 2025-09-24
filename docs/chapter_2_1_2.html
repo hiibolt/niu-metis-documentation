@@ -1,0 +1,513 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Building a CUDA Project from the Ground Up - NIU Metis Documentation</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1_1.html"><strong aria-hidden="true">1.1.</strong> Connecting to Metis</a></li><li class="chapter-item expanded "><a href="chapter_1_2.html"><strong aria-hidden="true">1.2.</strong> Remote Workspaces in VSCode</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Metis Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> C/C++ on Metis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_1_1.html"><strong aria-hidden="true">2.1.1.</strong> Building a C++ Project from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_1_2.html" class="active"><strong aria-hidden="true">2.1.2.</strong> Building a CUDA Project from the Ground Up</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Rust on Metis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2_2_1.html"><strong aria-hidden="true">2.2.1.</strong> A Parallel Rust Project, from the Ground Up</a></li><li class="chapter-item expanded "><a href="chapter_2_2_2.html"><strong aria-hidden="true">2.2.2.</strong> Cross-Node Computation with MPI and Rust</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> User Environment Customization/Virtualization on Metis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Pros/Cons: Podman + Docker and Singularity/Apptainer + Docker</a></li><li class="chapter-item expanded "><a href="chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Pros/Cons: Conda</a></li><li class="chapter-item expanded "><a href="chapter_3_3.html"><strong aria-hidden="true">3.3.</strong> Pros/Cons: Modulefiles</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Using Podman + Docker at Metis</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> Using Pre-Made Docker Images</a></li><li class="chapter-item expanded "><a href="chapter_4_2.html"><strong aria-hidden="true">4.2.</strong> Using GPU Acceleration With Docker</a></li><li class="chapter-item expanded "><a href="chapter_4_3.html"><strong aria-hidden="true">4.3.</strong> Creating Your Own Docker Image</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Advanced Metis Usage Techniques</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html"><strong aria-hidden="true">5.1.</strong> SSH Automation with Metis</a></li><li class="chapter-item expanded "><a href="chapter_5_2.html"><strong aria-hidden="true">5.2.</strong> Conceptual Techniques</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Command Quick Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_6_1.html"><strong aria-hidden="true">6.1.</strong> Bash</a></li><li class="chapter-item expanded "><a href="chapter_6_2.html"><strong aria-hidden="true">6.2.</strong> Podman and Docker</a></li><li class="chapter-item expanded "><a href="chapter_6_3.html"><strong aria-hidden="true">6.3.</strong> Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_6_3_1.html"><strong aria-hidden="true">6.3.1.</strong> Creating Modulefiles</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_6_4.html"><strong aria-hidden="true">6.4.</strong> PBS Professional</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_6_4_1.html"><strong aria-hidden="true">6.4.1.</strong> PBS Files</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Conclusion, Citations, and Contact</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">NIU Metis Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="212-building-a-cuda-project-from-the-ground-up"><a class="header" href="#212-building-a-cuda-project-from-the-ground-up">2.1.2. Building a CUDA Project from the Ground Up</a></h1>
+<p><small><em>Associated CRCD Documentation: <a href="https://crcd.niu.edu/crcd/current-users/getting-started/build-run-example.shtml">Project Example</a> and <a href="https://crcd.niu.edu/crcd/current-users/getting-started/run-interactive-jobs.shtml">PBS</a></em></small></p>
+<p><em>You can find the code mentioned in this chapter <a href="https://github.com/hiibolt/niu-metis-documentation/tree/main/projects/cuda/cuda_on_metis">in this book's repository</a>!</em></p>
+<p>The next part of this introductory chapter will teach you how to build, compile, and run a CUDA program from the ground up on Metis.</p>
+<p>CUDA stands for Compute Unified Device Architecture, and it is proprietary NVIDIA-distributed software that allows developers to perform matrice-based operations at unbelievable speeds using the heavily optimized CUDA cores found only on NVIDIA GPUs.</p>
+<p>This chapter will teach you how to run CUDA code on Metis, but it will not teach you how to write it!</p>
+<p>There are many fantastic resources on how to write it, some of which are linked below:</p>
+<ul>
+<li><a href="https://developer.nvidia.com/blog/even-easier-introduction-cuda/">(NVIDIA) An Even Easier Introduction to CUDA</a></li>
+<li><a href="https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/">(cuda-tutorial) Introduction to CUDA</a></li>
+<li><a href="https://docs.nvidia.com/cuda/cuda-runtime-api/index.html">(NVIDIA) CUDA Runtime API Reference</a></li>
+<li><a href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">(NVIDIA) CUDA Driver API Reference</a></li>
+</ul>
+<h2 id="goals"><a class="header" href="#goals">Goals</a></h2>
+<ul>
+<li>Learn how to use the <code>module</code> commands on the login node</li>
+<li>Learn how to use the <code>qstat</code> command to view a running or completed job</li>
+</ul>
+<h2 id="cuda-boilerplate"><a class="header" href="#cuda-boilerplate">CUDA Boilerplate</a></h2>
+<p>If you did not in the previous section, start by creating a folder for our projects, then a folder for CUDA projects, and finally a folder for this project:</p>
+<pre><code class="language-bash">$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda
+$ mkdir /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis
+$ cd /lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis
+</code></pre>
+<p>Let's start by creating a <code>main.cu</code> file with the following contents:</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+
+/// A kernel function designed to calculate the number of
+///  numbers divisible by two, three, and five
+///
+/// # Arguments
+/// * `d_number_of_divisible_by_two` - The number of numbers divisible by two
+/// * `d_number_of_divisible_by_three` - The number of numbers divisible by three
+/// * `d_number_of_divisible_by_five` - The number of numbers divisible by five
+__global__ void calculate(
+    unsigned long long int * d_number_of_divisible_by_two,
+    unsigned long long int * d_number_of_divisible_by_three,
+    unsigned long long int * d_number_of_divisible_by_five
+) {
+    int grid_x = blockIdx.x;
+    int grid_y = blockIdx.y;
+    int grid_z = blockIdx.z;
+
+    int block_x = threadIdx.x;
+    int block_y = threadIdx.y;
+    int block_z = threadIdx.z;
+
+    unsigned long long local_counter = 
+        (grid_z * 100 * 100 * 10 * 10 * 10) + 
+        (grid_y * 100 * 10 * 10) + 
+        (grid_x * 10 * 10) +
+        (block_z * 10 * 10) +
+        (block_y * 10) +
+        block_x + 1;
+
+    unsigned long one = 1;
+
+    if (local_counter % 2 == 0) {
+        atomicAdd(d_number_of_divisible_by_two, one);
+    }
+    if (local_counter % 3 == 0) {
+        atomicAdd(d_number_of_divisible_by_three, one);
+    }
+    if (local_counter % 5 == 0) {
+        atomicAdd(d_number_of_divisible_by_five, one);
+    }
+}
+
+int main() {
+    // Say hello to the user
+    std::cout &lt;&lt; "Hello, Metis!" &lt;&lt; std::endl;
+
+    // Host variables
+    unsigned long long int h_number_of_divisible_by_two   = 0;
+    unsigned long long int h_number_of_divisible_by_three = 0;
+    unsigned long long int h_number_of_divisible_by_five  = 0;
+
+    // Device variables
+    unsigned long long int * d_number_of_divisible_by_two;
+    unsigned long long int * d_number_of_divisible_by_three;
+    unsigned long long int * d_number_of_divisible_by_five;
+
+    // Allocate memory on the device with the correct sizing
+    cudaMalloc( &amp;d_number_of_divisible_by_two,   sizeof(unsigned long long int) );
+    cudaMalloc( &amp;d_number_of_divisible_by_three, sizeof(unsigned long long int) );
+    cudaMalloc( &amp;d_number_of_divisible_by_five,  sizeof(unsigned long long int) );
+
+    // Copy the memory from the host to the device
+    cudaMemcpy( d_number_of_divisible_by_two,   &amp;h_number_of_divisible_by_two,   
+        sizeof(unsigned long long int), cudaMemcpyHostToDevice );
+    cudaMemcpy( d_number_of_divisible_by_three, &amp;h_number_of_divisible_by_three,
+        sizeof(unsigned long long int), cudaMemcpyHostToDevice );
+    cudaMemcpy( d_number_of_divisible_by_five,  &amp;h_number_of_divisible_by_five,
+        sizeof(unsigned long long int), cudaMemcpyHostToDevice );
+
+    // Define our grid's dimensions
+    dim3 gridDim(100, 100, 10);
+
+    // Define each block's dimensions
+    dim3 blockDim(10, 10, 10);
+
+    // Run our calculation
+    calculate&lt;&lt;&lt;gridDim, blockDim&gt;&gt;&gt;(d_number_of_divisible_by_two, d_number_of_divisible_by_three, d_number_of_divisible_by_five);
+    cudaDeviceSynchronize();
+
+    // Copy the memory back to our machine
+    cudaMemcpy(&amp;h_number_of_divisible_by_two, d_number_of_divisible_by_two, sizeof(unsigned long long int), cudaMemcpyDeviceToHost);
+    cudaMemcpy(&amp;h_number_of_divisible_by_three, d_number_of_divisible_by_three, sizeof(unsigned long long int), cudaMemcpyDeviceToHost);
+    cudaMemcpy(&amp;h_number_of_divisible_by_five, d_number_of_divisible_by_five, sizeof(unsigned long long int), cudaMemcpyDeviceToHost);
+
+    // Provide our results to the user
+    std::cout &lt;&lt; std::endl
+              &lt;&lt; "- Numbers divisible by two: "       &lt;&lt; h_number_of_divisible_by_two       &lt;&lt; std::endl
+              &lt;&lt; "- Numbers divisible by three: "     &lt;&lt; h_number_of_divisible_by_three     &lt;&lt; std::endl
+              &lt;&lt; "- Numbers divisible by five: "      &lt;&lt; h_number_of_divisible_by_five      &lt;&lt; std::endl;
+
+    // Free the memory
+    cudaFree(d_number_of_divisible_by_two);
+    cudaFree(d_number_of_divisible_by_three);
+    cudaFree(d_number_of_divisible_by_five);
+
+    return 0;
+}
+</code></pre>
+<p>This program does the exact same thing as the previous section, with one key difference - it makes use of the CUDA runtime.</p>
+<p>Instead of using indicied loops, we run our program using the compute systems of CUDA.</p>
+<ul>
+<li>Our outer loop's dimensions are replaced by the CUDA (thread) block grid, 1-3D grid containing (thread) block.</li>
+<li>Our inner loop's dimensions are replaced by the CUDA thread block, which are a 1-3D block containing the threads our kernel function will be executed on.</li>
+</ul>
+<p>In our program, we use the maximum number of dimensions, effectively creating a 6D matrix. Because each each block is aware of its coordinates on the grid it lies on, and each thread the coordinates of the block it sits in, we can use sneaky math to calculate which number the old "counter" variable each of the <em>ten billion</em> threads translates to.</p>
+<p>If you would like to learn more about CUDA, the resources in the introductory section of this paragraph are greatly recommended.</p>
+<h2 id="loading-modules-on-the-login-node"><a class="header" href="#loading-modules-on-the-login-node">Loading Modules on the Login Node</a></h2>
+<p>However, unlike our previous project which used <code>g++</code>, the CUDA compiler, <code>nvcc</code>, is not pre-loaded.</p>
+<p>To load it, we will use the <code>module</code> commands mentioned briefly in the previous section. The <code>module</code> system loads and unloads an evironment for specific application packages not part of the operating system.</p>
+<p>First, let's list the modules related to <code>cuda</code> with the following command:</p>
+<pre><code class="language-bash">$ module av cuda
+-------------------------------------------------- /etc/modulefiles --------------------------------------------------
+cuda/cuda-7.5  cuda/cuda-8.0  cuda/cuda-11.5  cuda/cuda-11.8  cuda/cuda-11.8-rocky8  cuda/cuda-12.2
+</code></pre>
+<p>We see a variety of versions. For the sake of this guide, we will be using <code>cuda/cuda-11.8</code>.</p>
+<p>Next, let's clean up our modules, and load CUDA:</p>
+<pre><code class="language-bash">$ module purge
+$ module load cuda/cuda-11.8
+$ module list
+Currently Loaded Modulefiles:
+ 1) cuda/cuda-11.8
+</code></pre>
+<p>Finally, we're ready to go! Let's compile and run our program:</p>
+<pre><code class="language-bash">$ nvcc -o hello_world main.cu
+$ ./hello_world
+Hello, Metis!
+
+- Numbers divisible by two: 50000000
+- Numbers divisible by three: 33333333
+- Numbers divisible by five: 20000000
+</code></pre>
+<p>You will notice a nearly instantaneous completion time of <a href="https://github.com/hiibolt/niu-metis-documentation/blob/main/projects/cuda/cuda_on_metis/time_no_pbs">0.5 seconds</a>.</p>
+<p>Such is the power of graphical programming!</p>
+<h2 id="launching-a-cuda-program-with-pbs"><a class="header" href="#launching-a-cuda-program-with-pbs">Launching a CUDA Program with PBS</a></h2>
+<p>For the most part, the <code>run.pbs</code> file will look similar to the version from the previous chapter.</p>
+<p>Create a <code>run.pbs</code> file with the following contents:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+#PBS -N hello_world_cuda
+#PBS -j oe
+
+#Note - on Metis
+#              Nchunks&lt;=32, for GPU chunks
+#              Nchunks&lt;=4096/Ncpus for CPU-only chunks
+#              (run 'shownodes' command to find the number of free cpus)
+#              Ncpus&lt;=128, the total number of CPUs per node is 128
+#              NPmpi&lt;=Ncpus, the total number of CPUs allocated for MPI tasks,
+#                              request NPmpi=Ncpus for non-OPENMP jobs
+#              Ngpus==1,  the total number of GPUs per node is 1
+#              X&lt;=256,  28 of 32 Metis modes have 256 GB of RAM
+#                       special jobs can request up to 1024 GB of RAM (4 nodes)
+#
+# Below, we request two chunks;
+#  each chunk needs 8 CPUs, 8 MPI processes, 1 GPU card, and 16 GB RAM
+#PBS -l select=1:ncpus=8:mpiprocs=1:ngpus=1:mem=251gb
+#PBS -l walltime=00:15:00
+
+# When to send a status email ("-m abe" sends e-mails at job abort, begin, and end)
+#--PBS -m ae
+#--#PBS -M account@niu.edu
+
+# Navigate to our working directory
+PROJECT_DIRECTORY=/lstr/sahara/&lt;your_project&gt;/&lt;you&gt;/cuda/cuda_on_metis
+echo "The job's working directory is $PROJECT_DIRECTORY"
+cd $PROJECT_DIRECTORY
+
+# Install GCC
+echo ""
+echo "Loading CUDA"
+module purge; module load cuda/cuda-11.8; module load gcc/gcc-11.3.0
+module list
+echo "Done!"
+
+# Compile our code
+echo ""
+echo "Compiling code..."
+nvcc -o hello_world main.cu
+echo "Done!"
+
+# Run our binary
+echo ""
+echo "Executing binary..."
+./hello_world
+echo "Done!"
+
+# Clean up our binary
+rm ./hello_world
+</code></pre>
+<p>There are a few notable differences.</p>
+<ul>
+<li>Our project name is <code>hello_world_cuda</code> instead of <code>hello_world</code>.</li>
+<li>Our project directory is <code>.../hello_world_cuda</code> instead of <code>.../hello_world</code>.</li>
+<li>Instead of loading GCC, we loaded CUDA (<code>module load cuda/cuda-11.8</code>).</li>
+<li>Instead of compiling with G++ (<code>g++ -o hello_world main.cpp</code>), we compiled with CUDA (<code>nvcc -o hello_world main.cu</code>).</li>
+</ul>
+<p>Be sure to replace any instances of <code>&lt;your_project&gt;</code> and <code>&lt;you&gt;</code> with your Metis project and username!</p>
+<h2 id="launching-our-job-with-pbs"><a class="header" href="#launching-our-job-with-pbs">Launching our Job with PBS</a></h2>
+<p>We're ready to go! All that's left is to start our job, which can be done easily with the following command:</p>
+<pre><code class="language-bash">$ qsub run.pbs
+</code></pre>
+<p>The output will look something like this:</p>
+<pre><code class="language-bash">18681.cm
+</code></pre>
+<p>This tells us the ID number of our job. Wait around 30 seconds for the job to finish, and list the contents of the directory!</p>
+<pre><code class="language-bash">$ ls
+hello_world_cuda.o18681 main.cu run.pbs
+</code></pre>
+<p>Reading the output from our job:</p>
+<pre><code>$ cat hello_world.o18681
+The job's working directory is /home/&lt;your_account_username&gt;/projects/cuda/cuda_on_metis
+
+Loading GCC...
+Currently Loaded Modulefiles:
+ 1) gcc/gcc-12.3.0  
+Done!
+
+Compiling code...
+Done!
+
+Executing binary...
+Hello, Metis!
+
+- Numbers divisible by two: 5000000000
+- Numbers divisible by three: 3333333333
+- Numbers divisible by five: 2000000000
+Done!
+</code></pre>
+<p>It's also worth noting that you can use the <code>qstat</code> command to view the status of a job:</p>
+<pre><code>$ qstat -x 18681
+Job id            Name             User              Time Use S Queue
+----------------  ---------------- ----------------  -------- - -----
+18681.cm          hello_world      z1994244          00:00:02 F short 
+</code></pre>
+<p>The <code>-x</code> flag means you will recieve output even if the job has concluded.</p>
+<p>The documentation for this command, as well as <code>qsub</code>, can be found below:</p>
+<ul>
+<li><a href="https://www.jlab.org/hpc/PBS/qsub.html">(jlab) Documetation: <code>qsub</code></a></li>
+<li><a href="https://www.jlab.org/hpc/PBS/qstat.html">(jlab) Documetation: <code>qstat</code></a></li>
+</ul>
+<p>There are also other useful commands such as <code>qdel</code> (terminates a job):</p>
+<ul>
+<li><a href="https://www.jlab.org/hpc/PBS/qdel.html">(jlab) Documentation: <code>qdel</code></a></li>
+</ul>
+<h2 id="closing-thoughts"><a class="header" href="#closing-thoughts">Closing Thoughts</a></h2>
+<p>Once again, congratulations! You have just harnessed the power of the NVIDIA hardware on Metis.</p>
+<p>The boilerplate from this project will be enough to get almost any CUDA project up and running. For those who recieve enough of a performance improvement to satisfy your needs, you may be able to stop here.</p>
+<p>For tasks that require even further optimization, Metis supports <a href="https://www.open-mpi.org/">OpenMPI</a>, a message passing interface which allows for massively parallel computation across multiple CPUs/Metis nodes.</p>
+<p>Metis has modules containing GCC, CUDA, and OpenMPI for your convenience:</p>
+<pre><code class="language-bash">$ module av openmpi
+-------------------- /etc/modulefiles ---------------------
+openmpi/openmpi-1.8.8-gcc-11.4.0            
+openmpi/openmpi-4.0.7-gcc-9.5.0-cuda-11.8   
+openmpi/openmpi-4.1.1-gcc-11.3.0-cuda-11.8  
+openmpi/openmpi-4.1.5-gcc-8.5.0-cuda-11.8   
+openmpi/openmpi-4.1.5-gcc-11.4.0-cuda-11.8  
+openmpi/openmpi-4.1.5-gcc-12.3.0-cuda-12.2  
+openmpi/openmpi-4.1.6-gcc-11.4.0-cuda-11.8
+</code></pre>
+<p>Using a combination of both OpenMPI for coordinating large-scale tasks across many processors and CUDA for handling tasks best accelerated by GPU programming will allow you to fully harness the hardware of Metis.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chapter_2_1_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="chapter_2_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chapter_2_1_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="chapter_2_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
