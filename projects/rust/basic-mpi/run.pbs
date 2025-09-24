@@ -1,9 +1,9 @@
 #!/bin/bash
-#PBS -N rsmpi-test
+#PBS -N basic-mpi
 #PBS -l select=2:ncpus=1:mpiprocs=1
 #PBS -l walltime=00:10:00
 #PBS -j oe
-#PBS -o rsmpi-test.out
+#PBS -o basic-mpi.out
 
 # Change to the directory from which the job was submitted
 cd $PBS_O_WORKDIR
